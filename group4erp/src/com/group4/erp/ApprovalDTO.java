@@ -4,6 +4,7 @@ public class ApprovalDTO {
 
 	private String e_works_no;
 	private String document_no;
+	private int doc_no;
 	private int emp_no;
 	private String emp_name;
 	private int mgr_emp_no;
@@ -15,6 +16,35 @@ public class ApprovalDTO {
 	private String approval_state;
 	private String jikup;
 	private String approval_num;
+	private String confirm;
+	private int mgr_emp;
+	
+
+	
+	public int getMgr_emp() {
+		return mgr_emp;
+	}
+
+	public void setMgr_emp(int mgr_emp) {
+		this.mgr_emp = mgr_emp;
+	}
+
+	public int getDoc_no() {
+		return doc_no;
+	}
+
+	public void setDoc_no(int doc_no) {
+		this.doc_no = doc_no;
+	}
+
+	public String getConfirm() {
+		return confirm;
+	}
+
+	public void setConfirm(String confirm) {
+		this.confirm = confirm;
+	}
+
 	
 	public String getApproval_num() {
 		return approval_num;

@@ -92,4 +92,20 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		return updateApprovalCnt;
 	}
 
+	@Override
+	public int getApprovalCEOResCnt(ApprovalSearchDTO approvalSearchDTO) {
+		// TODO Auto-generated method stub
+		int approvalCEOCnt = this.sqlSession.selectOne(mapper_namespace+"getApprovalCEOResCnt", approvalSearchDTO);
+		
+		return approvalCEOCnt;
+	}
+
+	@Override
+	public List<ApprovalDTO> getApprovalCEOResList(ApprovalSearchDTO approvalSearchDTO) {
+		// TODO Auto-generated method stub
+		List<ApprovalDTO> approvalResList = this.sqlSession.selectList(mapper_namespace+"getApprovalCEOResList", approvalSearchDTO);
+		
+		return approvalResList;
+	}
+
 }

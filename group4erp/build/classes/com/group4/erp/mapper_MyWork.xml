@@ -245,6 +245,7 @@
         select     
         d.dayoff_apply_no "dayoff_apply_no",    
         d.emp_no "emp_no", 
+        (select e.emp_name from employee e where e.emp_no=(select ee.mgr_emp_no from employee ee where ee.emp_no = d.emp_no) ) "mgr_name",
         (select c.jikup from code_jikup c where jikup_cd=(select e.jikup_cd from employee e where e.emp_no=(select d.emp_no from emp_dayoff_apply d where d.dayoff_apply_no=#{dayoff_apply_no}) ) ) "jikup",
         (select e.emp_name from employee e where e.emp_no=(select d.emp_no from emp_dayoff_apply d where d.dayoff_apply_no=#{dayoff_apply_no}) ) "emp_name",   
         d.dayoff_apply_dt "dayoff_apply_dt",    
@@ -253,7 +254,7 @@
         to_char(d.start_dayoff, 'yyyy-mm-dd') "start_dayoff",    
         to_char(d.end_dayoff, 'yyyy-mm-dd') "end_dayoff",    
         d.confirm "confirm"   
-        from emp_dayoff_apply d   where 1=1   and d.dayoff_apply_no=#{dayoff_apply_no} and d.confirm='N' or d.confirm='n'
+        from emp_dayoff_apply d   where 1=1   and d.dayoff_apply_no=#{dayoff_apply_no}
 	</select>
 	
 	

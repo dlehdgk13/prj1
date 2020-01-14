@@ -19,9 +19,17 @@ public class EventDTO {
 	private String reg_dt;
 	private String evnt_state_cd;
 	private String document_no;
+	private String mgr_name;
+	
 
-	
-	
+	public String getMgr_name() {
+		return mgr_name;
+	}
+
+	public void setMgr_name(String mgr_name) {
+		this.mgr_name = mgr_name;
+	}
+
 	public String getDocument_no() {
 		return document_no;
 	}

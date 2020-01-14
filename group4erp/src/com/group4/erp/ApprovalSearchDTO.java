@@ -1,13 +1,24 @@
 package com.group4.erp;
 
 public class ApprovalSearchDTO {
-	
+
 	private String searchKeyword;
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;
-	private String emp_no;
+	//private String emp_no;
 	private String mgr_emp_no;
 	private String sort;
+	private int isCEO;
+	private int emp_no;
+
+	
+	public int getIsCEO() {
+		return isCEO;
+	}
+
+	public void setIsCEO(int isCEO) {
+		this.isCEO = isCEO;
+	}
 
 
 	public String getSearchKeyword() {
@@ -34,11 +45,11 @@ public class ApprovalSearchDTO {
 		this.rowCntPerPage = rowCntPerPage;
 	}
 	
-	public String getEmp_no() {
+	public int getEmp_no() {
 		return emp_no;
 	}
 	
-	public void setEmp_no(String emp_no) {
+	public void setEmp_no(int emp_no) {
 		this.emp_no = emp_no;
 	}
 	

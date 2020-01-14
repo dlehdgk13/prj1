@@ -41,17 +41,13 @@ $(document).ready(function(){
 		document.empListSearchForm.reset();
 		document.empListSearchForm.submit();
 	}
-	function insertNewEmp() {
-		//alert("신규 사원 추가 기능 구현");
-		location.href="/group4erp/viewNewEmpJoin.do"
-	}
+// 	function insertNewEmp() {
+//		location.href="/group4erp/viewNewEmpJoin.do"
+//	} 
 	function goEmpContentForm(emp_no){
-		
 		//alert("emp_no="+emp_no);
 		//return;
-		
 		var str = "emp_no="+emp_no
-		
 		location.href="/group4erp/viewEmpContentForm.do?"+str;
 		/*
 		$.ajax({
@@ -129,6 +125,7 @@ $(document).ready(function(){
 						<th style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd asc'); goSearch();">직급
 					</c:otherwise>
 				</c:choose>
+				<th>승인상태
 			</thead>
 			<tbody>
 			<c:forEach items="${requestScope.getEmpBoardList}" var="empList" varStatus="loopTagStatus">
@@ -137,12 +134,18 @@ $(document).ready(function(){
 					<td align=center>${empList.emp_name}</td>
 					<td align=center>${empList.dep_name}</td>
 					<td align=center>${empList.jikup}</td>
+					<c:if test="${empList.worktime_name=='미승인'}">
+						<td align=center>${empList.worktime_name}</td>
+					</c:if>
+					<c:if test="${empList.worktime_name!='미승인'}">
+						<td align=center></td>
+					</c:if>
 				</tr>		
 			</c:forEach>
 			</tbody>
 		</table>
 		<br>
-		<input type="button" value="신규사원등록" onClick="insertNewEmp();">
+		<!-- <input type="button" value="신규사원등록" onClick="insertNewEmp();"> -->
 		<br><br>
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 	</form>

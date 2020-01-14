@@ -3,11 +3,13 @@ package com.group4.erp;
 public class HrDayoffDTO {
 	private String emp_no;
 	private String dayoff_cd;
+	private String dayoff_name;
 	private String start_dayoff;
 	private String end_dayoff;
 	private String using_dayoff;
 	private String remain_dayoff;
 	private String confirm;
+	private String dayoff_apply_dt;
 	
 	
 	public String getEmp_no() {
@@ -21,6 +23,13 @@ public class HrDayoffDTO {
 	}
 	public void setDayoff_cd(String dayoff_cd) {
 		this.dayoff_cd = dayoff_cd;
+	}
+	
+	public String getDayoff_name() {
+		return dayoff_name;
+	}
+	public void setDayoff_name(String dayoff_name) {
+		this.dayoff_name = dayoff_name;
 	}
 	public String getStart_dayoff() {
 		return start_dayoff;
@@ -52,7 +61,13 @@ public class HrDayoffDTO {
 	public void setConfirm(String confirm) {
 		this.confirm = confirm;
 	}
-
+	public String getDayoff_apply_dt() {
+		return dayoff_apply_dt;
+	}
+	public void setDayoff_apply_dt(String dayoff_apply_dt) {
+		this.dayoff_apply_dt = dayoff_apply_dt;
+	}
+	
 	
 	
 	

@@ -29,7 +29,9 @@
 	
 	.fileBox .fileName {display:inline-block;width:190px;height:20px;padding-left:10px;margin-right:5px;line-height:30px;border:1px solid #aaa;background-color:#fff;vertical-align:middle}
 	.fileBox .btn_file {display:inline-block;border:1px solid #000;width:100px;height:20px;font-size:0.8em;line-height:20px;text-align:center;vertical-align:middle; background-color:black; color:white;}
-	.fileBox input[type="file"] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:1px}
+
+	.fileBox input[type="file"] {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);}
+
 	
 	
 </style>
@@ -41,8 +43,8 @@
 		inputData("[name=dep_name]", "${employeeInfoUpDTO.dep_name}");
 		inputData("[name=jikup]", "${employeeInfoUpDTO.jikup}");
 		inputData("[name=worktime_name]", "${employeeInfoUpDTO.worktime_name}");
-		inputData("[name=mgr_emp_dep_name]", "${employeeInfoUpDTO.mgr_emp_dep_name}");
-		inputData("[name=mgr_emp_jikup]", "${employeeInfoUpDTO.mgr_emp_jikup}");
+//		inputData("[name=mgr_emp_dep_name]", "${employeeInfoUpDTO.mgr_emp_dep_name}");
+//		inputData("[name=mgr_emp_jikup]", "${employeeInfoUpDTO.mgr_emp_jikup}");
 		
 		
 		$("#hire_dt").datepicker({ 
@@ -109,7 +111,7 @@
 		var form = $('[name=empContentUp]')[0];
         var formData = new FormData(form);
         formData.append("uploadBtn", $("#uploadBtn")[0].files[0]);
-        formData.append("emp_no", $("#emp_no").val());
+        //formData.append("emp_no", $("#emp_no").val());
 	   	//console.log(formData);
         
         if( is_empty('[name=emp_name]') ){
@@ -137,11 +139,11 @@
 			       $("[name=phone]").focus();
 			       return;
 			}
-		    if( is_empty('[name=emp_email_office]') ){
+		    /* if( is_empty('[name=emp_email_office]') ){
 			       alert("회사 이메일을 입력해주세요.");
 			       $("[name=emp_email_office]").focus();
 			       return;
-			}
+			} */
 		    if( is_empty('[name=emp_email]') ){
 			       alert("이메일을 입력해주세요.");
 			       $("[name=emp_email]").focus();
@@ -176,11 +178,11 @@
 		    }
 
 		    
-		    if( is_empty('[name=mgr_emp_name]') ){
+		    /* if( is_empty('[name=mgr_emp_name]') ){
 		       alert("직속상관 이름을 입력해주세요.");
 		       $("[name=conmgr_emp_nametent]").focus();
 		       return;
-		    }
+		    } */
 		    
 		    
 		    var juminb = $('[name=jumin_num]').val();
@@ -224,7 +226,11 @@
 		    }
 		    
 		    if(confirm("정말 저장하시겠습니까?")==false){return;}
-        
+
+			//alert(formData.serialize());
+			//return;
+	        var emp_no = $("[name=emp_no]").val();
+
         $.ajax({
             url: '/group4erp/empInfoUpProc.do',
                     processData: false,
@@ -233,6 +239,8 @@
                     type: 'POST',
                     success: function(result){
                         alert("수정이 완료되었습니다.");
+                        $("img").remove();
+                        location.href="/group4erp/viewEmpContentForm.do?emp_no="+emp_no;
                     }
         });
 		
@@ -275,24 +283,6 @@
 
 
 
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	
-
 </script>
 </head>
 <body><center>
@@ -317,9 +307,12 @@
 		<table class="empContentInfo tab2" width="850" border=1 bordercolor="#000000" cellpadding=5 align=center>
 			<tr>
 				<td rowspan="6" colspan="2" width="20%">
-				<%-- <c:if test="${employeeInfoUpDTO.emp_pic='emp0000.jpg'}"> --%>
-					<img src="${ctRootImage}/default.jpg" width="100%" height="150">
-				<%-- </c:if> --%>
+				<c:if test="${empty employeeInfoUpDTO.emp_pic}">
+					<img src="${ctRootImage}/default.jpg" width="100%" height=""187">
+				</c:if>
+				<c:if test="${!empty employeeInfoUpDTO.emp_pic}">
+					<img src="${ctRootImage}/${employeeInfoUpDTO.emp_pic}" width="100%" height="187">
+				</c:if>
 					<%-- <img src="${ctRootImage}/emp_0003.jpg" width="100%" height="150"> --%>
 				<!-- <img src="../image/emp_0002.jpg"> --></td>
 				<td bgcolor="#EEEEEE" width="12%">성명</td>
@@ -331,6 +324,14 @@
 				<td bgcolor="#EEEEEE">사번</td>
 				<td><input type="text" size="27" name="emp_no" id="emp_no" value="${employeeInfoUpDTO.emp_no}"></td>
 				<%-- <td><input type="text" style="background-color:#EBEBE4; box-shadow:none; border: 1px solid lightgray" size="27" name="emp_no" id="emp_no" value="${employeeInfoUpDTO.emp_no}"></td> --%>
+				<td bgcolor="#EEEEEE">비밀번호</td>
+				<td><input type="text" size="27" name="emp_pwd" id="emp_pwd" value="${employeeInfoUpDTO.emp_pwd}"></td>
+				
+				
+			</tr>
+			<tr>			
+				<td bgcolor="#EEEEEE">주민번호</td>
+				<td><input type="text" size="27" name="jumin_num" value="${employeeInfoUpDTO.jumin_num}"></td>
 				<td bgcolor="#EEEEEE">성별</td>
 				<td>
 					<c:if test="${employeeInfoUpDTO.emp_gender=='여'}">
@@ -342,19 +343,19 @@
 						<input type="radio" name="emp_gender" value="남" checked>남
 					</c:if>
 				</td>
-			</tr>
-			<tr>			
-				<td bgcolor="#EEEEEE">주민번호</td>
-				<td><input type="text" size="27" name="jumin_num" value="${employeeInfoUpDTO.jumin_num}"></td>
-				<td bgcolor="#EEEEEE">전화번호</td>
-				<td><input type="text" size="27" name="phone" value="${employeeInfoUpDTO.phone}"></td>
+				
+				
+				
+				
+				
 			</tr>
 			<tr>
-				<td bgcolor="#EEEEEE" rowspan="2">회사이메일</td>
-				<td rowspan="2"><input type="text" name="emp_email_office" size="27" value="${employeeInfoUpDTO.emp_email_office}"></td>
-				<td bgcolor="#EEEEEE" rowspan="2">이메일</td>
-				<td rowspan="2"><input type="text" size="27" name="emp_email" size="25" value="${employeeInfoUpDTO.emp_email}"></td>
-			<tr></tr>
+				<td bgcolor="#EEEEEE">전화번호</td>
+				<td><input type="text" size="27" name="phone" value="${employeeInfoUpDTO.phone}"></td>
+				
+				<td bgcolor="#EEEEEE">이메일</td>
+				<td><input type="text" size="27" name="emp_email" size="25" value="${employeeInfoUpDTO.emp_email}"></td>
+			</tr>
 			<tr>
 				<td bgcolor="#EEEEEE">주소</td>
 				<td colspan="3"><input type="text" name="emp_addr" size="76" value="${employeeInfoUpDTO.emp_addr}"></td>
@@ -362,7 +363,7 @@
 				<td colspan="6">
 					<div class="fileBox" align="left">	<!-- style="position:absolute;left:22%; -->
 						<input align="left" type="text" class="fileName" readonly="readonly">
-						<label for="uploadBtn" class="btn_file" align="left">프로필pic 수정</label>
+						<label style="cursor:pointer" for="uploadBtn" class="btn_file" align="left">프로필pic 수정</label>
 						<input type="file" id="uploadBtn" class="uploadBtn" name="uploadBtn">
 					</div>
 				</td>
@@ -432,7 +433,7 @@
 			</tr>
 			<tr>
 				<td bgcolor="#EEEEEE">휴직상태</td>
-				<td colspan="4">
+				<td colspan="2">
 					<c:if test="${employeeInfoUpDTO.is_on_leave=='F'}">
 						재직중
 					</c:if>
@@ -440,15 +441,26 @@
 						휴직중
 					</c:if>
 				<%-- <input type="text" name="is_on_leave" value="${employeeInfoDTO.is_on_leave}"></td> --%>
+				<td bgcolor="#EEEEEE" rowspan="2">회사이메일</td>
+				<td colspan="2">
+					<c:if test="${employeeInfoUpDTO.salary!=0}">
+						<input type="text" name="emp_email_office" size="27" value="${employeeInfoUpDTO.emp_email_office}">
+					</c:if>
+					<c:if test="${employeeInfoUpDTO.salary==0}">
+						<input type="hidden" style='background-color:#EBEBE4; box-shadow:none; border: 1px solid lightgray; text-align:center;' name="emp_email_office" size="27" value="${employeeInfoUpDTO.emp_email_office}" readonly> 
+						<font size='2px' color='orange'> *승인 시 자동으로 부여</font>
+					</c:if>
+				</td>
+					
+					
+					
+					
 			</tr>
 		</table>
-
-		
-		<br>
 	
-		<table class="line" width="850">
+		<%-- <table class="line" width="850">
 			<tr>
-				<td>&nbsp;&nbsp;<b>직속상관정보</b></td>
+				<td>&nbsp;&nbsp;<b>결재자</b></td>
 			</tr>
 		</table>
 		<table table class="empContentInfo tab2" width="850" border=1 bordercolor="#000000" cellpadding=5 align=center>
@@ -457,7 +469,7 @@
 				<td width="23%"><input type="text" name="mgr_emp_name" value="${employeeInfoUpDTO.mgr_emp_name}"></td>
 				<td bgcolor="#EEEEEE" width="13%">부서</td>
 				<td width="20%">
-					<%-- <input type="text" name="mgr_emp_dep_name" value="${employeeInfoUpDTO.mgr_emp_dep_name}"> --%>
+					<input type="text" name="mgr_emp_dep_name" value="${employeeInfoUpDTO.mgr_emp_dep_name}">
 					<select name="mgr_emp_dep_name">
 							<option value="총무부">총무부</option>
 							<option value="기획부">기획부</option>
@@ -469,7 +481,7 @@
 				</td>
 				<td bgcolor="#EEEEEE" width="10%">직급</td>
 				<td width="23%">
-					<%-- <input type="text" name="mgr_emp_jikup" value="${employeeInfoUpDTO.mgr_emp_jikup}"> --%>
+					<input type="text" name="mgr_emp_jikup" value="${employeeInfoUpDTO.mgr_emp_jikup}">
 					<select name="mgr_emp_jikup">
 						<option value="대표이사">대표이사</option>
 						<option value="전무이사">전무이사</option>
@@ -484,13 +496,15 @@
 					</select>
 				</td>
 			</tr>
-		</table>
+		</table> --%>
 	</form>
-		
-		
-		<br>
-		<input type="button" value=" 수정 " onclick="empInfoUp();">&nbsp;
-		<input type="button" value=" 삭제 " onclick="empInfoDel(${emp_no});">&nbsp;
+		<c:if test="${employeeInfoUpDTO.salary==0}">
+			<input type="button" value=" 승인 " onclick="empInfoUp();">&nbsp;
+		</c:if>
+		<c:if test="${employeeInfoUpDTO.salary!=0}">
+			<input type="button" value=" 수정" onclick="empInfoUp();">&nbsp;
+		</c:if>
+		<%-- <input type="button" value=" 삭제 " onclick="empInfoDel(${emp_no});">&nbsp; --%>
 		<!-- <input type="button" value="뒤로가기" onclick="goBack();"> -->
 		<form method="post" name="empUpDelForm" action="/group4erp/empUpDelProc.do">
 			<input type="hidden" name="emp_no" value="${emp_no}">

@@ -19,6 +19,7 @@ import com.group4.erp.DayOffApplyDTO;
 import com.group4.erp.EventDTO;
 import com.group4.erp.EventSearchDTO;
 import com.group4.erp.service.ApprovalService;
+import com.group4.erp.service.HRService;
 import com.group4.erp.service.MarketingService;
 import com.group4.erp.service.MyWorkService;
 
@@ -34,6 +35,9 @@ public class ApprovalController {
 	@Autowired
 	MyWorkService myWorkService;
 	
+	@Autowired
+	HRService hrService;
+	
 	@RequestMapping(value="/viewApprovalList.do")
 	public ModelAndView viewApprovalList(HttpSession session, ApprovalSearchDTO approvalSearchDTO) {
 		
@@ -41,18 +45,42 @@ public class ApprovalController {
 		//mav.setViewName("eventScheduleForm.jsp");
 		
 		String emp_no = (String)session.getAttribute("emp_id");
+		String emp_name = (String)session.getAttribute("emp_name");
+		int jikup_cd = (Integer)session.getAttribute("jikup_cd");
+		
+		int my_emp_no = Integer.parseInt(emp_no);
+		approvalSearchDTO.setEmp_no(my_emp_no);
+		
+		System.out.println("viewApprovalList emp_no==="+emp_no);
 		
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewApprovalList");
 		mav.addObject("navigator", "[업무관리]-[문서 결재]");
 		
-		approvalSearchDTO.setEmp_no(emp_no);
+		int approvalCnt = 0;
+		int approvalResCnt = 0;
 		
-		int approvalCnt = this.approvalService.getApprovalReqCnt(approvalSearchDTO);
-		int approvalResCnt = this.approvalService.getApprovalResCnt(approvalSearchDTO);
+		List<ApprovalDTO> approvalReqList;
+		List<ApprovalDTO> approvalResList;
 		
-		List<ApprovalDTO> approvalReqList = this.approvalService.getApprovalReqList(approvalSearchDTO);
-		List<ApprovalDTO> approvalResList = this.approvalService.getApprovalResList(approvalSearchDTO);
+		if(jikup_cd==1) {
+			System.out.println("대표이사 결재");
+		
+			approvalResCnt = this.approvalService.getApprovalCEOResCnt(approvalSearchDTO);
+			approvalResList = this.approvalService.getApprovalCEOResList(approvalSearchDTO);
+			
+		} else {
+			System.out.println("부서장 결재");
+						
+			approvalCnt = this.approvalService.getApprovalReqCnt(approvalSearchDTO);
+			approvalResCnt = this.approvalService.getApprovalResCnt(approvalSearchDTO);
+			approvalResList = this.approvalService.getApprovalResList(approvalSearchDTO);
+		}
+		
+		
+		
+		approvalReqList = this.approvalService.getApprovalReqList(approvalSearchDTO);
+		
 		
 		mav.addObject("approvalCnt", approvalCnt);
 		mav.addObject("approvalReqList", approvalReqList);
@@ -80,6 +108,16 @@ public class ApprovalController {
 		String approvalDoc = "";
 		String tableName = "";
 		
+		String emp_no = (String)session.getAttribute("emp_id");
+		String mgr = (String)session.getAttribute("mgr");
+		String mgr_no = (String)session.getAttribute("mgr_emp_no");
+		String ceo_no = (String)session.getAttribute("ceo_no");
+		String ceo_name = (String)session.getAttribute("ceo_name");
+		
+		int my_emp_no = Integer.parseInt(emp_no);
+		System.out.println("emp_no==="+my_emp_no);
+	
+				
 		if(document_no.indexOf("EV") >=0 ) {
 			approvalDoc="EV";
 			tableName = "event_info";
@@ -92,6 +130,7 @@ public class ApprovalController {
 			
 			EventDTO myEventInfo = this.marketingService.getMyEventInfoApproval(document_no);
 			mav.addObject("approvalInfoList", myEventInfo);
+			mav.addObject("approvalCategory", "이벤트 행사 신청 기획안입니다.");
 			
 			
 		} else if(document_no.indexOf("DO") >=0) {
@@ -108,7 +147,8 @@ public class ApprovalController {
 			
 			DayOffApplyDTO myDayOffApplyInfo = this.myWorkService.getMyDayOffApproval(my_dayoff_approval_no);
 			
-			//System.out.println("myDayOffApplyInfo.getEmp_no==="+myDayOffApplyInfo.getDayoff_category());
+			System.out.println("myDayOffApplyInfo.getDayoff_category()==="+myDayOffApplyInfo.getDayoff_category());
+			System.out.println("myDayOffApplyInfo.getEmp_name()==="+myDayOffApplyInfo.getEmp_name());
 			
 			mav.addObject("myDayOffApplyInfo", myDayOffApplyInfo);
 			mav.addObject("approvalCategory", "휴가 신청 결재 바랍니다.");
@@ -140,7 +180,6 @@ public class ApprovalController {
 			eventDTO.setEvnt_state_cd(approvalYn);
 			eventDTO.setEvnt_no(document_no);
 
-			//System.out.println("approvalDTO.getApprovalYn=="+approvalDTO.);
 			approvalUpCnt = this.approvalService.updateApprovalProc(approvalDTO);
 			evntUpCnt = this.marketingService.updateEvntApprovalState(eventDTO);
 			
@@ -155,6 +194,59 @@ public class ApprovalController {
 			
 		} catch(Exception e) {
 			System.out.println("deleteCorpProc() 메소드에서 예외 발생 >>> "+e);
+		}
+				
+		return approvalUpCnt;
+	}
+	
+	@RequestMapping(value="/updateDayOffApproavalProc.do", 
+			method=RequestMethod.POST, 
+			produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public int updateDayOffApprovalProc(ApprovalDTO approvalDTO, DayOffApplyDTO dayOffApplyDTO, String approvalYn, String document_no) {
+	
+		int approvalUpCnt = 0;
+		int dayOffUpCnt = 0;
+		
+		try {
+			
+			System.out.println("approvalYn==="+approvalYn);
+			System.out.println("document_no==="+document_no);
+			
+			approvalDTO.setE_works_state_cd(approvalYn);
+			approvalDTO.setDocument_no("DO-"+document_no);
+			approvalDTO.setDoc_no(Integer.parseInt(document_no));
+			
+			String confirm = "";
+			
+			if(approvalYn=="7" || approvalYn.equals("7")) {	//승인되었을 때				
+				confirm="Y";
+				approvalDTO.setConfirm(confirm);
+				approvalUpCnt = this.approvalService.updateApprovalProc(approvalDTO);
+				dayOffUpCnt = this.hrService.updateDayOffApprovalProc(approvalDTO);
+				
+			} else if(approvalYn=="6" || approvalYn.equals("6")) {	//반려되었을 때
+				confirm="C";
+				approvalDTO.setConfirm(confirm);
+				approvalUpCnt = this.approvalService.updateApprovalProc(approvalDTO);
+				dayOffUpCnt = this.hrService.updateDayOffApprovalProc(approvalDTO);
+			}
+
+			
+			//approvalUpCnt = this.approvalService.updateApprovalProc(approvalDTO);
+			//dayOffUpCnt = this.marketingService.updateEvntApprovalState(eventDTO);
+			
+			/*if(upDel.equals("up")) {
+				upDelCnt = this.boardService.updateBoard(boardDTO);
+			}
+			
+			//만약 삭제 모드이면 삭제 실행하고 삭제 적용행의 개수를 저장
+			else {
+				upDelCnt = this.boardService.deleteBoard(boardDTO);
+			} */
+			
+		} catch(Exception e) {
+			System.out.println("updateDayOffApprovalProc() 메소드에서 예외 발생 >>> "+e);
 		}
 				
 		return approvalUpCnt;

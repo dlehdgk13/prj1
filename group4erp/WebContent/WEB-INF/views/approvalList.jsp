@@ -52,18 +52,17 @@
 		<form name="approvalResListForm" method="post" action="/group4erp/viewApprovalDoc.do" >
 			<table class="approvalResList tab" name="approvalResList" cellpadding="5" cellspacing="5">
 			<tr>
-				<th>번호</th><th>결재 종류</th><th>직급</th><th>사원</th><th>문서일련번호</th><th>결재요청시간</th>
+				<th>직급</th><th>사원</th><th>문서일련번호</th><th>결재요청시간</th><th>상태</th>
 			</tr>
 			<c:forEach items='${approvalResList}' var="approvalResList" varStatus="loopTagStatus">
-				<tr style="cursor:pointer" onClick="viewAppResDoc('${approvalResList.document_no}');">
+				<tr style="cursor:pointer" onClick="viewAppResDoc('${approvalResList.document_no}');" align="center">
 					
-					<td>${approvalResList.approval_num}</td>
-					<td>${approvalResList.document_no}</td>
+					<%--<td>${approvalResList.approval_num}</td> --%>
 					<td>${approvalResList.jikup}</td>
 					<td>${approvalResList.emp_name}</td>
 					<td>${approvalResList.document_no}</td>
 					<td>${approvalResList.e_works_req_dt}</td>
-
+					<td>${approvalResList.approval_state}</td>
 				</tr>	
 			</c:forEach>
 		
@@ -87,7 +86,7 @@
 					<td>${approvalReqList.e_works_no}</td>
 					<td>${approvalReqList.document_no}</td>
 					<td>${approvalReqList.e_works_req_dt}</td> 
-					<td>${approvalReqList.approval_state}</td> 
+					<td align="center">${approvalReqList.approval_state}</td> 
 					<td>
 						<c:if test="${approvalReqList.approval_state eq '대기중' }">
 							<input type="button" value="삭제" onClick="deleteApproval('${approvalReqList.e_works_no}');">

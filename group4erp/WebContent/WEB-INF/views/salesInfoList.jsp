@@ -61,19 +61,13 @@
 	
 		var options1 = {
 				title: '일반 고객 주문 건수(분야별)',
-				width :600, 
+				width :700, 
 				height: 300
 		};
 
 		var options2 = {
 				title: '기업고객 주문 건수(분야별)',
-				width: 600,
-				height:300
-		};
-
-		var options3 = {
-				title: '기업고객 주문 건수(일자별)',
-				width: 600,
+				width: 700,
 				height:300
 		};
 	
@@ -181,7 +175,6 @@
 </head>
 <body><center>
 	<h1>[주문 & 판매현황]</h1>
-	<h5>일반 고객 주문 현황</h5>	
 	<table border="0" cellpadding="5" cellspacing="5" align="center">
 		<tr>
 			<td>
@@ -210,31 +203,31 @@
 		</tr>
 		
 		<tr>
-			<td>분야별
-				<div id="orderInfoChart" style="width: 600px; height: 300px;"> </div>
+			<td>분야별 누적 주문
+				<div id="orderInfoChart" style="width: 700px; height: 300px;"> </div>
 			</td>
-			<td>분야별
-				<div id="corpOrderInfoChart" style="width: 600px; height: 300px;"> </div>
+			<td>분야별 누적 주문
+				<div id="corpOrderInfoChart" style="width: 700px; height: 300px;"> </div>
 			</td>
 		</tr>
 		
 		<tr>
-			<td>일자별
+			<td>일자별 누적 주문
 				<div id="dailyOrderChart" style="width: 600px; height: 300px;"> </div>
 			</td>
 			
-			<td>일자별
+			<td>일자별 누적 주문
 				<div id="dailyCorpOrderChart" style="width: 600px; height: 300px;"> </div>
 			</td>
 		</tr>
 		<tr>
 			<td align="center">
-				<input type="button" value="세부내역보기" onClick="showOrderList();">&nbsp;
-				<input type="button" value="세부내역숨기기" onClick="hideOrderList();"><br> 
+				<!-- <input type="button" value="세부내역보기" onClick="showOrderList();">&nbsp;
+				<input type="button" value="세부내역숨기기" onClick="hideOrderList();"><br> --> 
 			</td>
 			<td align="center">
-				<input type="button" value="세부내역보기" onClick="showOrderList();">&nbsp;
-				<input type="button" value="세부내역숨기기" onClick="hideOrderList();"><br> 
+				<!-- <input type="button" value="세부내역보기" onClick="showOrderList();">&nbsp;
+				<input type="button" value="세부내역숨기기" onClick="hideOrderList();"><br> -->
 			</td>
 		</tr>
 	</table>

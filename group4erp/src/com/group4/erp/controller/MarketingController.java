@@ -83,8 +83,6 @@ public class MarketingController {
 			}
 			sales_chart_data += "]";
 			
-			System.out.println("sales_chart_data=="+sales_chart_data);
-			
 			String corpOrder_chart_data = "[";
 			corpOrder_chart_data += "['분류', '수량']";
 			
@@ -234,8 +232,6 @@ public class MarketingController {
 		try {
 
 			System.out.println("EventDTO.getAtchd_data==="+eventDTO.getAtchd_data());
-			System.out.println("EventDTO.eventNo==="+eventDTO.getEvnt_no());
-			
 			eventDTO.setEmp_no(Integer.parseInt(emp_no));
 					
 			insertEventCnt = this.marketingService.insertEvent(eventDTO);
@@ -245,7 +241,9 @@ public class MarketingController {
 				ApprovalDTO approvalDTO = new ApprovalDTO();
 				
 				approvalDTO.setDocument_no(eventDTO.getEvnt_no());
+				System.out.println("approvalDTO.getDocument_no=="+approvalDTO.getDocument_no());
 				approvalDTO.setEmp_no(Integer.parseInt(emp_no));
+				System.out.println("approvalDTO.getEmp_no==="+approvalDTO.getEmp_no());
 				
 				insertApprovalCnt = this.approvalService.insertApproval(approvalDTO); 
 			}

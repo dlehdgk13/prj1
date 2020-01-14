@@ -113,6 +113,7 @@ $(document).ready( function() {
 		location.replace("/group4erp/godelete.do");
 	}*/
 
+
 	function goCEOLogin(str){
 		
 		$('[name=emp_pwd]').val(1111);
@@ -142,8 +143,13 @@ $(document).ready( function() {
 			checkLoginInfo();
 		}
 	}
+
 	
-	
+	function insertNewEmp() {
+		//alert("신규 사원 추가 기능 구현");
+		location.href="/group4erp/viewNewEmpJoin.do"
+	}
+
 	
 	function goClose1(){
 		$(".checkID").hide(1000);
@@ -206,6 +212,7 @@ $(document).ready( function() {
 </div>
 
 <input type="button" name="loginBtn" value="로그인" onClick="checkLoginInfo();">&nbsp;
+<input type="button" value="신규사원등록" onClick="insertNewEmp();">
 <!-- <input type="button" name="joinBtn" value="사원등록" onClick="joinMembership();">&nbsp;
 <input type="button" name="deleteBtn" value="사원삭제" onClick="deleteMembership();"> -->
 <!-- <input type="button" name="checkIDbtu" value="승인여부"> -->

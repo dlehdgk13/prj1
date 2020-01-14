@@ -36,6 +36,15 @@
 <script>
 	$(document).ready(function(){
 
+		setTableTrBgColor(
+				"businessTripListTable",	//테이블 class 값
+				"${headerColor}",			//헤더 tr 배경색
+				"${oddTrColor}",		//홀수행 배경색
+				"${evenTrColor}",	//짝수행 배경색
+				"${mouseOverColor}"			//마우스 온 시 배경색
+		);
+		
+
 		$("#datepicker3").datepicker({
 			dateFormat: 'yy-mm-dd'
 		});
@@ -43,7 +52,6 @@
 			dateFormat: 'yy-mm-dd'
 		});
 		
-
 		
 		$('[name=rowCntPerPage]').change(function(){
 			goSearch();
@@ -151,24 +159,26 @@
 	<h1>[출장 리스트]</h1>
 	<form name="getBusinessTripListSearchForm" method="post" action="/group4erp/businessTripList.do">
 		
-     <table>
+     <table class="searchTb tab" border="0" cellpadding="5">
      	<tr>
-     		<td>
-				출발날짜<input type="text" id="datepicker3" readonly>
-				~
-				복귀날짜<input type="text" id="datepicker4" readonly>
+     		<td>[일자별]</td>
+     		<td align="left">
+				<input type="text" id="datepicker3" readonly>일 부터 <input type="text" id="datepicker4" readonly>일 까지
 				&nbsp;&nbsp;&nbsp;
 			</td>
      	</tr>
      	<tr>
-     		<td>
+     		<td>[결재상태별]</td>
+     		<td align="left">
      			<input type="checkbox" name='payment' class="payment" value="Y">승인
          		<input type="checkbox" name='payment' class="payment" value="W">대기중
          		<input type="checkbox" name='payment' class="payment" value="N">반려
      		</td>
      	</tr>
-     </table>   
-		검색조건<select id = "selectSearch">
+     	<tr>
+     		<td>[검색조건]</td>
+     		<td align="left">
+     					<select id = "selectSearch">
 					<option>------</option>
 					<option value="emp_name">성명</option>
 					<option value="dep_name">부서</option>
@@ -178,8 +188,15 @@
 				</select>
 				
 				<span id="searchText">
-					<input type="text" id="searchKeyword">&nbsp;&nbsp;
+					<input type="text" id="searchKeyword">&nbsp;&nbsp;<input type="button" value=" 검색 " onClick="goSearch();">		
+				
+&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goAllSearch();">
 				</span>
+     		
+     		</td>
+     	</tr>
+     </table>   
+
 				
 				<!-- 
 				<span id="layer" style="display:none">
@@ -191,9 +208,7 @@
 					</select>
 				</span> 
 				 -->
-				<input type="button" value=" 검색 " onClick="goSearch();">		
 				
-	&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goAllSearch();">
 	 <table border=0 width=700>
 	 	<tr>
 	    	<td align=right>
@@ -220,7 +235,7 @@
 	<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 	
 	<div id="blankArea"><br></div>
-		<table class="businessTripListTable tbcss1" name="businessTripListTable" cellpadding="5" cellspacing="5">		
+		<table class="businessTripListTable tab" name="businessTripListTable" cellpadding="5" cellspacing="5">		
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -253,7 +268,7 @@
 					
 					<th>담당자</th>
 					
-					<th>결제</th>
+					<th>결재</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -300,7 +315,7 @@
 			</tbody>
 		</table>
 		<br>
-		<input type="button" value="등록" onClick="goBusinessTripForm();">	
+		<input type="button" value="출장 신청" onClick="goBusinessTripForm();">	
 		<br><br>
 		
 		

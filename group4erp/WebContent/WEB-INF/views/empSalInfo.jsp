@@ -22,6 +22,7 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
+			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
 			goSearch();
 		});
 
@@ -36,11 +37,14 @@
 			);
 
 		//검색 후 입력양식에 넣었던 검색 조건들 세팅하기
-		$('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
-		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
+		$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
+
+		//$('[name=rowCntPerPage]').val($('[name=empSalForm] [name=rowCntPerPage]').val());
+		//$('[name=selectPageNo]').val($('[name=empSalForm] [name=selectPageNo]').val());
 		
-		//inputData('[name=rowCntPerPage]',"${salListSearchDTO.rowCntPerPage}");
-		//inputData('[name=selectPageNo]',"${salListSearchDTO.selectPageNo}");
+		inputData('[name=rowCntPerPage]',  $('[name=empSalForm] [name=rowCntPerPage]').val());
+		inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val());
 		//inputData("[name=sort]", "${salListSearchDTO.sort}");
 	});
 	
@@ -53,8 +57,8 @@
 	function goSearchAll() {
 		document.empSalForm.reset();
 
-		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
-		$('[name=corpSearchForm] [name=rowCntPerPage]').val("15");
+		$('[name=empSalForm] [name=selectPageNo]').val("1");
+		$('[name=empSalForm] [name=rowCntPerPage]').val("15");
 		goSearch();
 	}
 		
@@ -64,18 +68,18 @@
 	
 	<h1>[급여 지급 내역]</h1><br>
 	직책 : ${jikup}	&nbsp;&nbsp; 성명 :${emp_name}  <br>
-	<form name="empSalForm" method="post">
-	
-		<input type="hidden" name="selectPageNo">
-		<input type="hidden" name="rowCntPerPage">
-    	<input type="hidden" name="sort" >
-		
+	<form name="empSalForm" method="post" action="/group4erp/viewEmpSalInfo.do">
+
 		<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
 		<table>
 			<tr height=10>
 				<td></td>
 			</tr>
 		</table>
+			
+		<input type="hidden" name="selectPageNo">
+		<input type="hidden" name="rowCntPerPage">
+
 		
 	</form>
 	

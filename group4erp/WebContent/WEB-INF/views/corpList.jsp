@@ -44,11 +44,11 @@
 		inputData('[name=sort]').val("${corpSearchDTO.sort}");
 		
 		<c:forEach items="${corpSearchDTO.corp_business}" var="corp_business">
-			inputData("[name=corp_business]", "${corpSearchDTO.corp_business}");
+			inputData("[name=corpSearchForm] [name=corp_business]", "${corpSearchDTO.corp_business}");
 		</c:forEach>
 
 		<c:forEach items="${corpSearchDTO.corp_business}" var="corp_business">
-			$('[name=corp_business]').filter("[value = ${corp_business}]").prop("checked", true);
+			$("[name=corpSearchForm] [name=corp_business]").filter("[value = ${corp_business}]").prop("checked", true);
 		</c:forEach>
 
 	});
@@ -215,7 +215,7 @@
 <body><center>
 	<h1>[거래처 현황]</h1>
 <form name="corpSearchForm" method="post" action="/group4erp/viewCorpList.do">
-	<table name="corpSearchTb" border="0" cellpadding="5" cellspacing="5">
+	<table class="corpSearchTb tab" name="corpSearchTb" border="0" cellpadding="5" cellspacing="5">
 		<tr>
 			<td align="right">[사업분야별]&nbsp;</td><td>
 				<%--<c:forEach items="${corp_business_area}" var="corp_business_area" varStatus="loopTagStatus">
@@ -225,14 +225,14 @@
 					<input type="checkbox" name="corp_business_area" value="${corp_business_area.bus_area_code}">${corp_business_area.bus_area_name} &nbsp;
 																								
 				</c:forEach> --%>
-					<input type="checkbox" name="corp_business" value="1">IT &nbsp;
-					<input type="checkbox" name="corp_business" value="2">통신 &nbsp;
-					<input type="checkbox" name="corp_business" value="3">금융 &nbsp;
-					<input type="checkbox" name="corp_business" value="4">출판&미디어&nbsp;
-					<input type="checkbox" name="corp_business" value="5">교육&학원 &nbsp;<br>
-					<input type="checkbox" name="corp_business" value="6">운송&물류 &nbsp;
-					<input type="checkbox" name="corp_business" value="7">학교 &nbsp;
-					<input type="checkbox" name="corp_business" value="8">기타 &nbsp;	
+					<input type="checkbox" name="corp_business" value="IT">IT &nbsp;
+					<input type="checkbox" name="corp_business" value="통신">통신 &nbsp;
+					<input type="checkbox" name="corp_business" value="금융">금융 &nbsp;
+					<input type="checkbox" name="corp_business" value="출판&미디어">출판&미디어&nbsp;
+					<input type="checkbox" name="corp_business" value="교육&학원">교육&학원 &nbsp;<br>
+					<input type="checkbox" name="corp_business" value="운송&물류">운송&물류 &nbsp;
+					<input type="checkbox" name="corp_business" value="학교">학교 &nbsp;
+					<input type="checkbox" name="corp_business" value="기타">기타 &nbsp;	
 			
 			 </td>
 		</tr>

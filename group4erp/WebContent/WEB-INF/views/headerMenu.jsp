@@ -17,6 +17,15 @@
  
 <head>
 
+<style>
+	.subMenu:hover {
+		box-shadow : 2px 2px 5px #999;	
+	}
+	
+
+
+</style>
+
 	<script>
 		$(document).ready(function() {
 			$("#subMenu1").hide();
@@ -321,20 +330,20 @@
 	</script>
 </head>
 <body>
-<center>
+<center><nav class="cl-effect-7">
 	<table class="menuList tab" name="menuList" border="0" cellspacing="0" cellpadding="0" width="100%" style="table-layout:fixed;">
 		<tr style="border-bottom:1px solid black;">
 			<td align="left"><input type="button" value="메인화면으로" onClick="moveMainPage();"></td>
-			<td>&nbsp;</td>
-			<th style="cursor:pointer" onMouseOver="javascript:viewMyWorkMenu();"  onClick="myCareBookList();">업무관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>	
-			<th style="cursor:pointer" onMouseOver="javascirpt:viewInventoryMenu();" onClick="goBookList();">재고현황</th><td widht="100" onMouseOver="hideSubMenu();" onClick="goBookList();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td width="50">&nbsp;</td>
+			<th width="100" style="cursor:pointer" onMouseOver="javascript:viewMyWorkMenu();" onClick="myCareBookList();"><span><a href="#">업무관리</a></span></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>	
+			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewInventoryMenu();" onClick="goBookList();"><a href="#">재고현황</a></th><td widht="50" onMouseOver="hideSubMenu();" onClick="goBookList();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<!-- <th style="cursor:pointer" onMouseOver="javascirpt:viewShippingMenu();">배송관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> -->
-			<th style="cursor:pointer" onMouseOver="javascirpt:viewMarketingMenu();" onClick="goNowSaleList();">마케팅관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<th style="cursor:pointer" onMouseOver="javascirpt:viewHRMenu();" onClick="viewEmpList();" >인사관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<th style="cursor:pointer" onMouseOver="javascirpt:viewAccoutingMenu();" onClick="viewTranLog();">회계관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<th style="cursor:pointer" onMouseOver="javascirpt:viewBigDataMenu();" onClick="viewBestKeywdReport();">전략분석</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewMarketingMenu();" onClick="goNowSaleList();"><a href="#">마케팅관리</a></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewHRMenu();" onClick="viewEmpList();" ><a href="#">인사관리</a></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewAccoutingMenu();" onClick="viewTranLog();"><a href="#">회계관리</a></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewBigDataMenu();" onClick="viewBestKeywdReport();"><a href="#">전략분석</a></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<!-- <th style="cursor:pointer" onMouseOver="javascirpt:viewBuyerMenu();">거래처관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> -->
-			<td align="right" colspan="2"><h5>${emp_name} ${jikup}님 안녕하세요.^^</h5> <input type="button" value="로그아웃" onClick="logout();">
+			<td id="menu" align="right" colspan="2"><h5>${emp_name} ${jikup}님 안녕하세요.^^</h5> <input type="button" value="로그아웃" onClick="logout();">
 			</td>
 			
 		</tr>
@@ -343,22 +352,23 @@
 			<!-- <td colspan="16" width="500"> -->
 			<td nowrap>&nbsp;<!-- &nbsp;지우지말것!! -->
 				<span id="subMenu1"> <!-- 업무관리 -->
-					<span id="myCareBookList" style="cursor:pointer" onClick="myCareBookList();">담당 상품 조회&nbsp;&nbsp;&nbsp;</span>
-					<span id="businessTripForm" style="cursor:pointer" onClick="businessTripForm();">출장신청&nbsp;&nbsp;&nbsp;</span>
-					<span id="viewMyWorkTime" style="cursor:pointer" onClick="viewMyWorkTime();">근태조회&nbsp;&nbsp;&nbsp;</span>
-					<span id="viewMyWorkTime" style="cursor:pointer" onClick="viewApprovalList();">문서 결재&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="myCareBookList" style="cursor:pointer" onClick="myCareBookList();">담당 상품 조회&nbsp;&nbsp;&nbsp;</span>
+					<!--<span id="myCareBookList " style="cursor:pointer" onClick="myCareBookList();">담당 상품 조회&nbsp;&nbsp;&nbsp;</span>  -->
+					<span class="subMenu" id="businessTripForm" style="cursor:pointer" onClick="businessTripForm();">출장신청&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="viewMyWorkTime" style="cursor:pointer" onClick="viewMyWorkTime();">근태조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="viewMyWorkTime" style="cursor:pointer" onClick="viewApprovalList();">문서 결재&nbsp;&nbsp;&nbsp;</span>
 					<!-- <span id="viewMyWorkTime" style="cursor:pointer" onClick="approvalDoc();">문서 결재&nbsp;&nbsp;&nbsp;</span> -->
-					<span id="empDayOffjoin" style="cursor:pointer" onClick="dayoffJoin();">휴가 신청&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="empDayOffjoin" style="cursor:pointer" onClick="dayoffJoin();">휴가 신청&nbsp;&nbsp;&nbsp;</span>
 
 				</span>
 			</td>
 			<td></td>
 			<td nowrap>
 				<span id="subMenu2">	<!-- 재고관리 -->
-					<span id="myCareBookList" style="cursor:pointer" onClick="goBookList();">도서정보조회&nbsp;&nbsp;&nbsp;</span>
-					<span id="shippingList" style="cursor:pointer" onClick="goShippingList();">출고현황조회&nbsp;&nbsp;&nbsp;</span>
-					<span id="myIntoList" style="cursor:pointer" onClick="goMyIntoList();">입고현황조회&nbsp;&nbsp;&nbsp;</span>
-					<span id="returnBookList" style="cursor:pointer" onClick="goReturnBookList();">반품현황조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="myCareBookList" style="cursor:pointer" onClick="goBookList();">도서정보조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="shippingList" style="cursor:pointer" onClick="goShippingList();">출고현황조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="myIntoList" style="cursor:pointer" onClick="goMyIntoList();">입고현황조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="returnBookList" style="cursor:pointer" onClick="goReturnBookList();">반품현황조회&nbsp;&nbsp;&nbsp;</span>
 				</span>
 			</td>
 			<td></td>
@@ -370,23 +380,23 @@
 				</span>-->
 			<td nowrap>
 				<span id="subMenu4">	<!-- 마케팅관리 -->
-					<span id="nowSaleList" style="cursor:pointer" onClick="goNowSaleList();">판매현황&nbsp;&nbsp;&nbsp;</span>
-					<span id="eventSchedulingList" style="cursor:pointer" onClick="eventSchedulingList();">이벤트행사 현황&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="nowSaleList" style="cursor:pointer" onClick="goNowSaleList();">판매현황&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="eventSchedulingList" style="cursor:pointer" onClick="eventSchedulingList();">이벤트행사 현황&nbsp;&nbsp;&nbsp;</span>
 					<!-- <span id="adOrder" style="cursor:pointer" onClick="adApplyList();">광고신청현황&nbsp;&nbsp;&nbsp;</span> -->	
 				</span>
 			</td>
 			<td></td>
 			<td nowrap>
 				<span id="subMenu5">	<!-- 인사관리 -->
-					<span id="empList" style="cursor:pointer" onClick="viewEmpList();">직원정보&nbsp;</span>
+					<span class="subMenu" id="empList" style="cursor:pointer" onClick="viewEmpList();">직원정보&nbsp;</span>
 					
 						<c:if test="${dep_no eq 6 && mgr_emp_no eq '100001'}">
 							<span id="salaryList" style="cursor:pointer" onClick="viewSalaryList();">급여지급현황&nbsp;</span>
 						</c:if>
 					
-					<span id="salaryList" style="cursor:pointer" onClick="viewSalarySpecList();">급여명세서 조회&nbsp;</span>		
-					<span id="empWorkState" style="cursor:pointer" onClick="viewEmpWorkStateList();">직원별 근무현황조회&nbsp;</span>
-					<span id="empDayOffList" style="cursor:pointer" onClick="viewEmpDayOffList();">직원별 휴가 현황&nbsp;</span>
+					<span class="subMenu" id="salaryList" style="cursor:pointer" onClick="viewSalarySpecList();">급여명세서 조회&nbsp;</span>		
+					<span class="subMenu" id="empWorkState" style="cursor:pointer" onClick="viewEmpWorkStateList();">직원별 근무현황조회&nbsp;</span>
+					<span class="subMenu" id="empDayOffList" style="cursor:pointer" onClick="viewEmpDayOffList();">직원별 휴가 현황&nbsp;</span>
 				</span>
 			</td>
 			<td></td>
@@ -394,10 +404,10 @@
 				<span id="subMenu6">	<!-- 회계관리 -->
 					<!-- <span id="salesInfoList" style="cursor:pointer" onClick="viewSalesReport();">매출정보&nbsp;&nbsp;&nbsp;</span> -->
 					<!-- <span id="elecBill" style="cursor:pointer" onClick="viewPromiNoteList();">전자어음&nbsp;&nbsp;&nbsp;</span> -->
-					<span id="specTransaction" style="cursor:pointer" onClick="viewSpecTransaction();">거래명세서 발급 조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="specTransaction" style="cursor:pointer" onClick="viewSpecTransaction();">거래명세서 발급 조회&nbsp;&nbsp;&nbsp;</span>
 					<!-- <span id="taxInvoice" style="cursor:pointer" onClick="viewTaxInvoiceList();">세금계산서&nbsp;&nbsp;&nbsp;</span> -->
-					<span id="viewTranLog" style="cursor:pointer" onClick="viewTranLog();">거래내역 조회&nbsp;&nbsp;&nbsp;</span>
-					<span id="updateClientList" style="cursor:pointer" onClick="viewCorpList();">거래처 등록/삭제&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu"  id="viewTranLog" style="cursor:pointer" onClick="viewTranLog();">거래내역 조회&nbsp;&nbsp;&nbsp;</span>
+					<span class="subMenu" id="updateClientList" style="cursor:pointer" onClick="viewCorpList();">거래처 등록/삭제&nbsp;&nbsp;&nbsp;</span>
 				</span>
 			</td>
 			<td></td>
@@ -405,8 +415,8 @@
 				<span id="subMenu7">	<!-- 전략분석 -->
 					<!-- <span id="salesChangeReport" style="cursor:pointer" onClick="viewSalesChangeReport();">매출추이분석&nbsp;&nbsp;&nbsp;</span> -->
 					<!-- <span id="cusClaimReport" style="cursor:pointer" onClick="viewCusClaimReport();">고객 클레임 처리 상황&nbsp;&nbsp;&nbsp;</span> -->
-					<span id="bestKeywordReport" style="cursor:pointer" onClick="viewBestKeywdReport();">키워드 검색 자료 조회&nbsp;&nbsp;</span>
-					<span id="ourCompanyReport" style="cursor:pointer" onClick="viewOurCompanyReport();">회사 현황&nbsp;&nbsp;</span>					
+					<span class="subMenu" id="bestKeywordReport" style="cursor:pointer" onClick="viewBestKeywdReport();">키워드 검색 자료 조회&nbsp;&nbsp;</span>
+					<span class="subMenu" id="ourCompanyReport" style="cursor:pointer" onClick="viewOurCompanyReport();">회사 현황&nbsp;&nbsp;</span>					
 				</span>
 			</td>
 				<!-- <span id="subMenu8">	거래처관리 
@@ -418,7 +428,9 @@
 				</span>-->			
 			<td colspan="2"></td>		
 		</tr>
+		</nav>
 	</table>
+	</nav>
 	<div id="navigationBar" align="left">
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
 			<tr>

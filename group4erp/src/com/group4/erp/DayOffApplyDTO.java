@@ -1,7 +1,7 @@
 package com.group4.erp;
 
 public class DayOffApplyDTO {
-	
+
 	private int dayoff_apply_no;
 	private int emp_no;
 	private String dayoff_apply_dt;
@@ -13,8 +13,17 @@ public class DayOffApplyDTO {
 	private String dayoff_category;
 	private String jikup;
 	private String emp_name;
+	private String mgr_name;
 	
 	
+	public String getMgr_name() {
+		return mgr_name;
+	}
+
+	public void setMgr_name(String mgr_name) {
+		this.mgr_name = mgr_name;
+	}
+
 	public String getJikup() {
 		return jikup;
 	}

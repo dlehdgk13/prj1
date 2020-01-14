@@ -40,6 +40,8 @@
 			e.emp_email "emp_email",
 			e.emp_email_office "emp_email_office",
 			e.mgr_emp_no "mgr_emp_no",
+			(select ee.emp_no from employee ee where ee.jikup_cd=1) "ceo_no",
+            (select ee.emp_name from employee ee where ee.jikup_cd=1) "ceo_name",
 			(select ee.emp_name from employee ee where e.mgr_emp_no = ee.emp_no) "mgr",
 			e.emp_addr "emp_addr"
 		from employee e

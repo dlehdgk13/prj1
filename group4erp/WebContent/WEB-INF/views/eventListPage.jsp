@@ -98,7 +98,6 @@
 		inputData('[name=rowCntPerPage]',"${eventSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${eventSearchDTO.selectPageNo}");
 		inputData("[name=searchKeyword]", "${eventSearchDTO.searchKeyword}");
-		inputData("[name=allOrMine]", "${eventSearchDTO.allOrMine}");
 		inputData("[name=sort]", "${eventSearchDTO.sort}");
 		
 
@@ -275,7 +274,7 @@
     <input type="hidden" name="selectPageNo">
     <input type="hidden" name="sort">
 	<form name="searchEvntForm" method="post" action="/group4erp/viewEventList.do">
-		<table border=0>
+		<table class="searchEvntTable tab" border="0" cellpadding="5" cellspacing="5">
 			<tr>
 	    		<td align="left">
 	    			
@@ -285,11 +284,11 @@
 	            </td>
 	        </tr>
 		</table><br>
-		<table name="searchEvntTable">
-			<tr>
+		<table class="searchEvntTable tab" name="searchEvntTable" cellpadding="5" cellspacing="5">
+			<!-- <tr>
 				<td>[행사별] </td><td><input type="checkbox" name="allOrMine" value='a'>전체보기 &nbsp;
 									<input type="checkbox" name="allOrMine" value='m'>담당 행사만 보기</td>
-			</tr>
+			</tr> -->
 			<tr> <!-- DB 연동할 것 -->
 				<td valign="top">[종류별]</td><td><input type="checkbox" value="01" name="evnt_category">매대판매
 								<input type="checkbox" value="02" name="evnt_category">야외판매
@@ -425,7 +424,7 @@
 			<c:forEach items="${eventList}" var="eventList" varStatus="loopTagStatus">
 				<tr style="cursor:pointer" onClick="viewEventInfoForm(${empList.emp_no});">	
 					<td class="delCheckBox" align=center>
-						<c:if test="${eventList.evnt_stat eq '대기중' }">
+						<c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려' }">
 							<input type="checkbox" name="delCheckBox" value="${eventList.evnt_no}">
 						</c:if>
 					</td>
@@ -435,7 +434,7 @@
 					<td align=center>${eventList.evnt_start_dt}</td>
 					<td align=center>${eventList.evnt_end_dt}</td>
 					<td align=center>${eventList.evnt_stat}</td>
-					<td><c:if test="${eventList.evnt_stat eq '대기중' }">
+					<td><c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려'}">
 							<input type="button" name="updateBtn" value="수정" onClick="updateEventInfo(this,'${eventList.evnt_no}', '${eventList.evnt_title}', '${eventList.evnt_start_dt}', '${eventList.evnt_end_dt}');">
 						</c:if>
 					</td>

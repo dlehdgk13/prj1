@@ -6,17 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>IZ Books ERP 메인 페이지</title>
+<style>
+
+
+</style>
+
 </head>
 <%--<header width=95%><%@ include file ="/WEB-INF/views/headerMenu.jsp" %></header> --%>
 <body><center>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" >
-	<tr height="50">
+<table border="0" cellpadding="0" cellspacing="0" style="background-image : url('/group4erp/resources/image/bookImage.jpg'); 
+		background-repeat:no-repeat; 
+		background-size:cover;
+		background-attachment:fixed; " >
+	<tr height="40">
 		<td align="center"><%@ include file ="/WEB-INF/views/headerMenu.jsp" %></td>
 	</tr>
-	<tr height="90%" valign=top>
-		<td align="center" height="500"><br><br>
+	<tr class="main" valign="top" height="700px" >
+		<td align="center">
 		<!-- <section> -->
+			<c:if test="${subMenu.equals('mainPage') }">
+				<%@ include file="/WEB-INF/views/mainPage.jsp" %>
+			</c:if>	
 
 			<c:if test="${subMenu.equals('eventReserve') }">
 				<%@ include file="/WEB-INF/views/eventScheduleForm.jsp" %>
@@ -208,9 +219,9 @@
 
 		</td>
 	</tr>
-	<tr height="50">
+	<tr height="40">
 		<td align="center"><%@ include file ="/WEB-INF/views/footer.jsp" %></td> 
-	</tr>
+	</tr> 
 
 </table>
 

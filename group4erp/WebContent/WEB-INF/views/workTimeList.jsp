@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ include file = "/WEB-INF/views/common.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +10,20 @@
 <title>근태 조회</title>
 <script>
 	$(document).ready(function(){
+
+		setTableTrBgColor(
+				"workDayStateList",	//테이블 class 값
+				"${headerColor}",			//헤더 tr 배경색
+				"${oddTrColor}",		//홀수행 배경색
+				"${evenTrColor}",	//짝수행 배경색
+				"${mouseOverColor}"			//마우스 온 시 배경색
+		);
+
+		
 		$('[name=rowCntPerPage]').change(function(){
 			goWorkStateListSearch();
 		});
+		
 		$('[name=searchEmpNo]').change(function(){
 			goWorkStateListSearch();
 		});
@@ -27,7 +41,9 @@
 		inputData("[name=rowCntPerPage]", "${myWorkSearchDTO.rowCntPerPage}");
 		inputData("[name=searchEmpNo]", "${myWorkSearchDTO.searchEmpNo}");
 	});
+	
 	function goWorkStateListSearch(){
+		
 		document.workStateListSearch.submit();
 		/* 
 		$.ajax({
@@ -43,18 +59,27 @@
 <body><center>
 	<h1>[근태 조회]</h1><br>
 	<form name="workStateListSearch" method="post" action="/group4erp/goMyWorkTime.do">
-		<table border=0 width=70% align=center>
-			<select name="searchEmpNo">
-				<option value="0">전체
-				<c:forEach items="${requestScope.searchEmpNo}" var="searchEmpNo" varStatus="loopTagStatus">
-				<option value="${searchEmpNo.emp_no}">${searchEmpNo.emp_no}
-				</c:forEach>
-			</select>
+		<table class="searchTb tab" name="searchTb" cellpadding="5" cellspacing="5" border="0" align="center">
+		<tr>
+			<td>[사번 검색]</td><td><select name="searchEmpNo">
+							<option value="0">전체
+							<c:forEach items="${requestScope.searchEmpNo}" var="searchEmpNo" varStatus="loopTagStatus">
+								<option value="${searchEmpNo.emp_no}">${searchEmpNo.emp_no}
+							</c:forEach>
+						</select>
+						</td>
+			</td>
+		</tr>
 		</table>
-		<table border=0>
-			<tr>
-				<td align=right>
-					[총 개수] : ${workDaysListAllCnt}&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="hidden" name="selectPageNo">
+	</form>
+	<br>
+	
+	<!-- <form name="workDaysMng" method="post" action="/group4erp/workDaysList.do"> -->
+	<table name="outerBorder" border="0" cellpadding="0" cellspacing="5">
+		<tr>
+			<td align="right">
+			[총 개수] : ${workDaysListAllCnt}&nbsp;&nbsp;&nbsp;&nbsp; 		
 					<select name="rowCntPerPage">
 						<option value="10">10
 						<option value="15">15
@@ -62,12 +87,12 @@
 						<option value="25">25
 						<option value="30">30
 					</select> 행보기
-		</table>
-		<input type="hidden" name="selectPageNo">
-	</form>
-	
-	<form name="workDaysMng" method="post" action="/group4erp/workDaysList.do">
-		<table class="workDayStateList tab" name="workDayStateList" cellpadding="5" cellspacing="5">
+			</td>
+		</tr>
+		<tr>
+			<!-- 메인 목록 시작 -->
+			<td>
+			<table class="workDayStateList tab" name="workDayStateList" cellpadding="5" cellspacing="5">
 			<thead>
 				<tr>
 					<th>직원번호
@@ -98,10 +123,16 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		</td>
+		<!-- 메인 목록 끝 -->
+			
+		</tr>
+	
 		
+	</table>
 		<table><tr height=10><td></table>
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
-	</form>
+	<!-- </form> -->
 
 </center>
 </body>

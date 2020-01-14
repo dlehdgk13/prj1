@@ -11,7 +11,7 @@
 <title>이벤트 행사 신청 결재</title>
 <script>
 	$(document).ready(function() {
-
+		
 	});
 	
 	function responseApproval() {
@@ -56,10 +56,18 @@
 														<tr><td align="center">${approvalInfoList.emp_name}</td><td align="center">
 																												
 																												<% String mgr_no = (String)session.getAttribute("mgr_emp_no"); 
-																												
+																													String emp = (String)session.getAttribute("emp_id");
+																													System.out.println("mgr_no==="+mgr_no);
+																													String ceo_no = (String)session.getAttribute("ceo_no");
+																													System.out.println("ceo_no==="+ceo_no);
 																												if(mgr_no != null) { %>
-																												<input type="radio" name="approvalYn" value="5">승인 &nbsp;
-																												<input type="radio" name="approvalYn" value="6">반려 &nbsp;
+																													<input type="radio" name="approvalYn" value="7">승인 &nbsp;
+																													<input type="radio" name="approvalYn" value="6">반려 &nbsp;
+																													<input type="hidden" name="mgr_emp" value='<%=emp %>'>
+																												<% } else if(mgr_no==null && ceo_no!=null) { %>
+																													
+																													
+																													<label>${approvalInfoList.mgr_name}</label>
 																												
 																												<% } %>
 																												

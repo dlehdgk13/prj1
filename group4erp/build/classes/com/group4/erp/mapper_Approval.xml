@@ -10,19 +10,13 @@
 <mapper namespace="com.group4.erp.dao.ApprovalDAO">
 
 
+
 	<select id="getApprovalReqCnt" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="int">
 		select count(*) from e_works_info ap
 		where 1=1
 		and ap.emp_no = #{emp_no}
 	</select>
 	
-	<select id="getApprovalResCnt" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="int">
-		select count(*) from e_works_info ap
-		where 1=1
-		and e_works_state_cd in (1, 3)
-		and ap.mgr_emp_no = #{emp_no}
-	</select>
-
 	<select id="getApprovalReqList" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="com.group4.erp.ApprovalDTO">
 		select
 			ap.e_works_no "e_works_no",
@@ -37,8 +31,25 @@
 		from e_works_info ap
 		where 1=1
 		and ap.emp_no = #{emp_no}
-	
+		order by ap.e_works_req_dt
 	</select>
+	
+	
+	<select id="getApprovalResCnt" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="int">
+		select count(*) from e_works_info ap
+		where 1=1
+		and e_works_state_cd not in (1, 6, 7)
+		and ap.mgr_emp_no = #{emp_no}
+
+	</select>
+	
+	<select id="getApprovalCEOResCnt" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="int">
+		select count(*) from e_works_info ap
+		where 1=1
+		and ap.e_works_state_cd ='7'
+
+	</select>
+
 	
 	<select id="getApprovalResList" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="com.group4.erp.ApprovalDTO">
       	select
@@ -47,6 +58,7 @@
 			ap.document_no "document_no",
 			ap.emp_no "emp_no",        
             ap.mgr_emp_no "mgr_emp_no",
+            <!-- (select e.emp_name from employee e where e.mgr_emp_no = ap.emp_no) "mgr_name", -->	
 			(select c.jikup from code_jikup c where c.jikup_cd = (select e.jikup_cd from employee e where e.emp_no = ap.emp_no) )  "jikup",
 			(select e.emp_name from employee e where e.emp_no = ap.emp_no) "emp_name",			
 			to_char(ap.e_works_req_dt, 'yyyy.mm.dd(dy) hh24:mi:ss', 'nls_date_language=Korean') "e_works_req_dt",
@@ -54,9 +66,43 @@
 			(select c.evnt_state_name from code_ad_state c where c.evnt_state_cd = ap.e_works_state_cd) "approval_state"
 		from e_works_info ap
 		where 1=1
-		and ap.e_works_state_cd in (1, 3)
+		and ap.e_works_state_cd in ('1', '6', '7')
 		and ap.mgr_emp_no = #{emp_no}
 	</select>
+	
+	
+	<select id="getApprovalCEOResList" parameterType="com.group4.erp.ApprovalSearchDTO" resultType="com.group4.erp.ApprovalDTO">
+      	select
+      		rownum "approval_num",
+			ap.e_works_no "e_works_no",
+			ap.document_no "document_no",
+			ap.emp_no "emp_no",        
+            ap.mgr_emp_no "mgr_emp_no",
+            (select e.emp_name from employee e where e.emp_no = ap.mgr_emp_no) "mgr_name", 
+			(select c.jikup from code_jikup c where c.jikup_cd = (select e.jikup_cd from employee e where e.emp_no = ap.emp_no) )  "jikup",
+			(select e.emp_name from employee e where e.emp_no = ap.emp_no) "emp_name",			
+			to_char(ap.e_works_req_dt, 'yyyy.mm.dd(dy) hh24:mi:ss', 'nls_date_language=Korean') "e_works_req_dt",
+			ap.e_works_state_cd "e_works_state_cd",
+			(select c.evnt_state_name from code_ad_state c where c.evnt_state_cd = ap.e_works_state_cd) "approval_state"
+		from e_works_info ap
+		where 1=1
+		and ap.e_works_state_cd='7'
+	</select>
+	
+	
+	<sql id="WhereCondition">
+	
+		<if test="isCEO==1">
+			and ap.e_works_state_cd = '7'	
+		</if>
+		
+		<if test="isCEO==0">
+			and ap.e_works_state_cd not in (2, 4)
+			and ap.mgr_emp_no = #{emp_no}
+		</if>
+		
+	</sql>
+	
 	
 	
 	<insert id="insertApproval" parameterType="com.group4.erp.ApprovalDTO">
@@ -72,7 +118,7 @@
 			e_works_state_cd,
 			e_work_comment		
 		) values (
-			(select nvl(max(e_works_no),0)+1 from e_works_info),
+			(select nvl(count(*), 0)+1 from e_works_info),
 			#{document_no},
 			#{emp_no},
 			#{document_no},

@@ -80,8 +80,7 @@
 	<select id='getEventCnt' parameterType="com.group4.erp.EventSearchDTO" resultType="int">
 		select count(*) from event_info ei
 		where 1=1
-		and ei.evnt_state_cd != 7
-		<include refid="eventWhere" />
+		and ei.emp_no = #{emp_no}
 	</select>
 	
 	
@@ -101,7 +100,6 @@
             ei.atchd_data "atchd_data"
         from event_info ei
 		where 1=1	
-		and ei.evnt_state_cd != 7	
 		<include refid="eventWhere" />
 		<include refid="headerSort" />
 		
@@ -345,6 +343,7 @@
        	select
 			i.evnt_no "evnt_no",
 			i.emp_no "emp_no",
+			(select e.emp_name from employee e where e.emp_no=(select ee.mgr_emp_no from employee ee where ee.emp_no = i.emp_no) ) "mgr_name",
 			(select c.jikup from code_jikup c
         		where c.jikup_cd = (select e.jikup_cd from employee e 
         							where e.emp_no=(select ee.emp_no from event_info ee where ee.evnt_no=i.evnt_no) ) ) "jikup",

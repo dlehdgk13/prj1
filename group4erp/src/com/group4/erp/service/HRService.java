@@ -2,6 +2,8 @@ package com.group4.erp.service;
 
 import java.util.List;
 import java.util.Map;
+
+import com.group4.erp.ApprovalDTO;
 import com.group4.erp.EmployeeDTO;
 import com.group4.erp.EmployeeInfoDTO;
 import com.group4.erp.EmployeeInfoUpDTO;
@@ -39,15 +41,21 @@ public interface HRService {
 	
 	int empInfoUpProc(EmployeeInfoUpDTO employeeInfoUpDTO);
 	
+	/* EmployeeInfoUpDTO getEmpNoEmpPic(EmployeeInfoUpDTO employeeInfoUpDTO); */
+	
 	List<SalaryDTO> getAvgSalChart();
 	
 	int getNewEmpInsertCnt(EmployeeDTO employeeDTO);
 	
-	int getAddDayoffinfoCnt(EmployeeDTO employeeDTO);
+	int getAddDayoffinfoCnt(EmployeeInfoUpDTO employeeInfoUpDTO);
 	
 	int dayoffUpdateProcI(HrDayoffDTO hrDayoffDTO);
 	
 	int dayoffUpdateProcII(HrDayoffDTO hrDayoffDTO);
+	
+	int dayoffDeleteProcI(HrDayoffDTO hrDayoffDTO);
+	
+	int dayoffDeleteProcII(HrDayoffDTO hrDayoffDTO);
 
 	//String getMgrEmpName(EmployeeDTO employeeDTO);
 
@@ -56,5 +64,7 @@ public interface HRService {
 	int getUpdateCnt(Map<String, String> emp_no_in_time_out_time_check_inout_name_remarks);
 	
 	int getMyPayCheckCnt(int emp_no);
+	
+	int updateDayOffApprovalProc(ApprovalDTO approvalDTO);
 
 }

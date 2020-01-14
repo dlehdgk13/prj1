@@ -164,7 +164,7 @@
 	
 		</table><br><br>
 		
-		<input type="button" value="결재" onClick="goApproval();">
+		<!-- <input type="button" value="결재" onClick="goApproval();"> -->
 		<input type="button" value="급여 지급" onClick="goPayCheck();">
 		<input type="button" value="차트보기" onClick="goChart();">
 	</form>

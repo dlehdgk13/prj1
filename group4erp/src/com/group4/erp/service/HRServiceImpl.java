@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.group4.erp.ApprovalDTO;
 import com.group4.erp.EmployeeDTO;
 import com.group4.erp.EmployeeInfoDTO;
 import com.group4.erp.EmployeeInfoUpDTO;
@@ -117,9 +118,30 @@ public class HRServiceImpl implements HRService {
 
 	@Override
 	public int empInfoUpProc(EmployeeInfoUpDTO employeeInfoUpDTO) {
-		int empInfoUpdate = this.hrDAO.empInfoUpProc(employeeInfoUpDTO);
-		return empInfoUpdate;
+		int empInfoUpdate = 0;
+		String emp_no = employeeInfoUpDTO.getEmp_no();
+		if(emp_no.length() < 6) {
+			System.out.println(employeeInfoUpDTO.toString());
+			int newEmpConfirm = this.hrDAO.newEmpConfirmProc(employeeInfoUpDTO);
+			if(newEmpConfirm != 1) {
+				return 0;
+			}
+		}else {
+			System.out.println(employeeInfoUpDTO.toString());
+			empInfoUpdate = this.hrDAO.empInfoUpProc(employeeInfoUpDTO);
+		}
+		return empInfoUpdate;	
+			
 	}
+	
+	/*
+	 * @Override public EmployeeInfoUpDTO getEmpNoEmpPic(EmployeeInfoUpDTO
+	 * employeeInfoUpDTO) { EmployeeInfoUpDTO noEmp_pic =
+	 * this.hrDAO.getEmpNoEmpPic(employeeInfoUpDTO); return noEmp_pic; }
+	 */
+
+	
+	
 
 	@Override
 	public List<SalaryDTO> getAvgSalChart() {
@@ -135,8 +157,8 @@ public class HRServiceImpl implements HRService {
 	
 	
 	@Override
-	public int getAddDayoffinfoCnt(EmployeeDTO employeeDTO) {
-		int addDayoffinfo = this.hrDAO.getAddDayoffinfoCnt(employeeDTO);
+	public int getAddDayoffinfoCnt(EmployeeInfoUpDTO employeeInfoUpDTO) {
+		int addDayoffinfo = this.hrDAO.getAddDayoffinfoCnt(employeeInfoUpDTO);
 		return addDayoffinfo;
 	}
 
@@ -161,12 +183,26 @@ public class HRServiceImpl implements HRService {
 		return dayoffUpdateCnt;
 	}
 
+
+	@Override
+	public int dayoffDeleteProcI(HrDayoffDTO hrDayoffDTO) {
+		int dayoffDeleteCntI = this.hrDAO.dayoffDeleteProcI(hrDayoffDTO);
+		return dayoffDeleteCntI;
+	}
+
+	@Override
+	public int dayoffDeleteProcII(HrDayoffDTO hrDayoffDTO) {
+		int dayoffDeleteCntII = this.hrDAO.dayoffDeleteProcII(hrDayoffDTO);
+		return dayoffDeleteCntII;
+	}
+
 	@Override
 	public int dayoffUpdateProc(HrDayoffDTO hrDayoffDTO) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	
 	public int getUpdateCnt(Map<String, String> emp_no_in_time_out_time_check_inout_name_remarks) {
 		System.out.println("서비스 진입 성공");
 		int updateCnt = this.hrDAO.getUpdateCnt(emp_no_in_time_out_time_check_inout_name_remarks);
@@ -181,4 +217,13 @@ public class HRServiceImpl implements HRService {
 		
 		return myPayCheckCnt;
 	}
+
+	@Override
+	public int updateDayOffApprovalProc(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int myDayOffApproval = this.hrDAO.updateDayOffApprovalProc(approvalDTO);
+		
+		return myDayOffApproval;
+	}
+
 }

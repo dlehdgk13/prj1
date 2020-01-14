@@ -1,12 +1,12 @@
 package com.group4.erp.controller;
 
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +22,7 @@ import com.group4.erp.service.AccountService;
 import com.group4.erp.service.HRService;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group4.erp.EmployeeDTO;
@@ -35,14 +36,13 @@ import com.group4.erp.service.HRService;
 
 @Controller
 public class HRController {
-	
+
 	@Autowired
 	HRService hrservice;
 	AccountService accountService;
 
 	@RequestMapping(value = "/viewEmpList.do")
 	public ModelAndView viewEmpListList(HttpSession session, HrListSearchDTO hrListSearchDTO) {
-
 
 		ModelAndView mav = new ModelAndView();
 		// mav.setViewName("eventScheduleForm.jsp");
@@ -94,16 +94,17 @@ public class HRController {
 			List<SalaryDTO> empSalList = this.hrservice.getEmpSalList(salListSearchDTO);
 
 			TimeDTO timeDTO = this.hrservice.getTime();
-			
-			if(emp_tot_cnt >0 ) {
-				int selectPageNo = salListSearchDTO.getSelectPageNo();	//선택한 페이지 번호 구하기
-				int rowCntPerPage = salListSearchDTO.getRowCntPerPage();	//한 화면에 보여지는 행의 개수 구하기
-				int beginRowNo = selectPageNo * rowCntPerPage - rowCntPerPage +1;	//검색할 시작행 번호 구하기
-				if(emp_tot_cnt < beginRowNo) {		//만약 검색한 총 개수가 검색할 시작행 번호보다 작으면 선택한 페이지 번호를 1로 지정
+
+			if (emp_tot_cnt > 0) {
+				int selectPageNo = salListSearchDTO.getSelectPageNo(); // 선택한 페이지 번호 구하기
+				int rowCntPerPage = salListSearchDTO.getRowCntPerPage(); // 한 화면에 보여지는 행의 개수 구하기
+				int beginRowNo = selectPageNo * rowCntPerPage - rowCntPerPage + 1; // 검색할 시작행 번호 구하기
+				if (emp_tot_cnt < beginRowNo) { // 만약 검색한 총 개수가 검색할 시작행 번호보다 작으면 선택한 페이지 번호를 1로 지정
 
 					salListSearchDTO.setSelectPageNo(1);
 				}
 			}
+			
 
 			mav.setViewName("main.jsp");
 			mav.addObject("salListSearchDTO", salListSearchDTO);
@@ -120,7 +121,6 @@ public class HRController {
 
 		return mav;
 	}
-
 	
 	//급여명세서(개인별) 조회 기능
 	@RequestMapping(value="/viewEmpSalInfo.do")
@@ -138,10 +138,13 @@ public class HRController {
 		TimeDTO timeDTO = this.hrservice.getTime();
 		//int emp_tot_cnt = this.hrservice.getEmpListAllCnt(salListSearchDTO);
 		
+		System.out.println("salListSearchDTO.getRowCnt=="+salListSearchDTO.getRowCntPerPage());
+		
 		int myPayCheckCnt = this.hrservice.getMyPayCheckCnt(my_emp_no);
 			
 		//List<SalaryDTO> empSalInfo = this.hrservice.getEmpSalList(salListSearchDTO);
 	
+
 		System.out.println("급여 컨트롤러 시작");
 		List<SalaryDTO> myPayCheckList = this.hrservice.getSalaryInfo(salListSearchDTO);
 		System.out.println("컨트롤러 급여명세서 조회 성공");
@@ -154,8 +157,9 @@ public class HRController {
 		mav.addObject("timeDTO", timeDTO);
 
 		return mav;
+
 	}
-	
+
 	
 	// 직급별 평균 연봉을 막대 차트로 보여준다.
 	@RequestMapping(value = "/viewEmpAvgSalChart.do")
@@ -281,74 +285,78 @@ public class HRController {
 	@RequestMapping(value = "/viewNewEmpJoin.do")
 	public ModelAndView newEmpjoinMemberForm() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main.jsp");
-		mav.addObject("subMenu", "viewEmpJoinMember");
-		mav.addObject("navigator", "[인사관리]-[직원정보]-[직원등록]");
+		mav.setViewName("empListJoinForm.jsp");
+		//mav.addObject("subMenu", "viewEmpJoinMember");
+		//mav.addObject("navigator", "[인사관리]-[직원정보]-[직원등록]");
 
 		return mav;
 	}
 
-	@RequestMapping(
-	         value="/empWorkStateUpdateProc.do"                			//접속하는 클의 URL 주소 설정
-	         
-	         //POST를 없애면 GET방식과 POST 방식 모두 수용하기 때문에 보안상 문제가 발생할수 있다.
-	         //현업에선 보안 중시이니 귀찮더라더 from 태그 여러개 만들며 POST 방식으로 만들것! 
-	         
-	         ,method=RequestMethod.POST           		    //접속하는 클의 파값 전송 방법
-	         ,produces="application/json;charset=UTF-8"		//응당할 데이터 종류 json 설정
-	   )
-	   @ResponseBody //비동기방식으로 들어온것이며 HTML소스가 아닌 DB연동의 결과물을 얻고 싶을때 메소드 위에 설정한다.
-	   public int updateDayInOutTime(
-			   @RequestParam(value="in_time") String in_time
-			   , @RequestParam(value="out_time", required=false) String out_time
-			   , @RequestParam(value="check_inout_name") String check_inout_name
-			   , @RequestParam(value="remarks", required=false) String remarks
-			   , @RequestParam(value="emp_no") String emp_no
-			   , @RequestParam(value="dt_work") String dt_work
-			   , HttpSession session
-		) {
-		   System.out.println("dt_work =>"+dt_work);
-		   System.out.println("in_time =>"+in_time);
-		   System.out.println("out_time =>"+out_time);
-		   System.out.println("check_inout_name =>"+check_inout_name);
-		   System.out.println("remarks =>"+remarks);
-		   System.out.println("emp_no =>"+emp_no);
-		   //매개변수에 저장된 파라미터값(즉 아이디,암호)을 HashMap에 저장하기
-		   //이렇게 한 군데에 모으는 이유는 서비스 클래스에게 전달할 때 하나로 단일화하기 위함이다.
-		   Map<String, String> map = new HashMap<String, String>();
-		   map.put("dt_work", dt_work);
-		   map.put("emp_no", emp_no);
-		   map.put("in_time", in_time);
-		   map.put("out_time", out_time);
-		   map.put("check_inout_name", check_inout_name);
-		   map.put("remarks", remarks);
-		   /*
-		   System.out.print("admin_id2 =>"+paramMap.get("admin_id"));
-		   System.out.print("pwd2 =>"+paramMap.get("pwd"));
-		   */
-		   int updateCnt=0;
-		   try {
-			   updateCnt = this.hrservice.getUpdateCnt(map);
-		   }catch(Exception e) {
-			   System.out.println("컨트롤러 에러 발생 : " + e);
-		   }
-		   return updateCnt;
-	   }
-	
-	
-	@RequestMapping(value="/newEmpInfoProc.do")
+	@RequestMapping(value = "/empWorkStateUpdateProc.do" // 접속하는 클의 URL 주소 설정
+
+	// POST를 없애면 GET방식과 POST 방식 모두 수용하기 때문에 보안상 문제가 발생할수 있다.
+	// 현업에선 보안 중시이니 귀찮더라더 from 태그 여러개 만들며 POST 방식으로 만들것!
+
+			, method = RequestMethod.POST // 접속하는 클의 파값 전송 방법
+			, produces = "application/json;charset=UTF-8" // 응당할 데이터 종류 json 설정
+	)
+	@ResponseBody // 비동기방식으로 들어온것이며 HTML소스가 아닌 DB연동의 결과물을 얻고 싶을때 메소드 위에 설정한다.
+	public int updateDayInOutTime(@RequestParam(value = "in_time") String in_time,
+			@RequestParam(value = "out_time", required = false) String out_time,
+			@RequestParam(value = "check_inout_name") String check_inout_name,
+			@RequestParam(value = "remarks", required = false) String remarks,
+			@RequestParam(value = "emp_no") String emp_no, @RequestParam(value = "dt_work") String dt_work,
+			HttpSession session) {
+		System.out.println("dt_work =>" + dt_work);
+		System.out.println("in_time =>" + in_time);
+		System.out.println("out_time =>" + out_time);
+		System.out.println("check_inout_name =>" + check_inout_name);
+		System.out.println("remarks =>" + remarks);
+		System.out.println("emp_no =>" + emp_no);
+		// 매개변수에 저장된 파라미터값(즉 아이디,암호)을 HashMap에 저장하기
+		// 이렇게 한 군데에 모으는 이유는 서비스 클래스에게 전달할 때 하나로 단일화하기 위함이다.
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("dt_work", dt_work);
+		map.put("emp_no", emp_no);
+		map.put("in_time", in_time);
+		map.put("out_time", out_time);
+		map.put("check_inout_name", check_inout_name);
+		map.put("remarks", remarks);
+		/*
+		 * System.out.print("admin_id2 =>"+paramMap.get("admin_id"));
+		 * System.out.print("pwd2 =>"+paramMap.get("pwd"));
+		 */
+		int updateCnt = 0;
+		try {
+			updateCnt = this.hrservice.getUpdateCnt(map);
+		} catch (Exception e) {
+			System.out.println("컨트롤러 에러 발생 : " + e);
+		}
+		return updateCnt;
+	}
+
+	@RequestMapping(value = "/newEmpInfoProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public int newEmpjoinMemberProc(EmployeeDTO employeeDTO) {
+	public int newEmpjoinMemberProc(EmployeeDTO employeeDTO, @RequestParam("uploadBtn") MultipartFile multipartFile) {
 		int newEmpInsertCnt = 0;
 
-		int addDayoffinfo = 0;
-
-		String mgrEmpName = null;
-
 		try {
-
+			String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
+			String originalFilename = multipartFile.getOriginalFilename();
+			originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
+			//int length = originalFilename.length();
+			int position =  originalFilename.lastIndexOf(".");
+			String emp_email = employeeDTO.getEmp_email();
+			//System.out.println("emp_no=>"+emp_no);
+			String upFileName = emp_email + originalFilename.substring(position);
+			File localFile = new File(profilePath + upFileName);
+			//if(localFile.exists()==true){
+			//	localFile.delete();
+			//}
+			multipartFile.transferTo(localFile);
+			employeeDTO.setEmp_pic(upFileName);
 			newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
-			addDayoffinfo = this.hrservice.getAddDayoffinfoCnt(employeeDTO);
+			
 		} catch (Exception e) {
 			System.out.println("<사원 등록 실패>");
 			System.out.println("예외 발생=>" + e);
@@ -362,25 +370,60 @@ public class HRController {
 	// ================================
 	@RequestMapping(value = "/empInfoUpProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public int empInfoUpProc(EmployeeInfoUpDTO employeeInfoUpDTO, @RequestParam("uploadBtn") MultipartFile multipartFile) {
+	public int empInfoUpProc(EmployeeInfoUpDTO employeeInfoUpDTO,
+			@RequestParam("uploadBtn") MultipartFile multipartFile) {
 		int empInfoUpdate = 0;
+		int addDayoffinfo = 0;
 		try {
 			String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
 			String originalFilename = multipartFile.getOriginalFilename();
-			File localFile = new File(profilePath + originalFilename);
-			multipartFile.transferTo(localFile);
+			if(originalFilename!=null) {	
+
+				originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
+				//int length = originalFilename.length();
+				int position =  originalFilename.lastIndexOf(".");
+				String emp_email = employeeInfoUpDTO.getEmp_email();
+				System.out.println("emp_email=>"+emp_email);
+				String upFileName = emp_email + originalFilename.substring(position);
+				File localFile = new File(profilePath + upFileName);
+				if(localFile.exists()==true){
+					localFile.delete();
+				}
+				multipartFile.transferTo(localFile);
+				employeeInfoUpDTO.setEmp_pic(upFileName);
+				//System.out.println("upFileName=>"+upFileName);
+				//System.out.println("localFile=>"+localFile);
+			}
 			
-			employeeInfoUpDTO.setEmp_pic(originalFilename);
+			
 			empInfoUpdate = this.hrservice.empInfoUpProc(employeeInfoUpDTO);
+			addDayoffinfo = this.hrservice.getAddDayoffinfoCnt(employeeInfoUpDTO);
+			/*
+			 * EmployeeInfoUpDTO noEmp_pic =
+			 * this.hrservice.getEmpNoEmpPic(employeeInfoUpDTO);
+			 */
 			if (empInfoUpdate != 1) {
 				return 0;
 			}
+			
+			
+			//String newName = employeeInfoUpDTO.getEmp_pic();
+			//String newEmp_no = employeeInfoUpDTO.getEmp_no();
+			//if(newName != null) {
+			//	System.out.println("Emp_no=>"+newEmp_no+"Emp_pic=>"+newName);
+			//	int newPosition =  newName.lastIndexOf(".");
+			//	System.out.println("newPosition=>"+newPosition);
+			//	File updateFileName = new File(profilePath + newName);
+			//	File updateFileNameNew = new File(profilePath + newEmp_no + newName.substring(newPosition));
+			//	if( updateFileName.exists() ) updateFileName.renameTo( updateFileNameNew );
+			//}
 
 		} catch (Exception e) {
 			System.out.println("<직원 상세보기 수정 실패>");
 			System.out.println("예외 발생=>" + e);
 		}
 		return empInfoUpdate;
+
 	}
 
 	// ================================
@@ -404,34 +447,60 @@ public class HRController {
 		return dayoffUpdateCnt;
 	}
 
-	/*
-	 * // 파일 업로드
-	 * 
-	 * @RequestMapping(value = "/insertSampleFile.do") public ModelAndView
-	 * insertBoard(HttpServletRequest request) throws Exception { ModelAndView mv =
-	 * new ModelAndView(); MultipartHttpServletRequest multipartHttpServletRequest =
-	 * (MultipartHttpServletRequest) request;
-	 * multipartHttpServletRequest.getAttribute(arg0) Iterator<String> iterator =
-	 * multipartHttpServletRequest.getFileNames(); MultipartFile multipartFile =
-	 * null; multipartFile.transferTo(arg0); while (iterator.hasNext()) {
-	 * multipartFile = multipartHttpServletRequest.getFile(iterator.next()); if
-	 * (multipartFile.isEmpty() == false) {
-	 * System.out.println("------------- file start -------------");
-	 * System.out.println("name : " + multipartFile.getName());
-	 * System.out.println("filename : " + multipartFile.getOriginalFilename());
-	 * System.out.println("size : " + multipartFile.getSize());
-	 * System.out.println("-------------- file end --------------\n"); } }
-	 * 
-	 * return mv; }
-	 */
+	// ================================
+	// 비동기 방식으로 휴가 신청 현황을 삭제하는 메소드
+	// ================================
+	@RequestMapping(value = "/dayoffDeleteProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public int dayoffDeleteProc(HrDayoffDTO hrDayoffDTO) {
+		int dayoffDeleteCntI = 0;
+		int dayoffDeleteCntII = 0;
+		try {
+			dayoffDeleteCntI = this.hrservice.dayoffDeleteProcI(hrDayoffDTO);
+			if (dayoffDeleteCntI != 1) {
+				return 0;
+			}
+			dayoffDeleteCntII = this.hrservice.dayoffDeleteProcII(hrDayoffDTO);
+			if (dayoffDeleteCntII != 1) {
+				return 0;
+			}
+		} catch (Exception e) {
+			System.out.println("<휴가 현황 수정 실패>");
+			System.out.println("예외 발생=>" + e);
+		}
+		return dayoffDeleteCntI;
+	}
+
+
+// 파일 업로드
+/*
+@RequestMapping(value = "/insertSampleFile.do") 
+public ModelAndView insertBoard(HttpServletRequest request) throws Exception { 
+	ModelAndView mv = new ModelAndView(); 
+	MultipartHttpServletRequest multipartHttpServletRequest =(MultipartHttpServletRequest) request;
+	multipartHttpServletRequest.getAttribute(arg0) 
+	Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); 
+	MultipartFile multipartFile = null; 
+	multipartFile.transferTo(arg0); 
+	while (iterator.hasNext()) {
+		multipartFile = multipartHttpServletRequest.getFile(iterator.next()); 
+		if(multipartFile.isEmpty() == false) {
+			System.out.println("------------- file start -------------");
+			System.out.println("name : " + multipartFile.getName());
+			System.out.println("filename : " + multipartFile.getOriginalFilename());
+			System.out.println("size : " + multipartFile.getSize());
+			System.out.println("-------------- file end --------------\n"); } }
 	
+	 return mv; 
+}
+
 	// 파일 업로드
 	@RequestMapping(value = "/insertSampleFile.do")
 	public ModelAndView insertBoard(@RequestParam("profilePic") MultipartFile multipartFile) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		File localFile = new File("C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/"+multipartFile.getOriginalFilename());
+		File localFile = new File("C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/" + multipartFile.getOriginalFilename());
 		multipartFile.transferTo(localFile);
 		return mv;
 	}
-
+*/
 }

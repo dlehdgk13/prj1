@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.group4.erp.SalaryDTO;
 import com.group4.erp.TimeDTO;
+import com.group4.erp.ApprovalDTO;
 import com.group4.erp.EmployeeDTO;
 import com.group4.erp.EmployeeInfoDTO;
 import com.group4.erp.EmployeeInfoUpDTO;
@@ -103,6 +104,28 @@ public class HrDAOImpl implements HrDAO {
 		return dayoffUpdateCnt;
 	}
 	
+	
+	@Override
+	public int dayoffDeleteProcI(HrDayoffDTO hrDayoffDTO) {
+		int dayoffDeleteCntI = this.sqlSession.update(
+				mapper_namespace+"dayoffDeleteProcI"
+				,hrDayoffDTO
+				);
+		return dayoffDeleteCntI;
+	}
+	@Override
+	public int dayoffDeleteProcII(HrDayoffDTO hrDayoffDTO) {
+		int dayoffDeleteCntII = this.sqlSession.delete(
+				mapper_namespace+"dayoffDeleteProcII"
+				,hrDayoffDTO
+				);
+		return dayoffDeleteCntII;
+	}
+
+
+
+	
+	
 
 	
 	@Override
@@ -177,6 +200,25 @@ public class HrDAOImpl implements HrDAO {
 				);
 		return empInfoUpdate;
 	}
+	
+	public int newEmpConfirmProc(EmployeeInfoUpDTO employeeInfoUpDTO) {
+		int	newEmpConfirm = this.sqlSession.update(
+					mapper_namespace+"newEmpConfirmProc"
+					,employeeInfoUpDTO
+					);
+		return newEmpConfirm;
+	}
+	
+	/*
+	 * public EmployeeInfoUpDTO getEmpNoEmpPic(EmployeeInfoUpDTO employeeInfoUpDTO)
+	 * { EmployeeInfoUpDTO noEmp_pic = this.sqlSession.selectOne(
+	 * mapper_namespace+"getEmpNoEmpPic" ,employeeInfoUpDTO ); return noEmp_pic; }
+	 */
+	
+	
+	
+	
+	
 
 
 	@Override
@@ -197,11 +239,11 @@ public class HrDAOImpl implements HrDAO {
 		return newEmpInsertCnt;
 	}
 	
-	public int getAddDayoffinfoCnt(EmployeeDTO employeeDTO) {
+	public int getAddDayoffinfoCnt(EmployeeInfoUpDTO employeeInfoUpDTO) {
 		
 		int addDayoffinfo = this.sqlSession.insert(
 				mapper_namespace+"getAddDayoffinfo"
-				,employeeDTO
+				,employeeInfoUpDTO
 				);
 				
 		return addDayoffinfo;
@@ -241,5 +283,16 @@ public class HrDAOImpl implements HrDAO {
 		
 		return myPayCheckCnt;
 	}
+
+
+	@Override
+	public int updateDayOffApprovalProc(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int myDayOffApproval = this.sqlSession.update(mapper_namespace+"updateDayOffApprovalProc", approvalDTO);
+		
+		return myDayOffApproval;
+	}
+
+
 
 }

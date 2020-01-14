@@ -1,7 +1,6 @@
 package com.group4.erp;
 
 public class EmployeeInfoDTO {
-	
 
 	private int emp_no;
 	private String emp_name;
@@ -26,6 +25,7 @@ public class EmployeeInfoDTO {
 	private String mgr_emp_jikup;
 	private String mgr_emp_dep_name;
 	private String mgr_emp_name;
+	private String emp_pwd;
 
 	public String getMgr_emp_name() {
 		return mgr_emp_name;
@@ -165,5 +165,12 @@ public class EmployeeInfoDTO {
 	public void setMgr_emp_dep_name(String mgr_emp_dep_name) {
 		this.mgr_emp_dep_name = mgr_emp_dep_name;
 	}
+	public String getPwd() {
+		return emp_pwd;
+	}
+	public void setPwd(String emp_pwd) {
+		this.emp_pwd = emp_pwd;
+	}
+	
 	
 }

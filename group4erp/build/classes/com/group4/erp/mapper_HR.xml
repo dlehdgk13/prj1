@@ -169,6 +169,7 @@
 				,emp_name 					as "emp_name"
 				,(select d.dep_name from dept d where d.dep_no=e.dep_no) as "dep_name"
 				,(select j.jikup from code_jikup j where j.jikup_cd=e.jikup_cd) as "jikup"
+				,(select worktime_name from code_worktime where e.worktime_cd = worktime_cd) as "worktime_name"
 			from employee e	
 			where 1=1
 			<include refid="empListWhere" />
@@ -288,7 +289,9 @@
                 then '휴가후'
             end as "dayoffState"
 		from EMP_DAYOFF_APPLY da
-		where 1=1 <include refid="dayoffWhere" />
+		where 1=1 
+		and da.confirm in ('Y', 'N')
+		<include refid="dayoffWhere" />
 		<if test="sort!=null and sort.length()>0">
  			order by ${sort}
  		</if>
@@ -300,12 +303,12 @@
 	</select>
 	
 	
-	
-	
-	
-	
-	
-	
+	<update id="updateDayOffApprovalProc" parameterType="com.group4.erp.ApprovalDTO">
+		update emp_dayoff_apply set
+		confirm = #{confirm}
+		where dayoff_apply_no=#{doc_no}
+	</update>
+
 	
 	<update id="dayoffUpdateProcI" parameterType="com.group4.erp.HrDayoffDTO">
 		update EMP_DAYOFF_INFO
@@ -315,17 +318,25 @@
 	
 	<update id="dayoffUpdateProcII" parameterType="com.group4.erp.HrDayoffDTO">
 		update EMP_DAYOFF_APPLY 
-		set dayoff_cd=to_number(#{dayoff_cd})
-			,start_dayoff = to_date(#{start_dayoff},'YYYY-MM-DD') 
-			,end_dayoff = to_date(#{end_dayoff},'YYYY-MM-DD')
-			,using_dayoff = to_number(#{using_dayoff})
+		<set>
+			<if test="dayoff_name!=null">dayoff_cd=(select dayoff_cd from code_dayoff where dayoff_name=#{dayoff_name})</if>      
+			<if test="start_dayoff!=null">,start_dayoff = to_date(#{start_dayoff},'YYYY-MM-DD')</if>
+			<if test="end_dayoff!=null">,end_dayoff = to_date(#{end_dayoff},'YYYY-MM-DD')</if>
+			<if test="using_dayoff!=null">,using_dayoff = ${using_dayoff}</if>
+		</set>
 		where emp_no = to_number(#{emp_no}) 
 	</update>
 	
 
 	
-	
-	
+	<update id="dayoffDeleteProcI" parameterType="com.group4.erp.HrDayoffDTO">
+		update EMP_DAYOFF_INFO
+		set remain_dayoff = remain_dayoff + to_number(#{remain_dayoff})
+		where emp_no = to_number(#{emp_no})
+	</update>
+	<delete id="dayoffDeleteProcII" parameterType="com.group4.erp.HrDayoffDTO">
+		delete from EMP_DAYOFF_APPLY where emp_no = to_number(#{emp_no}) and dayoff_apply_dt=to_date(#{dayoff_apply_dt},'YYYY-MM-DD')
+	</delete>
 	
 	
 	
@@ -387,6 +398,7 @@
 			,emp_gender		as	"emp_gender"
 			,salary			as	"salary"
 			,emp_pic		as	"emp_pic"
+			,emp_pwd 			as 	"emp_pwd"
 			,(select d.dep_name from dept d where e1.dep_no=d.dep_no)	as	"dep_name"
 			,(select w.worktime_name from code_worktime w where e1.worktime_cd=w.worktime_cd)	as	"worktime_name"
 			,(select j.jikup from code_jikup j where j.jikup_cd=e1.jikup_cd)		as		"jikup"
@@ -398,41 +410,54 @@
 	</select>
 	
 	<insert id="getNewEmpInsert" parameterType="com.group4.erp.EmployeeDTO">
-		insert into employee (emp_no, emp_name, emp_eng_name, dep_no, jikup_cd, salary, jumin_num, emp_gender, phone, emp_email, emp_email_office, mgr_emp_no, emp_addr, worktime_cd, emp_pwd
+		insert into employee (emp_no, emp_name, emp_eng_name, jumin_num, emp_gender, phone, emp_email, emp_addr, worktime_cd, emp_pic ,emp_pwd
 		) values (
-		(select nvl(max(emp_no), 0)+1 from employee where dep_no=#{dep_no})
+		(select nvl(max(emp_no), 0)+1 from employee where worktime_cd=6)
 		,'${emp_name}'
 		,'${emp_eng_name}'
-		,${dep_no}
-		,${jikup_cd}
-		,${salary}
 		,'${jumin_num}'
 		,'${emp_gender}'
 		,'${phone}'
 		,'${emp_email}'
-		,'${emp_email_office}'
-		,(select emp_no from employee where jikup_cd=4 and dep_no=#{dep_no})
 		,'${emp_addr}'
-		,${worktime_cd}
+		,6
+		,#{emp_pic}
 		,'${emp_pwd}'
 		)
 	</insert>
+	<!-- ,(select emp_no from employee where jikup_cd=4 and dep_no=#{dep_no})  -->
 	
 	
-	<insert id="getAddDayoffinfo" parameterType="com.group4.erp.EmployeeDTO">
-		insert into emp_dayoff_info
-		values (
-			(select emp_no from employee where jumin_num='${jumin_num}')
-			,15
-			,15
-		)
-	</insert>
-	
-	
-	<update id="empInfoUpProc" parameterType="com.group4.erp.EmployeeInfoDTO">
+	<update id="empInfoUpProc" parameterType="com.group4.erp.EmployeeInfoUpDTO">
 		update employee 
-		set emp_name=#{emp_name}
+		<set>
+			<if test="emp_no!=null">emp_no=to_number(#{emp_no})</if>
+			<if test="emp_name!=null">,emp_name=#{emp_name}</if>
+			<if test="emp_eng_name!=null">,emp_eng_name=#{emp_eng_name}</if>
+			<if test="emp_pwd!=null">,emp_pwd = #{emp_pwd}</if>
+			<if test="emp_gender!=null">,emp_gender=#{emp_gender}</if>
+			<if test="jumin_num!=null">,jumin_num=#{jumin_num}</if>
+			<if test="phone!=null">,phone=#{phone}</if>
+			<if test="emp_email_office!=null">,emp_email_office=#{emp_email_office}</if>
+			<if test="emp_email!=null">,emp_email=#{emp_email}</if>
+			<if test="emp_addr!=null">,emp_addr=#{emp_addr}</if>
+			<if test="jikup!=null">,jikup_cd=(select jikup_cd from code_jikup where jikup=#{jikup})</if>
+			<if test="worktime_name!=null">,worktime_cd = (select worktime_cd from CODE_WORKTIME where worktime_name=#{worktime_name})</if>
+			<if test="dep_name!=null">,dep_no=(select dep_no from dept where dep_name=#{dep_name})</if>
+			<if test="salary!=null">,salary=#{salary}</if>
+			<if test="resign_date!=null">,emp_resign_date=to_date(#{resign_date}, 'YYYY-MM-DD')</if>
+			<if test="emp_pic!=null">,emp_pic=#{emp_pic}</if>
+		</set>
+		where emp_no = to_number(#{emp_no})
+	</update>
+	
+	
+<!-- 			update employee 
+		set 
+			emp_no = to_number(#{emp_no})
+			,emp_name=#{emp_name}
 			,emp_eng_name=#{emp_eng_name}
+			,emp_pwd = #{emp_pwd}
 			,emp_gender=#{emp_gender}
 			,jumin_num=#{jumin_num}
 			,phone=#{phone}
@@ -445,8 +470,62 @@
 			,salary=#{salary}
 			,emp_resign_date=to_date(#{resign_date}, 'YYYY-MM-DD')
 			,emp_pic=#{emp_pic}
-		where emp_no = to_number(#{emp_no}) 
+		where emp_no = to_number(#{emp_no})  -->
+	
+
+	<update id="newEmpConfirmProc" parameterType="com.group4.erp.EmployeeInfoUpDTO">
+		update employee 
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="emp_name!=null">emp_no = (select nvl(max(emp_no),0)+1 from employee where dep_no=(select dep_no from dept where dep_name=#{dep_name}))</if>
+			<if test="emp_name!=null">,emp_name=#{emp_name}</if>
+			<if test="emp_eng_name!=null">,emp_eng_name=#{emp_eng_name}</if>
+			<if test="emp_pwd!=null">,emp_pwd = #{emp_pwd}</if>
+			<if test="emp_gender!=null">,emp_gender=#{emp_gender}</if>
+			<if test="jumin_num!=null">,jumin_num=#{jumin_num}</if>
+			<if test="phone!=null">,phone=#{phone}</if>
+			<if test="emp_name != null">,emp_email_office=((select nvl(max(emp_no),0)+1||'@office.co.kr' from employee where dep_no=(select dep_no from dept where dep_name=#{dep_name})) )</if>
+			<if test="emp_email != null">,emp_email=#{emp_email}</if>
+			<if test="emp_addr != null">,emp_addr=#{emp_addr}</if>
+			<if test="jikup != null">,jikup_cd=(select jikup_cd from code_jikup where jikup=#{jikup})</if>
+			<if test="worktime_name!= null">,worktime_cd = (select worktime_cd from CODE_WORKTIME where worktime_name=#{worktime_name})</if>
+			<if test="dep_name != null">,dep_no=(select dep_no from dept where dep_name=#{dep_name})</if>
+			<if test="salary != null">,salary=#{salary}</if>
+			<if test="resign_date != null">,emp_resign_date=to_date(#{resign_date}, 'YYYY-MM-DD')</if>
+			<if test="emp_pic != null">,emp_pic=#{emp_pic}</if>
+		</trim>
+		where emp_no = to_number(#{emp_no})
 	</update>
+	
+	<insert id="getAddDayoffinfo" parameterType="com.group4.erp.EmployeeInfoUpDTO">
+		insert into emp_dayoff_info
+		values (
+			(select emp_no from employee where jumin_num=#{jumin_num})
+			,15
+			,15
+		)
+	</insert>
+		
+	<!-- 	set 
+			emp_no = (select nvl(max(emp_no),0)+1 from employee where dep_no=(select dep_no from dept where dep_name=#{dep_name}))
+			,emp_name=#{emp_name}
+			,emp_eng_name=#{emp_eng_name}
+			,emp_pwd = #{emp_pwd}
+			,emp_gender=#{emp_gender}
+			,jumin_num=#{jumin_num}
+			,phone=#{phone}
+			,emp_email_office=((select nvl(max(emp_no),0)+1 from employee where dep_no=(select dep_no from dept where dep_name=#{dep_name})) ||'@office.co.kr'   )
+			,emp_email=#{emp_email}
+			,emp_addr=#{emp_addr}
+			,jikup_cd=(select jikup_cd from code_jikup where jikup=#{jikup})
+			,worktime_cd = (select worktime_cd from CODE_WORKTIME where worktime_name=#{worktime_name})
+			,dep_no=(select dep_no from dept where dep_name=#{dep_name})
+			,salary=#{salary}
+			,emp_resign_date=to_date(#{resign_date}, 'YYYY-MM-DD')
+			<c:if test="emp_pic!=null and emp_pic.length()>0">
+				,emp_pic=#{emp_pic}
+			</c:if>
+		where emp_no = to_number(#{emp_no})  
+	</update>-->
 
 	<update id='getUpdateCnt' parameterType="hashmap">
 		update emp_inout 
@@ -458,5 +537,13 @@
             ,remarks = '${remarks}'
         where emp_no = to_number(${emp_no}) and dt_work = to_date('${dt_work}','yyyy-mm-dd')
 	</update>
+	
+<!-- 	<select id="getEmpNoEmpPic" parameterType="com.group4.erp.EmployeeInfoUpDTO" resultType="com.group4.erp.EmployeeInfoUpDTO">
+		select
+			emp_no		as		"emp_no"
+			,emp_pic		as	"emp_pic"
+		from employee 
+		where 1=1 and emp_no=to_number(#{emp_no})
+	</select> -->
 
 </mapper>

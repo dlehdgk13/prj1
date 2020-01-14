@@ -3,7 +3,7 @@ package com.group4.erp;
 public class EmployeeInfoUpDTO {
 	
 
-	private int emp_no;
+	private String emp_no;
 	private String emp_name;
 	private String emp_eng_name;
 	private int salary;
@@ -14,7 +14,7 @@ public class EmployeeInfoUpDTO {
 	private String phone;
 	private String emp_email;
 	private String emp_email_office;
-	private int mgr_emp_no;
+	private String mgr_emp_no;
 	private String emp_addr;
 	private String is_on_leave;
 	private String emp_pic;
@@ -24,10 +24,11 @@ public class EmployeeInfoUpDTO {
 	private String mgr_emp_jikup;
 	private String mgr_emp_dep_name;
 	private String mgr_emp_name;
-	public int getEmp_no() {
+	private String emp_pwd;
+	public String getEmp_no() {
 		return emp_no;
 	}
-	public void setEmp_no(int emp_no) {
+	public void setEmp_no(String emp_no) {
 		this.emp_no = emp_no;
 	}
 	public String getEmp_name() {
@@ -90,10 +91,10 @@ public class EmployeeInfoUpDTO {
 	public void setEmp_email_office(String emp_email_office) {
 		this.emp_email_office = emp_email_office;
 	}
-	public int getMgr_emp_no() {
+	public String getMgr_emp_no() {
 		return mgr_emp_no;
 	}
-	public void setMgr_emp_no(int mgr_emp_no) {
+	public void setMgr_emp_no(String mgr_emp_no) {
 		this.mgr_emp_no = mgr_emp_no;
 	}
 	public String getEmp_addr() {
@@ -150,7 +151,26 @@ public class EmployeeInfoUpDTO {
 	public void setMgr_emp_name(String mgr_emp_name) {
 		this.mgr_emp_name = mgr_emp_name;
 	}
-
+	public String getEmp_pwd() {
+		return emp_pwd;
+	}
+	public void setEmp_pwd(String emp_pwd) {
+		this.emp_pwd = emp_pwd;
+	}
+	@Override
+	public String toString() {
+		return "EmployeeInfoUpDTO [emp_no=" + emp_no + ", emp_name=" + emp_name + ", emp_eng_name=" + emp_eng_name
+				+ ", salary=" + salary + ", hire_dt=" + hire_dt + ", resign_date=" + resign_date + ", jumin_num="
+				+ jumin_num + ", emp_gender=" + emp_gender + ", phone=" + phone + ", emp_email=" + emp_email
+				+ ", emp_email_office=" + emp_email_office + ", mgr_emp_no=" + mgr_emp_no + ", emp_addr=" + emp_addr
+				+ ", is_on_leave=" + is_on_leave + ", emp_pic=" + emp_pic + ", jikup=" + jikup + ", dep_name="
+				+ dep_name + ", worktime_name=" + worktime_name + ", mgr_emp_jikup=" + mgr_emp_jikup
+				+ ", mgr_emp_dep_name=" + mgr_emp_dep_name + ", mgr_emp_name=" + mgr_emp_name + ", emp_pwd=" + emp_pwd
+				+ "]";
+	}
+	
+	
+	
 	
 	
 }
