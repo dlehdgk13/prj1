@@ -78,7 +78,7 @@ public class LoginController {
 		   }catch(Exception e) {
 			   	System.out.println("예외발생 : "+e);
 				System.out.println("<접속실패> [접속URL]->/loginProc.do [호출메소드]->LoginController.loginProc(~) \n");
-				emp_idCnt = -1;
+				emp_idCnt = -5;
 			}
 		   //admin 테이블에 존재하는 로그인 아이디의 존재 개수 리턴하기
 		   return emp_idCnt;
@@ -109,7 +109,6 @@ public class LoginController {
 			EmpApprovalCheckDTO empCheckDTO
 			,@RequestParam(value="jumin_num") String jumin
 			) {
-		System.out.println("승인 여부 확인 시작");
 		
 		EmpApprovalCheckDTO loginInfo = null;
 		
@@ -117,12 +116,13 @@ public class LoginController {
 			
 			loginInfo = this.loginService.getApprovalCheck(jumin);
 			
+			/*
 			String checkemp = loginInfo.getEmp_no()+"";
 			if(checkemp.length()<6) {
 				loginInfo.setCheckApproval("미승인");
 			}else {
 				loginInfo.setCheckApproval("승인");
-			}
+			}*/
 			
 		}catch(Exception e) {
 			System.out.println("<승인 여부 확인 실패>");

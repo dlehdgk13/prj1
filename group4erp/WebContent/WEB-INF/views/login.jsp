@@ -19,6 +19,10 @@
 	background-color:#D4D4D4;
 	position:absolute;
 }
+.noneAprroval{
+	background-color:#D4D4D4;
+	position:absolute;
+}
 </style>
 <title>YES4조 전사적자원관리 시스템 </title>
 <script>
@@ -30,6 +34,7 @@ $(document).ready( function() {
 	$(".checkID").hide();
 	$(".aprroval").hide();
 	$(".noAprroval").hide();
+	$(".noneAprroval").hide();
 	
 	$('a').click(function(){
 		
@@ -45,7 +50,7 @@ $(document).ready( function() {
 		
 	});
 	
-	
+	/*
 	$('[name=searchbtu]').click(function(){
 		
 		$(".checkID").hide();
@@ -59,7 +64,7 @@ $(document).ready( function() {
 			, type : "post"
 			, data : $('[name=checkIDProc1]').serialize()
 			, success : function(check){
-				if(check.checkApproval=='미승인'){
+				if(check.worktime_cd==6){
 					$(".noAprroval").show( 1000 );
 					$(".noAprroval").css( {"top":y,"left":x} );
 				}else{
@@ -78,7 +83,7 @@ $(document).ready( function() {
 		
 		
 	});
-	
+	*/
 });
 
 	function checkLoginInfo() {
@@ -93,6 +98,12 @@ $(document).ready( function() {
 					//alert("회원 로그인 성공!");
 					location.replace("/group4erp/goMainPage.do");
 				}
+				else if(loginCnt==-1){
+					alert("일치하는 아이디가 없습니다.");
+				}
+				else if(loginCnt==-2){
+					alert("비밀번호가 일치하지 않습니다.");
+				}	
 				else{
 					alert("회원 로그인 실패! 관리자에게 문의 바람.");
 				}
@@ -145,6 +156,39 @@ $(document).ready( function() {
 	}
 
 	
+	function goCheckApproval(){
+		$(".checkID").hide();
+		
+		alert("승인 여부 구현중");
+		//return;
+		
+		$.ajax({
+			
+			url : "/group4erp/checkApprovalProc.do"
+			, type : "post"
+			, data : $('[name=checkIDProc1]').serialize()
+			, success : function(check){
+				if(check.worktime_cd==6){
+					$(".noAprroval").show( 1000 );
+					$(".noAprroval").css( {"top":y,"left":x} );
+				}else if(check.worktime_cd==null){
+					$(".noneAprroval").show( 1000 );
+					$(".noneAprroval").css( {"top":y,"left":x} );
+				}
+				else {
+					$('#approvalID td:eq(0)').text(check.emp_no);
+					$('#approvalID td:eq(1)').text(check.emp_pwd);
+					
+					$(".aprroval").show( 1000 );
+					$(".aprroval").css( {"top":y,"left":x} );
+				}
+			}
+			, error : function(){
+				alert("서버 접속 실패");
+			}
+		});
+	}
+	
 	function insertNewEmp() {
 		//alert("신규 사원 추가 기능 구현");
 		location.href="/group4erp/viewNewEmpJoin.do"
@@ -159,6 +203,13 @@ $(document).ready( function() {
 	}
 	function goClose3(){
 		$(".noAprroval").hide(1000);
+	}
+	function goClose4(){
+		$(".noneAprroval").hide(1000);
+	}
+	
+	function goClient(){
+		location.replace("/group4erp/goClientLogin.do");
 	}
 	
 </script>
@@ -185,7 +236,7 @@ $(document).ready( function() {
 			<th>주민등록번호<td><input type="text" name="jumin_num" size="20">
 	</table>
 	<!-- onclick="goCheckApproval();" -->
-	<input type="button" value="검색" name="searchbtu" >&nbsp;
+	<input type="button" value="검색" name="searchbtu" onclick="goCheckApproval();">&nbsp;
 	<input type="button" value="닫기" onclick="goClose1();">
 	</form>
 </div>
@@ -210,6 +261,15 @@ $(document).ready( function() {
 	<input type="button" value="닫기" onclick="goClose3();">
 	</form>
 </div>
+<div class="noneAprroval" >
+	<form name="checkIDProc4">
+	<table id="noneApprovalID">
+		<tr>
+			<th>등록되지 않은 주민등록번호 입니다!
+	</table>
+	<input type="button" value="닫기" onclick="goClose4();">
+	</form>
+</div>
 
 <input type="button" name="loginBtn" value="로그인" onClick="checkLoginInfo();">&nbsp;
 <input type="button" value="신규사원등록" onClick="insertNewEmp();">
@@ -217,6 +277,12 @@ $(document).ready( function() {
 <input type="button" name="deleteBtn" value="사원삭제" onClick="deleteMembership();"> -->
 <!-- <input type="button" name="checkIDbtu" value="승인여부"> -->
 <a style="cursor:pointer;">[승인 여부]</a>
+<br>
+<br>
+<br>
+
+<tr><input type="button" value="고객로그인" onclick="goClient();">
+
 <br>
 <br>
 <br>

@@ -5,8 +5,15 @@ public class EmpApprovalCheckDTO {
 	private int emp_no;
 	private String emp_pwd;
 	private String checkApproval;
+	private int worktime_cd;
 	
 	
+	public int getWorktime_cd() {
+		return worktime_cd;
+	}
+	public void setWorktime_cd(int worktime_cd) {
+		this.worktime_cd = worktime_cd;
+	}
 	public String getCheckApproval() {
 		return checkApproval;
 	}
@@ -27,3 +34,4 @@ public class EmpApprovalCheckDTO {
 	}
 	
 }
+

@@ -256,7 +256,7 @@ $(document).ready(function(){
             <td align=center>${book.publisher}
             <td align=center>${book.is_print}
             <td align=center>${book.book_price}
-            <td align=center>${book.book_cnt}
+            <td align=center>${empty book.book_cnt?0:book.book_cnt}
             <td align=center>${book.branch_name}
          </c:forEach>
          <!-- <tr><td colspan=8 align=center> DB 연동 실패(아직 구현중)  -->

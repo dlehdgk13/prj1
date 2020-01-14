@@ -25,13 +25,28 @@ public class LoginDAOImpl implements LoginDAO {
 
 		//SqlSessionTemplate객체의 selectOne메소드를 호출하여 검색 SQL구문을 실행하여 1행n열의 데이터를 얻는다.
 		int emp_idCnt = this.sqlSession.selectOne(
-			
 				//xml파일중에 <mapper namespace="com.naver.erp.LoginDAO">태그 내부에 id=getAdminCnt를 가진 태그 내부의 SQL구문을 실행하라
 				"com.group4.erp.dao.loginDAO.getEmpIdCnt"
 				//위 SQL구문을 실행할때 참여할 HashMap객체 지정
 				,emp_id_pwd
 		);
 
+		int emp_idCheck = this.sqlSession.selectOne(
+				"com.group4.erp.dao.loginDAO.getEmpIDCheck"
+				,emp_id_pwd
+				);
+		if(emp_idCheck==0) {
+			return -1;
+		}
+		
+		int emp_pwdCheck = this.sqlSession.selectOne(
+				"com.group4.erp.dao.loginDAO.getEmpPWDCheck"
+				,emp_id_pwd
+				);
+		if(emp_pwdCheck==0) {
+			return -2;
+		}
+		
 		System.out.println("DAO : " + emp_idCnt);
 		//로그인 정보의 개수를 리턴
 		return emp_idCnt;
