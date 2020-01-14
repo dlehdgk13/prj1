@@ -143,36 +143,7 @@ $(document).ready( function() {
 		}
 	}
 	
-	function goCheckApproval(){
-
-		alert("승인 여부 구현중");
-		return;
-		
-		
-		$.ajax({
-			
-			url : "/group4erp/checkApprovalProc.do"
-			, type : "post"
-			, data : $('[name=checkIDProc]').serialize()
-			, success : function(check){
-				
-				if(check==1){
-					//alert("사번 :"+1+'\n 패스워드 : '+2+"\n 승인되셨습니다");
-					
-				}
-				else if(check==0){
-					alert("아직 승인되지 않았습니다.");
-				}else{
-					alert("등록되지 않은 주민등록번호 입니다.")
-				}
-			}
-			, error : function(){
-				alert("서버 접속 실패");
-			}
-		});
-		
-		
-	}
+	
 	
 	function goClose1(){
 		$(".checkID").hide(1000);
