@@ -9,26 +9,23 @@
 <title>YES4조 전사적자원관리 시스템 </title>
 <script>
 
-
+	function clientLogin(){
+		location.href="/group4erp/goCusLogin.do"
+	}
+	function corporationLogin(){
+		location.href="/group4erp/goCorpLogin.do"
+	}
 
 </script>
 
 </head>
 <body>
-<cneter>
-<form name="delete_form" method="post" action="/group4erp/joinProc.do">
-	<b>사원등록화면</b><br>
-	<table class="tbcss1" cellpadding=5 cellspacing=0>
-		<tr>
-			<td>사원아이디</td><td><input type="text" name="emp_id" value="안녕하세요" readonly></td>
-		</tr>
-		<tr>
-			<td>비밀번호</td><td><input type="text" name="emp_pwd" value="123" readonly></td>
-		</tr>	
-	</table>
-</form>
+<center>
+<br><br><br><br><br><br>
+<input type="button" name="joinBtn" value="고객로그인" onClick="clientLogin();">&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="joinBtn" value="사업자로그인" onClick="corporationLogin();">&nbsp;
 
-<input type="button" name="joinBtn" value="저장" onClick="checkLoginInfo();">&nbsp;
-
+</center>
 </body>
 </html>

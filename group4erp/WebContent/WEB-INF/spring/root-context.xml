@@ -55,7 +55,7 @@
 	</bean>		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="log4jdbcProxyDataSource"/>
-		<property name="mapperLocations" value="classpath:com/group4/erp/*.xml"/>		
+		<property name="mapperLocations" value="classpath:com/group4/*/*.xml"/>		
 	</bean> 
 			 
 	<!--**********************************************************************************************-->

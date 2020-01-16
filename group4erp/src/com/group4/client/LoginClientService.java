@@ -10,10 +10,8 @@ import com.group4.erp.TimeDTO;
 import com.group4.erp.HrListSearchDTO;
 
 
-public interface LoginService {
-	int getEmpIdCnt(Map<String, String> emp_id_pwd);
+public interface LoginClientService {
 	
-	EmployeeDTO getLoginEmpInfo(String emp_id);
+	int getcusLoginCnt(CustomerLoginDTO cusLoginDTO);
 	
-	EmpApprovalCheckDTO getApprovalCheck(String jumin);
 }

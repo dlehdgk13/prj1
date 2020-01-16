@@ -209,7 +209,7 @@ $(document).ready( function() {
 	}
 	
 	function goClient(){
-		location.replace("/group4erp/goClientLogin.do");
+		location.href="/group4erp/goClientLogin.do";
 	}
 	
 </script>
@@ -281,7 +281,7 @@ $(document).ready( function() {
 <br>
 <br>
 
-<tr><input type="button" value="고객로그인" onclick="goClient();">
+<tr><input type="button" value="고객주문페이지" onclick="goClient();">
 
 <br>
 <br>

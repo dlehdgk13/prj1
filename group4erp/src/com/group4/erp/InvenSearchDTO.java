@@ -12,7 +12,6 @@ public class InvenSearchDTO {
 	private String orAnd;
 	private String[] date;
 	private int rowCntPerPage=10;
-
 	private int selectPageNo=1;
 	
 	private String[] branch;

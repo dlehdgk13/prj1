@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/com/group4/client/LoginController.java=UTF-8
+encoding//src/com/group4/client/LoginClientController.java=UTF-8
+encoding//src/com/group4/client/OrderBookController.java=UTF-8
 encoding//src/com/group4/erp/SessionInterceptor.java=UTF-8
 encoding//src/com/group4/erp/controller/InvenController.java=UTF-8
 encoding//src/com/group4/erp/controller/LoginController.java=UTF-8
