@@ -45,6 +45,7 @@
 		
 		<c:forEach items="${corpSearchDTO.corp_business}" var="corp_business">
 			inputData("[name=corpSearchForm] [name=corp_business]", "${corpSearchDTO.corp_business}");
+			
 		</c:forEach>
 
 		<c:forEach items="${corpSearchDTO.corp_business}" var="corp_business">
@@ -64,9 +65,13 @@
 
 		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
 		$('[name=corpSearchForm] [name=rowCntPerPage]').val("15");
+		$("[name=corpSearchForm] [name=sort]").val('');
 		goSearch();
 	}
-
+	
+	function goReset() {
+		document.corpSearchForm.reset();
+	}
 	function insertCorp() {
 		//alert("거래처 추가");
 		location.replace("/group4erp/goInsertCorpPage.do");
@@ -102,12 +107,14 @@
 		htmlCode += 			"<tr> <td>상호명 </td> <td><input type='text' name='corp_name' value="+corp_name+"> </td> </tr>"
 		htmlCode += 			"<tr> <td>사업자명</td> <td><input type='text' name='ceo_name' value="+ceo_name+"></td> </tr>"
 		htmlCode += 			"<tr> <td>사업분야</td> <td><input type='text' name='corp_business_area' value="+business_area+"></td> </tr>"
-		htmlCode += 			"<tr> <td>소재지</td> <td><input type='text' name='corp_addr' value="+corp_addr+"></td> </tr>"
+		htmlCode += 			"<tr> <td>소재지</td> <td><input type='text' name='corp_addr' value='"+corp_addr+"'></td> </tr>"
 		htmlCode += 			"<tr> <td>연락처</td> <td><input type='text' name='corp_tel' value="+corp_tel+"></td> </tr>"
 		htmlCode += 			"<tr> <td>FAX</td> <td><input type='text' name='corp_fax' value="+corp_fax+"></td> </tr>"
-		htmlCode += 		"</table>"
-		htmlCode += 		"<input type='button' value='저장' name='updateCorp' onClick='updateCorpInfoProc("+corp_no+");'>&nbsp;"
-		htmlCode += 		"<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
+		htmlCode += 		"</table><br>"
+		//htmlCode += 		"<input type='button' value='저장' name='updateCorp' onClick='updateCorpInfoProc("+corp_no+");'>&nbsp;"
+		//htmlCode += 		"<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
+		htmlCode +=			"<button id= 'button' value='저장' name='updateCorp' onClick='updateCorpInfoProc('"+corp_no+"');'>저장</button> &nbsp;"
+		htmlCode += 		"<button id='closeTr' name='closeTr' onClick='closeThisTr(this);'>닫기</button>"
 		htmlCode +=         "<input type='hidden' name='corp_no' value="+corp_no+">"
 		htmlCode +=  	"</form>"
 		htmlCode += "</td>"
@@ -214,10 +221,20 @@
 </head>
 <body><center>
 	<h1>[거래처 현황]</h1>
-<form name="corpSearchForm" method="post" action="/group4erp/viewCorpList.do">
-	<table class="corpSearchTb tab" name="corpSearchTb" border="0" cellpadding="5" cellspacing="5">
-		<tr>
-			<td align="right">[사업분야별]&nbsp;</td><td>
+	<form name="corpSearchForm" method="post" action="/group4erp/viewCorpList.do">
+		<!-- 검색 테스트중 -->
+		<input type="checkbox" name="corp_business" value="IT">IT &nbsp;
+		<input type="checkbox" name="corp_business" value="통신">통신 &nbsp;
+		<input type="checkbox" name="corp_business" value="금융">금융 &nbsp;
+		<input type="checkbox" name="corp_business" value="출판&미디어">출판&미디어&nbsp;
+		<input type="checkbox" name="corp_business" value="교육&학원">교육&학원 &nbsp;<br>
+		<input type="checkbox" name="corp_business" value="운송&물류">운송&물류 &nbsp;
+		<input type="checkbox" name="corp_business" value="학교">학교 &nbsp;
+		<input type="checkbox" name="corp_business" value="기타">기타 &nbsp;		
+	
+		<table border="0" cellpadding="5" cellspacing="5">
+			<tr>
+				<td align="right">[사업분야별]&nbsp;</td><td>
 				<%--<c:forEach items="${corp_business_area}" var="corp_business_area" varStatus="loopTagStatus">
 					<c:if test="${corp_business_area.bus_area_code eq '6'}">
 						<br>
@@ -225,19 +242,13 @@
 					<input type="checkbox" name="corp_business_area" value="${corp_business_area.bus_area_code}">${corp_business_area.bus_area_name} &nbsp;
 																								
 				</c:forEach> --%>
-					<input type="checkbox" name="corp_business" value="IT">IT &nbsp;
-					<input type="checkbox" name="corp_business" value="통신">통신 &nbsp;
-					<input type="checkbox" name="corp_business" value="금융">금융 &nbsp;
-					<input type="checkbox" name="corp_business" value="출판&미디어">출판&미디어&nbsp;
-					<input type="checkbox" name="corp_business" value="교육&학원">교육&학원 &nbsp;<br>
-					<input type="checkbox" name="corp_business" value="운송&물류">운송&물류 &nbsp;
-					<input type="checkbox" name="corp_business" value="학교">학교 &nbsp;
-					<input type="checkbox" name="corp_business" value="기타">기타 &nbsp;	
-			
-			 </td>
-		</tr>
-		<tr>
-			<td align="right">[검색어]&nbsp;</td><td><input type="text" name="searchKeyword">&nbsp;&nbsp; <input type="button" value="검색" onClick="goSearch();">&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goSearchAll();"> </td>
+				</td>
+			</tr>
+			<tr>
+			<td align="right">[검색어]&nbsp;</td><td><input type="text" name="searchKeyword">&nbsp;&nbsp; <input type="button" value="검색" onClick="goSearch();">
+														&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goSearchAll();">
+														&nbsp;&nbsp;<input type="button" value="초기화" onClick="goReset();">
+														 </td>
 		</tr>
 	</table>
 	
@@ -254,7 +265,7 @@
 	</tr>
 	<tr>
 	<form name="corpSearchRowPageForm" method="post" action="/group4erp/viewCorpList.do">
-		<td align="right">[전체] : ${corpListCnt}개&nbsp;&nbsp;&nbsp;&nbsp;
+		<td align="right">[전체] : ${corpListCnt}&nbsp;&nbsp;&nbsp;&nbsp;
 	            <select name="rowCntPerPage">
 	               <option value="10">10</option>
 	               <option value="15">15</option>
@@ -271,7 +282,7 @@
 		<th></th>
 		<c:choose>
 			<c:when test="${param.sort=='corp_no desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_no asc'); goSearch();  "> ▲ 사업자번호</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▲ 사업자번호</th>
 			</c:when>
 			<c:when test="${param.sort=='corp_no asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_no desc'); goSearch(); "> ▼ 사업자번호</th>
@@ -283,7 +294,7 @@
 		
 		<c:choose>
 			<c:when test="${param.sort=='corp_name desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_name asc'); goSearch(); "> ▲ 거래처명</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch(); "> ▲ 거래처명</th>
 			</c:when>
 			<c:when test="${param.sort=='corp_name asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_name desc'); goSearch(); "> ▼ 거래처명</th>
@@ -295,7 +306,7 @@
 		
 		<c:choose>
 			<c:when test="${param.sort=='ceo_name desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('ceo_name asc'); goSearch(); "> ▲ 사업자명</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch(); "> ▲ 사업자명</th>
 			</c:when>
 			<c:when test="${param.sort=='ceo_name asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('ceo_name desc'); goSearch(); "> ▼ 사업자명</th>
@@ -308,7 +319,7 @@
 		
 		<c:choose>
 			<c:when test="${param.sort=='corp_business_area desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_business_area asc'); goSearch(); "> ▲ 사업분야</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch(); "> ▲ 사업분야</th>
 			</c:when>
 			<c:when test="${param.sort=='corp_business_area asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_business_area desc'); goSearch(); "> ▼ 사업분야</th>
@@ -321,7 +332,7 @@
 		
 		<c:choose>
 			<c:when test="${param.sort=='corp_addr desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_addr asc'); goSearch(); "> ▲ 소재지</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch(); "> ▲ 소재지</th>
 			</c:when>
 			<c:when test="${param.sort=='corp_addr asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_addr desc'); goSearch(); "> ▼ 소재지</th>
@@ -334,7 +345,7 @@
 		
 		<c:choose>
 			<c:when test="${param.sort=='corp_tel desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_tel asc'); goSearch(); "> ▲ 연락처</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch(); "> ▲ 연락처</th>
 			</c:when>
 			<c:when test="${param.sort=='corp_tel asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_tel desc'); goSearch(); "> ▼ 연락처</th>
@@ -347,7 +358,7 @@
 		
 		<c:choose>
 			<c:when test="${param.sort=='corp_fax desc'}">
-				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_fax asc'); goSearch(); "> ▲ FAX</th>
+				<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch(); "> ▲ FAX</th>
 			</c:when>
 			<c:when test="${param.sort=='corp_fax asc'}">
 				<th style="cursor:pointer" onClick="$('[name=sort]').val('corp_fax desc'); goSearch(); "> ▼ FAX</th>

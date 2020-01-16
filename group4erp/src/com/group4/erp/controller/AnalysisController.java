@@ -103,7 +103,7 @@ public class AnalysisController {
 			System.out.println("bestKwdDTOList.size==="+bestKwdDTOList.size());
 			
 		} catch (Exception e) {
-			System.out.println("<입고 상세 페이지 불러오기 실패>");
+			System.out.println("<베스트 키워드 페이지 불러오기 실패>");
 			System.out.println("예외발생" + e.getMessage());
 		}
 		

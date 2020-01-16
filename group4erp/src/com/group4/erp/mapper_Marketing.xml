@@ -80,6 +80,7 @@
 	<select id='getEventCnt' parameterType="com.group4.erp.EventSearchDTO" resultType="int">
 		select count(*) from event_info ei
 		where 1=1
+		and ei.evnt_state_cd != '0'
 		and ei.emp_no = #{emp_no}
 	</select>
 	
@@ -100,6 +101,7 @@
             ei.atchd_data "atchd_data"
         from event_info ei
 		where 1=1	
+		and ei.evnt_state_cd != '0'
 		<include refid="eventWhere" />
 		<include refid="headerSort" />
 		

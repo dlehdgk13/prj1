@@ -59,10 +59,60 @@
 		</if>
 	</sql>
 	
+	<sql id="headerSort">
+		<if test="sort!=null and sort.length() > 0" >
+			order by ${sort}
+		</if>
+		
+		<if test="sort==null or sort==''">
+			order by 13, b.reg_dt desc
+		</if>
+	</sql>
+	
 	<!--=============================================================================================================================================-->
 	<!-- 담당 상품 조회 -->
 	<!--=============================================================================================================================================-->
 	<select id='getMyCareBookList' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="java.util.HashMap">
+		<!-- select * from(select zzz.*, rownum RNUM from(
+			 select                 
+                 isbn13 "isbn13",
+                 book_name "book_name",
+                 cat_name "cat_name",
+                 book_price "book_price",
+                 book_pages "book_pages",
+                 writer "writer",
+                 publisher "publisher",
+                 size_cd "size_cd",
+                 is_print "is_print",
+                 emp_no "emp_no",
+                 published_dt "published_dt",
+                 editor "editor",
+                 isbn_cnt "isbn_cnt",
+                 branch_name "branch_name",
+                 reg_dt "reg_dt"
+			from
+                (select 
+                b.ISBN13  as "ISBN13"
+                ,b.book_name  as "BOOK_NAME"                 
+                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "CAT_NAME"
+                ,b.book_price  as "BOOK_PRICE"
+                ,b.book_pages||'' as "BOOK_PAGES"
+                ,b.writer as "WRITER"
+                ,b.publisher  as "PUBLISHER"                 
+                ,b.size_cd||'' as "SIZE_CD"
+                ,b.is_print  as "IS_PRINT"
+                ,b.emp_no||'' as "EMP_NO"
+                ,to_char(b.published_dt,'YYYY-MM-DD') as "PUBLISHED_DT"
+                ,b.editor as "EDITOR"
+                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_CNT" 
+                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "BRANCH_NAME"
+                ,b.reg_dt "REG_DT"             
+            from book b)
+            where emp_no = '${emp_no}'
+			<include refid="MyCareBookSearch" />
+			order by reg_dt desc
+		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>		 -->	
+
 		select * from(select zzz.*, rownum RNUM from(
 			select
                 b.ISBN13                     as "ISBN13"
@@ -81,11 +131,57 @@
                 ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "branch_name"
             from book b 
             where b.emp_no = '${emp_no}'
-			<include refid="MyCareBookSearchWere" />
-			order by b.reg_dt desc
+			<include refid="headerSort"/>
 		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
-			
+
 	</select>
+	
+	
+	<sql id="MyCareBookSearch">
+		<if test="searchCategory=='전체'">
+			<if test="(search_keyword!=null and search_keyword.length()>0)">
+				and(
+					upper(isbn13) like upper('%${search_keyword}%')
+				    or upper(book_name) like upper('%${search_keyword}%')
+				    or upper(cat_name) like upper('%${search_keyword}%')
+				    or upper(book_price) like upper('%${search_keyword}%')
+				    or upper(isbn_cnt) like upper('%${search_keyword}%')
+				    or upper(branch_name) like upper('%${search_keyword}%')
+			    	)
+			</if>
+		</if>
+		<if test="searchCategory=='책번호'">
+			<if test="(search_keyword!=null and search_keyword.length()>0)">
+				and upper(isbn13) like upper('%${search_keyword}%')
+			</if>
+		</if>
+		<if test="searchCategory=='책이름'">
+			<if test="(search_keyword!=null and search_keyword.length()>0)">
+				and upper(book_name) like upper('%${search_keyword}%')
+			</if>
+		</if>
+		<if test="searchCategory=='카테고리'">
+			<if test="(search_keyword!=null and search_keyword.length()>0)">
+				and upper(cat_name) like upper('%${search_keyword}%')
+			</if>
+		</if>
+		<if test="searchCategory=='보유지점'">
+			<if test="(search_keyword!=null and search_keyword.length()>0)">
+				and upper(branch_name) like upper('%${search_keyword}%')
+			</if>
+		</if>
+		 <!-- 
+		<if test="(category!=null and category.length>0)">
+			and
+			<foreach collection="category" item="category" open="(" separator="or" close=")">
+				b.cat_cd = to_number(${category})
+			</foreach>
+		</if>
+		 -->
+		 <if test="is_print!=null and is_print.length()>0">
+		 	and is_print = #{is_print}
+		 </if>
+	</sql>
 	
 	<select id='getCategoryList' resultType="java.util.HashMap">
 		select
@@ -152,7 +248,13 @@
 			from work_days_mng w, employee e, dept d, code_jikup cj
 			where w.emp_no=e.emp_no and e.dep_no=d.dep_no and e.jikup_cd=cj.jikup_cd
 			<include refid="WorkDaysListSearchWere" />
-			order by emp_no asc
+			<if test="sort!=null and sort.length() > 0" >
+				order by ${sort}
+			</if>
+			
+			<if test="sort==null or sort==''">
+				order by w.emp_no
+			</if>
 		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
 			
 	</select>

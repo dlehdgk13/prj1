@@ -7,6 +7,7 @@
 	<!-- namespace 속성값으로 [DAO 인터페이스명]이 오며 -->
 	<!-- [DAO 인터페이스] 메소드명과 동일한 id 값을 소유한 태그를 내포하고 있다. -->
 <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+
 <mapper namespace="com.group4.erp.dao.loginDAO">
 	<!-- 로그인 아이디, 암호의 존재 개수를 검색하는 select문을 내포한 <select> 태그 선언 -->
 	<!-- 

@@ -183,7 +183,7 @@
 				<td>사업분야</td>
 				<td>
 					<c:forEach items='${business_area}' var="business_area" varStatus="loopTagStatus">
-						<input type="checkbox" name="corp_business_area" value="${business_area.bus_area_code}">${business_area.bus_area_name}&nbsp;
+						<input type="checkbox" name="corp_business_area" value="${business_area.bus_area_name}">${business_area.bus_area_name}&nbsp;
 					</c:forEach>
 				</td>
 			</tr>
@@ -194,7 +194,7 @@
 				<td>연락처</td><td><input type="text" name="corp_tel" maxlength="11" placeholder="- 제외한 숫자 7~11자 입력"></td>
 			</tr>
 			<tr>
-				<td>FAX</td><td><input type="text" name="corp_fax" maxlength="15"></td>
+				<td>FAX</td><td><input type="text" name="corp_fax" maxlength="15" placeholder="- 제외한 숫자 7~11자 입력"></td>
 			</tr>
 					
 		</table> <br>

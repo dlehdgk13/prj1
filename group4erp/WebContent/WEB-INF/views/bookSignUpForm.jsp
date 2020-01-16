@@ -194,7 +194,7 @@ $(document).ready(function(){
                   <input type="radio" name="cat_cd" value="06">종교
                   <input type="radio" name="cat_cd" value="07">만화
                   <input type="radio" name="cat_cd" value="08">여행
-                  <input type="radio" name="cat_cd" value="09">잡지
+                  <input type="radio" name="cat_cd" value="09">에세이
                   <input type="radio" name="cat_cd" value="10">요리
                   <input type="radio" name="cat_cd" value="11">수험서
             </tr>

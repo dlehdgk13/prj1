@@ -27,7 +27,7 @@
             <if test="category_name!=null and category_name.length>0">
             and
           		<foreach collection="category_name" item="cat" open="(" separator="or" close=")">
-             		<if test="cat.equals('소설')">
+             		<if test="cat.equals('시&amp;소설')">
                 	  	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if>
              		<if test="cat.equals('사회')">
@@ -51,12 +51,13 @@
              		<if test="cat.equals('여행')">
                   		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if>
-            	 	<if test="cat.equals('잡지')">
+            	 	<if test="cat.equals('에세이')">
                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if>
              		<if test="cat.equals('요리')">
                   		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if> 
+             		
             	</foreach>
       	</if>
       
@@ -332,7 +333,13 @@
 			from release_info r	
 			where 1=1
 			<include refid="releaseWhere" />
-			order by "release_dt" desc
+			<if test="sort!=null and sort.length() > 0" >
+				order by ${sort}
+			</if>
+			<if test="sort==null or sort==''">
+				order by "release_dt" desc
+			</if>
+			
 		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
 	</select>
 	

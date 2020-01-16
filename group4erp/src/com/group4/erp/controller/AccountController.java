@@ -41,25 +41,7 @@ public class AccountController {
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewCorpList");
 		mav.addObject("navigator", "[회계관리]-[거래처 현황]");
-		
-		String corpBusiness = "";
-		
-		if(corpSearchDTO.getCorp_business()!= null) {
-			for(int i=0; i<corpSearchDTO.getCorp_business().length; i++) {
-				System.out.println("corpSearchDTO.getCorp_business.size==="+corpSearchDTO.getCorp_business()[i]);
-				
-				//if(i !=corpSearchDTO.getCorp_business().length-1) {
-				//	corpBusiness += corpSearchDTO.getCorp_business()[i] +", ";
-				//} else {
-				//	corpBusiness += corpSearchDTO.getCorp_business()[i];
-				//}
-				
-			}
-		
-		}
-		
-		//corpSearchDTO.setCorp_business_area(corpBusiness);
-		//System.out.println(corpBusiness);
+
 		
 		try {
 			

@@ -95,13 +95,13 @@
 	
 		var options3 = {
 				title: '일반고객 주문 건수(일자별)',
-				width: 600,
+				width: 700,
 				height:300
 		};
 
 		var options4 = {
 				title: '사업자고객 주문 건수(일자별)',
-				width: 600,
+				width: 700,
 				height:300
 		};
 	
@@ -203,21 +203,21 @@
 		</tr>
 		
 		<tr>
-			<td>분야별 누적 주문
+			<td align="center">분야별 누적 주문
 				<div id="orderInfoChart" style="width: 700px; height: 300px;"> </div>
 			</td>
-			<td>분야별 누적 주문
+			<td align="center">분야별 누적 주문
 				<div id="corpOrderInfoChart" style="width: 700px; height: 300px;"> </div>
 			</td>
 		</tr>
 		
 		<tr>
-			<td>일자별 누적 주문
-				<div id="dailyOrderChart" style="width: 600px; height: 300px;"> </div>
+			<td align="center">일자별 누적 주문
+				<div id="dailyOrderChart" style="width: 700px; height: 300px;"> </div>
 			</td>
 			
-			<td>일자별 누적 주문
-				<div id="dailyCorpOrderChart" style="width: 600px; height: 300px;"> </div>
+			<td align="center">일자별 누적 주문
+				<div id="dailyCorpOrderChart" style="width: 700px; height: 300px;"> </div>
 			</td>
 		</tr>
 		<tr>

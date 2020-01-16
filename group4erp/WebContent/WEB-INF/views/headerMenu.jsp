@@ -343,14 +343,14 @@
 			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewAccoutingMenu();" onClick="viewTranLog();"><a href="#">회계관리</a></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<th width="100" id="menu" style="cursor:pointer" onMouseOver="javascirpt:viewBigDataMenu();" onClick="viewBestKeywdReport();"><a href="#">전략분석</a></th><td widht="50" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<!-- <th style="cursor:pointer" onMouseOver="javascirpt:viewBuyerMenu();">거래처관리</th><td widht="100" onMouseOver="hideSubMenu();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> -->
-			<td id="menu" align="right" colspan="2"><h5>${emp_name} ${jikup}님 안녕하세요.^^</h5> <input type="button" value="로그아웃" onClick="logout();">
+			<td id="menu" align="left" colspan="2"><h5>${emp_name} ${jikup}님 <br>안녕하세요.^^</h5> <input type="button" value="로그아웃" onClick="logout();">
 			</td>
 			
 		</tr>
 		<tr style="border-top:1px solid black;">
 			<td></td><td></td>
 			<!-- <td colspan="16" width="500"> -->
-			<td nowrap>&nbsp;<!-- &nbsp;지우지말것!! -->
+			<td class="fontNormal" nowrap>&nbsp;<!-- &nbsp;지우지말것!! -->
 				<span id="subMenu1"> <!-- 업무관리 -->
 					<span class="subMenu" id="myCareBookList" style="cursor:pointer" onClick="myCareBookList();">담당 상품 조회&nbsp;&nbsp;&nbsp;</span>
 					<!--<span id="myCareBookList " style="cursor:pointer" onClick="myCareBookList();">담당 상품 조회&nbsp;&nbsp;&nbsp;</span>  -->
@@ -363,7 +363,7 @@
 				</span>
 			</td>
 			<td></td>
-			<td nowrap>
+			<td class="fontNormal" nowrap>
 				<span id="subMenu2">	<!-- 재고관리 -->
 					<span class="subMenu" id="myCareBookList" style="cursor:pointer" onClick="goBookList();">도서정보조회&nbsp;&nbsp;&nbsp;</span>
 					<span class="subMenu" id="shippingList" style="cursor:pointer" onClick="goShippingList();">출고현황조회&nbsp;&nbsp;&nbsp;</span>
@@ -378,7 +378,7 @@
 					<span id="goShipping" style="cursor:pointer" onClick="goShipping();">출고지시&nbsp;&nbsp;&nbsp;</span> 
 					<span id="returnList" style="cursor:pointer" onClick="goReturnList();">반품접수&처리 현황&nbsp;&nbsp;&nbsp;</span>
 				</span>-->
-			<td nowrap>
+			<td class="fontNormal" nowrap>
 				<span id="subMenu4">	<!-- 마케팅관리 -->
 					<span class="subMenu" id="nowSaleList" style="cursor:pointer" onClick="goNowSaleList();">판매현황&nbsp;&nbsp;&nbsp;</span>
 					<span class="subMenu" id="eventSchedulingList" style="cursor:pointer" onClick="eventSchedulingList();">이벤트행사 현황&nbsp;&nbsp;&nbsp;</span>
@@ -386,7 +386,7 @@
 				</span>
 			</td>
 			<td></td>
-			<td nowrap>
+			<td class="fontNormal" nowrap>
 				<span id="subMenu5">	<!-- 인사관리 -->
 					<span class="subMenu" id="empList" style="cursor:pointer" onClick="viewEmpList();">직원정보&nbsp;</span>
 					
@@ -400,7 +400,7 @@
 				</span>
 			</td>
 			<td></td>
-			<td nowrap>
+			<td class="fontNormal" nowrap>
 				<span id="subMenu6">	<!-- 회계관리 -->
 					<!-- <span id="salesInfoList" style="cursor:pointer" onClick="viewSalesReport();">매출정보&nbsp;&nbsp;&nbsp;</span> -->
 					<!-- <span id="elecBill" style="cursor:pointer" onClick="viewPromiNoteList();">전자어음&nbsp;&nbsp;&nbsp;</span> -->
@@ -411,7 +411,7 @@
 				</span>
 			</td>
 			<td></td>
-			<td nowrap>
+			<td class="fontNormal" nowrap>
 				<span id="subMenu7">	<!-- 전략분석 -->
 					<!-- <span id="salesChangeReport" style="cursor:pointer" onClick="viewSalesChangeReport();">매출추이분석&nbsp;&nbsp;&nbsp;</span> -->
 					<!-- <span id="cusClaimReport" style="cursor:pointer" onClick="viewCusClaimReport();">고객 클레임 처리 상황&nbsp;&nbsp;&nbsp;</span> -->

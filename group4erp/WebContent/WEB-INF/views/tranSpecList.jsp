@@ -57,9 +57,13 @@ $(document).ready(function(){
 
 		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
 		$('[name=corpSearchForm] [name=rowCntPerPage]').val("15");
+		$("[name=corpSearchForm] [name=sort]").val('');
 		goSearch();
 	}
-
+	
+	function goReset() {
+		document.corpSearchForm.reset();
+	}
 </script>
 </head>
 <body><center>
@@ -69,6 +73,7 @@ $(document).ready(function(){
 	[검색어]&nbsp;<input type="text" name="searchKeyword">&nbsp;&nbsp;<input type="button" value="검색" onClick="goSearch();">
 	
 	&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goSearchAll();">
+	&nbsp;&nbsp;<input type="button" value="초기화" onClick="goReset();">
 	 <table border=0>
 	 	<tr>
 	    	
@@ -104,7 +109,7 @@ $(document).ready(function(){
 					<tr>						
 						<c:choose>
 							<c:when test="${param.sort=='1 desc'}">
-								<th style="cursor:pointer" onClick="$('[name=sort]').val('1 asc'); goSearch();  "> ▼ 발급번호</th>
+								<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 발급번호</th>
 							</c:when>
 							<c:when test="${param.sort=='1 asc'}">
 								<th style="cursor:pointer" onClick="$('[name=sort]').val('1 desc'); goSearch(); "> ▲ 발급번호</th>
@@ -116,7 +121,7 @@ $(document).ready(function(){
 						
 						<c:choose>
 							<c:when test="${param.sort=='3 desc'}">
-								<th style="cursor:pointer" onClick="$('[name=sort]').val('3 asc'); goSearch();  "> ▼ 사업자번호</th>
+								<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 사업자번호</th>
 							</c:when>
 							<c:when test="${param.sort=='3 asc'}">
 								<th style="cursor:pointer" onClick="$('[name=sort]').val('3 desc'); goSearch(); "> ▲ 사업자번호</th>
@@ -128,7 +133,7 @@ $(document).ready(function(){
 						
 						<c:choose>
 							<c:when test="${param.sort=='4 desc'}">
-								<th style="cursor:pointer" onClick="$('[name=sort]').val('4 asc'); goSearch();  "> ▼ 상호명</th>
+								<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 상호명</th>
 							</c:when>
 							<c:when test="${param.sort=='4 asc'}">
 								<th style="cursor:pointer" onClick="$('[name=sort]').val('4 desc'); goSearch(); "> ▲ 상호명</th>
@@ -140,7 +145,7 @@ $(document).ready(function(){
 						
 						<c:choose>
 							<c:when test="${param.sort=='5 desc'}">
-								<th style="cursor:pointer" onClick="$('[name=sort]').val('5 asc'); goSearch();  "> ▼ 사업자명</th>
+								<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 사업자명</th>
 							</c:when>
 							<c:when test="${param.sort=='5 asc'}">
 								<th style="cursor:pointer" onClick="$('[name=sort]').val('5 desc'); goSearch(); "> ▲ 사업자명</th>
@@ -152,7 +157,7 @@ $(document).ready(function(){
 						
 						<c:choose>
 							<c:when test="${param.sort=='7 desc'}">
-								<th style="cursor:pointer" onClick="$('[name=sort]').val('7 asc'); goSearch();  "> ▼ 발급일시</th>
+								<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 발급일시</th>
 							</c:when>
 							<c:when test="${param.sort=='7 asc'}">
 								<th style="cursor:pointer" onClick="$('[name=sort]').val('7 desc'); goSearch(); "> ▲ 발급일시</th>

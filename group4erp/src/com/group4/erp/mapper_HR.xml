@@ -80,16 +80,15 @@
 					or upper((select e.emp_name from employee e where da.emp_no = e.emp_no)) like upper('%${dy_keyword}%')
 					or upper((select cd.dayoff_name from code_dayoff cd where da.dayoff_cd = cd.dayoff_cd )) like upper('%${dy_keyword}%')
 					
-					
 					or upper(to_char(da.start_dayoff, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN')) like upper('%${dy_keyword}%')
 					or upper(to_char(da.end_dayoff, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN')) like upper('%${dy_keyword}%')
 					
 					or upper(da.using_dayoff) like upper('%${dy_keyword}%')	
-					or upper((select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no)) like upper('%${dy_keyword}%')		
-					or upper((select dayoff_tot from emp_dayoff_info where emp_no = da.emp_no)) like upper('%${dy_keyword}%')
+					<!-- or upper((select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no)) like upper('%${dy_keyword}%')		
+					or upper((select dayoff_tot from emp_dayoff_info where emp_no = da.emp_no)) like upper('%${dy_keyword}%') -->
 					or upper(to_char(da.dayoff_apply_dt, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN')) like upper('%${dy_keyword}%')
 					or upper(decode(da.confirm, 'Y', '완료', 'N', '대기중')) like upper('%${dy_keyword}%')
-					or upper(case when (da.start_dayoff &lt;= sysdate and sysdate &lt;= da.end_dayoff) then '휴가중' 
+				    or upper(case when (da.start_dayoff &lt;= sysdate and sysdate &lt;= da.end_dayoff) then '휴가중' 
 					  when (da.start_dayoff &gt; sysdate and da.end_dayoff &gt; sysdate) then '휴가전'
                       when (da.end_dayoff &lt; sysdate) then '휴가후' end) like upper('%${dy_keyword}%')
 				)
@@ -173,7 +172,6 @@
 			from employee e	
 			where 1=1
 			<include refid="empListWhere" />
-			
 			<if test="sort!=null and sort.length()>0">
 	 			order by ${sort}
 	 		</if>
@@ -276,8 +274,8 @@
 		    ,to_char(da.start_dayoff, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') as "start_dayoff"
 		    ,to_char(da.end_dayoff, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') as "end_dayoff"
 		    ,da.using_dayoff||'' as "using_dayoff"
-		    ,(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no)||'' as "remain_dayoff"
-		    ,(select dayoff_tot from emp_dayoff_info where emp_no = da.emp_no)||'' as "dayoff_tot"
+		    <!-- ,(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no)||'' as "remain_dayoff"
+		    ,(select dayoff_tot from emp_dayoff_info where emp_no = da.emp_no)||'' as "dayoff_tot" -->
 			,to_char(da.dayoff_apply_dt, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') as "dayoff_apply_dt"
 			,decode(da.confirm, 'Y', '완료', 'N', '대기중') as "confirm"
             ,case

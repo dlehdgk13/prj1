@@ -14,7 +14,7 @@ public class EventDTO {
 	private String evnt_start_dt;
 	private String evnt_end_dt;
 	private String evnt_stat;
-	private String evnt_comment;
+	private String evnt_comment="";
 	private String atchd_data;
 	private String reg_dt;
 	private String evnt_state_cd;

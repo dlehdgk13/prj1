@@ -108,4 +108,12 @@ public class ApprovalDAOImpl implements ApprovalDAO {
 		return approvalResList;
 	}
 
+	@Override
+	public int insertBTripApproval(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int myBTripApprovalCnt = this.sqlSession.insert(mapper_namespace+"insertApproval", approvalDTO);
+		
+		return myBTripApprovalCnt;
+	}
+
 }

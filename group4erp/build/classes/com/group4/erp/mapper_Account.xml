@@ -110,37 +110,35 @@
 				)			
 		</if>
 		
-		<if test="corp_business!= null and corp_business.length>0">
+		<if test="corp_business!= null">
 			and 
 			<foreach collection="corp_business" item="corp_business" open="(" separator=" or " close=")">	
 				<if test="corp_business.equals('IT')">
-					cc.corp_business_area ='1'
+					cc.corp_business_area like 'IT'
 				</if>
 				<if test="corp_business.equals('통신')">
-					cc.corp_business_area='2'
+					cc.corp_business_area like '통신'
 				</if>
 				<if test="corp_business.equals('금융')">
-					cc.corp_business_area='3'
+					cc.corp_business_area like '통신'
 				</if>
 				<if test="corp_business.equals('출판&amp;미디어')">
-					cc.corp_business_area='4'
+					cc.corp_business_area like '%출판&amp;미디어%'
 				</if>
 				<if test="corp_business.equals('교육&amp;학원')">
-					cc.corp_business_area='5'
+					cc.corp_business_area like '%교육&amp;학원%'
 				</if>
 				<if test="corp_business.equals('운송&amp;물류')">
-					cc.corp_business_area='6'
+					cc.corp_business_area like '%운송&amp;물류%'
 				</if>
 				<if test="corp_business.equals('학교')">
-					cc.corp_business_area='7'
+					cc.corp_business_area like '학교'
 				</if>
 				<if test="corp_business.equals('기타')">
-					cc.corp_business_area='8'
+					cc.corp_business_area like '기타'
 				</if>			
-			</foreach>			
-			
-		</if>
-	
+			</foreach>						
+		</if>	
 	</sql>
 	
 	<select id='getCorpInfo' parameterType="String" resultType="com.group4.erp.CorporationDTO">
@@ -200,6 +198,7 @@
 	</select>
 	
 	<select id='getCorpOrderList' parameterType = "com.group4.erp.CorpSearchDTO" resultType="com.group4.erp.CorpOrderDTO">
+	select * from (select zzz.*, rownum RNUM from (
 		select
 			order_books_no "order_books_no",
 			corp_no "corp_no",
@@ -227,7 +226,7 @@
     	<include refid="CorpCondition" />
     	<include refid="issueYnWhere" />
     	<include refid="CorpOrderHeaderSort" />
-		
+	) zzz) where RNUM&gt;= ${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
     		
 	</select>
 	

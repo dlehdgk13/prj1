@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/WEB-INF/views/common.jsp" %>
 
@@ -39,6 +39,9 @@ $(document).ready(function(){
 	}
 	function goSearchAll() {
 		document.empListSearchForm.reset();
+		$("[name=empListSearchForm] [name=selectPageNo]").val(1);
+		$("[name=empListSearchForm] [name=rowCntPerPage]").val(10);
+		$("[name=empListSearchForm] [name=sort]").val('');
 		document.empListSearchForm.submit();
 	}
 // 	function insertNewEmp() {
@@ -66,7 +69,9 @@ $(document).ready(function(){
 		*/
 		//location.replace("......");
 	}
-	
+	function reset(){
+		document.empListSearchForm.reset();
+	}
 </script>
 </head>
 <body>
@@ -74,12 +79,13 @@ $(document).ready(function(){
 	<h1>[직원 리스트]</h1>
 
 	<form name="empListSearchForm" method="post" action="/group4erp/viewEmpList.do">
-	[검색어]<input type="text" name="searchKeyword">&nbsp;&nbsp;<input type="button" value="검색" onClick="goSearch();">
+		[검색어]<input type="text" name="searchKeyword">&nbsp;&nbsp;<input type="button" value="검색" onClick="goSearch();">
 
 	<!-- <form name="empListSearchForm" method="post" action="/group4erp/viewEmpList.do">
 	[검색어]<input type="text" name="searchKeyword">&nbsp;&nbsp;<input type="button" value=" 검색 " onClick="goSearch();"> -->
 
 	&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goSearchAll();">
+	&nbsp;&nbsp;<input type="button" value="초기화" onClick="reset();">
 	 <table border=0 width=700>
 	 	<tr>
 	    	<td align=right>
@@ -104,7 +110,7 @@ $(document).ready(function(){
 				<tr>
 				<c:choose>
 					<c:when test="${param.sort=='emp_no desc'}">
-						<th style="cursor:pointer" onclick="$('[name=sort]').val('emp_no asc'); goSearch();">▼사번
+						<th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼사번
 					</c:when>
 					<c:when test="${param.sort=='emp_no asc'}">
 						<th style="cursor:pointer" onclick="$('[name=sort]').val('emp_no desc'); goSearch();">▲사번
@@ -113,10 +119,31 @@ $(document).ready(function(){
 						<th style="cursor:pointer" onclick="$('[name=sort]').val('emp_no asc'); goSearch();">사번
 					</c:otherwise>
 				</c:choose>
-					<th>성명<th>부서
+				<c:choose>
+					<c:when test="${param.sort=='emp_name desc'}">
+						<th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼성명
+					</c:when>
+					<c:when test="${param.sort=='emp_name asc'}">
+						<th style="cursor:pointer" onclick="$('[name=sort]').val('emp_name desc'); goSearch();">▲성명
+					</c:when>
+					<c:otherwise>
+						<th style="cursor:pointer" onclick="$('[name=sort]').val('emp_name asc'); goSearch();">성명
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${param.sort=='3 desc'}">
+						<th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼부서
+					</c:when>
+					<c:when test="${param.sort=='3 asc'}">
+						<th style="cursor:pointer" onclick="$('[name=sort]').val('3 desc'); goSearch();">▲부서
+					</c:when>
+					<c:otherwise>
+						<th style="cursor:pointer" onclick="$('[name=sort]').val('3 asc'); goSearch();">부서
+					</c:otherwise>
+				</c:choose>
 				<c:choose>
 					<c:when test="${param.sort=='jikup_cd desc'}">
-						<th style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd asc'); goSearch();">▼직급
+						<th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼직급
 					</c:when>
 					<c:when test="${param.sort=='jikup_cd asc'}">
 						<th style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd desc'); goSearch();">▲직급
@@ -125,7 +152,17 @@ $(document).ready(function(){
 						<th style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd asc'); goSearch();">직급
 					</c:otherwise>
 				</c:choose>
-				<th>승인상태
+				<c:choose>
+					<c:when test="${param.sort=='5 desc'}">
+						<th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼승인상태
+					</c:when>
+					<c:when test="${param.sort=='5 asc'}">
+						<th style="cursor:pointer" onclick="$('[name=sort]').val('5 desc'); goSearch();">▲승인상태
+					</c:when>
+					<c:otherwise>
+						<th style="cursor:pointer" onclick="$('[name=sort]').val('5 asc'); goSearch();">승인상태
+					</c:otherwise>
+				</c:choose>
 			</thead>
 			<tbody>
 			<c:forEach items="${requestScope.getEmpBoardList}" var="empList" varStatus="loopTagStatus">

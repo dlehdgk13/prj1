@@ -53,4 +53,48 @@ public class WorkDAOImpl implements WorkDAO{
 		return businessTripRegCnt;
 	}
 	
+	public int updateBusinessTrip(BusinessTripDTO businessTripDTO) {
+		int businessTripUpDelAppCnt = sqlSession.update(
+				"com.group4.erp.dao.WorkDAO.updateBusinessTrip"
+				,businessTripDTO
+			);
+		return businessTripUpDelAppCnt;
+	}
+	
+	public int deleteBusinessTrip(BusinessTripDTO businessTripDTO) {
+		int businessTripUpDelCnt = sqlSession.update(
+				"com.group4.erp.dao.WorkDAO.deleteBusinessTrip"
+				,businessTripDTO
+			);
+		return businessTripUpDelCnt;
+	}
+	
+	public int approvedBusinessTrip(BusinessTripDTO businessTripDTO) {
+		int businessTripUpDelCnt = sqlSession.update(
+				"com.group4.erp.dao.WorkDAO.approvedBusinessTrip"
+				,businessTripDTO
+			);
+		return businessTripUpDelCnt;
+	}
+	/*public int getBusinessDelCnt(BusinessTripDTO businessTripDTO) {
+		int delCnt = this.sqlSession.selectOne(
+				"com.group4.erp.dao.WorkDAO.getBusinessDelCnt"
+				,businessTripDTO
+			);
+		return delCnt;
+	}*/
+	@Override
+	public String searchMyBTripApplyNo(BusinessTripDTO businessTripDTO) {
+		// TODO Auto-generated method stub
+		String myBTripApplyNo = sqlSession.selectOne("com.group4.erp.dao.WorkDAO.searchMyBTripApplyNo", businessTripDTO);
+		
+		return myBTripApplyNo;
+	}
+	@Override
+	public BusinessTripDTO getMyBTripApproval(int my_bTrip_approval_no) {
+		// TODO Auto-generated method stub
+		BusinessTripDTO myBTripApplyInfo = sqlSession.selectOne("com.group4.erp.dao.WorkDAO.getMyBTripApproval", my_bTrip_approval_no);
+		
+		return myBTripApplyInfo;
+	}
 }

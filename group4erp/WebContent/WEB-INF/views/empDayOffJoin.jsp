@@ -357,6 +357,11 @@ $(document).ready(function(){
 		$('[name=empDayOffJoinForm] td:eq(1)').children().show()
 		document.empDayOffJoinForm.reset();
 	}
+
+	function goAllSerach(){
+		document.empDayOffJoinForm.reset();
+		document.empDayOffJoinForm.submit();
+	}
 	
 </script>
 
@@ -405,6 +410,7 @@ $(document).ready(function(){
 </form>
 
 	<input type="button" value=" 신청 " onclick="empDayOffJoin();">&nbsp;&nbsp;
+	<input type="button" value=" 모두검색 " onclick="goAllSerach();">&nbsp;&nbsp;
 	<input type="button" value="초기화" onclick="goAllReset();">
 
 

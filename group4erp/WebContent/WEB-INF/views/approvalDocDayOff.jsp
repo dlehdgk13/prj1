@@ -13,11 +13,21 @@
 
 	function responseDayOffApproval() {
 		//alert("결재 시작");
+		
+		var approvalYn = $(".eventApprovalDoc").find("[name=approvalYn]:checked").val();
+		var e_work_comment = $(".eventApprovalDoc [name=documentTable]").find("[name=e_work_comment]").val();
+		
+		
+		if(approvalYn==6) {
+			alert("반려 시 사유를 기입해주세요.");
 
+			return;		
+		}
+	
 		$.ajax({
-			url : "/group4erp/updateDayOffApproavalProc.do",				//호출할 서버쪽 URL 주소 설정
+			url : "/group4erp/updateDayOffApprovalProc.do",				//호출할 서버쪽 URL 주소 설정
 			type : "post",										//전송 방법 설정
-			data : $('[name=DayOffApprovalDoc]').serialize(),		//서버로 보낼 파라미터명과 파라미터값을 설정	
+			data : $('.DayOffApprovalDoc').serialize(),		//서버로 보낼 파라미터명과 파라미터값을 설정	
 			success : function(upCnt) {
 				if(upCnt==1) {
 					alert("결재 성공!");
@@ -43,11 +53,11 @@
 </script>
 </head>
 <body><center>	
-	<form name="DayOffApprovalDoc" method="post">
-		<table name="outerLineTable tab" cellpadding="5" cellspacing="5" width="700" align="center">
+	<form class="DayOffApprovalDoc" method="post">
+		<table cellpadding="5" cellspacing="5" width="700" align="center">
 		
 		<tr>
-			<td align="right" ><table name="jikup" border="1" cellpadding="5" cellspacing="0"><tr><td  width="90" align="center">기안자 </td><td  width="90" align="center">부서장</td><td width="90" align="center">대표이사 </td> </tr> 
+			<td align="right" ><table name="jikup" border="1" cellpadding="5" cellspacing="0"><tr><td width="90" align="center">기안자 </td><td  width="90" align="center">부서장</td><td width="90" align="center">대표이사 </td> </tr> 
 														<tr><td align="center">${myDayOffApplyInfo.emp_name} </td><td align="center">
 																											<% String mgr_no = (String)session.getAttribute("mgr_emp_no"); 
 																													String emp = (String)session.getAttribute("emp_id");
@@ -93,7 +103,9 @@
 				<tr>
 					<td>휴가 기간</td><td colspan="2">${myDayOffApplyInfo.start_dayoff} ~ ${myDayOffApplyInfo.end_dayoff} ${myDayOffApplyInfo.using_dayoff }일간</td>
 				</tr>
-					
+				<tr>
+					<td width="100">메모</td><td colspan="3"><textarea name="e_work_comment" cols="40" rows="10" placeholder="반려할 시 사유를 기입해주세요."></textarea></td>
+				</tr>	
 			</table><br>
 			<h4>위와 같이 휴가를 신청하오니 검토 부탁드립니다.</h4>	
 			<input type="button" value="결재" onClick="responseDayOffApproval();"> &nbsp;

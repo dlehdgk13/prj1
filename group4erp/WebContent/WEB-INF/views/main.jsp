@@ -19,7 +19,7 @@
 		background-repeat:no-repeat; 
 		background-size:cover;
 		background-attachment:fixed; " >
-	<tr height="40">
+	<tr height="35">
 		<td align="center"><%@ include file ="/WEB-INF/views/headerMenu.jsp" %></td>
 	</tr>
 	<tr class="main" valign="top" height="700px" >
@@ -46,6 +46,11 @@
 			<!-- 출장 상세페이지 -->
 			<c:if test="${subMenu.equals('businessTripContentsForm') }">
 				<%@ include file="/WEB-INF/views/businessTripContentsForm.jsp" %>
+			</c:if>
+			
+			<!-- 출장 상세페이지 -->
+			<c:if test="${subMenu.equals('businessTripUpDelForm') }">
+				<%@ include file="/WEB-INF/views/businessTripUpDelForm.jsp" %>
 			</c:if>
 			
 			<!-- 문서 결재 -->

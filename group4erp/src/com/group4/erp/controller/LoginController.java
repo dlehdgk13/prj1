@@ -59,7 +59,6 @@ public class LoginController {
 			   	
 			   emp_idCnt = this.loginService.getEmpIdCnt(map);
 			   System.out.println("<접속성공> [접속URL]->/loginProc.do [호출메소드]->LoginController.loginProc(~) \n");
-			   
 			   if(emp_idCnt==1) {
 				   
 				   String dep_no = empInfo.getDep_no()+"";
@@ -93,11 +92,17 @@ public class LoginController {
 		
 		return mav;
 	}
+<<<<<<< HEAD
+	
+	/*@RequestMapping(value="/joininsert.do")
+	public ModelAndView joinMembership() {
+=======
 	*/
 	@RequestMapping(value="/goMainPage.do")
 	public ModelAndView goMainPage(HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
+
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "mainPage");
 		return mav;
@@ -149,7 +154,7 @@ public class LoginController {
 		System.out.println("<접속성공> [접속 URI]-> /logout.do [호출 메소드]->LoginController.logout() \n");
 		
 		return mav;
-	}
+	} 
 	
 	
 }

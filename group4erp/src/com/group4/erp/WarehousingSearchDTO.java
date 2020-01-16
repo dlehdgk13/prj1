@@ -10,6 +10,7 @@ public class WarehousingSearchDTO {
 	private String wh_keyword;
 	private int rowCntPerPage=10;
 	private int selectPageNo=1;
+	private String sort;
 	
 	
 	
@@ -84,6 +85,12 @@ public class WarehousingSearchDTO {
 	}
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 	public String[] getBranch() {
 		return branch;

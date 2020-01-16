@@ -19,5 +19,16 @@ public interface WorkService {
 	
 	//출장 신청
 	int insertBusinessTrip(BusinessTripDTO businessTripDTO);
+	//출장 수정
+	int updateBusinessTrip(BusinessTripDTO businessTripDTO);
+	//출장 삭제
+	int deleteBusinessTrip(BusinessTripDTO businessTripDTO);
+	//출장 승인
+	int approvedBusinessTrip(BusinessTripDTO businessTripDTO);
 	
+	//출장 신청시 결재 테이블에 저장할 결재번호를 만들기 위해 신청번호를 검색
+	String searchMyBTripApplyNo(BusinessTripDTO businessTripDTO);
+	
+	//결재 화면에서 불러올 출장 신청 정보를 검색함
+	BusinessTripDTO getMyBTripApproval(int my_bTrip_approval_no);
 }

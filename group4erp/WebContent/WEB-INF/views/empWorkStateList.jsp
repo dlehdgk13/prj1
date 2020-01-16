@@ -107,7 +107,9 @@
 			goSearch();
 			
 		}
-		
+		function goReset(){
+			document.InoutListDate.reset();
+		}
 		function InoutbyDt(){
 			//alert( $("[name=getEmpInoutList]").serialize() );
 			/* 
@@ -285,8 +287,9 @@
 			<input type="checkbox" name="inout_name" class="inout_name" value="외근">외근
 			
 			<table><tr height=10><td></table>
-			<button onClick="goSearch();">검색</button>
-			<button onClick="goSearchAll();">모두검색</button>
+			<input type="button" value="검색" onClick="goSearch();">
+			<input type="button" value="모두검색"  onClick="goSearchAll();">
+			<input type="button" value="초기화" onClick="goReset();">
 			<!-- <input type="button" value="검색" onClick="goSearch();"
 				 style="width:75;  background-color:#FFFFFF; border:1 solid #A0DBE4">&nbsp;
 			<input type="button" value="모두검색" onClick="goSearchAll();"

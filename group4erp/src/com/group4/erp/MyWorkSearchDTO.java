@@ -3,12 +3,13 @@ package com.group4.erp;
 public class MyWorkSearchDTO {
 
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private String search_keyword;
 	private String[] category;
 	private String searchCategory = "전체";
 	private String emp_no;
 	private String is_print;
+	private String sort;
 	
 	
 	public String getIs_print() {
@@ -63,5 +64,12 @@ public class MyWorkSearchDTO {
 	public void setSearchEmpNo(int searchEmpNo) {
 		this.searchEmpNo = searchEmpNo;
 	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+	
 	
 }

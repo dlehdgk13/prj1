@@ -343,20 +343,21 @@ public class HRController {
 		try {
 			String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
 			String originalFilename = multipartFile.getOriginalFilename();
-			originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
-			//int length = originalFilename.length();
-			int position =  originalFilename.lastIndexOf(".");
-			String emp_email = employeeDTO.getEmp_email();
-			//System.out.println("emp_no=>"+emp_no);
-			String upFileName = emp_email + originalFilename.substring(position);
-			File localFile = new File(profilePath + upFileName);
-			//if(localFile.exists()==true){
-			//	localFile.delete();
-			//}
-			multipartFile.transferTo(localFile);
-			employeeDTO.setEmp_pic(upFileName);
-			newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
-			
+			if(originalFilename.isEmpty() != true){	
+				originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
+				//int length = originalFilename.length();
+				int position =  originalFilename.lastIndexOf(".");
+				String emp_email = employeeDTO.getEmp_email();
+				//System.out.println("emp_no=>"+emp_no);
+				String upFileName = emp_email + originalFilename.substring(position);
+				File localFile = new File(profilePath + upFileName);
+				//if(localFile.exists()==true){
+				//	localFile.delete();
+				//}
+				multipartFile.transferTo(localFile);
+				employeeDTO.setEmp_pic(upFileName);
+				newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
+			}
 		} catch (Exception e) {
 			System.out.println("<사원 등록 실패>");
 			System.out.println("예외 발생=>" + e);
@@ -377,8 +378,8 @@ public class HRController {
 		try {
 			String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
 			String originalFilename = multipartFile.getOriginalFilename();
-			if(originalFilename!=null) {	
-
+			if(originalFilename.isEmpty() != true){	
+				System.out.println("진입");
 				originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
 				//int length = originalFilename.length();
 				int position =  originalFilename.lastIndexOf(".");

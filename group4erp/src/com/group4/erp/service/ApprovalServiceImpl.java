@@ -104,4 +104,12 @@ public class ApprovalServiceImpl implements ApprovalService {
 		return approvalResList;
 	}
 
+	@Override
+	public int insertBTripApproval(ApprovalDTO approvalDTO) {
+		// TODO Auto-generated method stub
+		int myBTripApprovalCnt = this.approvalDAO.insertBTripApproval(approvalDTO);
+		
+		return myBTripApprovalCnt;
+	}
+
 }

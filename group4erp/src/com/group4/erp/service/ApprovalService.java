@@ -28,5 +28,7 @@ public interface ApprovalService {
 	int insertApproval_dayOff(ApprovalDTO approvalDTO);
 	
 	int updateApprovalProc(ApprovalDTO approvalDTO);
+	
+	int insertBTripApproval(ApprovalDTO approvalDTO);
 
 }

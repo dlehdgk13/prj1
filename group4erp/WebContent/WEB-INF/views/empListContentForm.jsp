@@ -231,6 +231,9 @@
 			//return;
 	        var emp_no = $("[name=emp_no]").val();
 
+
+	       	//alert(formData);
+	       	//return;
         $.ajax({
             url: '/group4erp/empInfoUpProc.do',
                     processData: false,

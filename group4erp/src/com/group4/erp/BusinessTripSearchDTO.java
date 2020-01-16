@@ -6,7 +6,7 @@ public class BusinessTripSearchDTO {
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;
 	private String searchKey;
-	private String sort="outside_start_time desc";
+	private String sort="work_outside_seq desc";
 	private int work_outside_seq;
 	private String startTime;
 	private String endTime;

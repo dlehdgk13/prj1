@@ -1,63 +1,91 @@
 @charset "UTF-8";
-	
+   
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,200,300,350,400,500,600,700,800,900&display=swap');
 
 body {
-		background: #EBFBFF;	  
-		font-family: 'Noto Sans KR', sans-serif;
+      /* background: #EBFBFF; */   
+      background: white;
+      font-family: 'Noto Sans KR', sans-serif;
 }
 .tab, .tab td, .tab th{
-	border-collapse: collapse;
-	padding:5px;
-	border-top:1px solid #C0C0C0;
-	border-bottom:1px solid #C0C0C0;
-	border-left:0px;
-	border-right:0px;
-	font-size:11pt;
-	font-family: 'Noto Sans KR', sans-serif;
-/* 	font-weight:350; */
+   border-collapse: collapse;
+   padding:5px;
+   border-top:1px solid #C0C0C0;
+   border-bottom:1px solid #C0C0C0;
+   border-left:0px;
+   border-right:0px;
+   font-size:12pt;
+   font-family: 'Noto Sans KR', sans-serif;
+   /* background-color: white; */
+/*    font-weight:350; */
 }
 
 .tab2, .tab2 td, .tab2 th{
-	border-collapse: collapse;
-	border:1px solid #C0C0C0;
-	padding:5px;
-	font-size:11pt;
-	font-family: 'Noto Sans KR', sans-serif;
+   border-collapse: collapse;
+   border:1px solid #C0C0C0;
+   padding:5px;
+   font-size:12pt;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
+.tab3{
+   border-collapse: collapse;
+   border:0px solid #C0C0C0;
+   border:0;
+   padding:5px;
+   font-size:12pt;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+.logintab{
+   border-collapse: collapse;
+   padding:5px;
+   border-top:1px solid #C0C0C0;
+   border-bottom:1px solid #C0C0C0;
+   border-left:0px;
+   border-right:0px;
+   font-size:12pt;
+   font-family: 'Noto Sans KR', sans-serif;
 }
 
 .thset{
-	font-size:10pt;
-	color : white;
-	
+   font-size:10pt;
+   color : white;
+   
 }
 td{
-	font-weight:300; 
-	
+   font-weight:380; 
+   
 }
 
 th{
-	
-	font-weight: 350; 
-	font-size:11pt ;
+   
+   font-weight: 450; 
+   font-size:11pt ;
 }
 .fontLight{
-	
-	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 300; 
-	font-size: 11pt ;
-	
+   
+   font-family: 'Noto Sans KR', sans-serif;
+   font-weight: 350; 
+   font-size: 11pt ;
+   
 }
 .fontNormal{
-	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 500; 
-	font-size: 11pt ;
-	
+   font-family: 'Noto Sans KR', sans-serif;
+   font-weight: 410; 
+   font-size: 14pt ;
+   color : #666666;
+   
 }
 .fontBold{
-	font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 700;
-	font-size: 11pt ;
+   font-family: 'Noto Sans KR', sans-serif;
+   font-weight: 700;
+   font-size: 11pt ;
+}
+
+h1{
+   font-family: 'Noto Sans KR', sans-serif;
+   font-weight: 600;
+   font-size: 17pt ;
 }
 
 
@@ -76,8 +104,8 @@ th{
     display:inline-block;
     color: black;
     font-family: 'Noto Sans KR', sans-serif;
-	font-weight: 500; 
-	font-size:9pt;
+   font-weight: 500; 
+   font-size:9pt;
 }
 
 
@@ -121,6 +149,5 @@ button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
-
 
 
