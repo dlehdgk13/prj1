@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/book_inven_search.jsp=UTF-8
 encoding//src/com/group4/client/LoginClientController.java=UTF-8
 encoding//src/com/group4/client/OrderBookController.java=UTF-8
 encoding//src/com/group4/erp/SessionInterceptor.java=UTF-8

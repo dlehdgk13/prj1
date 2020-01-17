@@ -33,92 +33,140 @@
    border-width: thin;
 }
 
+.divcss{
+   background-color:#F1F1F1;
+   width:90%;
+   height:100;
+   vertical-align:middle;
+}
+input {
+	vertical-align: middle;
+}
+input.img-button {
+  background: url( "/group4erp/resources/image/searchA.png" ) no-repeat;
+  border: 1px;
+  width: 10%;
+  height: 20%;
+  cursor: pointer;
+}
+.button {
+    width:auto;
+    height:30;
+    /* background-color: #F0C40F; */
+    /* background-color: white; */
+    background-color: #F0C40F;
+    border: 1px;
+    /* color:#fff; */
+    /* color: gray; */
+    color: black;
+    padding: 3px 3;
+    text-align: center;
+    vertical-align: text-top;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 3;
+    line-height:2;
+    cursor: pointer;
+}
+
+.line{
+   border-collapse: collapse;
+   padding:5px;
+   border-top:0px;
+   border-bottom:5px solid #F1F1F1;
+   border-left:0px;
+   border-right:0px;
+   font-size:11pt;
+   font-family: 'Noto Sans KR', sans-serif;
+}
+
 </style>
 <script>
 
-	$(document).ready(function(){	
+   $(document).ready(function(){   
 
-		//goSearchMyWorkList();
-		
-		$('[name=rowCntPerPage]').change(function(){
-			goSearchMyWorkList();
-		});
-		
-		$(".pagingNumber").html(
-				getPagingNumber(
-					"${myWorkListAllCnt}"						//검색 결과 총 행 개수
-					,"${myWorkSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
-					,"${myWorkSearchDTO.rowCntPerPage}"			//페이지 당 출력행의 개수
-					,"10"										//페이지 당 보여줄 페이지번호 개수
-					,"goSearchMyWorkList();"					//페이지 번호 클릭 후 실행할 자스코드
-				)
-			);
-		inputData("[name=selectPageNo]", "${myWorkSearchDTO.selectPageNo}");
-		inputData("[name=rowCntPerPage]", "${myWorkSearchDTO.rowCntPerPage}");
-		inputData("[name=search_keyword]", "${myWorkSearchDTO.search_keyword}");
-		inputData("[name=searchCategory]", "${myWorkSearchDTO.searchCategory}");
-		inputData("[name=is_print]", "${myWorkSearchDTO.is_print}");
-		
-		<c:forEach items="${myWorkSearchDTO.category}" var="category">
-			inputData("[name=category]", "${category}");
-		</c:forEach>
+      //goSearchMyWorkList();
+      
+      $('[name=rowCntPerPage]').change(function(){
+         goSearchMyWorkList();
+      });
+      
+      $(".pagingNumber").html(
+            getPagingNumber(
+               "${myWorkListAllCnt}"                  //검색 결과 총 행 개수
+               ,"${myWorkSearchDTO.selectPageNo}"         //선택된 현재 페이지 번호
+               ,"${myWorkSearchDTO.rowCntPerPage}"         //페이지 당 출력행의 개수
+               ,"10"                              //페이지 당 보여줄 페이지번호 개수
+               ,"goSearchMyWorkList();"               //페이지 번호 클릭 후 실행할 자스코드
+            )
+         );
+      inputData("[name=selectPageNo]", "${myWorkSearchDTO.selectPageNo}");
+      inputData("[name=rowCntPerPage]", "${myWorkSearchDTO.rowCntPerPage}");
+      inputData("[name=search_keyword]", "${myWorkSearchDTO.search_keyword}");
+      inputData("[name=searchCategory]", "${myWorkSearchDTO.searchCategory}");
+      inputData("[name=is_print]", "${myWorkSearchDTO.is_print}");
 
+      /* 
+      <c:forEach items="${myWorkSearchDTO.category}" var="category">
+         inputData("[name=category]", "${category}");
+      </c:forEach>
+       */
 
-		$("[name=is_print]").change(function(){
-			if ( $(this).is(":checked") ){
-				$(this).siblings().prop("checked", false);
-			}
-			$(this).siblings().prop("checked", false);
-		});
-
-	});
-	
-	function goSearchMyWorkList(){
-		if( is_empty('[name=mycarebooklist] [name=search_keyword]') ){
-			$('[name=search_keyword]').val("");
-		}
-		
-		//키워드 앞뒤에 공백이 있으면 제거하고 다시 넣어주기
-		
-		var search_keyword = $('[name=mycarebooklist] [name=search_keyword]').val();
-		search_keyword = $.trim(search_keyword);
-		
-		$('[name=search_keyword]').val(search_keyword);
-		//alert($('[name=mycarebooklist]').serialize());
-		document.mycarebooklist.submit();
-		
-		/*
-		$.ajax({
-			url : "/group4erp/goMyCareBookList.do"
-			, type : "post"
-		  , data : document.mycarebooklist.submit()
-		});
-		*/
-	}
-	
-	function goAllSearchMyWorkList(){
-		
-		//name=boardListForm을 가진 form 태그 내부의 모든 입력양식에 value값을 비우거나 체크를 푼다.
-		document.mycarebooklist.reset();
-		
-		$('[name=mycarebooklist] [name=rowCntPerPage]').val('20');
-		$('[name=mycarebooklist] [name=selectPageNo]').val('1');
-		$("[name=mycarebooklist] [name=sort]").val('');
-		goSearchMyWorkList();
-	}
+      $("[name=is_print]").change(function(){
+         if ( $(this).is(":checked") ){
+            $(this).siblings().prop("checked", false);
+         }
+         $(this).siblings().prop("checked", false);
+      });
+   });
+   
+   function goSearchMyWorkList(){
+      if( is_empty('[name=mycarebooklist] [name=search_keyword]') ){
+         $('[name=search_keyword]').val("");
+      }
+      
+      //키워드 앞뒤에 공백이 있으면 제거하고 다시 넣어주기
+      
+      var search_keyword = $('[name=mycarebooklist] [name=search_keyword]').val();
+      search_keyword = $.trim(search_keyword);
+      
+      $('[name=search_keyword]').val(search_keyword);
+      //alert($('[name=mycarebooklist]').serialize());
+      document.mycarebooklist.submit();
+      
+      /*
+      $.ajax({
+         url : "/group4erp/goMyCareBookList.do"
+         , type : "post"
+        , data : document.mycarebooklist.submit()
+      });
+      */
+   }
+   
+   function goAllSearchMyWorkList(){
+      
+      //name=boardListForm을 가진 form 태그 내부의 모든 입력양식에 value값을 비우거나 체크를 푼다.
+      document.mycarebooklist.reset();
+      
+      $('[name=mycarebooklist] [name=rowCntPerPage]').val('20');
+      $('[name=mycarebooklist] [name=selectPageNo]').val('1');
+      $("[name=mycarebooklist] [name=sort]").val('');
+      goSearchMyWorkList();
+   }
    
    function booKInvenFill(idx,isbn) {
 
       //alert("도서 발주 기능 구현중 "+idx+"/"+isbn);
   
-   	  var thisTr = $(idx).parent().parent();
-   	  var trindex = thisTr.index();
-   	  $(idx).addClass('fillbtu');
+        var thisTr = $(idx).parent().parent();
+        var trindex = thisTr.index();
+        $(idx).addClass('fillbtu');
 
       //alert('999');
       var delTr = $('.mycarebookTable [name=test]');
       if(delTr.size()>0){
-    	  delTr.remove();
+         delTr.remove();
       }
       
       //alert(trindex);
@@ -158,18 +206,18 @@
       //return;
       
       $('[name=wareHousing]').click(function(){
-    	  
-    	  var wareData = "isbn=" + isbn + "&" + $('[name=wareHousingForm]').serialize();
-    	  
-    	  $.ajax({
+         
+         var wareData = "isbn=" + isbn + "&" + $('[name=wareHousingForm]').serialize();
+         
+         $.ajax({
               url : "/group4erp/myBookWarehousingProc.do"
               , type: "post"
               , data : wareData
               ,success : function(data){
-                 	if(data == 1){
-                 		alert("발주 성공");
-                 		location.replace("/group4erp/goMyCareBookList.do");
-                 	}else{ alert("발주 실패"); }
+                    if(data == 1){
+                       alert("발주 성공");
+                       location.replace("/group4erp/goMyCareBookList.do");
+                    }else{ alert("발주 실패"); }
               } 
               , error : function(){ alert("서버 접속 실패"); }
            }); 
@@ -178,12 +226,12 @@
    }
    
    function closeTr(){
-	   $('[name=test]').remove();
+      $('[name=test]').remove();
    }
    
-	function goAllReset(){
-		document.mycarebooklist.reset();
-	}
+   function goAllReset(){
+      document.mycarebooklist.reset();
+   }
 
    
 
@@ -191,19 +239,57 @@
 
 </head>
 <body>
-	<center>
-	<h1 class="fontBold" style="font-size:15pt">[담당 상품 조회]</h1>
+   <center>
+   <table class="line" width="90%">
+         <tr>
+            <td>&nbsp;&nbsp;<b><font style="font-size:20pt; color:lightgray;">담당 상품 조회</font></b></td>
+         </tr>
+   </table>
+   <table><tr height=3><td></table>
+   <!-- <h1 class="fontBold" style="font-size:15pt">[담당 상품 조회]</h1> -->
    <form name="mycarebooklist" method="post" action="/group4erp/goMyCareBookList.do">
    <!-- <div class="table_layout"> -->
    <input type="hidden" name="emp_no" value="<%=(String)session.getAttribute("emp_id") %>">
-      <table class="mycarebookSearch tab" border=1 bordercolor="#000000" cellpadding=5 align=center>
+        <div class="divcss">
+           <table><tr height=15><td></table>
+           <table class="tab3" border=0 width="100%" bordercolor="#000000" cellpadding=5 align=center>
+              <tr>
+               <th width="8%"><b>절판 상황</b></th>
+               <td width="13%" align=left>
+                  <input type="checkbox" name="is_print" value="y">절판
+                  <input type="checkbox" name="is_print" value="n">판매중
+               <th width="10%"><b>키워드</b>
+               <td width="40%">
+                  <select name="searchCategory">
+                     <option value="전체">전체
+                     <option value="책번호">책번호
+                     <option value="책이름">책이름
+                     <option value="카테고리">카테고리
+                     <option value="보유지점">보유지점
+                  </select>
+                  <input type="text" name="search_keyword" size=40>
+               <td width="13%">
+                 <td>
+                 <button class="button"><input type="image" src="/group4erp/resources/image/magnifying-glass.png" width="20" height="20" onclick="goSearchMyWorkList();">검색</button>
+                 <button class="button"><input type="image" src="/group4erp/resources/image/magnifying-glass.png" width="20" height="20" onclick="goAllSearchMyWorkList();">모두검색</button>
+                 <button class="button"><input type="image" src="/group4erp/resources/image/reset.png" width="20" height="20" onclick="goAllReset();">초기화</button>
+                 </td>
+           </table>
+           <br>
+           <!-- <button type="button" id="" class="btn btnEvent">
+      <img src="/group4erp/resources/image/searchA.png" width="10%" height="50%" alt="btnImages" class="btnImages">
+      </button> -->
+         <!-- <input type="button" value="검색" onclick="goSearchMyWorkList();">&nbsp;&nbsp;
+         <input type="button" value="모두검색" onclick="goAllSearchMyWorkList();">&nbsp;&nbsp;
+         <input type="button" value="초기화" onclick="goAllReset();"> -->
+        </div>
+      <%-- <table class="tab" border=1 bordercolor="#000000" cellpadding=5 align=center>
          <!-- <colgroup>
             <col width="20%" />
             <col width="*" />
          </colgroup> -->
-
          
-         <%-- 
+         
          <tr>
          <th bgcolor="gray">분야
          <td align=center>
@@ -236,16 +322,15 @@
                <option value="출판사3">출판사3
                <option value="출판사4">출판사4
                <option value="출판사5">출판사5
-                --> --%>
+                -->
          <tr>
-
-         <th>절판 상황
+         <th bgcolor="gray">절판 상황
          <td align=left>
             <input type="checkbox" name="is_print" value="y">절판
             <input type="checkbox" name="is_print" value="n">판매중
          
          <tr>
-         <th>키워드
+         <th bgcolor="gray">키워드
          <td>
             <select name="searchCategory">
                <option value="전체">전체
@@ -255,13 +340,10 @@
                <option value="보유지점">보유지점
             </select>
             <input type="text" name="search_keyword" size=40>
-      </table>
+      </table> --%>
       <!-- </div> -->
-      <br>
-      <input type="button" value="  검색  " onclick="goSearchMyWorkList();">&nbsp;&nbsp;
-      <input type="button" value="모두검색" onclick="goAllSearchMyWorkList();">&nbsp;&nbsp;
-      <input type="button" value="초기화" onclick="goAllReset();">
-      <table border=0 width=700>
+      
+      <table border=0 width=90%>
          <tr>
             <td align=right>
                총 개수 : ${myWorkListAllCnt}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -278,113 +360,111 @@
       </form>
       
       
-      <table class="mycarebookTable tab" width="80%" border=0 cellspacing=5 cellpadding=5 >
-      	<thead>
+      <table class="mycarebookTable tab" width="90%" border=0 cellspacing=5 cellpadding=5 style="background-color:white;" >
+         <thead>
          <tr bgcolor="gray">
-         	<th width="4%">No
+            <th width="4%">No
             <c:choose>
-					<c:when test="${param.sort=='b.ISBN13 desc'}">
-						<th width="9%" style="cursor: pointer"
-							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼책번호
-					</c:when>
-					<c:when test="${param.sort=='b.ISBN13 asc'}">
-						<th width="9%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('b.ISBN13 desc'); goSearchMyWorkList();">▲책번호
-					</c:when>
-					<c:otherwise>
-						<th width="9%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('b.ISBN13 asc'); goSearchMyWorkList();">책번호
-					</c:otherwise>
-			</c:choose> 
+               <c:when test="${param.sort=='b.ISBN13 desc'}">
+                  <th width="9%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼책번호
+               </c:when>
+               <c:when test="${param.sort=='b.ISBN13 asc'}">
+                  <th width="9%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('b.ISBN13 desc'); goSearchMyWorkList();">▲책번호
+               </c:when>
+               <c:otherwise>
+                  <th width="9%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('b.ISBN13 asc'); goSearchMyWorkList();">책번호
+               </c:otherwise>
+         </c:choose> 
             <c:choose>
-					<c:when test="${param.sort=='b.book_name desc'}">
-						<th width="25%" style="cursor: pointer"
-							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼책 이름
-					</c:when>
-					<c:when test="${param.sort=='b.book_name asc'}">
-						<th width="25%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('b.book_name desc'); goSearchMyWorkList();">▲책 이름
-					</c:when>
-					<c:otherwise>
-						<th width="25%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('b.book_name asc'); goSearchMyWorkList();">책 이름
-					</c:otherwise>
-			</c:choose>
+               <c:when test="${param.sort=='b.book_name desc'}">
+                  <th width="25%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼책 이름
+               </c:when>
+               <c:when test="${param.sort=='b.book_name asc'}">
+                  <th width="25%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('b.book_name desc'); goSearchMyWorkList();">▲책 이름
+               </c:when>
+               <c:otherwise>
+                  <th width="25%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('b.book_name asc'); goSearchMyWorkList();">책 이름
+               </c:otherwise>
+         </c:choose>
             <c:choose>
-					<c:when test="${param.sort=='3 desc'}">
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼카테고리
-					</c:when>
-					<c:when test="${param.sort=='3 asc'}">
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('3 desc'); goSearchMyWorkList();">▲카테고리
-					</c:when>
-					<c:otherwise>
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('3 asc'); goSearchMyWorkList();">카테고리
-					</c:otherwise>
-			</c:choose>
+               <c:when test="${param.sort=='3 desc'}">
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼카테고리
+               </c:when>
+               <c:when test="${param.sort=='3 asc'}">
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('3 desc'); goSearchMyWorkList();">▲카테고리
+               </c:when>
+               <c:otherwise>
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('3 asc'); goSearchMyWorkList();">카테고리
+               </c:otherwise>
+         </c:choose>
             <c:choose>
-					<c:when test="${param.sort=='to_number(b.book_price) desc'}">
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼가격
-					</c:when>
-					<c:when test="${param.sort=='to_number(b.book_price) asc'}">
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('to_number(b.book_price) desc'); goSearchMyWorkList();">▲가격
-					</c:when>
-					<c:otherwise>
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('to_number(b.book_price) asc'); goSearchMyWorkList();">가격
-					</c:otherwise>
-			</c:choose>
+               <c:when test="${param.sort=='to_number(b.book_price) desc'}">
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼가격
+               </c:when>
+               <c:when test="${param.sort=='to_number(b.book_price) asc'}">
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('to_number(b.book_price) desc'); goSearchMyWorkList();">▲가격
+               </c:when>
+               <c:otherwise>
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('to_number(b.book_price) asc'); goSearchMyWorkList();">가격
+               </c:otherwise>
+         </c:choose>
             <c:choose>
-					<c:when test="${param.sort=='13 desc'}">
-						<th width="7%" style="cursor: pointer"
-							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼수량
-					</c:when>
-					<c:when test="${param.sort=='13 asc'}">
-						<th width="7%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('13 desc'); goSearchMyWorkList();">▲수량
-					</c:when>
-					<c:otherwise>
-						<th width="7%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('13 asc'); goSearchMyWorkList();">수량
-					</c:otherwise>
-			</c:choose>
-			<c:choose>
-					<c:when test="${param.sort=='14 desc'}">
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼보유지점
-					</c:when>
-					<c:when test="${param.sort=='14 asc'}">
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('14 desc'); goSearchMyWorkList();">▲보유지점
-					</c:when>
-					<c:otherwise>
-						<th width="8%" style="cursor: pointer"
-							onclick="$('[name=sort]').val('14 asc'); goSearchMyWorkList();">보유지점
-					</c:otherwise>
-			</c:choose>
+               <c:when test="${param.sort=='13 desc'}">
+                  <th width="7%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼수량
+               </c:when>
+               <c:when test="${param.sort=='13 asc'}">
+                  <th width="7%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('13 desc'); goSearchMyWorkList();">▲수량
+               </c:when>
+               <c:otherwise>
+                  <th width="7%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('13 asc'); goSearchMyWorkList();">수량
+               </c:otherwise>
+         </c:choose>
+         <c:choose>
+               <c:when test="${param.sort=='14 desc'}">
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼보유지점
+               </c:when>
+               <c:when test="${param.sort=='14 asc'}">
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('14 desc'); goSearchMyWorkList();">▲보유지점
+               </c:when>
+               <c:otherwise>
+                  <th width="8%" style="cursor: pointer"
+                     onclick="$('[name=sort]').val('14 asc'); goSearchMyWorkList();">보유지점
+               </c:otherwise>
+         </c:choose>
             <th width="8%">비고
         </thead>
         <tbody>    
          <c:forEach items="${requestScope.MyCareBookList}" var="MyCareBookList" varStatus="loopTagStatus">
          <tr>   
-
-			<td align=center>${myWorkListAllCnt-(myWorkSearchDTO.selectPageNo*myWorkSearchDTO.rowCntPerPage-myWorkSearchDTO.rowCntPerPage+1+loopTagStatus.index)+1}
+         <td align=center>${myWorkListAllCnt-(myWorkSearchDTO.selectPageNo*myWorkSearchDTO.rowCntPerPage-myWorkSearchDTO.rowCntPerPage+1+loopTagStatus.index)+1}
             <td align=center>${MyCareBookList.ISBN13}
             <td align=center>${MyCareBookList.book_name}
             <td align=center>${MyCareBookList.cat_name}
             <td align=center>${MyCareBookList.book_price}
             <td align=center>${MyCareBookList.ISBN_cnt}
             <td align=center>${MyCareBookList.branch_name}
-
             <td align=center>
-               <c:if test="${MyCareBookList.isbn_cnt < 100}">
-                  <input type="button" value="발주" onClick="booKInvenFill(this,'${MyCareBookList.isbn13}');" >
+               <c:if test="${MyCareBookList.ISBN_cnt < 100}">
+                  <input type="button" value="발주" onClick="booKInvenFill(this,'${MyCareBookList.ISBN13}');" >
                </c:if>
-               <c:if test="${MyCareBookList.isbn_cnt >= 100}">
+               <c:if test="${MyCareBookList.ISBN_cnt >= 100}">
                   --
                </c:if>  
          </c:forEach>
@@ -393,6 +473,6 @@
       <br>
         <input type="hidden" name="selectPageNo">
       <div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
-   		
+         
 </body>
 </html>

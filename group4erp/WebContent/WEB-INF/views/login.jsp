@@ -10,14 +10,27 @@
 .checkID{
    background-color:#D4D4D4;
    position:absolute;
+   border-radius:10px;
 }
 .aprroval{
    background-color:#D4D4D4;
    position:absolute;
+   border-radius:10px;
 }
 .noAprroval{
    background-color:#D4D4D4;
    position:absolute;
+   border-radius:10px;
+}
+.noApprovalID tr{
+color:white;
+}
+.approvalID tr{
+color:white;
+vertical-align:text-top;
+}
+.jumin_num{
+border-radius:10px;
 }
 body{
   background: #34495F;
@@ -29,6 +42,7 @@ body{
 }
 .input { border-style: none; background: transparent; outline: none; }
 button { padding: 0; background: none; border: none; outline: none; }
+
 /* $input-background: rgba(57, 63, 84, 0.8); */
 $input-background: rgba(0, 0, 0, 0.8);
 $input-text-inactive: #7881A1;
@@ -101,7 +115,32 @@ $input-text-active: white;/* #BFD2FF; */
     line-height:2.5;
     cursor: pointer;
 }
-
+.buttonIN{
+    width:15%;
+    height:20%;
+    /* background-color: #F0C40F; */
+    background-color: white;
+    border: 1px;
+    /* color:#fff; */
+    /* color: gray; */
+    color: black;
+    padding: 1px 0;
+    text-align: center;
+    vertical-align: text-top;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    /* margin: 5; */
+    line-height:2.5;
+    cursor: pointer;
+    border-radius:10px;
+}
+.buttonINClose{
+	width:50%;
+    height:50%;
+    background-color: white;
+    padding: 1px 0;
+}
 </style>
 <title>YES4조 전사적자원관리 시스템 </title>
 <script>
@@ -297,34 +336,34 @@ $(document).ready( function() {
 
 <div class="checkID" >
    <form name="checkIDProc1">
-   <table>
+   <table >
       <tr>
-         <th>주민등록번호<td><input type="text" name="jumin_num" size="20">
+         <td><input type="text" name="jumin_num" class="jumin_num" size="30" placeholder="주민등록번호를 입력하세요">
    </table>
    <!-- onclick="goCheckApproval();" -->
-   <input type="button" value="검색" name="searchbtu" >&nbsp;
-   <input type="button" value="닫기" onclick="goClose1();">
+   <input type="button" class="buttonIN" style=" vertical-align:top;" value="검색" name="searchbtu" >&nbsp;
+   <input type="button" class="buttonIN" value="닫기" onclick="goClose1();">
    </form>
 </div>
 
 <div class="aprroval" >
    <form name="checkIDProc2">
-   <table id="approvalID">
+   <table id="approvalID" class="approvalID">
       <tr>
          <th>사번 :<td>
       <tr>
          <th>비밀번호 :<td>
    </table>
-   <input type="button" value="닫기" onclick="goClose2();">
+   <input type="button" class="buttonINClose" value="닫기" onclick="goClose2();">
    </form>
 </div>
 <div class="noAprroval" >
    <form name="checkIDProc3">
-   <table id="noApprovalID">
+   <table id="noApprovalID" class="noApprovalID">
       <tr>
          <th>승인되지 않은 주민등록번호 입니다!
    </table>
-   <input type="button" value="닫기" onclick="goClose3();">
+   <input type="button" class="buttonIN" value="닫기" onclick="goClose3();">
    </form>
 </div>
 
@@ -348,3 +387,4 @@ $(document).ready( function() {
 
 </body>
 </html>
+

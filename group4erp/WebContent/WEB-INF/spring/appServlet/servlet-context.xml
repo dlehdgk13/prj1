@@ -27,6 +27,9 @@
 	<!-- 	                   주로 css, 이미지, js  파일을 URL 로 접근 불가능한 경로에 숨겨 사용할 때 설정함.   -->
 	<!--****************************************************************************************-->
 	<resources mapping="/resources/**" location="/WEB-INF/resources/" />
+	<resources mapping="/resources/lib/**" location="/WEB-INF/resources/lib/" />
+	<resources mapping="/resources/img/**" location="/WEB-INF/resources/img/" />
+	<resources mapping="/resources/css/**" location="/WEB-INF/resources/css/" />
 	
 	<!--****************************************************************************************-->
 	<!--파일업 로드를 관리하는 [CommonsMultipartResolver 객체] 정보 등록  -->

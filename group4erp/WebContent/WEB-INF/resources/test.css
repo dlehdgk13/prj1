@@ -7,6 +7,7 @@ body {
       background: white;
       font-family: 'Noto Sans KR', sans-serif;
 }
+
 .tab, .tab td, .tab th{
    border-collapse: collapse;
    padding:5px;
@@ -88,10 +89,10 @@ h1{
    font-size: 17pt ;
 }
 
-
+/*
 .button {
-    /*float:right;
-    background-color:#fbfbfb;*/
+    float:right;
+    background-color:#fbfbfb;
     background-color: #4CAF50;
     border-radius: 5px;
     align-items: center; 
@@ -149,5 +150,5 @@ button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;
 }
-
+*/
 
