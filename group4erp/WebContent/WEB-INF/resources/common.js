@@ -29,6 +29,8 @@ function is_empty(selector) {
 	}
 }
 
+      
+
 
 function getPagingNumber(
 		totRowCnt               // 검색 결과 총 행 개수

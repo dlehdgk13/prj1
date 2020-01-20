@@ -14,7 +14,7 @@ html {
 body {
 	margin: 0
 }
-
+/* 제대로 고정이 되게 */
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	main, menu, nav, section, summary {
 	display: block
