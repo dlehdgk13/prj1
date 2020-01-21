@@ -102,6 +102,10 @@ $(document).ready(function(){
 //    function insertNewEmp() {
 //      location.href="/group4erp/viewNewEmpJoin.do"
 //   } 
+    function goAllReset(){
+       inputData('[name=searchKeyword]',"");
+       $('[name=searchKeyword]').focus();
+     }
    function goEmpContentForm(emp_no){
       //alert("emp_no="+emp_no);
       //return;
@@ -124,65 +128,6 @@ $(document).ready(function(){
       */
       //location.replace("......");
    }
-   
-   function showTime() {
-	    //현재 날짜를 관리하는 Date 객체 생성
-	    var today = new Date();
-	    //----------------------------------------
-	    //Date 객체에서 날짜 관련 각 데이터를 꺼내어 저장하는 변수 선언
-	    var amPm = "오후";
-	    var year = today.getFullYear();
-	    var month = today.getMonth()+1;
-	    var week = today.getDay();
-	    var date = today.getDate();
-	    var hour = today.getHours();
-	    var minute = today.getMinutes();
-	    var second = today.getSeconds();
-
-	    var week = ["일", "월", "화", "수", "목", "금", "토"][today.getDay()];
-	    //날짜 관련 각 데이터가 10 미만이면 앞에 0 붙이기
-	    //오전, 오후 여부 판단해서 저장하기
-	    
-	    if(month<10) {
-	       month = "0"+month;
-	    }
-
-	    if(date<10) {
-	       date = "0"+date;
-	    }
-
-	    if(hour<12) {
-	       amPm = "오전";
-	    }
-
-	    if(hour>12) {
-	       hour=hour-12;
-	    }
-
-	    if(hour<10) {
-	       hour="0"+hour;
-	    }
-
-	    if(minute<10) {
-	       minute = "0"+minute;
-	    }
-
-	    if(second<10) {
-	       second = "0" + second;
-	    }
-	    //id="nowTime"가 있는 태그영역 내부에 시간 문자열 삽입
-
-	    document.getElementById("nowTime").innerHTML = year+"년 "+month+"월 "+date+"일("+week+") "+amPm+" "+hour+"시 "+minute+"분 "+second+"초 ";
-	    
-	 }
-
-	function startTime() {
-	showTime();      //1초 딜레이 되어 시간이 표시되는 현상을 제거하기 위해 showTime() 함수를 한 번 호출한다.
-	//-----------------------------------
-	//1초마다 showTime() 함수를 호출하기
-	//-----------------------------------
-	window.setInterval("showTime()", 1000);      //window.setInterval(function() { showTime(); }, 1000);
-	}
    
 </script>
 <body>
@@ -378,9 +323,9 @@ $(document).ready(function(){
                <td width="20%">
                <th>
                <td width="30%" >
-                  <button  type="button" class="btn btn-default" onclick="goSearchBookInven();"><input type="image" src="/group4erp/resources/image/magnifying-glass.png" style="width:13; height:13;" ><font style="font-size:9pt;" >검색</font></button>
+                  <button  type="button" class="btn btn-default" onclick="goSearch();"><input type="image" src="/group4erp/resources/image/magnifying-glass.png" style="width:13; height:13;" ><font style="font-size:9pt;" >검색</font></button>
                   &nbsp;
-                  <button type="button" class="btn btn-default" onclick="goAllSearchBookInven();"><input type="image" src="/group4erp/resources/image/searchA.png" style="width:13; height:13;"><font style="font-size:9pt;">모두검색</font></button>
+                  <button type="button" class="btn btn-default" onclick="goSearchAll();"><input type="image" src="/group4erp/resources/image/searchA.png" style="width:13; height:13;"><font style="font-size:9pt;">모두검색</font></button>
                   &nbsp;
                   <button type="button" class="btn btn-default" onclick="goAllReset();"><input type="image" src="/group4erp/resources/image/reset.png" style="width:13; height:13;"><font style="font-size:9pt;">초기화</font></button>
          </table>
@@ -419,64 +364,64 @@ $(document).ready(function(){
          </table>
          <table><tr><td height="10"></td></tr></table>
          <form name="empListForm" method="post" action="/group4erp/viewEmpInfo.do">
-         <table class="table table-striped table-advance table-hover table-bordered" width="90%" border=0 cellspacing=0 cellpadding=5>   
+         <table class="table table-striped table-advance table-hover table-bordered" width="100%" border=0 cellspacing=0 cellpadding=5>   
          
          
          <thead>
             <tr>
             <c:choose>
                <c:when test="${param.sort=='emp_no desc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼사번
+                  <th width="15%" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼사번
                </c:when>
                <c:when test="${param.sort=='emp_no asc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('emp_no desc'); goSearch();">▲사번
+                  <th width="15%" style="cursor:pointer" onclick="$('[name=sort]').val('emp_no desc'); goSearch();">▲사번
                </c:when>
                <c:otherwise>
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('emp_no asc'); goSearch();">사번
+                  <th width="15%" style="cursor:pointer" onclick="$('[name=sort]').val('emp_no asc'); goSearch();">사번
                </c:otherwise>
             </c:choose>
             <c:choose>
                <c:when test="${param.sort=='emp_name desc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼성명
+                  <th width="30%" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼성명
                </c:when>
                <c:when test="${param.sort=='emp_name asc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('emp_name desc'); goSearch();">▲성명
+                  <th width="30%" style="cursor:pointer" onclick="$('[name=sort]').val('emp_name desc'); goSearch();">▲성명
                </c:when>
                <c:otherwise>
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('emp_name asc'); goSearch();">성명
+                  <th width="30%" style="cursor:pointer" onclick="$('[name=sort]').val('emp_name asc'); goSearch();">성명
                </c:otherwise>
             </c:choose>
             <c:choose>
                <c:when test="${param.sort=='3 desc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼부서
+                  <th width="20%" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼부서
                </c:when>
                <c:when test="${param.sort=='3 asc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('3 desc'); goSearch();">▲부서
+                  <th width="20%" style="cursor:pointer" onclick="$('[name=sort]').val('3 desc'); goSearch();">▲부서
                </c:when>
                <c:otherwise>
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('3 asc'); goSearch();">부서
+                  <th width="20%" style="cursor:pointer" onclick="$('[name=sort]').val('3 asc'); goSearch();">부서
                </c:otherwise>
             </c:choose>
             <c:choose>
                <c:when test="${param.sort=='jikup_cd desc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼직급
+                  <th width="20%" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼직급
                </c:when>
                <c:when test="${param.sort=='jikup_cd asc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd desc'); goSearch();">▲직급
+                  <th width="20%" style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd desc'); goSearch();">▲직급
                </c:when>
                <c:otherwise>
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd asc'); goSearch();">직급
+                  <th width="20%" style="cursor:pointer" onclick="$('[name=sort]').val('jikup_cd asc'); goSearch();">직급
                </c:otherwise>
             </c:choose>
             <c:choose>
                <c:when test="${param.sort=='5 desc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼승인상태
+                  <th width="10%" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼승인상태
                </c:when>
                <c:when test="${param.sort=='5 asc'}">
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('5 desc'); goSearch();">▲승인상태
+                  <th width="10%" style="cursor:pointer" onclick="$('[name=sort]').val('5 desc'); goSearch();">▲승인상태
                </c:when>
                <c:otherwise>
-                  <th style="cursor:pointer" onclick="$('[name=sort]').val('5 asc'); goSearch();">승인상태
+                  <th width="10%" style="cursor:pointer" onclick="$('[name=sort]').val('5 asc'); goSearch();">승인상태
                </c:otherwise>
             </c:choose>
          </thead>
@@ -500,7 +445,7 @@ $(document).ready(function(){
       <br>
       <!-- <input type="button" value="신규사원등록" onClick="insertNewEmp();"> -->
       <br><br>
-      <div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
+      <div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
    </form>
          
          
@@ -549,13 +494,13 @@ $(document).ready(function(){
   <script type="text/javascript" language="javascript" src="${ctRootlib}/advanced-datatable/js/jquery.js"></script>
   <script type="text/javascript" language="javascript" src="${ctRootlib}/advanced-datatable/js/jquery.dataTables.js"></script>
   <script type="text/javascript" src="${ctRootlib}/advanced-datatable/js/DT_bootstrap.js"></script> --%>
-  <script src="${ctRootlib}/jquery/jquery.min.js"></script>
-  <script src="${ctRootlib}/bootstrap/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="${ctRootlib}/jquery.dcjqaccordion.2.7.js"></script>
-  <script src="${ctRootlib}/jquery.scrollTo.min.js"></script>
-  <script src="${ctRootlib}/jquery.nicescroll.js" type="text/javascript"></script>
+  <script src="${ctRootlib}/jquery/jquery.min.js?ver=1"></script>
+  <script src="${ctRootlib}/bootstrap/js/bootstrap.min.js?ver=1"></script>
+  <script class="include" type="text/javascript" src="${ctRootlib}/jquery.dcjqaccordion.2.7.js?ver=1"></script>
+  <script src="${ctRootlib}/jquery.scrollTo.min.js?ver=1"></script>
+  <script src="${ctRootlib}/jquery.nicescroll.js?ver=1" type="text/javascript"></script>
   <!--common script for all pages-->
-  <script src="${ctRootlib}/common-scripts.js"></script>
+  <script src="${ctRootlib}/common-scripts.js?ver=1"></script>
   <!--script for this page-->
   
 </body>

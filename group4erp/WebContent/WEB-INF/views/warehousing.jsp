@@ -81,6 +81,11 @@
     border: 1px solid #ddd !important;
 }
 
+.tableth th{
+	text-align: center;
+	font-weight: bold;
+}
+
 </style>
 
 <script>
@@ -248,7 +253,8 @@
 							
 							test.after(insert);
 							
-							
+							$('[name=thisTr]').hide();
+							$('[name=thisTr]').show(1000);
 							
                    	}
 							//$("#thisTable tr:eq(0)").siblings().click(function(){
@@ -267,7 +273,7 @@
 		function closeDiv(close){
 			/* $("#contecnt").css("display", "none");	
 			$("#thisTable tr").removeAttr("bgcolor"); */
-			$('[name=thisTr]').remove();
+			$('[name=thisTr]').hide(1000);
 	    }
 
 	    function goWhConfirm(wh_no){
@@ -500,7 +506,7 @@
     <!--main content start-->
    <section id="main-content">
       <section class="wrapper" style="text-align:left;">
-        <h3><i class="fa fa-angle-right"></i> 입고 현황(datepicker 수정해야함.)</h3>
+        <h3><i class="fa fa-angle-right"></i> 입고 현황</h3>
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
@@ -526,9 +532,9 @@
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 일자&nbsp;</b>
 					<td colspan=2 width="42%" align=left>
-						<input type="text" id="datepicker1" name="dateFrom" size=30>
+						<input type="text" id="dateFrom" name="dateFrom" size=30>
 						&nbsp; ~ &nbsp;
-						<input type="text" id="datepicker2" name="dateTill" size=30>&nbsp;&nbsp;
+						<input type="text" id="dateTill" name="dateTill" size=30>&nbsp;&nbsp;
 						<button type="button" class="btn btn-default" onclick="goTodaySearch();"><i class="fa fa-calendar-o"></i>금일 검색</button>
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b>
@@ -673,7 +679,12 @@
       </section>
     </section>
    <div id="contecnt" style="display:none;">
-		<table class="table table-striped table-advance table-bordered" id="contentTable" align=center>
+  		<table border=0 width=99%>
+	 			<tr>
+	 				<td align=right>
+	 					<h3><i class="fa fa-times" onclick="closeDiv(this);" style="cursor:pointer;"></i></h3>
+		</table>
+		<table class="table tableth table-advance table-bordered" id="contentTable" align=center>
 			<tr>
 				<th class="thcolor">주문자</th>  
 				<th class="thcolor">발주신청일 </th> 
@@ -682,7 +693,7 @@
 				<th class="thcolor">공급률</th> 
 				<th class="thcolor">입고요청일</th> 
 			</tr>	
-			<tr>
+			<tr align=center>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -697,7 +708,7 @@
 				<th class="thcolor">출판사</th>
 				<th class="thcolor">카테고리</th>
 			</tr>
-			<tr>
+			<tr align=center>
 				<td></td>
 				<td></td>
 				<td colspan=2></td>
@@ -707,11 +718,7 @@
 		</table>
 		<!-- <div height=3></div> -->
 		<!-- <table><tr height=1 border=0><td></td></tr></table> -->
-		<table border=0 width=100%>
-	 			<tr>
-	 				<td align=center>
-						<h3><button type="button" class="btn btn-default" onclick="closeDiv(this);"><i class="fa fa-times"></i>닫기</button></h3>
-		</table>
+		
 	</div>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
@@ -719,18 +726,20 @@
     <footer class="site-footer">
       <div class="text-center">
         <p>
-          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+			KOSMO 자바&빅데이터 과정 팀프로젝트
         </p>
         <div class="credits">
+        <font style="font-size:12pt;">
+        ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
+         </font>
           <!--
             You are NOT allowed to delete the credit link to TemplateMag with free version.
             You can delete the credit link only if you bought the pro version.
             Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
             Licensing information: https://templatemag.com/license/
           -->
-          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
         </div>
-        <a href="advanced_table.html#" class="go-top">
+        <a href="basic_table.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
@@ -749,7 +758,8 @@
   <!--common script for all pages-->
   <script src="${ctRootlib}/common-scripts.js"></script>
   <!--script for this page-->
-
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 
 </html>

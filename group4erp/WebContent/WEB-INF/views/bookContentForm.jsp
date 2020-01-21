@@ -532,7 +532,7 @@ $(document).ready(function(){
         <!-- /row -->
         <!-- INPUT MESSAGES -->
        <br>
-       <button ailgn=center type="button" class="btn btn-default" onclick="bookInfoUp();"><input type="image" src="/group4erp/resources/image/update.png" width="13" height="13">&nbsp;수정</button>
+        <button type="button" class="btn btn-theme02" onclick="bookInfoUp();"><i class="fa fa-check"></i> 수정</button>
        
         <!-- /row -->
         <!-- INPUT MESSAGES -->

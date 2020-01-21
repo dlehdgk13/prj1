@@ -551,7 +551,7 @@ $(document).ready(function(){
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
-              <h4><i class="fa fa-angle-right"></i><b><span id="getNoticeMonth"> </span></b></h4>
+              <h4 align=center><i class="fa fa-angle-right"></i><b><span id="getNoticeMonth"> </span></b></h4>
 				<table name="noticeTable" class="searchTable">
 					<tr>
 						<td width=30%>
@@ -580,7 +580,7 @@ $(document).ready(function(){
 				<table name="formTable" class="table" style="bordered: 0px;">
 					<tr>
 						<td width=30%></td>
-						<td width=10% style="text-align:left;">휴가 종류</td>
+						<td width=10% style="text-align:right;">휴가 종류</td>
 						<td width=60%>
 							<select name="dayoff_cd">
 								<option value="">---------
@@ -594,19 +594,19 @@ $(document).ready(function(){
 						</td>
 					<tr>
 						<td width=30%></td>
-						<td width=10% style="text-align:left;">휴가 기간</td>
+						<td width=10% style="text-align:right;">휴가 기간</td>
 						<td width=60%>
 							<input type="text" id="start_dayoff" name="start_dayoff" size="20" maxlength=20>&nbsp;<font> ~ </font>&nbsp;
 							<input type="text" id="end_dayoff" name="end_dayoff" size="20" maxlength=20>
 						</td>
 					<tr>
-						<td>
-						<td>
-						<button type="button" class="btn btn-default" onclick="goAllReset();"><input type="image" src="/group4erp/resources/image/reset.png" width="15" height="15">초기화</button>
-						<h3><button type="button" class="btn btn-default" onclick="empDayOffJoin();"><i class="fa fa-pencil-square-o"></i>신청</button></h3>
+						<td colspan=3 align=center>
 						
-						
-						<td>
+						<!-- <td width=15% align=right> -->
+						<button type="button" class="btn btn-default" onclick="empDayOffJoin();"><i class="fa fa-pencil-square-o"></i>신청</button>
+						&nbsp;&nbsp;
+						<!-- <td width=55% align=left> -->
+						<button type="button" class="btn btn-default" onclick="goAllReset();"><input type="image" src="/group4erp/resources/image/reset.png" width="13" height="13">초기화</button>
 				</table>
 							<input type="hidden" name="using_dayoff" class="using_dayoff">
 							<input type="hidden" name="remain_dayoff" class="remain_dayoff" value="${remain.remain_dayoff}">
@@ -618,35 +618,6 @@ $(document).ready(function(){
           <!-- /col-md-12 -->
         </div>
         <!-- row -->
-       <div class="row mt">
-          <div class="col-lg-12">
-            <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-angle-right"></i> Input Messages</h4>
-              <form class="form-horizontal tasi-form" method="get">
-                <div class="form-group has-success">
-                  <label class="col-sm-2 control-label col-lg-2" for="inputSuccess">Input with success</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputSuccess">
-                  </div>
-                </div>
-                <div class="form-group has-warning">
-                  <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Input with warning</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputWarning">
-                  </div>
-                </div>
-                <div class="form-group has-error">
-                  <label class="col-sm-2 control-label col-lg-2" for="inputError">Input with error</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputError">
-                  </div>
-                </div>
-              </form>
-            </div>
-            <!-- /form-panel -->
-          </div>
-          <!-- /col-lg-12 -->
-        </div>
         <!-- /row -->
       </section>
     </section>

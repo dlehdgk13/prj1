@@ -174,7 +174,7 @@
         $(idx).addClass('fillbtu');
 
       //alert('999');
-      var delTr = $('.mycarebookTable [name=test]');
+      var delTr = $('[name=mycarebookTable] [name=test]');
       if(delTr.size()>0){
          delTr.remove();
       }
@@ -512,7 +512,7 @@
 						</select> 행보기
 			</table>
 			<table><tr><td height="10"></td></tr></table>
-             <table class="table table-striped table-advance table-hover table-bordered" width="90%" border=0 cellspacing=0 cellpadding=5>
+             <table class="table table-striped table-advance table-hover table-bordered" name=mycarebookTable width="90%" border=0 cellspacing=0 cellpadding=5>
              <thead>
 				<tr>
 		            <th width="4%">No
@@ -614,7 +614,7 @@
 			            <td align=center>${MyCareBookList.branch_name}
 			            <td align=center>
 			               <c:if test="${MyCareBookList.ISBN_cnt < 100}">
-			                  <input type="button" value="발주" onClick="booKInvenFill(this,'${MyCareBookList.ISBN13}');" >
+			                  <button type='button' class='btn btn-default' onClick="booKInvenFill(this,'${MyCareBookList.ISBN13}');"><input type='image' src='/group4erp/resources/image/order_book.png' width='12' height='12'>발주</button> 
 			               </c:if>
 			               <c:if test="${MyCareBookList.ISBN_cnt >= 100}">
 			                  --
@@ -673,6 +673,7 @@
   <!--script for this page-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 </body>
 
 </html>

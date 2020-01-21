@@ -84,14 +84,6 @@ $(document).ready(function(){
 	            ,"goSearchBookInven();"                  //페이지 번호 클릭 후 실행할 자스코드
 	         )
 	      );
-	   
-	   setTableTrBgColor(
-				"bookTable"								//테이블 class값
-				, "${headerColor}"									//해더 tr 배경색
-				, "${oddTrColor}"									//홀수행 배경색
-				, "${evenColor}"									//짝수행 배경색
-				, "${mouseOverColor}"								//마우스 온 시 배경색
-		);
 
 	   inputData('[name=rowCntPerPageDown]',"${invenSearchDTO.rowCntPerPage}");
 	   inputData('[name=selectPageNo]',"${invenSearchDTO.selectPageNo}");
@@ -398,7 +390,14 @@ $(document).ready(function(){
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper" style="text-align:left;">
+      <table width=99%>
+      <tr>
+      <td>
         <h3><i class="fa fa-angle-right"></i> 재고 관리</h3>
+       <td align=right>
+       <button type="button" class="btn btn-theme04" onclick="goNewBookInfo();"><i class="fa fa-book"></i> 서적 등록</button>
+      </table>
+      <table><tr><td height=10></td></tr></table>  
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
@@ -410,7 +409,7 @@ $(document).ready(function(){
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 분야&nbsp;</b></th>
 					
-					<td width="42%" align=left>
+					<td colspan=2 width="50%" align=left>
 					<c:forEach items="${requestScope.category}" var="cat" varStatus="loopTagStatus">
 							&nbsp;<input type="checkbox" name="category_name" value="${cat.cat_name}">${cat.cat_name}
          			</c:forEach> </td>
@@ -420,7 +419,7 @@ $(document).ready(function(){
 						<input type="checkbox" name="is_print" value="y">판매중
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 판형&nbsp;</b>
-					<td width="42%" align=left>
+					<td colspan=2 width="42%" align=left>
 					<c:forEach items="${requestScope.size}" var="size" varStatus="loopTagStatus">
 							&nbsp;<input type="checkbox" name="size_cd" value="${loopTagStatus.index+1}">${size.size_name}
          			</c:forEach>
@@ -474,7 +473,8 @@ $(document).ready(function(){
             <table border=0 width=98%>
 					<tr>
 						<td><h4><i class="fa fa-angle-right"></i>검색 결과</h4>
-						<td align=right>[등록 서적] : ${bookListCnt} 권
+						<td align=right>
+						[등록 서적] : ${bookListCnt} 권
 						<select name="rowCntPerPageDown">
 								<option value="10">10</option>
 								<option value="15">15</option>

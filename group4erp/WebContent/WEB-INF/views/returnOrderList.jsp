@@ -195,11 +195,12 @@
                          $("#contentTable td:eq(2)").text(data.book_name);
                          $("#contentTable td:eq(3) [name=info]").text(data.return_comment);
 
-                  var insert = "<tr name='thisTr' bgcolor='white'><td colspan=4>"+$("#contecnt").html()+"</td></tr>"
+                  var insert = "<tr name='thisTr' bgcolor='white'><td colspan=5>"+$("#contecnt").html()+"</td></tr>"
                   
                   thisTr.after(insert);
                   
-                  
+                  $('[name=thisTr]').hide();
+                  $('[name=thisTr]').show(1000);
                   
                   }
             }
@@ -212,7 +213,7 @@
       
    function goClose(){
 
-      $('[name=thisTr]').remove();
+      $('[name=thisTr]').hide(1000);
       
     }
    
@@ -424,7 +425,7 @@
     <!--main content start-->
    <section id="main-content">
       <section class="wrapper" style="text-align:left;">
-        <h3><i class="fa fa-angle-right"></i> 반품 현황(datepicker 수정해야함.)</h3>
+        <h3><i class="fa fa-angle-right"></i> 반품 현황</h3>
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
@@ -569,6 +570,11 @@
       </section>
     </section>
     <div id="contecnt" style="display:none;">
+      <table border=0 width=99%>
+	 		<tr>
+	 			<td align=right>
+	 				<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
+	  </table>
       <table class="table table-striped table-advance table-bordered" id="contentTable" align=center>
          <tr>
             <th>ID</th>
@@ -578,21 +584,16 @@
          </tr>
          <tr>
             <th>책 제목</th>
-            <td align=center colspan=3></td>
+            <td align=center colspan=4></td>
          </tr>
          <tr>
             <th>세부내용</th>
-            <td align=center colspan=3>
-               <textarea name="info" cols=60 rows=10 readonly> </textarea>
+            <td align=center colspan=4>
+               <textarea name="info" cols=80 rows=10 readonly> </textarea>
             </td>
          </tr>
       </table>
       <table><tr height=1><td></td></tr></table>
-      <table border=0 width=100%>
-	 			<tr>
-	 				<td align=center>
-						<h3><button type="button" class="btn btn-default" onclick="goClose();"><i class="fa fa-times"></i>닫기</button></h3>
-		</table>
    </div>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
@@ -632,7 +633,8 @@
   <!--common script for all pages-->
   <script src="${ctRootlib}/common-scripts.js"></script>
   <!--script for this page-->
-
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 
 </html>

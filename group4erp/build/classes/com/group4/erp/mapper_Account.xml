@@ -75,6 +75,49 @@
 	
 	</sql>
 	
+	<sql id="whereCondition">
+		<if test="searchKeyword !=null and searchKeyword.length() > 0">
+				and (
+					upper(cc.corp_no) like upper('%${searchKeyword}%') 
+					or upper(cc.corp_name) like upper('%${searchKeyword}%')
+					or upper(cc.ceo_name) like upper('%${searchKeyword}%')
+					or upper(cc.corp_addr) like upper('%${searchKeyword}%')
+					or upper(cc.corp_fax) like upper('%${searchKeyword}%')
+					or upper(cc.corp_business_area) like upper('%${searchKeyword}%')
+				)			
+		</if>
+		
+		<if test="corp_business_areas != null and corp_business_areas.length > 0">
+			and 
+			<foreach collection="corp_business_areas" item="corp_business" open="(" separator=" or " close=")">	
+				<if test="corp_business.equals('IT')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area)=#{corp_business}
+				</if>
+				<if test="corp_business.equals('통신')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '통신'
+				</if>
+				<if test="corp_business.equals('금융')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '금융'
+				</if>
+				<if test="corp_business.equals('출판&amp;미디어')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '%출판&amp;미디어%'
+				</if>
+				<if test="corp_business.equals('교육&amp;학원')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '%교육&amp;학원%'
+				</if>
+				<if test="corp_business.equals('운송&amp;물류')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '%운송&amp;물류%'
+				</if>
+				<if test="corp_business.equals('학교')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '학교'
+				</if>
+				<if test="corp_business.equals('기타')">
+					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '기타'
+				</if>			
+			</foreach>						
+		</if>	
+	</sql>
+	
 	
 	<select id='getCorpList' parameterType="com.group4.erp.CorpSearchDTO" resultType="com.group4.erp.CorporationDTO">
 		select * from (select zzz.*, rownum RNUM from (
@@ -98,48 +141,7 @@
 	</select>
 	
 	
-	<sql id="whereCondition">
-		<if test="searchKeyword !=null and searchKeyword.length() > 0">
-				and (
-					upper(cc.corp_no) like upper('%${searchKeyword}%') 
-					or upper(cc.corp_name) like upper('%${searchKeyword}%')
-					or upper(cc.ceo_name) like upper('%${searchKeyword}%')
-					or upper(cc.corp_addr) like upper('%${searchKeyword}%')
-					or upper(cc.corp_fax) like upper('%${searchKeyword}%')
-					or upper(cc.corp_business_area) like upper('%${searchKeyword}%')
-				)			
-		</if>
-		
-		<if test="corp_business!= null">
-			and 
-			<foreach collection="corp_business" item="corp_business" open="(" separator=" or " close=")">	
-				<if test="corp_business.equals('IT')">
-					cc.corp_business_area like 'IT'
-				</if>
-				<if test="corp_business.equals('통신')">
-					cc.corp_business_area like '통신'
-				</if>
-				<if test="corp_business.equals('금융')">
-					cc.corp_business_area like '통신'
-				</if>
-				<if test="corp_business.equals('출판&amp;미디어')">
-					cc.corp_business_area like '%출판&amp;미디어%'
-				</if>
-				<if test="corp_business.equals('교육&amp;학원')">
-					cc.corp_business_area like '%교육&amp;학원%'
-				</if>
-				<if test="corp_business.equals('운송&amp;물류')">
-					cc.corp_business_area like '%운송&amp;물류%'
-				</if>
-				<if test="corp_business.equals('학교')">
-					cc.corp_business_area like '학교'
-				</if>
-				<if test="corp_business.equals('기타')">
-					cc.corp_business_area like '기타'
-				</if>			
-			</foreach>						
-		</if>	
-	</sql>
+	
 	
 	<select id='getCorpInfo' parameterType="String" resultType="com.group4.erp.CorporationDTO">
 		
@@ -273,7 +275,7 @@
 	
 	<select id="getTranSpecList" parameterType="int" resultType="com.group4.erp.TranSpecDTO">
 		select 
-    		co.order_books_no,  
+    		co.order_books_no  "order_books_no",
     		co.corp_no "corp_no",  
     		(select c.corp_name from corporation_cus c where c.corp_no = co.corp_no) "corp_name",   
     		(select c.ceo_name from corporation_cus c where c.corp_no = co.corp_no) "ceo_name",   
@@ -423,7 +425,7 @@
     		round( (e.salary*10000)/12, -5) * 0.0323 "health", 
     		round( (e.salary*10000)/12, -5) * 0.008 "emp_insurance",
     		round( (e.salary*10000)/12, -5) * 0.045 + round( (e.salary*10000)/12, -5) * 0.0323 + round( (e.salary*10000)/12, -5) * 0.008 "deduct"
-    	from employee e     
+    	from employee e where worktime_cd!=6   
 	</insert>
 	
 

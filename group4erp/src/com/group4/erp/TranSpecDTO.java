@@ -20,6 +20,7 @@ public class TranSpecDTO {
 	private String tax;
 	private String issue_no;
 	private String issue_dt;
+	private int tradeTot;
 	
 	
 
@@ -28,6 +29,17 @@ public class TranSpecDTO {
 	private int rowCntPerPage=10;
 	
 	
+	
+	
+	
+	public int getTradeTot() {
+		return tradeTot;
+	}
+
+	public void setTradeTot(int tradeTot) {
+		this.tradeTot = tradeTot;
+	}
+
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}

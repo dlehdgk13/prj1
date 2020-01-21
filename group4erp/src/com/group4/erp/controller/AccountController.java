@@ -223,15 +223,23 @@ public class AccountController {
 		try {
 			
 			int tranSpec_cnt = this.accountService.getTranSpecCnt(order_no);
-			List<TranSpecDTO> tranSpecList = this.accountService.getTranSpecList(order_no);
+			TranSpecDTO tranSpecList = this.accountService.getTranSpecList(order_no);
+			
+			int bookprice = Integer.parseInt(tranSpecList.getTot_cost());
+			int booktax = Integer.parseInt(tranSpecList.getTax());
+			
+			int tradeTot = bookprice-booktax;
+			
+			tranSpecList.setTradeTot(tradeTot);
 			
 			mav.addObject("tranSpec_cnt", tranSpec_cnt);
 			mav.addObject("tranSpecList", tranSpecList);
 			mav.addObject("order_no", order_no);
-			
+
 		} catch(Exception e) {
 			System.out.println("예외 발생=="+e);
 		} 
+		
 		
 		return mav;		
 	}

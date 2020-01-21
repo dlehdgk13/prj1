@@ -203,7 +203,7 @@
         	round( (e.salary*10000)/12, -5) * 0.045 + round( (e.salary*10000)/12, -5) * 0.0323 + round( (e.salary*10000)/12, -5) * 0.008 "deduct",
         	(round( (e.salary*10000)/12, -2) + ( (select count(*) from work_outside_info w where to_number(outside_end_time - outside_start_time) >=1 and w.emp_no = e.emp_no and w.outside_start_time between (sysdate-30) and sysdate ) * 10000) + 100000 ) - ( round( (e.salary*10000)/12, -5) * 0.045 + round( (e.salary*10000)/12, -5) * 0.0323 + round( (e.salary*10000)/12, -5) * 0.008 ) "real_sal"  
         from employee e   
-    	where 1=1
+    	where 1=1 and worktime_cd!=6
     	<include refid="empSalWhere"></include>
     	order by e.emp_no asc
 	) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
@@ -274,8 +274,8 @@
 		    ,to_char(da.start_dayoff, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') as "start_dayoff"
 		    ,to_char(da.end_dayoff, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') as "end_dayoff"
 		    ,da.using_dayoff||'' as "using_dayoff"
-		    <!-- ,(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no)||'' as "remain_dayoff"
-		    ,(select dayoff_tot from emp_dayoff_info where emp_no = da.emp_no)||'' as "dayoff_tot" -->
+		    ,(select i.remain_dayoff from emp_dayoff_info i where i.emp_no = da.emp_no)||'' as "remain_dayoff"
+		    ,(select i.dayoff_tot from emp_dayoff_info i where i.emp_no = da.emp_no)||'' as "dayoff_tot"
 			,to_char(da.dayoff_apply_dt, 'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') as "dayoff_apply_dt"
 			,decode(da.confirm, 'Y', '완료', 'N', '대기중') as "confirm"
             ,case

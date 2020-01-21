@@ -81,13 +81,16 @@
     border: 1px solid #ddd !important;
 }
 
+.tableth th{
+	text-align: right;
+	font-weight: bold;
+}
+
 </style>
 
 <script>
 
 $(document).ready(function(){  
-	
-	
 	
 	
 	$("#datepicker1").datepicker({
@@ -143,6 +146,7 @@ $(document).ready(function(){
 		
 		//alert($('[name=dateFrom]').val());
 		//return;
+		
 		document.bookReleaseSearch.submit();
 	}
 
@@ -154,7 +158,11 @@ $(document).ready(function(){
 	}
 	
 	function goClose(){
-		$('[name=thisTr]').remove();
+		$('[name=thisTr]').hide(1000);
+		
+		//$('[name=thisTr]').remove();
+		
+		//$('[name=thisTr]').show(1000);
 	}
 
 	
@@ -205,6 +213,8 @@ $(document).ready(function(){
 						var insert = "<tr name='thisTr' bgcolor='white'><td colspan=5>"+$("#allContent #contecnt1").html()+"</td></tr>"
 						
 						test.after(insert);
+						$('[name=thisTr]').hide();
+						$('[name=thisTr]').show(1000);
 						return;
 					}
 					if(data.check_order_num=='corp'){
@@ -226,6 +236,8 @@ $(document).ready(function(){
 							var insert = "<tr name='thisTr' bgcolor='white'><td colspan=5>"+$("#allContent #contecnt2").html()+"</td></tr>"
 							
 							test.after(insert);
+							$('[name=thisTr]').hide();
+							$('[name=thisTr]').show(1000);
 							return;
 						}
 						if(data.branch_name!=null){
@@ -240,6 +252,8 @@ $(document).ready(function(){
 							var insert = "<tr name='thisTr' bgcolor='white'><td colspan=5>"+$("#allContent #contecnt3").html()+"</td></tr>"
 							
 							test.after(insert);
+							$('[name=thisTr]').hide();
+							$('[name=thisTr]').show(1000);
 							return;
 							
 						}
@@ -497,7 +511,7 @@ $(document).ready(function(){
     <!--main content start-->
    <section id="main-content">
       <section class="wrapper" style="text-align:left;">
-        <h3><i class="fa fa-angle-right"></i> 출고 현황(datepicker 수정해야함.)</h3>
+        <h3><i class="fa fa-angle-right"></i> 출고 현황</h3>
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
@@ -655,23 +669,23 @@ $(document).ready(function(){
     </section>
     <div id="allContent" style="display:none;">
 		<div id="contecnt1" style="dispaly:none;">
-			<table border=0 width=100%>
+			<table border=0 width=99%>
 	 			<tr>
-	 				<td align=center>
-						<h3><button type="button" class="btn btn-default" onclick="goClose();"><i class="fa fa-times"></i>닫기</button></h3>
+	 				<td align=right>
+						<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
 			</table>
-			<table class="table table-striped table-advance table-bordered" id="contecntTable1"  align=center>
+			<table class="table table-advance table-bordered tableth" id="contecntTable1"  align=center>
 				<tr>
 					<th>책번호
-					<td colspan=2>111
+					<td colspan=2>
 					<th>고객ID
-					<td colspan=2>222
+					<td colspan=2>
 				<tr>
 					<th>책이름
-					<td colspan=5>333
+					<td colspan=5>
 				<tr>
 					<th>고객 배송지
-					<td colspan=5>444
+					<td colspan=5>
 				<tr>
 					<th>주문일시
 					<td>555
@@ -690,12 +704,12 @@ $(document).ready(function(){
 		</div>
 		
 		<div id="contecnt2" style="dispaly:none;">
-			<table border=0 width=100%>
+			<table border=0 width=99%>
 	 			<tr>
-	 				<td align=center>
-						<h3><button type="button" class="btn btn-default" onclick="goClose();"><i class="fa fa-times"></i>닫기</button></h3>
+	 				<td align=right>
+						<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
 			</table>
-			<table class="table table-striped table-advance table-bordered" id="contecntTable2" align=center>
+			<table class="table table-advance table-bordered tableth" id="contecntTable2" align=center>
 				<tr>
 					<th>책번호
 					<td colspan=2>
@@ -732,12 +746,12 @@ $(document).ready(function(){
 		</div>
 		
 		<div id="contecnt3" style="dispaly:none;">
-			<table border=0 width=100%>
+			<table border=0 width=99%>
 	 			<tr>
-	 				<td align=center>
-						<h3><button type="button" class="btn btn-default" onclick="goClose();"><i class="fa fa-times"></i>닫기</button></h3>
+	 				<td align=right>
+						<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
 			</table>
-			<table class="table table-striped table-advance table-bordered" id="contecntTable3" align=center>
+			<table class="table table-advance table-bordered tableth" id="contecntTable3" align=center>
 				<tr>
 					<th>책번호
 					<td colspan=2>
@@ -797,7 +811,8 @@ $(document).ready(function(){
   <!--common script for all pages-->
   <script src="${ctRootlib}/common-scripts.js"></script>
   <!--script for this page-->
-
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 
 </html>

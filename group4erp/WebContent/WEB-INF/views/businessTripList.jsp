@@ -376,7 +376,13 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper" style="text-align:left;">
-        <h3><i class="fa fa-angle-right"></i> 출장 신청</h3>
+        <table width=99%>
+	      <tr>
+	      <td>
+	        <h3><i class="fa fa-angle-right"></i> 출장 신청</h3>
+	       <td align=right>
+	       <button type="button" class="btn btn-theme04" onclick="goBusinessTripForm();"><i class="fa fa-briefcase"></i> 출장 신청</button>
+      </table>
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
@@ -392,7 +398,7 @@
 					<input type="checkbox" name='payment' class="payment" value="Y">승인
          			<input type="checkbox" name='payment' class="payment" value="W">대기중
          			<input type="checkbox" name='payment' class="payment" value="N">반려 </td>
-         			<th width="10%" style="text-align:right;"><b>* 판매 상황&nbsp;</b></th>
+         			<th width="10%" style="text-align:right;"><b>* 출장 날짜&nbsp;</b></th>
 					<td align=left>
 						<input type="text" id="datepicker3" readonly>&nbsp;~&nbsp;
 						<input type="text" id="datepicker4" readonly>
