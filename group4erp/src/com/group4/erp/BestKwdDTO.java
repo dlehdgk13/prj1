@@ -7,8 +7,16 @@ public class BestKwdDTO {
 	private String kwd_cnt;
 	private String date;
 	private String rank;
+	private String RNUM;
 	
 
+	public String getRNUM() {
+		return RNUM;
+	}
+
+	public void setRNUM(String rNUM) {
+		RNUM = rNUM;
+	}
 	public String getRank() {
 		return rank;
 	}

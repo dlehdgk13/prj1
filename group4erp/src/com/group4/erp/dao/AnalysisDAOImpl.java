@@ -83,4 +83,12 @@ public class AnalysisDAOImpl implements AnalysisDAO {
 		return empHireOrResignCnt;
 	}
 
+	@Override
+	public List<ChartDTO> getCatInventoryChart() {
+		// TODO Auto-generated method stub
+		List<ChartDTO> catInventoryChart = this.sqlSession.selectList(mapper_namespace+"getCatInventoryChart");
+
+		return catInventoryChart;
+	}
+
 }

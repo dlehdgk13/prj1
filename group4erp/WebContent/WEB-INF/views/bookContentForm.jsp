@@ -20,8 +20,6 @@
   <link href="${ctRootlib}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
   <link href="${ctRootlib}/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link rel="stylesheet" type="text/css" href="${ctRootlib}/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="${ctRootlib}/bootstrap-daterangepicker/daterangepicker.css" />
   <!-- Custom styles for this template -->
   <link href="${ctRootcss}/style.css" rel="stylesheet">
   <link href="${ctRootcss}/style-responsive.css" rel="stylesheet">
@@ -575,18 +573,8 @@ $(document).ready(function(){
   <!--common script for all pages-->
   <script src="${ctRootlib}/common-scripts.js"></script>
   <!--script for this page-->
-  <script src="${ctRootlib}/jquery-ui-1.9.2.custom.min.js"></script>
-  <!--custom switch-->
-  <script src="${ctRootlib}/bootstrap-switch.js"></script>
-  <!--custom tagsinput-->
-  <script src="${ctRootlib}/jquery.tagsinput.js"></script>
-  <!--custom checkbox & radio-->
-  <script type="text/javascript" src="${ctRootlib}/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-  <script type="text/javascript" src="${ctRootlib}/bootstrap-daterangepicker/date.js"></script>
-  <script type="text/javascript" src="${ctRootlib}/bootstrap-daterangepicker/daterangepicker.js"></script>
-  <script type="text/javascript" src="${ctRootlib}/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-  <script src="${ctRootlib}/form-component.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 
 </html>

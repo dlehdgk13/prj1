@@ -1,7 +1,7 @@
 package com.group4.erp;
 
 public class ReturnOrderDTO {
-	
+	private String RNUM;
 	private String return_sales_no;
 	private String order_no;
 	private String isbn13;
@@ -13,6 +13,13 @@ public class ReturnOrderDTO {
 	private String return_cnt;
 	
 
+	public String getRNUM() {
+		return RNUM;
+	}
+
+	public void setRNUM(String rNUM) {
+		RNUM = rNUM;
+	}
 	public String getReturn_cnt() {
 		return return_cnt;
 	}

@@ -41,7 +41,7 @@ public class MyWorkController {
 		//화면에 나의 상품 관리 페이지 띄우는 코드
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewMyCareBookList");
-		mav.addObject("navigator", "[업무관리]-[담당 상품 조회]");
+		mav.addObject("navigator", "[업무관리] → [담당 상품 조회]");
 		try {
 
 			//===================================================================================================
@@ -180,7 +180,7 @@ public class MyWorkController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewEmpDayOffjoinForm");
-		mav.addObject("navigator", "[업무관리]-[휴가 신청]");
+		mav.addObject("navigator", "[업무관리] → [휴가 신청]");
 		
 		String emp_id = (String)session.getAttribute("emp_id");
 		int emp_no = Integer.parseInt(emp_id);

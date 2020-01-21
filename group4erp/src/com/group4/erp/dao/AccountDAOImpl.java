@@ -87,9 +87,9 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
-	public TranSpecDTO getTranSpecList(int order_no) {
+	public List<TranSpecDTO> getTranSpecList(int order_no) {
 		// TODO Auto-generated method stub
-		TranSpecDTO tranSpecList = this.sqlSession.selectOne(mapper_namespace+"getTranSpecList", order_no);
+		List<TranSpecDTO> tranSpecList = this.sqlSession.selectList(mapper_namespace+"getTranSpecList", order_no);
 		
 		return tranSpecList;
 	}

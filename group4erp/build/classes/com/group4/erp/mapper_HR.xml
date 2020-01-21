@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
@@ -47,7 +46,7 @@
 			and 
 			<foreach collection="inout_name" item="inout" open="(" separator="or" close=")">
              	<if test="inout.equals('출근')">
-					(select check_inout from code_check_inout where eio.check_inout_cd = check_inout_cd and )=#{inout}
+					(select check_inout_name from code_check_inout where eio.check_inout_cd = check_inout_cd)=#{inout}
 				</if>
              	<if test="inout.equals('퇴근')">
 					(select check_inout_name from code_check_inout where eio.check_inout_cd = check_inout_cd)=#{inout}
@@ -126,8 +125,12 @@
 			and (
               upper(emp_name) like upper('%${searchKeyword}%')
               or upper(emp_eng_name) like upper('%${searchKeyword}%')
+              or upper(emp_no) like upper('%${searchKeyword}%')
+              <!-- or upper(hire_dt) like upper('%${searchKeyword}%') -->
+              or upper(emp_email_office) like upper('%${searchKeyword}%')
               or upper((select d.dep_name from dept d where d.dep_no=e.dep_no)) like upper('%${searchKeyword}%')
               or upper((select j.jikup from code_jikup j where j.jikup_cd=e.jikup_cd)) like upper('%${searchKeyword}%')
+              or upper((select c.worktime_name from code_worktime c where e.worktime_cd = c.worktime_cd)) like upper('%${searchKeyword}%')
            	)
 		</if>
 	 </sql>
@@ -168,7 +171,9 @@
 				,emp_name 					as "emp_name"
 				,(select d.dep_name from dept d where d.dep_no=e.dep_no) as "dep_name"
 				,(select j.jikup from code_jikup j where j.jikup_cd=e.jikup_cd) as "jikup"
-				,(select worktime_name from code_worktime where e.worktime_cd = worktime_cd) as "worktime_name"
+				,to_char(hire_dt, 'yyyy.mm.dd(dy)', 'nls_date_language=Korean') "hire_dt"
+				,emp_email_office "emp_email_office"
+				,(select c.worktime_name from code_worktime c where e.worktime_cd = c.worktime_cd) as "worktime_name"
 			from employee e	
 			where 1=1
 			<include refid="empListWhere" />
@@ -202,9 +207,9 @@
         	round( (e.salary*10000)/12, -5) * 0.008 "emp_insurance",
         	round( (e.salary*10000)/12, -5) * 0.045 + round( (e.salary*10000)/12, -5) * 0.0323 + round( (e.salary*10000)/12, -5) * 0.008 "deduct",
         	(round( (e.salary*10000)/12, -2) + ( (select count(*) from work_outside_info w where to_number(outside_end_time - outside_start_time) >=1 and w.emp_no = e.emp_no and w.outside_start_time between (sysdate-30) and sysdate ) * 10000) + 100000 ) - ( round( (e.salary*10000)/12, -5) * 0.045 + round( (e.salary*10000)/12, -5) * 0.0323 + round( (e.salary*10000)/12, -5) * 0.008 ) "real_sal"  
-        from employee e   
-    	where 1=1 and worktime_cd!=6
-    	<include refid="empSalWhere"></include>
+        from employee e  
+    	where 1=1
+    	and worktime_cd != 6
     	order by e.emp_no asc
 	) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
 	
@@ -213,8 +218,8 @@
 	<select id='getEmpSalInfo' parameterType="com.group4.erp.SalListSearchDTO" resultType="com.group4.erp.SalaryDTO">
 	select * from(select zzz.*, rownum RNUM from(
 		select 
-			emp_no "emp_no",
 			to_char(salary_dt, 'yyyy.mm.dd')|| '('||to_char(salary_dt, 'dy', 'nls_date_language=Korean' )||')' "salary_dt",
+			emp_no "emp_no",
 			real_sal "real_sal",
 			month_sal "month_sal",
 			mess_allowance "mess_allowance",
@@ -226,8 +231,13 @@
 			deduct "deduct"
 		from state_of_payment			  
     	where 1=1
-    	and emp_no = '${emp_no}'   
-    	order by salary_dt desc
+    	and emp_no = '${emp_no}'  
+    	<if test="sort!=null and sort.length() > 0" >
+			order by ${sort}
+		</if>
+		<if test="sort==null">
+			order by salary_dt desc
+		</if>
     	
     ) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
 	</select>
@@ -257,7 +267,7 @@
 
 	
 	<select id='getDayOffListCnt' resultType="int">
-		select count(*) from EMP_DAYOFF_APPLY da where 1=1 <include refid="dayoffWhere" />	
+		select count(*) from EMP_DAYOFF_APPLY da where 1=1 and da.confirm in ('Y', 'N') <include refid="dayoffWhere" />	
 	</select>
 	
 	
@@ -372,8 +382,15 @@
 	        ,(select check_inout_name from code_check_inout where eio.check_inout_cd = check_inout_cd) as "CHECK_INOUT_NAME"
 	        ,eio.remarks as "REMARKS"
 		from emp_inout eio
-		where 1=1 <include refid="inout"></include>
-		order by eio.dt_work asc
+		where 1=1 
+		<include refid="inout"></include>
+		<if test="sort!=null and sort.length() > 0" >
+			order by ${sort}
+		</if>
+		
+		<if test="sort==null">
+			order by eio.dt_work desc
+		</if>
 	) zzz ) 
 	where <![CDATA[RNUM >= ${selectPageNo * rowCntPerPage - rowCntPerPage + 1} and RNUM <= ${selectPageNo * rowCntPerPage} ]]>
 	</select>

@@ -13,8 +13,15 @@ public class CorpOrderDTO {
 	private String tot_cost;
 	private String issueYn;
 	private String category;
-	
+	private String RNUM;
 
+	public String getRNUM() {
+		return RNUM;
+	}
+
+	public void setRNUM(String rNUM) {
+		RNUM = rNUM;
+	}
 	public String getCategory() {
 		return category;
 	}

@@ -23,5 +23,7 @@ public interface AnalysisService {
 	List<ChartDTO> getEmployeeCntChart();
 	
 	List<ChartDTO> getEmpHireOrResignChart();
+	
+	List<ChartDTO> getCatInventoryChart();
 
 }

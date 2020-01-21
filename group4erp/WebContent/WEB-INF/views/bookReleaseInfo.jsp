@@ -131,7 +131,7 @@ $(document).ready(function(){
 	 inputData('[name=rowCntPerPageDown]',"${invenSearchDTO.rowCntPerPage}");
 	 inputData('[name=selectPageNo]',"${invenSearchDTO.selectPageNo}");
 	 inputData('[name=searchPublisher]',"${invenSearchDTO.searchPublisher}");
-	 inputData('[name=book_keyword]',"${invenSearchDTO.book_keyword}");
+	 inputData('[name=keyword1]',"${invenSearchDTO.keyword1}");
 	 inputData('[name=dateFrom]',"${invenSearchDTO.dateFrom}");
 	 inputData('[name=dateTill]',"${invenSearchDTO.dateTill}");
 	 <c:forEach items="${invenSearchDTO.inventory_loc}" var="loc">
@@ -154,6 +154,11 @@ $(document).ready(function(){
 		//alert("모두검색 기능 구현중");
 		document.bookReleaseSearch.reset();
 		//$("[name=book_inventory_search_form] [name=sort]").val('');
+		
+		$("[name=bookReleaseSearch] [name=selectPageNo]").val(1);
+		$("[name=bookReleaseSearch] [name=rowCntPerPage]").val(10);
+		$("[name=bookReleaseSearch] [name=sort]").val('');
+		
 		goSearchRelease();
 	}
 	
@@ -544,7 +549,7 @@ $(document).ready(function(){
 						<button type="button" class="btn btn-default" onclick="searchToday();"><i class="fa fa-calendar-o"></i>금일 검색</button>
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b>
-					<td width="42%"> <input type="text" name="book_keyword" size=76>
+					<td width="42%"> <input type="text" name="keyword1" size=76>
 					<th>
 					<td>
 					<th>

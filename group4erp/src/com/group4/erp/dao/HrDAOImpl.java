@@ -230,14 +230,15 @@ public class HrDAOImpl implements HrDAO {
 	}
 	
 	public int getNewEmpInsertCnt(EmployeeDTO employeeDTO) {
-
+		
 		int newEmpInsertCnt = this.sqlSession.insert(
 				mapper_namespace+"getNewEmpInsert"
 				,employeeDTO
 				);
-
+				
 		return newEmpInsertCnt;
 	}
+	
 	
 	public int getAddDayoffinfoCnt(EmployeeInfoUpDTO employeeInfoUpDTO) {
 	      String emp_no = employeeInfoUpDTO.getEmp_no();
@@ -251,7 +252,6 @@ public class HrDAOImpl implements HrDAO {
 	      }
 	      return addDayoffinfo;
 	   }
-
 
 	/*
 	public String getMgrEmpName(EmployeeDTO employeeDTO){

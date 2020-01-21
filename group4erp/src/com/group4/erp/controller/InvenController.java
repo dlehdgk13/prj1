@@ -36,7 +36,7 @@ public class InvenController {
 		//mav.setViewName("eventScheduleForm.jsp");
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewInventoryList");	//viewInventoryList 아무 이름이나 설정 가능. 메인 페이지에서 해당 메뉴 뜰 때 해당 페이지를 임포트하기 위해서 붙이는 플래그명
-		mav.addObject("navigator", "[재고현황]-[도서정보조회]");
+		mav.addObject("navigator", "[재고현황] → [도서정보조회]");
 		try {
 			
 			List<Map<String, String>> branch = this.invenService.getBranch(invenSearchDTO);
@@ -90,7 +90,7 @@ public class InvenController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewReleaseList");
-		mav.addObject("navigator", "[재고현황]-[출고현황조회]");
+		mav.addObject("navigator", "[재고현황] → [출고현황조회]");
 		
 		try {
 			
@@ -173,7 +173,7 @@ public class InvenController {
 		
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewReturnOrderList");
-		mav.addObject("navigator", "[재고현황]-[반품현황조회]");
+		mav.addObject("navigator", "[재고현황] → [반품현황조회]");
 		
 		try {
 			int returnOrderCnt = this.invenService.getReturnOrderCnt(returnSearchDTO);
@@ -217,13 +217,13 @@ public class InvenController {
 		
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewSignUpBook");
-		mav.addObject("navigator", "[재고현황]-[도서정보조회]-[도서등록]");
-		
-		List<Map<String, String>> category = this.invenService.getCategory();
-		mav.addObject("category", category);
+		mav.addObject("navigator", "[재고현황] → [도서정보조회] → [도서등록]");
 		
 		List<Map<String, String>> size = this.invenService.getSize();
 		mav.addObject("size", size);
+		
+		List<Map<String, String>> category = this.invenService.getCategory();
+		mav.addObject("category", category);
 		
 		return mav;
 	}
@@ -262,7 +262,7 @@ public class InvenController {
 		
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewBookContentForm");
-		mav.addObject("navigator", "[재고현황]-[도서정보조회]-[상세정보]");
+		mav.addObject("navigator", "[재고현황] → [도서정보조회] → [상세정보]");
 		
 		//System.out.println(isbn13_search);
 		

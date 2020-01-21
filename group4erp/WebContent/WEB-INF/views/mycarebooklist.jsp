@@ -159,7 +159,7 @@
       //name=boardListForm을 가진 form 태그 내부의 모든 입력양식에 value값을 비우거나 체크를 푼다.
       document.mycarebooklist.reset();
       
-      $('[name=mycarebooklist] [name=rowCntPerPage]').val('20');
+      $('[name=mycarebooklist] [name=rowCntPerPage]').val('10');
       $('[name=mycarebooklist] [name=selectPageNo]').val('1');
       $("[name=mycarebooklist] [name=sort]").val('');
       goSearchMyWorkList();
@@ -489,7 +489,7 @@
 			<!-- </div> -->
 			
 			<input type="hidden" name="selectPageNo">
-			<input type="hidden" name="rowCntPerPage" value="${invenSearchDTO.rowCntPerPage}">
+			<input type="hidden" name="rowCntPerPage" value="${myWorkSearchDTO.rowCntPerPage}">
 			<!-- header sort를 하기 위한 hidden Tag -->
 			<input type="hidden" name="sort">
 			</form>

@@ -10,47 +10,47 @@
 <meta charset="UTF-8">
 <title>이벤트 행사 신청 결재</title>
 <script>
-   
-   function responseApproval() {
-   
-      var approvalYn = $(".eventApprovalDoc").find("[name=approvalYn]:checked").val();
-      var e_work_comment = $(".eventApprovalDoc [name=documentTable]").find("[name=e_work_comment]").val();
-      //alert(e_work_comment);
-      
-      if( (approvalYn==6) && (e_work_comment=="") ) {
-         alert("반려 시 사유를 기입해주세요.");
+	
+	function responseApproval() {
+	
+		var approvalYn = $(".eventApprovalDoc").find("[name=approvalYn]:checked").val();
+		var e_work_comment = $(".eventApprovalDoc [name=documentTable]").find("[name=e_work_comment]").val();
+		//alert(e_work_comment);
+		
+		if( (approvalYn==6) && (e_work_comment=="") ) {
+			alert("반려 시 사유를 기입해주세요.");
 
-         return;      
-         
-      } 
-      //alert( $('.eventApprovalDoc').serialize() );
-      $.ajax({
-         url : "/group4erp/updateEventApproavalProc.do",            //호출할 서버쪽 URL 주소 설정
-         type : "post",                              //전송 방법 설정
-         data : $('.eventApprovalDoc').serialize(),      //서버로 보낼 파라미터명과 파라미터값을 설정
-         
-         success : function(upCnt) {
-            if(upCnt==1) {
-               alert("결재 성공!");
-               
-               location.replace("/group4erp/viewApprovalList.do");
-            } else if(delCnt==-1) {   
-               //alert("업체가 이미 삭제되었습니다!");
-               
-               location.replace("/group4erp/viewApprovalList.do");
+			return;		
+			
+		} 
+		//alert( $('.eventApprovalDoc').serialize() );
+		$.ajax({
+			url : "/group4erp/updateEventApproavalProc.do",				//호출할 서버쪽 URL 주소 설정
+			type : "post",										//전송 방법 설정
+			data : $('.eventApprovalDoc').serialize(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+			
+			success : function(upCnt) {
+				if(upCnt==1) {
+					alert("결재 성공!");
+					
+					location.replace("/group4erp/viewApprovalList.do");
+				} else if(delCnt==-1) {	
+					//alert("업체가 이미 삭제되었습니다!");
+					
+					location.replace("/group4erp/viewApprovalList.do");
 
-            } else {
-               alert("서버쪽 DB 연동 실패!");
-            }
-         }
+				} else {
+					alert("서버쪽 DB 연동 실패!");
+				}
+			}
 
-         //서버의 응답을 못 받았을 경우 실행할 익명함수 설정
-         , error : function() {      //서버의 응답을 못받았을 경우 실행할 익명함수 설정
-            alert("서버 접속 실패!");
-         }   
-      });
-      
-   }
+			//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+			, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+				alert("서버 접속 실패!");
+			}	
+		});
+		
+	}
 
 </script>
 

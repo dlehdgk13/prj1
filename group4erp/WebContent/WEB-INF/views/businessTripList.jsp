@@ -186,10 +186,10 @@
 				(travel_payment =="W")){
 				  alert($('[name=getBusinessTripListSearchForm]').serialize());
 				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-				location.replace("/group4erp/businessTripUpDelForm.do?"+str )
+				location.href="/group4erp/businessTripUpDelForm.do?"+str;
 			}else{
 				var str = "work_outside_seq="+work_outside_seq+"&"+emp_no+"&"+$('[name=getBusinessTripListSearchForm]').serialize();
-				location.replace("/group4erp/businessTripContentsForm.do?"+str )}
+				location.href="/group4erp/businessTripContentsForm.do?"+str;}
 	}
 
 	function goBusinessTripForm() {
@@ -413,9 +413,7 @@
 							<option>------</option>
 							<option value="emp_name">성명</option>
 							<option value="dep_name">부서</option>
-							<option value="outside_start_time">출발 날짜</option>
-							<option value="outside_end_time">복귀 날짜</option>
-							<option value="travel_payment">결제</option>
+							<option value="mgr_name">담당자</option>
 						</select>
 						<input type="text" name="book_keyword" id="searchKeyword" size=78>
 					<th>

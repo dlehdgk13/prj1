@@ -473,7 +473,17 @@
 					</c:otherwise>
 				</c:choose>
 				
-					<th>거래명세서 발급</th>
+				<c:choose>
+					<c:when test="${param.sort=='9 desc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val(''); goSearch();  "> ▼ 거래명세서 발급</th>
+					</c:when>
+					<c:when test="${param.sort=='9 asc'}">
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('9 desc'); goSearch(); "> ▲ 거래명세서 발급</th>
+					</c:when>			
+					<c:otherwise>
+						<th style="cursor:pointer" onClick="$('[name=sort]').val('9 asc'); goSearch();  ">거래명세서 발급</th>
+					</c:otherwise>
+			</c:choose>
 				</tr>
 					</thead>
 					<tbody>
@@ -489,7 +499,7 @@
 								발급완료
 							</c:if>
 							<c:if test="${tranList.issueYn == 0}">
-								<input type="button" value="발급" onClick="issueTranSpec();"></td>
+								미발급<!-- <input type="button" value="발급" onClick="issueTranSpec();"> --></td>
 							</c:if>
 					</tr>
 					</c:forEach>

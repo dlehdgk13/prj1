@@ -4,7 +4,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <head>
+ 
+  
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -21,12 +26,12 @@
   <link href="${ctRootlib}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
   <link href="${ctRootlib}/font-awesome/css/font-awesome.css" rel="stylesheet" />
-  <link href="${ctRootlib}/advanced-datatable/css/demo_page.css" rel="stylesheet" />
-  <link href="${ctRootlib}/advanced-datatable/css/demo_table.css" rel="stylesheet" />
-  <link rel="stylesheet" href="${ctRootlib}/advanced-datatable/css/DT_bootstrap.css" />
   <!-- Custom styles for this template -->
   <link href="${ctRootcss}/style.css" rel="stylesheet">
   <link href="${ctRootcss}/style-responsive.css" rel="stylesheet">
+
+  
+
 
   <!-- =======================================================
     Template Name: Dashio
@@ -121,20 +126,12 @@
                )
             );
 
-      setTableTrBgColor(
-         "returnOrderTable",   //테이블 class 값
-         "${headerColor}",         //헤더 tr 배경색
-         "${oddTrColor}",      //홀수행 배경색
-         "${evenTrColor}",   //짝수행 배경색
-         "${mouseOverColor}"         //마우스 온 시 배경색
-      );
-
       inputData('[name=rowCntPerPageDown]',"${returnSearchDTO.rowCntPerPage}");
       inputData('[name=selectPageNo]',"${returnSearchDTO.selectPageNo}");
       inputData('[name=dateFrom]',"${returnSearchDTO.dateFrom}");
       inputData('[name=dateTill]',"${returnSearchDTO.dateTill}");
       inputData('[name=searchKeyword]',"${returnSearchDTO.searchKeyword}");
-      inputData('[name=sort]').val("${returnSearchDTO.sort}");
+      inputData('[name=sort]', "${returnSearchDTO.sort}");
       <c:forEach items="${returnSearchDTO.return_cd}" var="cdReturn">
          inputData( "[name=return_cd]", "${cdReturn}" );
       </c:forEach>
@@ -142,6 +139,27 @@
    });
 
 
+   function goSearchToday(){
+	      $('[name=searchToday]').val('y');
+	      
+	      var date = new Date();
+	      
+	      var todayY = date.getFullYear();
+	      var todayM = date.getMonth()+1;
+	      var todayD = date.getDate();
+	      
+	      if(todayM<10) todayM = '0'+todayM;
+	      if(todayD<10) todayD = '0'+todayD;
+	      
+	      var today = todayY+'-'+todayM+'-'+todayD;
+	      
+	      
+	      $('[name=dateFrom]').val(today);
+	      $('[name=dateTill]').val(today);
+	      
+	      goSearch();
+	   }
+   
    function goSearch() {
 
       var keyword = $("[name=returnSearchForm] [name=searchKeyword]").val();
@@ -217,27 +235,6 @@
       
     }
    
-   function searchToday(){
-      alert("999");
-      $('[name=searchToday]').val('y');
-      
-      var date = new Date();
-      
-      var todayY = date.getFullYear();
-      var todayM = date.getMonth()+1;
-      var todayD = date.getDate();
-      
-      if(todayM<10) todayM = '0'+todayM;
-      if(todayD<10) todayD = '0'+todayD;
-      
-      var today = todayY+'-'+todayM+'-'+todayD;
-      
-      
-      $('[name=dateFrom]').val(today);
-      $('[name=dateTill]').val(today);
-      
-      goSearch();
-   }
    
 	function goReset(){
 		//alert(1)
@@ -450,7 +447,9 @@
 						<input type="text" id="datepicker1" name="dateFrom" size=30>
 						&nbsp; ~ &nbsp;
 						<input type="text" id="datepicker2" name="dateTill" size=30>&nbsp;&nbsp;
-						<button type="button" class="btn btn-default" onclick="searchToday();"><i class="fa fa-calendar-o"></i>금일 검색</button>
+						
+						<button type="button" class="btn btn-default" onclick="goSearchToday();"><i class="fa fa-calendar-o"></i>금일 검색</button>
+						
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b>
 					<td width="42%"> <input type="text" name="searchKeyword" size=76>
@@ -622,19 +621,18 @@
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
-  <script src="${ctRootlib}/jquery/jquery.min.js"></script>
-  <script type="text/javascript" language="javascript" src="${ctRootlib}/advanced-datatable/js/jquery.js"></script>
+  
   <script src="${ctRootlib}/bootstrap/js/bootstrap.min.js"></script>
+  <script src="${ctRootlib}/jquery/jquery.min.js"></script>
   <script class="include" type="text/javascript" src="${ctRootlib}/jquery.dcjqaccordion.2.7.js"></script>
   <script src="${ctRootlib}/jquery.scrollTo.min.js"></script>
   <script src="${ctRootlib}/jquery.nicescroll.js" type="text/javascript"></script>
-  <script type="text/javascript" language="javascript" src="${ctRootlib}/advanced-datatable/js/jquery.dataTables.js"></script>
-  <script type="text/javascript" src="${ctRootlib}/advanced-datatable/js/DT_bootstrap.js"></script>
   <!--common script for all pages-->
   <script src="${ctRootlib}/common-scripts.js"></script>
   <!--script for this page-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
 </body>
 
 </html>

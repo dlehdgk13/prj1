@@ -1,6 +1,7 @@
 package com.group4.erp;
 
 public class HrListSearchDTO {
+	
 	private String searchKeyword;
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;
@@ -8,10 +9,8 @@ public class HrListSearchDTO {
 	private String[] inout_name;
 	private String keyword1;
 	private String sort;
-	
 	private String dy_keyword;
 	private String[] dayoff_state;
-	
 	
 	public String getSort() {
 		return sort;

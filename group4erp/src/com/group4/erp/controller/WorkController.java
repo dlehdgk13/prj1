@@ -37,7 +37,7 @@ public class WorkController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "businessTripList");
-		mav.addObject("navigator", "[업무관리]-[출장신청]");
+		mav.addObject("navigator", "[업무관리] → [출장신청&보고]");
 		
 		try {
 			
@@ -116,7 +116,7 @@ public class WorkController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "businessTripContentsForm"); 
-		mav.addObject("navigator", "[업무관리]-[출장신청]-[상세보기]");
+		mav.addObject("navigator", "[업무관리] → [출장신청&보고] → [상세보기]");
 		
 		try {
 			
@@ -185,7 +185,7 @@ public class WorkController {
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("main.jsp");
 			mav.addObject("subMenu", "businessTripUpDelForm"); 
-			mav.addObject("navigator", "[업무관리]-[출장신청&보고]-[수정/삭제]");
+			mav.addObject("navigator", "[업무관리] → [출장신청&보고] → [수정/삭제/승인]");
 
 			
 			

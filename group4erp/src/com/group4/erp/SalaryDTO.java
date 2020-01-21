@@ -21,7 +21,14 @@ public class SalaryDTO {
 	private String year;
 	private String month;
 	private String real_sal;
+	private String RNUM;
 	
+	public String getRNUM() {
+		return RNUM;
+	}
+	public void setRNUM(String rNUM) {
+		RNUM = rNUM;
+	}
 
 	public String getReal_sal() {
 		return real_sal;

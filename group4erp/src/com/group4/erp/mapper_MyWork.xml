@@ -73,9 +73,9 @@
 	<!-- 담당 상품 조회 -->
 	<!--=============================================================================================================================================-->
 	<select id='getMyCareBookList' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="java.util.HashMap">
-		<!-- select * from(select zzz.*, rownum RNUM from(
+		select * from(select zzz.*, rownum RNUM from(
 			 select                 
-                 isbn13 "isbn13",
+                 ISBN13 "ISBN13",
                  book_name "book_name",
                  cat_name "cat_name",
                  book_price "book_price",
@@ -87,7 +87,7 @@
                  emp_no "emp_no",
                  published_dt "published_dt",
                  editor "editor",
-                 isbn_cnt "isbn_cnt",
+                 ISBN_CNT "ISBN_cnt",
                  branch_name "branch_name",
                  reg_dt "reg_dt"
 			from
@@ -111,9 +111,9 @@
             where emp_no = '${emp_no}'
 			<include refid="MyCareBookSearch" />
 			order by reg_dt desc
-		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>		 -->	
+		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>		 	
 
-		select * from(select zzz.*, rownum RNUM from(
+		<!-- select * from(select zzz.*, rownum RNUM from(
 			select
                 b.ISBN13                     as "ISBN13"
                 ,b.book_name                 as "book_name"
@@ -132,7 +132,7 @@
             from book b 
             where b.emp_no = '${emp_no}'
 			<include refid="headerSort"/>
-		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
+		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>  -->
 
 	</select>
 	
@@ -251,7 +251,6 @@
 			<if test="sort!=null and sort.length() > 0" >
 				order by ${sort}
 			</if>
-			
 			<if test="sort==null or sort==''">
 				order by w.emp_no
 			</if>

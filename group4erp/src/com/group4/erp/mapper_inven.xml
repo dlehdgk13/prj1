@@ -24,19 +24,19 @@
     -->  
     
 	<sql id="bookList">
-            <if test="category_name!=null and category_name.length>0">
-            and
-          		<foreach collection="category_name" item="cat" open="(" separator="or" close=")">
-             		<if test="cat.equals('시&amp;소설')">
-                	  	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
-             		</if>
-             		<if test="cat.equals('사회')">
-                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
-            		</if>
-             		<if test="cat.equals('과학')">
-                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
-             		</if>
-             		<if test="cat.equals('IT')">
+		<if test="category_name!=null and category_name.length>0">
+        and
+        <foreach collection="category_name" item="cat" open="(" separator="or" close=")">
+        	<if test="cat.equals('시&amp;소설')">
+              	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+            </if>
+            <if test="cat.equals('사회')">
+            	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+            </if>
+            <if test="cat.equals('철학&amp;역사')">
+            	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+            </if>
+             		<if test="cat.equals('IT&amp;과학')">
                   		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if>
              		<if test="cat.equals('예술')">
@@ -57,6 +57,12 @@
              		<if test="cat.equals('요리')">
                   		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if> 
+             		<if test="cat.equals('교재&amp;수험서')">
+                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+             		</if>
+             		<if test="cat.equals('어학')">
+                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+             		</if> 
              		
             	</foreach>
       	</if>
@@ -64,25 +70,28 @@
       <if test="size_cd!=null and size_cd.length>0">
       and
          <foreach collection="size_cd" item="size_cd" open="(" separator="or" close=")">
-             <if test="size_cd.equals('01')">
+             <if test="size_cd==1">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('02')">
+             <if test="size_cd==2">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('03')">
+             <if test="size_cd==3">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('04')">
+             <if test="size_cd==4">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('05')">
+             <if test="size_cd==5">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('06')">
+             <if test="size_cd==6">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('07')">
+             <if test="size_cd==7">
+                  b.size_cd =  #{size_cd}
+             </if>
+             <if test="size_cd==8">
                   b.size_cd =  #{size_cd}
              </if>
          </foreach>
@@ -198,7 +207,6 @@
 		<if test="sort!=null and sort.length() > 0" >
 			order by ${sort}
 		</if>
-		
 		<if test="sort==null">
 			order by 1
 		</if>
@@ -294,7 +302,7 @@
 	 				order by ${sort}
 	 			</if>
 	 			<if test="sort==null or sort.length()==0">
-	 				order by ISBN13 asc
+	 				order by published_dt desc
 	 			</if>
 
 		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>
@@ -309,10 +317,14 @@
 	</select>
 
 	<select id="getSize" resultType="java.util.HashMap">
-		select size_name as "size_name" from code_book_size order by 1
+		select 
+			size_cd as "size_cd",
+			size_name as "size_name" from code_book_size order by 1
 	</select>
 	<select id="getCategory" resultType="java.util.HashMap">
-		select cat_name as "cat_name" from code_category order by 1
+		select 
+			cat_cd "cat_cd",
+			cat_name as "cat_name" from code_category order by 1
 	</select>
 	
 	<select id="getInven_loc" parameterType="com.group4.erp.InvenSearchDTO" resultType="java.util.HashMap">
@@ -386,7 +398,8 @@
                 r.order_no "ORDER_NO",
                 r.isbn13 "ISBN13",
                 r.return_sales_cd "RETURN_SALES_CD",
-                r.return_order_dt "RETURN_ORDER_DT", 
+                r.return_order_dt "RETURN_ORDER_DT",
+                r.return_comment "RETURN_COMMENT",  
                 c.return_name "RETURN_CAUSE" 
                 from code_return c, return_sale_info r where c.return_cd = r.return_sales_cd)
 		where 1=1
@@ -396,26 +409,31 @@
 	
 	
 	<select id="getReturnOrderList" parameterType="com.group4.erp.ReturnSearchDTO" resultType="com.group4.erp.ReturnOrderDTO">
-        select
-			return_sales_no||'' "return_sales_no",
-			order_no||'' "order_no",
-			isbn13 "isbn13",
-			return_sales_cd "return_cd",
-			return_order_dt "return_dt",
-            return_cause "return_cause"
-		from (select 
-                r.return_sales_no "RETURN_SALES_NO",
-                r.order_no "ORDER_NO",
-                r.isbn13 "ISBN13",
-                r.return_sales_cd "RETURN_SALES_CD",
-                r.return_order_dt "RETURN_ORDER_DT", 
-                c.return_name "RETURN_CAUSE" 
+        select * from(select zzz.*, rownum "RNUM" from(
+        	select
+				return_sales_no||'' "return_sales_no",
+				order_no||'' "order_no",
+				isbn13 "isbn13",
+				return_sales_cd "return_cd",
+				return_order_dt "return_dt",
+                return_comment "return_comment",  
+	            return_cause "return_cause"
+			from (select 
+	                r.return_sales_no "RETURN_SALES_NO",
+	                r.order_no "ORDER_NO",
+	                r.isbn13 "ISBN13",
+	                r.return_sales_cd "RETURN_SALES_CD",
+	                r.return_order_dt "RETURN_ORDER_DT",
+                	r.return_comment "RETURN_COMMENT",   
+	                c.return_name "RETURN_CAUSE" 
                 from code_return c, return_sale_info r where c.return_cd = r.return_sales_cd)
-		where 1=1
-		<include refid="headerSort" />
+		where 1=1 
 		<include refid="returnWhere" />
+		<include refid="headerSort" />
+		 ) zzz  )
+		  where	1=1
+		
 	</select>
-
 
 	<select id="getReturnContent" parameterType="int" resultType="com.group4.erp.ReturnSalseContentDTO">
 		select

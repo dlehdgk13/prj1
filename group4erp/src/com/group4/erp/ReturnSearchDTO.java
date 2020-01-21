@@ -6,12 +6,12 @@ public class ReturnSearchDTO {
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;	
 	private String sort;
-	private String[] return_cd;
+	private String return_cd[];
 	private String return_dt;
 	private String dateFrom;
 	private String dateTill;
 	private String searchToday;
-
+	
 	public String getReturn_dt() {
 		return return_dt;
 	}
@@ -85,5 +85,4 @@ public class ReturnSearchDTO {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-
 }

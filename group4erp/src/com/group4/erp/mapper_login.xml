@@ -23,17 +23,8 @@
 		키값에 대응하는 데이터의 종류에 관계없이 데이터를 그대로 삽입
 	
 	 -->  
-	
-	<select id="getEmpIDCheck" parameterType="hashmap" resultType="int">
-		select count(*) from employee where emp_no=#{emp_id}
-	</select>
-	
-	<select id="getEmpPWDCheck" parameterType="hashmap" resultType="int">
-		select count(*) from employee where emp_no=#{emp_id} and emp_pwd=#{emp_pwd}
-	</select>  
-	
 	<select id='getEmpIdCnt' parameterType="hashmap" resultType="int">
-		select count(*) from employee where emp_no=#{emp_id} and emp_pwd=#{emp_pwd} and worktime_cd!=6
+		select count(*) from employee where emp_no=#{emp_id} and emp_pwd=#{emp_pwd}
 	</select>
 	
 	<select id="getLoginEmpInfo" parameterType="String" resultType="com.group4.erp.EmployeeDTO">
@@ -60,7 +51,7 @@
 	</select>
 	
 	<select id="getApprovalCheck" parameterType="String" resultType="com.group4.erp.EmpApprovalCheckDTO">
-		select emp_pwd "emp_pwd", emp_no "emp_no", worktime_cd "worktime_cd" from employee where jumin_num=#{jumin}
+		select emp_pwd, emp_no from employee where jumin_num=#{jumin}
 	</select>
 	
 </mapper>

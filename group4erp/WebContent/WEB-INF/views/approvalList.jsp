@@ -68,175 +68,247 @@
 
 <script>
 
-   $(document).ready(function() {
-      
-      headerSort("approvalResList", 0);
-      headerSort("approvalReqList", 0);
+	$(document).ready(function() {
+		
+		headerSort("approvalResList", 0);
+		headerSort("approvalReqList", 0);
 
-      setTableTrBgColor(
-            "approvalResList",   //테이블 class 값
-            "${headerColor}",         //헤더 tr 배경색
-            "${oddTrColor}",      //홀수행 배경색
-            "${evenTrColor}",   //짝수행 배경색
-            "${mouseOverColor}"         //마우스 온 시 배경색
-      );
+		setTableTrBgColor(
+				"approvalResList",	//테이블 class 값
+				"${headerColor}",			//헤더 tr 배경색
+				"${oddTrColor}",		//홀수행 배경색
+				"${evenTrColor}",	//짝수행 배경색
+				"${mouseOverColor}"			//마우스 온 시 배경색
+		);
 
-      setTableTrBgColor(
-            "approvalReqList",   //테이블 class 값
-            "${headerColor}",         //헤더 tr 배경색
-            "${oddTrColor}",      //홀수행 배경색
-            "${evenTrColor}",   //짝수행 배경색
-            "${mouseOverColor}"         //마우스 온 시 배경색
-      );
+		setTableTrBgColor(
+				"approvalReqList",	//테이블 class 값
+				"${headerColor}",			//헤더 tr 배경색
+				"${oddTrColor}",		//홀수행 배경색
+				"${evenTrColor}",	//짝수행 배경색
+				"${mouseOverColor}"			//마우스 온 시 배경색
+		);
 
-      inputData("[name=sort]", "${approvalSerachDTO.sort}");
+		inputData("[name=sort]", "${approvalSerachDTO.sort}");
 
-      $(document).on('click','#reApproval', function () {
+		$(document).on('click','#reApproval', function () {
 
-          var document_no = $(this).attr("value");
-          
-          reApprovalProc(document_no);
-             
-      });
-
-
-      $(document).on('click','#removeApproval', function () {
-
-          var document_no = $('[name=approvalReqList] [name=test]').find('[name=document_no]').val();
-          
-          deleteApproval(document_no);
-             
-      });
-
-   });
+		    var document_no = $(this).attr("value");
+		    
+		    reApprovalProc(document_no);
+		    	
+		});
 
 
-   function viewAppResDoc(document_no) {
-      //alert("결재 문서 보기 구현 예정");
-      //alert(document_no);
-      $("[name=document_no]").val(document_no);
+		$(document).on('click','#removeApproval', function () {
 
-      document.approvalResListForm.submit();
-      
-   }
+		    var document_no = $('[name=approvalReqList] [name=test]').find('[name=document_no]').val();
+		    
+		    deleteApproval(document_no);
+		    	
+		});
+
+	});
+
+
+	function viewAppResDoc(document_no) {
+		//alert("결재 문서 보기 구현 예정");
+		//alert(document_no);
+		$("[name=document_no]").val(document_no);
+
+		document.approvalResListForm.submit();
+		
+	}
 
 
 
-   function updateApprovalInfo(idx, e_works_no, document_no, approval_state, e_work_comment) {
-      
-      var thisTr = $(idx);
-      var delTr = $('.approvalReqList [name=test]');
+	function updateApprovalInfo(idx, e_works_no, document_no, approval_state, e_work_comment) {
+		
+		var thisTr = $(idx);
+		var delTr = $('[name=approvalReqList] [name=test]');
 
-      if(delTr.size()>0){
-         delTr.remove();
-      }
+		if(delTr.size()>0){
+			delTr.remove();
+		}
 
-      var htmlCode = "<tr name='test' align=center> <td colspan=7>"
-         //htmlCode += "<form name='updateEventForm'>"
-         htmlCode += "<table class='innertable tab' name='innertable' align='center'>"
+		var htmlCode = "<tr name='test' align=center> <td colspan=7>"
+			//htmlCode += "<form name='updateEventForm'>"
+			htmlCode += "<table class='innertable tab' name='innertable' align='center'>"
 
-         if(approval_state=='대기중') {
-             htmlCode += "<tr> <th colspan='2' align='center'>아직 회신이 없습니다. </tr>"
-         } else {
-            htmlCode += "<tr> <th colspan='2' align='center'>결재받은 내용입니다. </tr>"
-         }
-         
-         htmlCode += "<tr> <th>문서 번호</th> <td><label>'"+document_no+"'</label></td></tr>"
-          htmlCode += "<tr> <th>결과</th> <td><label>'"+approval_state+"'</label></td></tr>"
+			if(approval_state=='대기중') {
+				 htmlCode += "<tr> <th colspan='2' align='center'>아직 회신이 없습니다. </tr>"
+			} else {
+				htmlCode += "<tr> <th colspan='2' align='center'>결재받은 내용입니다. </tr>"
+			}
+			
+			htmlCode += "<tr> <th>문서 번호</th> <td><label>'"+document_no+"'</label></td></tr>"
+		    htmlCode += "<tr> <th>결과</th> <td><label>'"+approval_state+"'</label></td></tr>"
 
-         if(approval_state=='부서장 승인' || approval_state=='최종 승인') {
-            htmlCode += "<tr> <th>메시지</th> <td><label>"+e_work_comment+"</label></td></tr>"
-         } else {
-            htmlCode += "<tr> <th>메시지</th> <td><label>"+e_work_comment+"</label></td></tr>"
-         }
-            
-          htmlCode += "</table>"
-          htmlCode += "<input type='hidden' name='e_work_no' value="+e_works_no+">"
-          htmlCode += "<input type='hidden' name='document_no' value="+document_no+">"
+			if(approval_state=='부서장 승인' || approval_state=='최종 승인') {
+				htmlCode += "<tr> <th>메시지</th> <td><label>"+e_work_comment+"</label></td></tr>"
+			} else {
+				htmlCode += "<tr> <th>메시지</th> <td><label>"+e_work_comment+"</label></td></tr>"
+			}
+		   	
+		    htmlCode += "</table>"
+		    htmlCode += "<input type='hidden' name='e_work_no' value="+e_works_no+">"
+		    htmlCode += "<input type='hidden' name='document_no' value="+document_no+">"
 
-          if(approval_state == '반려') {
+		    if(approval_state == '반려' || approval_state == '대기중') {
 
-            htmlCode += "<button id ='reApproval' name='reApproval' value='"+document_no+"'>다시 결재요청하기</button>&nbsp;"
-            htmlCode += "<button id = 'removeApproval' name='removeApproval' value='"+document_no+"'>삭제</button>&nbsp;"
+				htmlCode += "<button id ='reApproval' name='reApproval' value='"+document_no+"'>다시 결재요청하기</button>&nbsp;"
+				htmlCode += "<button id = 'removeApproval' name='removeApproval' value='"+document_no+"'>삭제</button>&nbsp;"
 
-         } 
-         //htmlCode += "<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
-         htmlCode += "<button id='closeTr' name='closeTr' onClick='closeThisTr(this);'>닫기"
-          //htmlCode += "</form>"
-         htmlCode += "</tr>"
+			} 
+			//htmlCode += "<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
+			htmlCode += "<button id='closeTr' name='closeTr' onClick='closeThisTr(this);'>닫기"
+		    //htmlCode += "</form>"
+			htmlCode += "</tr>"
   
-         
-       thisTr.after(htmlCode);
-       
-   }
+		   
+	    thisTr.after(htmlCode);
+	    
+	}
 
-   function closeThisTr(idx) {
-      
-      $(idx).parent().parent().remove();
+	function closeThisTr(idx) {
+		
+		$(idx).parent().parent().remove();
 
-   }
+	}
 
-   function reApprovalProc(document_no) {
-      //alert("다시 결재 요청합니다. "+document_no);
-      if(document_no.indexOf('EV') >= 0) {
-         location.replace("/group4erp/eventScheduling.do?evnt_no="+document_no);
+	function reApprovalProc(document_no) {
+		//alert("다시 결재 요청합니다. "+document_no);
+		if(document_no.indexOf('EV') >= 0) {
+			//alert("이벤트 행사 재결재");
+			location.replace("/group4erp/eventScheduling.do?evnt_no="+document_no);
 
-      } else if(document_no.indexOf('DO') >= 0) {
-         location.replace("/group4erp/goEmpDayOffjoin.do");
+		} else if(document_no.indexOf('DO') >= 0) {
+			location.replace("/group4erp/goEmpDayOffjoin.do");
 
-      } else if(document_no.indexOf('BT') >= 0) {
-         location.replace("/group4erp/businessTripForm.do");
-      }
+		} else if(document_no.indexOf('BT') >= 0) {
+			location.replace("/group4erp/businessTripForm.do");
+		}
 
-   }
+	}
 
 
-   function deleteApproval(document_no) {
-      //alert("삭제 로직 시작=="+document_no);
+	function deleteApproval(document_no) {
+		//alert("삭제 로직 시작=="+document_no);
 
-      $.ajax({
-         url : "/group4erp/deleteEventApprovalProc.do?document_no="+document_no,            //호출할 서버쪽 URL 주소 설정
-         type : "post",                              //전송 방법 설정
-         //data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),      //서버로 보낼 파라미터명과 파라미터값을 설정
-         
-         success : function(delCnt) {
-            if(delCnt==1) {
-               alert("이벤트 결재 삭제 성공!");
-               
-               location.replace("/group4erp/viewApprovalList.do");
-            } else if(delCnt==0) {
-               alert("이벤트 결재 삭제 실패");
 
-            } else if(delCnt==-1) {   
-               //alert("업체가 이미 삭제되었습니다!");
-               
-               location.replace("/group4erp/viewApprovalList.do");
+		if(document_no.indexOf("EV") >= 0) {
 
-            } else {
-               alert("서버쪽 DB 연동 실패!");
-            }
-         }
+		$.ajax({
+				url : "/group4erp/deleteEventApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
+				type : "post",										//전송 방법 설정
+				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+				
+				success : function(delCnt) {
+					if(delCnt==1) {
+						alert("이벤트 결재 삭제 성공!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+					} else if(delCnt==0) {
+						alert("이벤트 결재 삭제 실패");
 
-         //서버의 응답을 못 받았을 경우 실행할 익명함수 설정
-         , error : function() {      //서버의 응답을 못받았을 경우 실행할 익명함수 설정
-            alert("서버 접속 실패!");
-         }   
-      });
-      
-   }
+					} else if(delCnt==-1) {	
+						//alert("업체가 이미 삭제되었습니다!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
 
-   function goSearch() {
+					} else {
+						alert("서버쪽 DB 연동 실패!");
+					}
+				}
 
-      document.approvalReqForm.submit();
+				//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+				, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+					alert("서버 접속 실패!");
+				}	
+			});
+			
+		} else if(document_no.indexOf("DO") >= 0) {
+			alert("휴가 신청 삭제");
 
-   }
+			$.ajax({
+				url : "/group4erp/deleteDayOffApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
+				type : "post",										//전송 방법 설정
+				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+				
+				success : function(delCnt) {
+					if(delCnt==1) {
+						alert("휴가 신청 & 결재 삭제 성공!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+					} else if(delCnt==0) {
+						alert("휴가 신청 & 결재 삭제 실패");
 
-   function goResSearch() {
+					} else if(delCnt==-1) {	
+						//alert("업체가 이미 삭제되었습니다!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
 
-      document.approvalResForm.submit();
+					} else {
+						alert("서버쪽 DB 연동 실패!");
+					}
+				}
 
-   }
-      
+				//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+				, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+					alert("서버 접속 실패!");
+				}	
+			});
+			
+
+		} else if(document_no.indexOf("BT") >= 0) {
+			alert("출장 신청 삭제");
+
+			$.ajax({
+				url : "/group4erp/deleteBTripApprovalProc.do?document_no="+document_no,				//호출할 서버쪽 URL 주소 설정
+				type : "post",										//전송 방법 설정
+				//data : document_no, //$('[name=approvalReqList] [name=test]').find('[name=document_no]').val(),		//서버로 보낼 파라미터명과 파라미터값을 설정
+				
+				success : function(delCnt) {
+					if(delCnt==1) {
+						alert("출장 신청 & 결재 삭제 성공!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+					} else if(delCnt==0) {
+						alert("출장 신청 & 결재 삭제 실패");
+
+					} else if(delCnt==-1) {	
+						//alert("업체가 이미 삭제되었습니다!");
+						
+						location.replace("/group4erp/viewApprovalList.do");
+
+					} else {
+						alert("서버쪽 DB 연동 실패!");
+					}
+				}
+
+				//서버의 응답을 못 받았을 경우 실행할 익명함수 설정
+				, error : function() {		//서버의 응답을 못받았을 경우 실행할 익명함수 설정
+					alert("서버 접속 실패!");
+				}	
+			});
+		}
+
+		/* */
+		
+	}
+
+	function goSearch() {
+
+		document.approvalReqForm.submit();
+
+	}
+
+	function goResSearch() {
+
+		document.approvalResForm.submit();
+
+	}
+		
 </script>
 
 
@@ -526,7 +598,7 @@
 		<form name="approvalReqForm" method="post" action="/group4erp/viewApprovalList.do">
 			<!-- <div class="divcss"> -->
 			<input type="hidden" name="sort" >
-			 <table class="table table-striped table-advance table-hover table-bordered" name="approvalResList" width="90%" border=0 cellspacing=0 cellpadding=5>
+			 <table class="table table-striped table-advance table-hover table-bordered" name="approvalReqList" width="90%" border=0 cellspacing=0 cellpadding=5>
              <thead>
 				<tr>
 	               <th>순서</th>

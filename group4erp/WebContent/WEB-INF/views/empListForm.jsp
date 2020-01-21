@@ -68,7 +68,7 @@ $(document).ready(function(){
    
    //headerSort("empListTable", 0);
    
-   $('[name=rowCntPerPage]').change(function(){
+   $('[name=rowCntPerPageDown]').change(function(){
       $('[name=rowCntPerPage]').val( $(this).val() );
       goSearch();
    });
@@ -83,13 +83,15 @@ $(document).ready(function(){
          )
       );
    
-   inputData('[name=rowCntPerPage]',"${hrListSearchDTO.rowCntPerPage}");
+   inputData('[name=rowCntPerPageDown]',"${hrListSearchDTO.rowCntPerPage}");
    inputData('[name=selectPageNo]',"${hrListSearchDTO.selectPageNo}");
    inputData('[name=searchKeyword]',"${hrListSearchDTO.searchKeyword}");
    inputData('[name=sort]',"${hrListSearchDTO.sort}");
 });
 
    function goSearch() {
+	   
+	   
       document.empListSearchForm.submit();
    }
    function goSearchAll() {
@@ -340,7 +342,7 @@ $(document).ready(function(){
          <!-- </div> -->
          
          <input type="hidden" name="selectPageNo">
-         <input type="hidden" name="rowCntPerPage"> <%-- value="${invenSearchDTO.rowCntPerPage}" --%>
+         <input type="hidden" name="rowCntPerPage" value="${hrListSearchDTO.rowCntPerPage}"> <%-- value="${invenSearchDTO.rowCntPerPage}" --%>
          <!-- header sort를 하기 위한 hidden Tag -->
          <input type="hidden" name="sort">
          </form>

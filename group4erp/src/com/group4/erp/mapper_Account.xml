@@ -29,54 +29,13 @@
 		</if>
 		
 		<if test="sort==null or sort.length() == 0">
-			order by 9 desc
+			order by cc.reg_dt desc
 		</if>
 	</sql>
 
 
-	<select id='getCorpListCnt' parameterType="com.group4.erp.CorpSearchDTO" resultType="int">
-		select count(*) from corporation_cus cc
-		where cc.is_on_business='y'
-		and 1=1
-		<include refid="corpListCntWhere" />
-	</select>
-	
-	<sql id="corpListCntWhere">
-		<if test="corp_business_area != null">
-
-			<foreach collection="corp_business_area" item="corp_business_area" >
-			
-				<if test="corp_business_area.equals('1')">
-					and cc.corp_business_area ='1'
-				</if>
-				<if test="corp_business_area.equals('2')">
-					and cc.corp_business_area='2'
-				</if>
-				<if test="corp_business_area.equals('3')">
-					and cc.corp_business_area='3'
-				</if>
-				<if test="corp_business_area.equals('4')">
-					and cc.corp_business_area='4'
-				</if>
-				<if test="corp_business_area.equals('5')">
-					and cc.corp_business_area='5'
-				</if>
-				<if test="corp_business_area.equals('6')">
-					and cc.corp_business_area='6'
-				</if>
-				<if test="corp_business_area.equals('7')">
-					and cc.corp_business_area='7'
-				</if>
-				<if test="corp_business_area.equals('8')">
-					and cc.corp_business_area='8'
-				</if>			
-			</foreach>			
-		</if>
-	
-	</sql>
-	
 	<sql id="whereCondition">
-		<if test="searchKeyword !=null and searchKeyword.length() > 0">
+		<if test="searchKeyword !=null and searchKeyword.length()>0">
 				and (
 					upper(cc.corp_no) like upper('%${searchKeyword}%') 
 					or upper(cc.corp_name) like upper('%${searchKeyword}%')
@@ -87,36 +46,48 @@
 				)			
 		</if>
 		
-		<if test="corp_business_areas != null and corp_business_areas.length > 0">
-			and 
-			<foreach collection="corp_business_areas" item="corp_business" open="(" separator=" or " close=")">	
-				<if test="corp_business.equals('IT')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area)=#{corp_business}
+		<if test="corp_business_area != null">
+			and
+			<foreach collection="corp_business_area" item="corp_business_area" open="(" separator=" or " close=")" >
+				<if test="corp_business_area==1">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('통신')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '통신'
+				<if test="corp_business_area==2">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('금융')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '금융'
+				<if test="corp_business_area==3">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('출판&amp;미디어')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '%출판&amp;미디어%'
+				<if test="corp_business_area==4">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('교육&amp;학원')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '%교육&amp;학원%'
+				<if test="corp_business_area==5">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('운송&amp;물류')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '%운송&amp;물류%'
+				<if test="corp_business_area==6">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('학교')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '학교'
+				<if test="corp_business_area==7">
+					cc.corp_business_area=#{corp_business_area}
 				</if>
-				<if test="corp_business.equals('기타')">
-					(select cb.business_area_name from code_business_area cb where cb.business_area_code = cc.corp_business_area) like '기타'
-				</if>			
-			</foreach>						
-		</if>	
+				<if test="corp_business_area==8">
+					cc.corp_business_area=#{corp_business_area}
+				</if>
+				<if test="corp_business_area==0">
+					
+				</if>
+			</foreach>			
+		</if>
 	</sql>
+
+
+	<select id='getCorpListCnt' parameterType="com.group4.erp.CorpSearchDTO" resultType="int">
+		select count(*) from corporation_cus cc
+		where 1=1
+		and cc.is_on_business='y'
+		<include refid="whereCondition" />
+
+	</select>
 	
 	
 	<select id='getCorpList' parameterType="com.group4.erp.CorpSearchDTO" resultType="com.group4.erp.CorporationDTO">
@@ -128,8 +99,8 @@
 				cc.corp_addr "corp_addr",
 				cc.corp_fax "corp_fax",
 				cc.corp_tel "corp_tel",
-				cc.corp_business_area "corp_business_area",
-				<!-- (select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) "corp_business_area", -->
+				cc.corp_business_area "corp_business_area", 
+				(select c.business_area_name from code_business_area c where c.business_area_code = cc.corp_business_area) "corp_business_name",
 				cc.is_on_business "is_on_business",
 				cc.reg_dt "reg_dt"
 			from corporation_cus cc
@@ -137,11 +108,13 @@
 			cc.is_on_business='y'
 			<include refid="whereCondition" />
 			<include refid="headerSort" />			
-		) zzz) where RNUM&gt;= ${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
+		) zzz) 
+		where RNUM&gt;= ${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
 	</select>
 	
+
 	
-	
+
 	
 	<select id='getCorpInfo' parameterType="String" resultType="com.group4.erp.CorporationDTO">
 		
@@ -275,7 +248,7 @@
 	
 	<select id="getTranSpecList" parameterType="int" resultType="com.group4.erp.TranSpecDTO">
 		select 
-    		co.order_books_no  "order_books_no",
+    		co.order_books_no "order_books_no",  
     		co.corp_no "corp_no",  
     		(select c.corp_name from corporation_cus c where c.corp_no = co.corp_no) "corp_name",   
     		(select c.ceo_name from corporation_cus c where c.corp_no = co.corp_no) "ceo_name",   
@@ -292,16 +265,27 @@
     		to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "order_dt"
     	from corp_order_info co
     	where co.order_books_no = #{order_books_no}
-		
 	</select>
 	
 	<select id="getTranSpecIssueCnt" resultType="int">
-		select count(*) from tran_issue_info
-	
+		<!-- select count(*) from tran_issue_info where 1=1 -->
+		select count(*) from (
+        		select 
+					ti.issue_no "ISSUE_NO",
+					ti.order_no||'' "ORDER_NO",
+					ti.corp_no "CORP_NO",
+					(select c.corp_name from corporation_cus c where c.corp_no = ti.corp_no) "CORP_NAME",
+					(select c.ceo_name from corporation_cus c where c.corp_no = ti.corp_no) "CEO_NAME",
+					ti.order_dt "ORDER_DT",
+					to_char(ti.issue_dt, 'yyyy.mm.dd')|| '('||to_char(ti.issue_dt, 'dy', 'nls_date_language=Korean' )||')' "ISSUE_DT"
+				from tran_issue_info ti 
+			) where 1=1
+		<include refid="TranSpecIssueWhere" />
 	</select>
 	
 	
-	<select id="getTranSpecIssue" parameterType="com.group4.erp.TranSpecSearchDTO" resultType="com.group4.erp.TranSpecDTO">     
+	<select id="getTranSpecIssue" parameterType="com.group4.erp.TranSpecSearchDTO" resultType="com.group4.erp.TranSpecDTO">   
+	select * from (select zzz.*, rownum RNUM from (  
         select
             issue_no,
             order_no,
@@ -324,6 +308,7 @@
 			where 1=1
 			<include refid="TranSpecIssueWhere" />
 			<include refid="headerSortTranIssue" />
+    )zzz)
 	</select>
 	
 	
@@ -354,7 +339,7 @@
 	
 	
 	<insert id="saveTempTranSpec" parameterType="com.group4.erp.TranSpecDTO">
-		insert into tran_issue_info (
+		insert into  (
 			issue_no,
 			order_no,
 			corp_no,
@@ -425,7 +410,7 @@
     		round( (e.salary*10000)/12, -5) * 0.0323 "health", 
     		round( (e.salary*10000)/12, -5) * 0.008 "emp_insurance",
     		round( (e.salary*10000)/12, -5) * 0.045 + round( (e.salary*10000)/12, -5) * 0.0323 + round( (e.salary*10000)/12, -5) * 0.008 "deduct"
-    	from employee e where worktime_cd!=6   
+    	from employee e     
 	</insert>
 	
 

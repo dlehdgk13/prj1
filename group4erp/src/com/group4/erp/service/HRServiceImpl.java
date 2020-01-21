@@ -151,9 +151,7 @@ public class HRServiceImpl implements HRService {
 	
 
 	public int getNewEmpInsertCnt(EmployeeDTO employeeDTO) {
-		
 		int newEmpInsertCnt = this.hrDAO.getNewEmpInsertCnt(employeeDTO);
-		
 		return newEmpInsertCnt;
 	}
 	

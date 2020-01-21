@@ -85,6 +85,7 @@
 			inputData( "[name=rowCntPerPage]", "${hrListSearchDTO.rowCntPerPage}" );
 			inputData( "[name=datepicker]", "${hrListSearchDTO.datepicker}" );
 			inputData( "[name=keyword1]", '${hrListSearchDTO.keyword1}' );
+			inputData( "[name=sort]", '${hrListSearchDTO.sort}' );
 			<c:forEach items="${hrListSearchDTO.inout_name}" var="inout">
 				inputData( "[name=inout_name]", "${inout}" );
 			</c:forEach>
@@ -93,7 +94,6 @@
 	
 		function goSearch(){
 			//alert($("[name=datepicker]").val());
-			alert($("[name=InoutListDate]").serialize());
 			var keyword1 = $("[name=InoutListDate] [name=keyword1]").val();
 			keyword1 = $.trim(keyword1);
 			$("[name=InoutListDate] [name=keyword1]").val(keyword1);
@@ -315,7 +315,9 @@
 		</table>
 	    
 	    <input type="hidden" name="selectPageNo">
-	    
+	    <input type="hidden" name="sort">
+	    
+
 	  <!-- 
 	    
 	  </form>
@@ -346,37 +348,147 @@
 		<table class="inoutListTable tab" name="dayOffList" cellpadding="5" cellspacing="5" width=70%>
 
 				<tr>
-					<th class="thset" style="cursor:pointer">NO
-					<th class="thset" style="cursor:pointer">날짜
-					<th class="thset" style="cursor:pointer">사원번호
-					<th class="thset" width=100 style="cursor:pointer">성명
-					<th class="thset" style="cursor:pointer">부서
-					<th class="thset" style="cursor:pointer">직급
-					<th class="thset" style="cursor:pointer">출근시간
-					<th class="thset" style="cursor:pointer">퇴근시간
-					<th class="thset" style="cursor:pointer">근무시간
-					<th class="thset" style="cursor:pointer">구분
-					<th class="thset" style="cursor:pointer">비고
+					<th class="thset" >번호</th>
+					<c:choose>
+						<c:when test="${param.sort=='DT_WORK desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼날짜</th>
+						</c:when>
+						<c:when test="${param.sort=='DT_WORK asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DT_WORK desc'); goSearch()">▲날짜</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DT_WORK asc'); goSearch();">날짜</th>
+						</c:otherwise>
+					</c:choose>
 					
-					<th class="thset" style="cursor:pointer">수정여부
+					<c:choose>
+						<c:when test="${param.sort=='EMP_NO desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼사원번호</th>
+						</c:when>
+						<c:when test="${param.sort=='EMP_NO asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('EMP_NO desc'); goSearch()">▲사원번호</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('EMP_NO asc'); goSearch();">사원번호</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='EMP_NAME desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼성명</th>
+						</c:when>
+						<c:when test="${param.sort=='EMP_NAME asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('EMP_NAME desc'); goSearch()">▲성명</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('EMP_NAME asc'); goSearch();">성명</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='DEP_NAME desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼부서</th>
+						</c:when>
+						<c:when test="${param.sort=='DEP_NAME asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DEP_NAME desc'); goSearch()">▲부서</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('DEP_NAME asc'); goSearch();">부서</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='JIKUP desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼직급</th>
+						</c:when>
+						<c:when test="${param.sort=='JIKUP asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('JIKUP desc'); goSearch()">▲직급</h>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('JIKUP asc'); goSearch();">직급</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='IN_TIME desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼출근시간</th>
+						</c:when>
+						<c:when test="${param.sort=='IN_TIME asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('IN_TIME desc'); goSearch()">▲출근시간</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('IN_TIME asc'); goSearch();">출근시간</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='OUT_TIME desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼퇴근시간</th>
+						</c:when>
+						<c:when test="${param.sort=='OUT_TIME asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('OUT_TIME desc'); goSearch()">▲퇴근시간</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('OUT_TIME asc'); goSearch();">퇴근시간</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='WORKING_HRS desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼근무시간</th>
+						</c:when>
+						<c:when test="${param.sort=='WORKING_HRS asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('WORKING_HRS desc'); goSearch()">▲근무시간</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('WORKING_HRS asc'); goSearch();">근무시간</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='CHECK_INOUT_NAME desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼구분</th>
+						</c:when>
+						<c:when test="${param.sort=='CHECK_INOUT_NAME asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('CHECK_INOUT_NAME desc'); goSearch()">▲구분</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('CHECK_INOUT_NAME asc'); goSearch();">구분</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${param.sort=='REMARKS desc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val(''); goSearch();">▼비고</th>
+						</c:when>
+						<c:when test="${param.sort=='REMARKS asc'}">
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('REMARKS desc'); goSearch()">▲비고</th>
+						</c:when>
+						<c:otherwise>
+							<th class="thset" style="cursor:pointer" onclick="$('[name=sort]').val('REMARKS asc'); goSearch();">비고</th>
+						</c:otherwise>
+					</c:choose>
+					
+					<th class="thset" >수정여부</th>
 					
 				</tr>
 
 				<c:forEach items="${requestScope.getEmpInoutList}" var="inout" varStatus="loopTagStatus">
 					<tr style="cursor:pointer">
-						<td align=center> ${loopTagStatus.index+1}
-						<td align=center> ${inout.DT_WORK}
-						<td align=center> ${inout.EMP_NO}
-						<td align=center> ${inout.EMP_NAME}
-						<td align=center> ${inout.DEP_NAME}
-						<td align=center> ${inout.JIKUP}
-						<td align=center> ${inout.IN_TIME}
-						<td align=center> ${inout.OUT_TIME}
-						<td align=center> ${inout.WORKING_HRS}
-						<td align=center> ${inout.CHECK_INOUT_NAME}
-						<td align=center> ${inout.REMARKS}
+						<td align=center> ${getEmpInoutListCnt-loopTagStatus.index}</td>
+						<td align=center> ${inout.DT_WORK}</td>
+						<td align=center> ${inout.EMP_NO}</td>
+						<td align=center> ${inout.EMP_NAME}</td>
+						<td align=center> ${inout.DEP_NAME}</td>
+						<td align=center> ${inout.JIKUP}</td>
+						<td align=center> ${inout.IN_TIME}</td>
+						<td align=center> ${inout.OUT_TIME}</td>
+						<td align=center> ${inout.WORKING_HRS}</td>
+						<td align=center> ${inout.CHECK_INOUT_NAME}</td>
+						<td align=center> ${inout.REMARKS}</td>
 						<td align=center>
 							<input type="button" value="수정" onClick="goUpdate(this,'${loopTagStatus.index+1}', '${inout.DT_WORK}','${inout.EMP_NO}');">
+						</td>
 						<%-- 
 						<c:if test="${inout.CHECK_INOUT_NAME != '퇴근' && inout.CHECK_INOUT_NAME != '출근'}">
 							<input type="button" value="수정" onClick="goUpdate(this,'${loopTagStatus.index+1}', '${inout.DT_WORK}','${inout.EMP_NO}');">
@@ -400,7 +512,9 @@
 		
 		
 		<table><tr height=10><td></table>
-		
+		<c:if test="${getEmpInoutListCnt eq 0}">
+				<h5>해당 결과가 없습니다.</h5>
+		</c:if>
 		<div>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 	
 	</form>

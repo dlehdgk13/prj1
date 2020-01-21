@@ -12,7 +12,7 @@ public class EventSearchDTO {
 	private String tableName;
 	private String allOrMine;
 	
-	
+
 	public String getAllOrMine() {
 		return allOrMine;
 	}

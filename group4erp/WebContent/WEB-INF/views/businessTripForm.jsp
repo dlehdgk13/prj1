@@ -35,6 +35,7 @@
   ======================================================= -->
 </head>
 
+<% String emp_num = (String)session.getAttribute("emp_id"); %>
 
 <style>
 
@@ -157,13 +158,11 @@
 
 		if(confirm("정말 저장하시겠습니까?")==false){return;}
 		
-		//alert( $('[name=businessTrip]').serialize() );
-		
 		$.ajax({
-			url : "/group4erp/businessTripRegProc.do"
-			,type : "post"
-			,data : $('[name=businessTrip]').serialize()
-			,success : function(businessTripRegCnt) {
+			url : "/group4erp/businessTripRegProc.do",
+			type : "post",
+			data : $('[name=businessTrip]').serialize(),
+			success : function(businessTripRegCnt) {
 				if (businessTripRegCnt == 1) {
 					alert("출장 신청 완료");
 					location.replace('/group4erp/businessTripList.do')
@@ -199,11 +198,10 @@
 			}
 		}).open();
 	}
-	
+
 	function goBack(){
-		history.go(-1);
+		history.back();
 	}
-	
 </script>
 
 
@@ -401,12 +399,12 @@
             	<td align=left width=27%><h4><i class="fa fa-angle-right"></i><b> 신청서</b></h4>
             	<td width=30%>
             </table>
-            	<form name=businessTrip>
+            	<form name=businessTrip id="businessTrip" method="post" action="/group4erp/businessTripRegProc.do">
 				<table align=center class="work_outside_info searchtable" name="work_outside_info" width=65% >
 				<tr>
 					<th>사원 번호</th>
 						<td>
-							<input type="text" class="form-control" id="emp_no" name="emp_no" size=10>
+							<input type="text" class="form-control" id="emp_no" name="emp_no" value=<%=emp_num %> readonly>
 							<!-- <span class="help-block"> ERP아이디 입니다. </span> -->
 						</td>
 				</tr>
