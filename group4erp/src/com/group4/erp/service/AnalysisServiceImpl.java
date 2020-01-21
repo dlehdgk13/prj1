@@ -80,4 +80,12 @@ public class AnalysisServiceImpl implements AnalysisService {
 		return empHireOrResignCnt;
 	}
 
+	@Override
+	public List<ChartDTO> getCatInventoryChart() {
+		// TODO Auto-generated method stub
+		List<ChartDTO> catInventoryChart = this.analysisDAO.getCatInventoryChart();
+		
+		return catInventoryChart;
+	}
+
 }

@@ -36,6 +36,27 @@
 	google.charts.setOnLoadCallback(drawEmployeeCntChart);
 	google.charts.setOnLoadCallback(drawHireOrResignChart);
 	google.charts.setOnLoadCallback(drawCategoryChart);
+	google.charts.setOnLoadCallback(drawCatInventoryChart);
+	
+	
+	function drawCatInventoryChart() {
+		
+		var catInventory_chart_data = google.visualization.arrayToDataTable(${catInventory_chart_data});
+		var catInventory_chart_options = {
+				title: '현재 도서 보유 현황',
+				width :700, 
+				height: 300,
+				animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+	                 startup: true,
+	                 duration: 1000,
+	                 easing: 'linear' 
+	            }
+			};
+		
+		var catInventory_chart = new google.visualization.BarChart(document.getElementById('catInventoryChart'));
+			
+		catInventory_chart.draw(catInventory_chart_data, catInventory_chart_options);
+	}
 
 
 	function drawHireOrResignChart() {
@@ -59,7 +80,12 @@
 		var employee_chart_options = {
 			title: '직원 현황(직급별)',
 			width :700, 
-			height: 300
+			height: 300,
+			animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+                startup: true,
+                duration: 1000,
+                easing: 'linear' 
+           }
 		};
 
 		var employee_chart = new google.visualization.ColumnChart(document.getElementById('employeeChart'));
@@ -73,6 +99,7 @@
 			title: '분야별 도서 계약 건수',
 			width :700, 
 			height: 300
+			
 		};
 
 		var categoryReg_chart = new google.visualization.ColumnChart(document.getElementById('categoryRegChart'));
@@ -103,7 +130,12 @@
 		var monthlyBookReg_data_options = {	
 			title: '월별 도서 계약 건수',
 			width :700, 
-			height: 300
+			height: 300,
+			animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+                startup: true,
+                duration: 1000,
+                easing: 'linear' 
+           }
 		};
 
 		var monthlyBookReg_chart = new google.visualization.LineChart(document.getElementById('monthlyBookRegChart'));
@@ -183,7 +215,9 @@ function drawLineChart() {
 		
 		<tr>
 			<td align="center">월별도서계약건수<br><div id="monthlyBookRegChart" style="width: 700px; height: 300px;"> </div></td>
-			<td align="center">종류별 도서 계약 건수<br>
+			<td align="center">판매도서 보유 현황<div id="catInventoryChart" style="width: 700px; height: 300px;"></div></td>
+			
+			<%--  <td align="center">종류별 도서 계약 건수<br>
 				<c:forEach items="${bookCategoryList}" var="bookCategoryList" varStatus="loopTagStatus">
 					<c:if test="${bookCategoryList.cat_cd eq 6}">
 						<br>
@@ -192,7 +226,7 @@ function drawLineChart() {
 					
 				</c:forEach>
 				
-			<div id="categoryRegChart" style="width: 700px; height: 300px;"> </div></td>
+			<div id="categoryRegChart" style="width: 700px; height: 300px;"> </div></td>--%>
 		</tr>
 	
 	</table>

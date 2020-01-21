@@ -56,23 +56,33 @@
 
 	function drawChart() {
 		var data1 = google.visualization.arrayToDataTable(${sales_chart_data});
-		var data2 = google.visualization.arrayToDataTable(${corpOrder_chart_data});
+		//var data2 = google.visualization.arrayToDataTable(${corpOrder_chart_data});
 		//var data3 = google.visualization.arrayToDataTable(${dailyOrder_chart_data});
 	
 		var options1 = {
 				title: '일반 고객 주문 건수(분야별)',
 				width :700, 
-				height: 300
+				height: 300,
+				animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+	             
+	                 duration: 1000,
+	                
+	            }
 		};
 
 		var options2 = {
 				title: '기업고객 주문 건수(분야별)',
 				width: 700,
-				height:300
+				height:300,
+				animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+	                 
+	                 duration: 1000,
+	              
+	            }
 		};
 	
 		var chart1 = new google.charts.Bar(document.getElementById('orderInfoChart'));
-		var chart2 = new google.charts.Bar(document.getElementById('corpOrderInfoChart'));
+		//var chart2 = new google.charts.Bar(document.getElementById('corpOrderInfoChart'));
 		//var chart3 = new google.visualization.LineChart(document.getElementById('dailyOrderChart'));
 		
 		//var chart1 = new google.visualization.BarChart(document.getElementById('orderInfoChart'));
@@ -91,40 +101,57 @@
 	function drawLineChart() {
 	
 		var data3 = google.visualization.arrayToDataTable(${dailyOrder_chart_data});
-		var data4 = google.visualization.arrayToDataTable(${dailyCorpOrder_chart_data});
+		//var data4 = google.visualization.arrayToDataTable(${dailyCorpOrder_chart_data});
 		var offline_data = google.visualization.arrayToDataTable(${offline_chart_data});
 	
 		var options3 = {
 				title: '일반고객 주문 건수(일자별)',
 				width: 700,
-				height:300
+				height:300,
+				animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+	                 startup: true,
+	                 duration: 1000,
+	                 easing: 'linear' 
+	            }
 		};
 
 		var options4 = {
 				title: '사업자고객 주문 건수(일자별)',
 				width: 700,
-				height:300
+				height:300,
+				animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+	                 startup: true,
+	                 duration: 1000,
+	                 easing: 'linear' 
+	            }
 		};
 
 		var offline_option = {
 				title: '오프라인매장 판매 건수(일자별)',
-				width: 700,
-				height:300
+				width: 900,
+				height:400,
+				animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+	                 startup: true,
+	                 duration: 500,
+	                 easing: 'linear' 
+	            }
+
 		};
 	
 		var chart3 = new google.visualization.LineChart(document.getElementById('dailyOrderChart'));
-		var chart4 = new google.visualization.LineChart(document.getElementById('dailyCorpOrderChart'));
+		//var chart4 = new google.visualization.LineChart(document.getElementById('dailyCorpOrderChart'));
 		var offline_chart = new google.visualization.LineChart(document.getElementById('dailyOfflineChart'));
 		
 		//var chart1 = new google.visualization.BarChart(document.getElementById('orderInfoChart'));
 		//var chart2 = new google.visualization.ColumnChart(document.getElementById('corpOrderInfoChart'));
 	
 		chart3.draw(data3, options3);
-		chart4.draw(data4, options4);
+		//chart4.draw(data4, options4);
 		offline_chart.draw(offline_data, offline_option);
+	
 	}
 	
-	
+		
 	function goSearch() {
 
 		var keyword = $("[name=saleSearchForm] [name=searchKeyword]").val();
@@ -189,10 +216,10 @@
 			<td>
 				<table border="0" cellpadding="5" cellspacing="5" align="center">
 					<tr>
-						<td colspan="4" align="center"><h5>일반 고객 주문 현황</h5></td>
+						<td colspan="4" align="center"><h5>일반 고객 판매 현황</h5></td>
 					</tr>
 					<tr>
-						<td>[오프라인 판매량]</td><td> ${dailyOfflineSalesTotCnt}건</td> <td>총 예상 수입액 </td><td> 원 </td>
+						<td>[오프라인 판매량]</td><td> ${dailyOfflineSalesTotCnt.tot_cnt}건</td> <td>총 예상 수입액 </td><td> ${dailyOfflineSalesTotCnt.tot_revenue}원 </td>
 					</tr>
 					<tr>
 						<td>[온라인 주문량]</td><td> ${onlineOrderCnt}건</td> <td>총 예상 수입액 </td><td> ${tot_revenue}원 </td>
@@ -202,7 +229,7 @@
 			</td>
 			
 			<td>
-				<table border="0" cellpadding="5" cellspacing="5" align="center">
+				<!--<table border="0" cellpadding="5" cellspacing="5" align="center">
 					<tr>
 						<td colspan="4" align="center"><h5>기업 고객 주문 현황</h5></td>
 					</tr>
@@ -213,13 +240,13 @@
 						<td>[온라인 주문량]</td><td> ${corpOrderCnt}건 </td> <td>총 예상 수입액 </td><td> ${corpTotRevenue}원 </td>
 					</tr>
 		
-				</table>
+				</table>  -->
 			</td>
 		</tr>
 		
 		<tr>
-			<td align="center">오프라인 매장 판매 현황
-				<div id="dailyOfflineChart" style="width: 700px; height: 300px;"> </div>
+			<td align="center" colspan="5">오프라인 매장 판매 현황
+				 <div id="dailyOfflineChart" style="width: 900px; height: 400px;"> </div>
 			</td>
 			<td>
 			
@@ -227,22 +254,22 @@
 			
 		</tr>
 		<tr>
-			<td align="center">분야별 누적 주문
+			<td align="center" colspan="4">분야별 누적 주문
 				<div id="orderInfoChart" style="width: 700px; height: 300px;"> </div>
 			</td>
-			<td align="center">분야별 누적 주문
-				<div id="corpOrderInfoChart" style="width: 700px; height: 300px;"> </div>
-			</td>
+			<!--<td align="center">분야별 누적 주문
+				  <div id="corpOrderInfoChart" style="width: 700px; height: 300px;"> </div>
+			</td>-->
 		</tr>
 		
 		<tr>
-			<td align="center">일자별 누적 주문
+			<td align="center" colspan="4">일자별 누적 주문
 				<div id="dailyOrderChart" style="width: 700px; height: 300px;"> </div>
 			</td>
 			
-			<td align="center">일자별 누적 주문
+			<!--<td align="center">일자별 누적 주문
 				<div id="dailyCorpOrderChart" style="width: 700px; height: 300px;"> </div>
-			</td>
+			</td>-->
 		</tr>
 		<tr>
 			<td align="center">

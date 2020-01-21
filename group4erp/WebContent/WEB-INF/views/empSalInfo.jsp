@@ -22,11 +22,18 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
+<<<<<<< HEAD
+=======
+
+			inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val("1"));			
+			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
+>>>>>>> refs/remotes/master/master
 			goSearch();
 		});
 
 		
 		$(".pagingNumber").html(
+
 				getPagingNumber(
 					"${myPayCheckCnt}"						//검색 결과 총 행 개수
 					,"${salListSearchDTO.selectPageNo}"			//선택된 현재 페이지 번호
@@ -40,17 +47,26 @@
 		//$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
 		//$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		
+<<<<<<< HEAD
 		inputData('[name=rowCntPerPage]', "${salListSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${salListSearchDTO.selectPageNo}");
 		inputData('[name=sort]',  "${salListSearchDTO.sort}");
 		/* $('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
 		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		$('[name=sort]').val("${salListSearchDTO.sort}"); */
+=======
+		$('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
+		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
+		$('[name=sort]').val("${salListSearchDTO.sort}");
+>>>>>>> refs/remotes/master/master
 
+<<<<<<< HEAD
 		//$('[name=rowCntPerPage]').val($('[name=empSalForm] [name=rowCntPerPage]').val());
 		//$('[name=selectPageNo]').val($('[name=empSalForm] [name=selectPageNo]').val());
 		
 		//inputData("[name=sort]", "${salListSearchDTO.sort}");
+=======
+>>>>>>> refs/remotes/master/master
 	});
 	
 	
@@ -61,8 +77,8 @@
 	function goSearchAll() {
 		document.empSalForm.reset();
 
-		$('[name=empSalForm] [name=selectPageNo]').val("1");
-		$('[name=empSalForm] [name=rowCntPerPage]').val("15");
+		$('[name=selectPageNo]').val("1");
+		$('[name=rowCntPerPage]').val("15");
 		goSearch();
 	}
 		
@@ -72,13 +88,35 @@
 	
 	<h1>[급여 지급 내역]</h1><br>
 	직책 : ${jikup}	&nbsp;&nbsp; 성명 :${emp_name}  <br>
+	
 	<form name="empSalForm" method="post" action="/group4erp/viewEmpSalInfo.do">
+<<<<<<< HEAD
 
 		
 		<table>
 			<tr height=10>
 				<td></td>
+=======
+
+		<input type="hidden" name="selectPageNo">
+		<input type="hidden" name="sort">
+
+	
+		<table class="tab" cellpadding="5" cellspacing="5">
+			<tr>			
+				<td align="right">
+	        	[전체] : ${myPayCheckCnt}건&nbsp;&nbsp;&nbsp;&nbsp;
+	           	 <select name="rowCntPerPage">
+	              		<option value="10">10</option>
+	               		<option value="15">15</option>
+	               		<option value="20">20</option>
+	               		<option value="25">25</option>
+	               		<option value="30">30</option>
+	            	</select> 행보기
+	    		</td>
+>>>>>>> refs/remotes/master/master
 			</tr>
+<<<<<<< HEAD
 		</table>
 			
 		<input type="hidden" name="selectPageNo">
@@ -104,6 +142,12 @@
 		<tr>
 			<td>
 				<table class="empSalInfo tab" name="empSalInfo" cellpadding="5" cellspacing="5">
+=======
+			</form>
+			<tr>
+				<td>
+					<table class="empSalInfo tab" cellpadding="5" cellspacing="5">
+>>>>>>> refs/remotes/master/master
 				
 					<tr align="center">
 						<th rowspan="2">번호</th>
@@ -260,14 +304,19 @@
 		
 					 </c:forEach>
 				</table>
-			
 			</td>
-		
 		</tr>
 	
 	</table>
+<<<<<<< HEAD
 	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
+=======
+	
+	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div><br>
+	
+>>>>>>> refs/remotes/master/master
 	</form>
+
 	<h5>귀하의 노고에 감사드립니다.</h5>
 	<input type="button" value="뒤로 가기" onClick="javascript:history.go(-1);">
 </center>

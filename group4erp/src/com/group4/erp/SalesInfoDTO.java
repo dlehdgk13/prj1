@@ -17,13 +17,41 @@ public class SalesInfoDTO {
 	private String category;
 	private String return_qty;
 	private String buy_dt;
-	
+	private String online_cnt;
+	private String offline_cnt;
+	private String tot_cnt;
+
 	private String searchKeyword;
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;
 	private String sort;
 	
 	
+	
+	public String getTot_cnt() {
+		return tot_cnt;
+	}
+
+	public void setTot_cnt(String tot_cnt) {
+		this.tot_cnt = tot_cnt;
+	}
+
+	public String getOnline_cnt() {
+		return online_cnt;
+	}
+
+	public void setOnline_cnt(String online_cnt) {
+		this.online_cnt = online_cnt;
+	}
+
+	public String getOffline_cnt() {
+		return offline_cnt;
+	}
+
+	public void setOffline_cnt(String offline_cnt) {
+		this.offline_cnt = offline_cnt;
+	}
+
 
 	public String getBuy_dt() {
 		return buy_dt;

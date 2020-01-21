@@ -60,7 +60,7 @@ $(document).ready(function(){
 			alert("책 제목을 입력해주세요.");
 			$("[name=book_name]").focus();
 			return;
-		}
+		} 
 		if( is_empty('[name=cat_cd]') ){
 			alert("카테고리를 선택해주세요.");
 			$("[name=cat_cd]").focus();
@@ -114,7 +114,7 @@ $(document).ready(function(){
 		
 		var incomisbn13 = $('[name=isbn13]').val();
 		if(incomisbn13.indexOf('-')>0){
-			var isbn13 = incomisbn13.split('-').join('');
+			var isbn13 = incomisbn13.split('-').join('').trim();
 			$('[name=isbn13]').val(isbn13);
 		}
 		
@@ -186,17 +186,18 @@ $(document).ready(function(){
             </tr>
             <tr>
                <th bgcolor=#DBDBDB>카테고리
-               <td><input type="radio" name="cat_cd" value="01">소설
+               <td><input type="radio" name="cat_cd" value="01">시&소설
                   <input type="radio" name="cat_cd" value="02">사회
-                  <input type="radio" name="cat_cd" value="03">과학
-                  <input type="radio" name="cat_cd" value="04">IT
+                  <input type="radio" name="cat_cd" value="03">철학&역사
+                  <input type="radio" name="cat_cd" value="04">IT&과학
                   <input type="radio" name="cat_cd" value="05">예술
                   <input type="radio" name="cat_cd" value="06">종교
                   <input type="radio" name="cat_cd" value="07">만화
                   <input type="radio" name="cat_cd" value="08">여행
                   <input type="radio" name="cat_cd" value="09">에세이
                   <input type="radio" name="cat_cd" value="10">요리
-                  <input type="radio" name="cat_cd" value="11">수험서
+                  <input type="radio" name="cat_cd" value="11">교재&수험서
+                  <input type="radio" name="cat_cd" value="12">어학
             </tr>
             <tr>
                <th bgcolor=#DBDBDB >가격
@@ -216,13 +217,13 @@ $(document).ready(function(){
             </tr>
             <tr>
                <th bgcolor=#DBDBDB >판형
-               <td><input type="radio" name="size_cd" value="01">신국판
-                  <input type="radio" name="size_cd" value="02">국판
-                  <input type="radio" name="size_cd" value="03">46판
-                  <input type="radio" name="size_cd" value="04">46배판
-                  <input type="radio" name="size_cd" value="05">크라운판
-                  <input type="radio" name="size_cd" value="06">국배판
-                  <input type="radio" name="size_cd" value="07">타블로이드
+               <td><input type="radio" name="size_cd" value="01">신국판(A4, 152*225)
+                  <input type="radio" name="size_cd" value="02">국판(A5, 148*210)
+                  <input type="radio" name="size_cd" value="03">46판(B6, 128*182)
+                  <input type="radio" name="size_cd" value="04">46배판(B5, 182*257)
+                  <input type="radio" name="size_cd" value="05">크라운판(176*248)
+                  <input type="radio" name="size_cd" value="06">국배판(A4, 210*297)
+                  <input type="radio" name="size_cd" value="07">B5변형(46배판 변형, 188*240)
                   <input type="radio" name="size_cd" value="08">기타
             </tr>
             <tr>

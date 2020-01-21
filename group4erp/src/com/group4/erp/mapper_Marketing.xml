@@ -18,6 +18,7 @@
 					or upper(ei.tot_cost) like upper('%${searchKeyword}%')
 					or upper(ei.evnt_start_dt) like upper('%${searchKeyword}%')
 					or upper(ei.evnt_end_dt) like upper('%${searchKeyword}%')
+					or upper((select s.evnt_state_name from code_ad_state s where s.evnt_state_cd = ei.evnt_state_cd)) like upper('%${searchKeyword}%')
 				)			
 		</if>
 		
@@ -86,33 +87,40 @@
 	
 	
 	<select id='getEventList' parameterType="com.group4.erp.EventSearchDTO" resultType="com.group4.erp.EventDTO">
-	select * from (select zzz.*, rownum RNUM from (
-		select
-        	ei.evnt_no "evnt_no",
-            (select e.emp_name from employee e where e.emp_no= ei.emp_no) "emp_name",
-            (select c.event_type from code_event c where c.event_cd = ei.evnt_cd) "evnt_category",
-            ei.evnt_title "evnt_title",
-            ei.tot_est_cost||'' "tot_est_cost",
-            ei.tot_cost||'' "tot_cost",
-            to_char(ei.evnt_start_dt, 'yyyy-mm-dd') || '('||to_char(ei.evnt_start_dt, 'dy', 'nls_date_language=Korean' )||')' "evnt_start_dt",
-            to_char(ei.evnt_end_dt, 'yyyy-mm-dd') || '('||to_char(ei.evnt_start_dt, 'dy', 'nls_date_language=Korean' )||')' "evnt_end_dt",
-            (select s.evnt_state_name from code_ad_state s where s.evnt_state_cd = ei.evnt_state_cd) "evnt_stat",
-            ei.evnt_comment "evnt_comment",
-            ei.atchd_data "atchd_data"
-        from event_info ei
-		where 1=1	
-		and ei.evnt_state_cd != '0'
-		<include refid="eventWhere" />
-		<include refid="headerSort" />
-		
-		) zzz) where RNUM&gt;= ${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
+		select * from (select zzz.*, rownum RNUM from (
+			select
+				ei.evnt_no "evnt_no",
+				(select e.emp_name from employee e where e.emp_no= ei.emp_no) "emp_name",
+				(select c.event_type from code_event c where c.event_cd = ei.evnt_cd) "evnt_category",
+				ei.evnt_title "evnt_title",
+				ei.tot_est_cost||'' "tot_est_cost",
+				ei.tot_cost||'' "tot_cost",
+				to_char(ei.evnt_start_dt, 'yyyy-mm-dd') || '('||to_char(ei.evnt_start_dt, 'dy', 'nls_date_language=Korean' )||')' "evnt_start_dt",
+				to_char(ei.evnt_end_dt, 'yyyy-mm-dd') || '('||to_char(ei.evnt_start_dt, 'dy', 'nls_date_language=Korean' )||')' "evnt_end_dt",
+				(select s.evnt_state_name from code_ad_state s where s.evnt_state_cd = ei.evnt_state_cd) "evnt_stat",
+				ei.evnt_comment "evnt_comment",
+				ei.atchd_data "atchd_data"
+			from event_info ei
+			where 1=1	
+			and ei.evnt_state_cd != '0'
+			<include refid="eventWhere" />
+			<include refid="headerSort" />
+		) zzz) 
+		where RNUM&gt;=${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
 	</select>
 
 	 
-	<select id='getEventAllCnt' resultType="int">
-		select count(*) from event_info 
+	<select id='getEventAllCnt' parameterType="com.group4.erp.EventSearchDTO" resultType="int">
+		select count(*) from event_info ei
 		where 1=1
-		
+		and ei.evnt_state_cd != '0'
+		<include refid="eventWhere" />
+	</select>
+	
+	
+	<select id='getEventNumForApproval' resultType="int">
+		select count(*) from event_info ei
+		where 1=1
 	</select>
 	
 	
@@ -265,7 +273,7 @@
 	
 	
 	<update id="deleteEvnt" parameterType="map">	
-			update event_info set evnt_state_cd = 7
+			update event_info set evnt_state_cd = 0
 			where evnt_no in (
 			<foreach collection="array" item="evnt_no" index="index" separator=",">
 				#{evnt_no}
@@ -279,7 +287,8 @@
 				evnt_cd = #{evnt_cd},			
 				evnt_title = #{evnt_title},
 				evnt_start_dt = #{evnt_start_dt},
-				evnt_end_dt = #{evnt_end_dt}
+				evnt_end_dt = #{evnt_end_dt},
+				evnt_comment = #{evnt_comment}
 			where evnt_no = #{evnt_no}
 			
 	</update>
@@ -344,11 +353,18 @@
 	
 	<select id="getDailyOfflineSalesChart" resultType="com.group4.erp.SalesInfoDTO">
 		select
+            extract(year from add_months(sysdate, -1) )||'.' ||(extract(month from add_months(sysdate, -1) ) )||'.'||c.date_name "buy_dt",
+            (select count(*) "BOOK_ONLINE_QTY" from order_info o where to_char(o.order_dt, 'dd')=c.date_cd) "online_cnt",
+            (select count(*) "BOOK_OFFLINE_QTY" from buy_offline_info f where to_char(f.buy_dt, 'dd')=c.date_cd) "offline_cnt"
+        from code_date c
+        where c.date_cd&lt;=30
+	
+		<!-- select
     		count(*) "book_qty",
     		to_char(buy_dt, 'yy-mm-dd') "buy_dt"
     	from buy_offline_info
     	group by to_char(buy_dt, 'yy-mm-dd')
-    	order by 2
+    	order by 2 -->
 		
 	</select>
 	
@@ -382,9 +398,10 @@
 	</update>
 	
 	
-	<select id="getDailyOfflineSalesTotCnt" resultType="int">
+	<select id="getDailyOfflineSalesTotCnt" resultType="com.group4.erp.SalesInfoDTO">
 		select
-			count(*)
+			count(*) "tot_cnt",
+			sum(tot_cost) "tot_revenue"
 		from buy_offline_info
 	</select>
 	

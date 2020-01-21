@@ -24,19 +24,19 @@
     -->  
     
 	<sql id="bookList">
-            <if test="category_name!=null and category_name.length>0">
-            and
-          		<foreach collection="category_name" item="cat" open="(" separator="or" close=")">
-             		<if test="cat.equals('시&amp;소설')">
-                	  	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
-             		</if>
-             		<if test="cat.equals('사회')">
-                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
-            		</if>
-             		<if test="cat.equals('과학')">
-                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
-             		</if>
-             		<if test="cat.equals('IT')">
+		<if test="category_name!=null and category_name.length>0">
+        and
+        <foreach collection="category_name" item="cat" open="(" separator="or" close=")">
+        	<if test="cat.equals('시&amp;소설')">
+              	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+            </if>
+            <if test="cat.equals('사회')">
+            	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+            </if>
+            <if test="cat.equals('철학&amp;역사')">
+            	(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+            </if>
+             		<if test="cat.equals('IT&amp;과학')">
                   		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if>
              		<if test="cat.equals('예술')">
@@ -57,6 +57,12 @@
              		<if test="cat.equals('요리')">
                   		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
              		</if> 
+             		<if test="cat.equals('교재&amp;수험서')">
+                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+             		</if>
+             		<if test="cat.equals('어학')">
+                  		(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) =  #{cat}
+             		</if> 
              		
             	</foreach>
       	</if>
@@ -64,25 +70,28 @@
       <if test="size_cd!=null and size_cd.length>0">
       and
          <foreach collection="size_cd" item="size_cd" open="(" separator="or" close=")">
-             <if test="size_cd.equals('01')">
+             <if test="size_cd==1">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('02')">
+             <if test="size_cd==2">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('03')">
+             <if test="size_cd==3">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('04')">
+             <if test="size_cd==4">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('05')">
+             <if test="size_cd==5">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('06')">
+             <if test="size_cd==6">
                   b.size_cd =  #{size_cd}
              </if>
-             <if test="size_cd.equals('07')">
+             <if test="size_cd==7">
+                  b.size_cd =  #{size_cd}
+             </if>
+             <if test="size_cd==8">
                   b.size_cd =  #{size_cd}
              </if>
          </foreach>
@@ -308,10 +317,14 @@
 	</select>
 
 	<select id="getSize" resultType="java.util.HashMap">
-		select size_name as "size_name" from code_book_size order by 1
+		select 
+			size_cd as "size_cd",
+			size_name as "size_name" from code_book_size order by 1
 	</select>
 	<select id="getCategory" resultType="java.util.HashMap">
-		select cat_name as "cat_name" from code_category order by 1
+		select 
+			cat_cd "cat_cd",
+			cat_name as "cat_name" from code_category order by 1
 	</select>
 	
 	<select id="getInven_loc" parameterType="com.group4.erp.InvenSearchDTO" resultType="java.util.HashMap">

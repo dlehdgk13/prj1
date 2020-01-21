@@ -102,5 +102,17 @@
          nvl( (select count(*) from employee e where to_char(e.emp_resign_date, 'yyyymm')=(extract(year from sysdate)-1)||c.month_cd), 0) "resign_cnt"         
      	from code_month c
 	</select>
+	
+	
+	<select id="getCatInventoryChart" resultType="com.group4.erp.ChartDTO">
+		select
+		    (select cc.cat_name from code_category cc where cc.cat_cd=c.cat_cd)  "cat_name",
+    		nvl((select count(*) from book b where b.cat_cd=c.cat_cd), 0) "cnt"
+    	from code_category c, book b
+    	where b.cat_cd = c.cat_cd(+)
+    	group by c.cat_cd(+)
+    	order by c.cat_cd
+	</select>
+	
 		
 </mapper>

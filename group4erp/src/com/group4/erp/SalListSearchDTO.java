@@ -8,6 +8,7 @@ public class SalListSearchDTO {
 	private String emp_no;
 	private String sort;
 	private int my_emp_no;
+	
 	public int getMy_emp_no() {
 		return my_emp_no;
 	}

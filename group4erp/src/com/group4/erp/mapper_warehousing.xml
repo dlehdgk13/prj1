@@ -42,16 +42,20 @@
 		
  		<if test="(dateFrom!=null and dateFrom.length()>0)  or  (dateTill!=null and dateTill.length()>0)">
 	 		and( 
-	 	</if>	
+	 	</if>
+	 		
 	 	<if test="((dateFrom!=null and dateFrom.length()>0) and (dateTill==null or dateTill.length()==0))">
 	 		w.wh_dt &gt;= to_date( #{dateFrom}, 'YYYY-MM-DD') 
 	 	</if>
+	 	
 	 	<if test="(dateTill!=null and dateTill.length()>0 ) and (dateFrom==null or dateFrom.length()==0)">
 	 		w.wh_dt &lt;= to_date( #{dateTill}, 'YYYY-MM-DD') 
 	 	</if>
+	 	
 	 	<if test="(dateFrom!=null and dateFrom.length()>0)and (dateTill != null and dateTill.length()>0)">
 	 		( w.wh_dt &gt;= to_date( #{dateFrom}, 'YYYY-MM-DD') )  and ( w.wh_dt &lt;= to_date( #{dateTill}, 'YYYY-MM-DD') ) 
 	 	</if>
+	 	
 	 	<if test="(dateFrom != null and dateFrom.length()>0)  or  (dateTill != null and dateTill.length()>0)">
 	 		) 
 	 	</if> 	
@@ -93,6 +97,17 @@
 			      to_char(wh_dt,'YYYY-MM-DD (DY)', 'NLS_DATE_LANGUAGE=KOREAN') as "wh_dt"
 			      ,wh_no||'' as "wh_no"
 			      ,order_inven_no||'' as "order_inven_no"
+			      ,(select emp_name from employee where emp_no = (select emp_no from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no))) as "emp_name"
+			      ,(select to_char(order_dt,'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') from books_inven_order_info where order_inven_no = w.order_inven_no)||''  as "order_dt" 
+    			  ,(select order_stock_cnt from books_inven_order_info where order_inven_no = w.order_inven_no )||''  as "order_stock_cnt"  
+    			  ,(select cost from books_inven_order_info where order_inven_no = w.order_inven_no)||'' as "cost"
+    			  ,(select supply_rate from books_inven_order_info where order_inven_no = w.order_inven_no )||''  as "supply_rate"
+    		      ,(select to_char(store_req_dt,'YYYY-MM-DD DY', 'NLS_DATE_LANGUAGE=KOREAN') from books_inven_order_info where order_inven_no = w.order_inven_no)||'' as "store_req_dt" 
+    			  ,(select branch_name from code_branch where branch_cd = (select branch_cd from books_inven_order_info where order_inven_no = w.order_inven_no))||''  as "branch_name"  
+    			  ,(select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no) as "isbn"
+    			  ,(select book_name from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)  ) as "book_name"
+    			  ,(select publisher from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)  ) as "book_publisher" 
+    			  ,(select cat_name from CODE_CATEGORY where cat_cd = (select cat_cd from book where isbn13 = (select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no )) ) as "cat_name"     		
 			from warehousing_info w
 			where 1=1 <include refid="warehousingList"></include>  
 			<if test="sort!=null and sort.length()>0">

@@ -228,6 +228,10 @@ function inputData(selector, data) {
 	}
 }
 
+function numberFormat(inputNumber) {
+	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 //jQuery 실습 때 했던 짝수행 홀수행에 음영 색상 설정
 /*function inputBgColor() {
 	var trsObj = $("[name=boardTable] tr").next();

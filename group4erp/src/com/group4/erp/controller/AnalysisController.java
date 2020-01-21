@@ -189,12 +189,27 @@ public class AnalysisController {
 			empHireOrResign_data += "] ";
 		}
 		empHireOrResign_data += "]";
-			
+		
+		List<ChartDTO> catInventoryChart = this.analysisService.getCatInventoryChart();
+		String catInventory_chart_data = "[";
+		catInventory_chart_data += "['카테고리', '보유수량']";
+		
+		for(int i=0; i<catInventoryChart.size(); i++) {
+			catInventory_chart_data += ", ['";
+			catInventory_chart_data += catInventoryChart.get(i).getCat_name();
+			catInventory_chart_data += "', ";
+			catInventory_chart_data += catInventoryChart.get(i).getCnt();
+			catInventory_chart_data += "] ";
+		}
+		
+		catInventory_chart_data += "] ";
+		
 		mav.addObject("bookCategoryList", bookCategoryList);
 		mav.addObject("employee_chart_data", employee_chart_data);
 		mav.addObject("monthlyBook_reg_chart_data", monthlyBook_reg_chart_data);
 		mav.addObject("empHireOrResign_data", empHireOrResign_data);
 		mav.addObject("bookCategory_reg_chart_data", bookCategory_reg_chart_data);
+		mav.addObject("catInventory_chart_data", catInventory_chart_data);
 		
 		return mav;
 	}

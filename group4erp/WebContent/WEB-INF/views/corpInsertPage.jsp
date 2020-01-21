@@ -186,7 +186,7 @@
 				<td>사업분야</td>
 				<td>
 					<c:forEach items='${business_area}' var="business_area" varStatus="loopTagStatus">
-						<input type="checkbox" name="corp_business_area" value="${business_area.bus_area_name}">${business_area.bus_area_name}&nbsp;
+						<input type="checkbox" name="corp_business_area" value="${business_area.bus_area_code}">${business_area.bus_area_name}&nbsp;
 					</c:forEach>
 				</td>
 			</tr>

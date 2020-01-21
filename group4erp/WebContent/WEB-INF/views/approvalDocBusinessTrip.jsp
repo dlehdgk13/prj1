@@ -18,23 +18,23 @@
 		var e_work_comment = $(".BTripApprovalDoc [name=documentTable]").find("[name=e_work_comment]").val();
 		
 		
-		if(approvalYn==6) {
+		if( (approvalYn==6) && (e_work_comment=="") ){
 			alert("반려 시 사유를 기입해주세요.");
 
 			return;		
 		}
 	
 		$.ajax({
-			url : "/group4erp/updateDayOffApprovalProc.do",				//호출할 서버쪽 URL 주소 설정
+			url : "/group4erp/updateBTripApprovalProc.do",				//호출할 서버쪽 URL 주소 설정
 			type : "post",										//전송 방법 설정
 			data : $('.BTripApprovalDoc').serialize(),		//서버로 보낼 파라미터명과 파라미터값을 설정	
 			success : function(upCnt) {
 				if(upCnt==1) {
-					alert("결재 성공!");
+					alert("출장 결재 성공!");
 				
 					location.replace("/group4erp/viewApprovalList.do");
 				} else if(delCnt==0) {	
-					alert("결재 로직 실패!");
+					alert("출장 결재 로직 실패!");
 				
 				location.replace("/group4erp/viewApprovalList.do");
 
@@ -57,7 +57,7 @@
 		<table cellpadding="5" cellspacing="5" width="700" align="center">
 		
 		<tr>
-			<td align="right" ><table name="jikup" border="1" cellpadding="5" cellspacing="0"><tr><td width="90" align="center">기안자 </td><td  width="90" align="center">부서장</td> </tr> 
+			<td align="right" ><table name="jikup" border="1" cellpadding="5" cellspacing="0"><tr><td width="90" align="center">기안자 </td><td  width="90" align="center">부서장</td><td width="90" align="center">대표이사 </td> </tr>
 														<tr><td align="center">${myBTripApplyInfo.emp_name} </td><td align="center">
 																											<% String mgr_no = (String)session.getAttribute("mgr_emp_no"); 
 																													String emp = (String)session.getAttribute("emp_id");
@@ -71,12 +71,20 @@
 																												<% } else if(mgr_no==null && ceo_no!=null) { %>
 																													
 																													
-																													<label>${myBTripApplyInfo.mgr_name}</label>
+																													<label>${myDayOffApplyInfo.mgr_name}</label>
 																												
 																												<% } %>
 														
 																											</td>
-																											</tr></table>						
+																											
+																											
+																											<td>
+																												<% if(mgr_no == null) { %>
+																											
+																													<input type="radio" name="approvalYn" value="5">승인 &nbsp;
+																													<input type="radio" name="approvalYn" value="6">반려 &nbsp; 
+																												<% } %>
+																											</td></tr></table>											
 		</tr>
 			
 		<tr>

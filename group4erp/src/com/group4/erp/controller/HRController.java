@@ -128,6 +128,8 @@ public class HRController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main.jsp");
+		mav.addObject("subMenu", "viewEmpSalInfo");
+		mav.addObject("navigator", "[인사관리] → [급여지급내역]");
 	
 		String emp_no = (String)session.getAttribute("emp_id");
 		int my_emp_no = Integer.parseInt(emp_no);
@@ -136,9 +138,9 @@ public class HRController {
 		salListSearchDTO.setEmp_no(emp_no);
 	
 		TimeDTO timeDTO = this.hrservice.getTime();
-		//int emp_tot_cnt = this.hrservice.getEmpListAllCnt(salListSearchDTO);
 		
-		System.out.println("salListSearchDTO.getRowCnt=="+salListSearchDTO.getRowCntPerPage());
+		System.out.println("salListSearchDTO.getRowCntPerPage=="+salListSearchDTO.getRowCntPerPage());
+		System.out.println("salListSearchDTO.getSelectPageNo=="+salListSearchDTO.getSelectPageNo());
 		
 		int myPayCheckCnt = this.hrservice.getMyPayCheckCnt(my_emp_no);
 			
@@ -154,17 +156,17 @@ public class HRController {
 			if(myPayCheckCnt<beginRowNo) salListSearchDTO.setSelectPageNo(1);
 			
 		}
-
 		System.out.println("급여 컨트롤러 시작");
+		
 		List<SalaryDTO> myPayCheckList = this.hrservice.getSalaryInfo(salListSearchDTO);
+		
 		System.out.println("컨트롤러 급여명세서 조회 성공");
 		
 		
 		mav.addObject("myPayCheckList", myPayCheckList);
-		mav.addObject("salListSearchDTO", salListSearchDTO);
+		//mav.addObject("salListSearchDTO", salListSearchDTO);
 		mav.addObject("myPayCheckCnt", myPayCheckCnt);
-		mav.addObject("subMenu", "viewEmpSalInfo");
-		mav.addObject("navigator", "[인사관리] → [급여지급내역]");
+
 		mav.addObject("timeDTO", timeDTO);
 		
 		return mav;
@@ -346,35 +348,38 @@ public class HRController {
 	}
 
 	@RequestMapping(value = "/newEmpInfoProc.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public int newEmpjoinMemberProc(EmployeeDTO employeeDTO, @RequestParam("uploadBtn") MultipartFile multipartFile) {
-		int newEmpInsertCnt = 0;
+	   @ResponseBody
+	   public int newEmpjoinMemberProc(EmployeeDTO employeeDTO, @RequestParam("uploadBtn") MultipartFile multipartFile) {
+	      int newEmpInsertCnt = 0;
 
-		try {
-			String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
-			String originalFilename = multipartFile.getOriginalFilename();
-			if(originalFilename.isEmpty() != true){	
-				originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
-				//int length = originalFilename.length();
-				int position =  originalFilename.lastIndexOf(".");
-				String emp_email = employeeDTO.getEmp_email();
-				//System.out.println("emp_no=>"+emp_no);
-				String upFileName = emp_email + originalFilename.substring(position);
-				File localFile = new File(profilePath + upFileName);
-				//if(localFile.exists()==true){
-				//	localFile.delete();
-				//}
-				multipartFile.transferTo(localFile);
-				employeeDTO.setEmp_pic(upFileName);
-				newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
-			}
-		} catch (Exception e) {
-			System.out.println("<사원 등록 실패>");
-			System.out.println("예외 발생=>" + e);
-		}
+	      try {
+	         String profilePath = "C:/git/prj1/group4erp/WebContent/WEB-INF/resources/image/";
+	         String originalFilename = multipartFile.getOriginalFilename();
+	         if(originalFilename.isEmpty() != true){   
+	            originalFilename = originalFilename.trim().toLowerCase().replaceAll(" ", "");
+	            //int length = originalFilename.length();
+	            int position =  originalFilename.lastIndexOf(".");
+	            String emp_email = employeeDTO.getEmp_email();
+	            //System.out.println("emp_no=>"+emp_no);
+	            String upFileName = emp_email + originalFilename.substring(position);
+	            File localFile = new File(profilePath + upFileName);
+	            //if(localFile.exists()==true){
+	            //   localFile.delete();
+	            //}
+	            multipartFile.transferTo(localFile);
+	            employeeDTO.setEmp_pic(upFileName);
+	         }
+	         else {
+	            employeeDTO.setEmp_pic("newWithoutPic");
+	         }
+	         newEmpInsertCnt = this.hrservice.getNewEmpInsertCnt(employeeDTO);
+	      } catch (Exception e) {
+	         System.out.println("<사원 등록 실패>");
+	         System.out.println("예외 발생=>" + e);
+	      }
 
-		return newEmpInsertCnt;
-	}
+	      return newEmpInsertCnt;
+	   }
 
 	// ================================
 	// 직원 상세보기 수정화면에서 수정될 값들 받는 ajax

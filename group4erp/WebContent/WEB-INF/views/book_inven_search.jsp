@@ -39,6 +39,7 @@ $(document).ready(function(){
    inputData('[name=is_print]',"${invenSearchDTO.is_print}");
    inputData('[name=book_keyword]',"${invenSearchDTO.book_keyword}");
    inputData('[name=sort]',"${invenSearchDTO.sort}");
+   
    	<c:forEach items="${invenSearchDTO.category_name}" var="cat">
 		inputData( "[name=category_name]", "${cat}" );
 	</c:forEach>
@@ -146,9 +147,10 @@ $(document).ready(function(){
              -->
 				<tr>
 					<th>판형
-					<td align=left colspan=5><c:forEach
-							items="${requestScope.size}" var="size" varStatus="loopTagStatus">
-							<input type="checkbox" name="size_cd" value="${loopTagStatus.index+1}">${size.size_name}
+					<td align=left colspan=5>
+						<c:forEach items="${requestScope.size}" var="size" varStatus="loopTagStatus">
+							<input type="checkbox" name="size_cd" value="${loopTagStatus.index+1}" >${size.size_name}
+							
          	</c:forEach> <!-- 
             <input type="checkbox" name="size_cd" value="01">신국판
             <input type="checkbox" name="size_cd" value="02">국판
@@ -160,9 +162,8 @@ $(document).ready(function(){
             -->
 				<tr>
 					<th>지역
-					<td align=left colspan=5><c:forEach
-							items="${requestScope.inventory_loc}" var="inven"
-							varStatus="loopTagStatus">
+					<td align=left colspan=5>
+					<c:forEach items="${requestScope.inventory_loc}" var="inven" varStatus="loopTagStatus">
 							<input type="checkbox" name="inventory_loc" value="${loopTagStatus.index+1}">${inven.branch_name}
              </c:forEach>
 				<tr>
@@ -179,14 +180,12 @@ $(document).ready(function(){
 								value="y">판매중
 						<tr>
 								<th>키워드
-								<td colspan=5><input type="text" name="book_keyword"
-									size=78>
+								<td colspan=5><input type="text" name="book_keyword" size=78>
 			</table>
 			<!-- </div> -->
-			<br> <input type="button" value="  검색  "
-				onclick="goSearchBookInven();">&nbsp;&nbsp; <input
-				type="button" value="모두검색" onclick="goAllSearchBookInven();">&nbsp;&nbsp;
-			<input type="button" value="초기화" onclick="goAllReset();">
+			<br> <input type="button" value="검색" onclick="goSearchBookInven();">&nbsp;&nbsp; 
+				<input type="button" value="모두검색" onclick="goAllSearchBookInven();">&nbsp;&nbsp;
+				<input type="button" value="초기화" onclick="goAllReset();">
 
 			<table border=0 width=700>
 				<tr>
@@ -212,16 +211,16 @@ $(document).ready(function(){
 					 <c:choose>
 							<c:when test="${param.sort=='isbn13 desc'}">
 								<th width="14%" style="cursor: pointer"
-									onclick="$('[name=sort]').val(''); goSearchBookInven();">▼책번호
+									onclick="$('[name=sort]').val(''); goSearchBookInven();">▼책번호(ISBN13)
 							</c:when>
 							<c:when test="${param.sort=='isbn13 asc'}">
 								<th width="14%" style="cursor: pointer"
-									onclick="$('[name=sort]').val('isbn13 desc'); goSearchBookInven();">▲책번호
+									onclick="$('[name=sort]').val('isbn13 desc'); goSearchBookInven();">▲책번호(ISBN13)
 								
 							</c:when>
 							<c:otherwise>
 								<th width="14%" style="cursor: pointer"
-									onclick="$('[name=sort]').val('isbn13 asc'); goSearchBookInven();">책번호
+									onclick="$('[name=sort]').val('isbn13 asc'); goSearchBookInven();">책번호(ISBN13)
 							</c:otherwise>
 					</c:choose> 
 						

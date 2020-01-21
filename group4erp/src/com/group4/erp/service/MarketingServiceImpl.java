@@ -61,9 +61,9 @@ public class MarketingServiceImpl implements MarketingService {
 	}
 
 	@Override
-	public int getEventAllCnt() {
+	public int getEventAllCnt(EventSearchDTO eventSearchDTO) {
 		// TODO Auto-generated method stub
-		int eventAllCnt = this.marketingDAO.getEventAllCnt();
+		int eventAllCnt = this.marketingDAO.getEventAllCnt(eventSearchDTO);
 		
 		return eventAllCnt;
 	}
@@ -221,11 +221,19 @@ public class MarketingServiceImpl implements MarketingService {
 	}
 
 	@Override
-	public int getDailyOfflineSalesTotCnt() {
+	public SalesInfoDTO getDailyOfflineSalesTotCnt() {
 		// TODO Auto-generated method stub
-		int dailyOfflineSalesTotCnt = this.marketingDAO.getDailyOfflineSalesTotCnt();
+		SalesInfoDTO dailyOfflineSalesTotCnt = this.marketingDAO.getDailyOfflineSalesTotCnt();
 		
 		return dailyOfflineSalesTotCnt;
+	}
+
+	@Override
+	public int getEventNumForApproval() {
+		// TODO Auto-generated method stub
+		int eventNumForApproval = this.marketingDAO.getEventNumForApproval();
+		
+		return eventNumForApproval;
 	}
 
 }

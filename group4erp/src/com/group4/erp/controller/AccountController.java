@@ -197,6 +197,7 @@ public class AccountController {
 			mav.addObject("corp_tran_cnt", corp_tran_cnt);
 			mav.addObject("corp_tran_list", corp_tran_list);
 			mav.addObject("corpSearchDTO", corpSearchDTO);
+			mav.addObject("tranSpecSearchDTO", tranSpecSearchDTO);
 			//mav.addObject("tranSpecIssueList", tranSpecIssueList);
 			
 		} catch(Exception e) {

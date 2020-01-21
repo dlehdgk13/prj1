@@ -24,4 +24,6 @@ public interface AnalysisDAO {
 	
 	List<ChartDTO> getEmpHireOrResignChart();
 	
+	List<ChartDTO> getCatInventoryChart();
+	
 }

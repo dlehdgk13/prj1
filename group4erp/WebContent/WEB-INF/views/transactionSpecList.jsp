@@ -122,7 +122,7 @@
      <input type="hidden" name="sort">
      <input type="hidden" name="issueYn">
 		
-	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
+	
 	<table>
 		<tr height=10>
 			<td></td>
@@ -278,7 +278,7 @@
 						발급완료
 					</c:if>
 					<c:if test="${tranList.issueYn == 0}">
-						<input type="button" value="발급" onClick="issueTranSpec();"></td>
+						미발급<!-- <input type="button" value="발급" onClick="issueTranSpec();"> --></td>
 					</c:if>
 			</tr>
 			</c:forEach>
@@ -287,12 +287,18 @@
 		</tr><!-- 메인 목록 끝 -->
 	
 	</table>
+<<<<<<< HEAD
 	<c:if test="${corp_tran_cnt eq 0}">
 			<h5>해당 결과가 없습니다.</h5>
 	</c:if>
+=======
+	
+	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
+	
+>>>>>>> refs/remotes/master/master
 	<form name="tranSpecTable" method="post" action="/group4erp/viewTranSpecInfo.do">
 		
-	<input type="hidden" name="order_no">
+		<input type="hidden" name="order_no">
 	</form>
 	
 	

@@ -36,8 +36,6 @@
 					,"goSearch();"						//페이지 번호 클릭 후 실행할 자스코드
 				)
 			);
-
-		
 		inputData('[name=rowCntPerPage]',"${corpSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${corpSearchDTO.selectPageNo}");
 		inputData('[name=searchKeyword]',"${corpSearchDTO.searchKeyword}");
@@ -48,15 +46,25 @@
 
 	});
 	function goSearch() {
-		document.corpSearchForm.submit();
+		var keyword = $("[name=searchKeyword]").text();
+		$("#searchKeyword").val(keyword);
+
 	}
 	
 
 	function goSearchAll() {
 		document.corpSearchForm.reset();
+<<<<<<< HEAD
 		$('[name=corpSearchForm] [name=selectPageNo]').val("1");
 		$('[name=corpSearchForm] [name=rowCntPerPage]').val("10");
 		$("[name=corpSearchForm] [name=sort]").val('');
+=======
+
+		$('[name=selectPageNo]').val("1");
+		$('[name=rowCntPerPage]').val("15");
+		$("[name=sort]").val('');
+		
+>>>>>>> refs/remotes/master/master
 		goSearch();
 	}
 	
@@ -98,14 +106,19 @@
 		htmlCode += 			"<tr> <td>사업자번호</td> <td><input type='text' name='new_corp_no' value="+corp_no+"> </td> </tr>"
 		htmlCode += 			"<tr> <td>상호명 </td> <td><input type='text' name='corp_name' value='"+corp_name+"'> </td> </tr>"
 		htmlCode += 			"<tr> <td>사업자명</td> <td><input type='text' name='ceo_name' value='"+ceo_name+"'></td> </tr>"
-		htmlCode += 			"<tr> <td>사업분야</td> <td><input type='text' name='corp_business_area' value='"+business_area+"'></td> </tr>"
+		htmlCode += 			"<tr> <td>사업분야</td> <td> <input type='checkbox' name='corp_business_area' value='1'>IT" 
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='2'>통신"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value'3'>금융"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='4'>출판&미디어"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='5'>교육&학원<br>"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='6'>운송&물류"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='7'>학교"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='8'>기타</td> </tr>"
 		htmlCode += 			"<tr> <td>소재지</td> <td><input type='text' name='corp_addr' value='"+corp_addr+"'></td> </tr>"
 		htmlCode += 			"<tr> <td>연락처</td> <td><input type='text' name='corp_tel' value='"+corp_tel+"'></td> </tr>"
 		htmlCode += 			"<tr> <td>FAX</td> <td><input type='text' name='corp_fax' value='"+corp_fax+"'></td> </tr>"
 		htmlCode += 		"</table><br>"
-		//htmlCode += 		"<input type='button' value='저장' name='updateCorp' onClick='updateCorpInfoProc("+corp_no+");'>&nbsp;"
-		//htmlCode += 		"<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
-		htmlCode +=			"<button id= 'button' value='저장' name='updateCorp' onClick='updateCorpInfoProc('"+corp_no+"');'>저장</button> &nbsp;"
+		htmlCode +=			"<button id= 'button' name='updateCorp' onClick='updateCorpInfoProc("+corp_no+");'>저장</button> &nbsp;"
 		htmlCode += 		"<button id='closeTr' name='closeTr' onClick='closeThisTr(this);'>닫기</button>"
 		htmlCode +=         "<input type='hidden' name='corp_no' value="+corp_no+">"
 		htmlCode +=  	"</form>"
@@ -122,6 +135,7 @@
 		$("[name=updateCorpBtn]").val("수정");
 		
 	}
+
 	
 	function updateCorpInfoProc(corp_no) {
 
@@ -131,10 +145,10 @@
 			data : $('[name=updateCorpForm]').serialize(),		//서버로 보낼 파라미터명과 파라미터값을 설정			
 			success : function(upCnt) {
 				if(upCnt==1) {
-					alert("수정 성공!");
+					alert("업체 정보가 수정되었습니다.");
 					location.replace("/group4erp/viewCorpList.do");
 					
-				} else if(delCnt==-1) {	
+				} else if(upCnt==-1) {	
 					alert("업체가 이미 삭제되었습니다!");
 					
 					location.replace("/group4erp/viewCorpList.do");
@@ -176,7 +190,6 @@
 
 		$("[name=corp_no]").val(corp_no);
 
-		//alert($('[name=deleteCorpForm]').serialize());
 		$.ajax({
 			url : "/group4erp/deleteCorpProc.do",				//호출할 서버쪽 URL 주소 설정
 			type : "post",										//전송 방법 설정
@@ -219,15 +232,14 @@
 		<table border="0" cellpadding="5" cellspacing="5">
 			<tr valign="top">
 				<td align="right">[사업분야별]&nbsp;</td><td>
-				
-					<input type="checkbox" name="corp_business_area" value="IT">IT &nbsp;
-					<input type="checkbox" name="corp_business_area" value="통신">통신 &nbsp;
-					<input type="checkbox" name="corp_business_area" value="금융">금융 &nbsp;
-					<input type="checkbox" name="corp_business_area" value="출판&미디어">출판&미디어&nbsp;
-					<input type="checkbox" name="corp_business_area" value="교육&학원">교육&학원 &nbsp;<br>
-					<input type="checkbox" name="corp_business_area" value="운송&물류">운송&물류 &nbsp;
-					<input type="checkbox" name="corp_business_area" value="학교">학교 &nbsp;
-					<input type="checkbox" name="corp_business_area" value="기타">기타 &nbsp;		
+					
+					<c:forEach items="${requestScope.corp_business_area}" var="corp_business_area" varStatus="loopTagStatus">
+						<c:if test="${corp_business_area.bus_area_code eq '6'}">
+							<br>
+						</c:if>
+						<input type="checkbox" name="corp_business_area" value="${corp_business_area.bus_area_code}" >${corp_business_area.bus_area_name}
+						<!-- <input type="hidden" id="corp_business_area"> -->
+         			</c:forEach>
 				<%--<c:forEach items="${corp_business_area}" var="corp_business_area" varStatus="loopTagStatus">
 					<c:if test="${corp_business_area.bus_area_code eq '6'}">
 						<br>
@@ -239,6 +251,7 @@
 			</tr>
 			<tr>
 			<td align="right">[검색어]&nbsp;</td><td><input type="text" name="searchKeyword">&nbsp;&nbsp; <input type="button" value="검색" onClick="goSearch();">
+													   <!-- <input type="hidden" name="searchKeyword" id="searchKeyword" > -->
 														&nbsp;&nbsp;<input type="button" value="모두검색" onClick="goSearchAll();">
 														&nbsp;&nbsp;<input type="button" value="초기화" onClick="goReset();">
 														 </td>
@@ -246,12 +259,20 @@
 	</table>
 
 
-<table class="corpListMain" border="0" cellpadding="5" cellspacing="5">
+
+<input type="button" value="거래처 추가" onClick="insertCorp();">
+<input type="button" value="거래처 삭제" onClick="deleteCorp();">
+
+<table class="tab1" border="0" cellpadding="5" cellspacing="5">
 	<tr>
-		<td align="center"><div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
+		<td align="center">
 	
 	</tr>
 	<tr>
+<<<<<<< HEAD
+=======
+	<!-- <form name="corpSearchRowPageForm" method="post" action="/group4erp/viewCorpList.do"> -->
+>>>>>>> refs/remotes/master/master
 		<td align="right">[전체] : ${corpListCnt}개&nbsp;&nbsp;&nbsp;&nbsp;
 	            <select name="rowCntPerPage">
 	               <option value="10">10</option>
@@ -260,6 +281,11 @@
 	               <option value="25">25</option>
 	               <option value="30">30</option>
 	            </select> 행보기 </td>
+<<<<<<< HEAD
+=======
+	<!-- </form> -->
+	</form> 
+>>>>>>> refs/remotes/master/master
 	</tr>
 	<tr>
 		<td> 
@@ -385,8 +411,8 @@
 
 
 <br>
-<input type="button" value="거래처 추가" onClick="insertCorp();">
-<input type="button" value="거래처 삭제" onClick="deleteCorp();">
+
+<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
 
 <form name="deleteCorpForm" method="post" action="/group4erp/deleteCorpProc.do">
 	<input type="hidden" name="corp_no">
