@@ -22,12 +22,6 @@
 		);
 	
 		$('[name=rowCntPerPage]').change(function(){
-<<<<<<< HEAD
-=======
-
-			inputData('[name=selectPageNo]',  $('[name=empSalForm] [name=selectPageNo]').val("1"));			
-			inputData('[name=rowCntPerPage]',  $('[name=outerBorder] [name=rowCntPerPage]').val());
->>>>>>> refs/remotes/master/master
 			goSearch();
 		});
 
@@ -47,26 +41,9 @@
 		//$('[name=empSalForm] [name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
 		//$('[name=empSalForm] [name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
 		
-<<<<<<< HEAD
 		inputData('[name=rowCntPerPage]', "${salListSearchDTO.rowCntPerPage}");
 		inputData('[name=selectPageNo]',"${salListSearchDTO.selectPageNo}");
 		inputData('[name=sort]',  "${salListSearchDTO.sort}");
-		/* $('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
-		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
-		$('[name=sort]').val("${salListSearchDTO.sort}"); */
-=======
-		$('[name=rowCntPerPage]').val("${salListSearchDTO.rowCntPerPage}");
-		$('[name=selectPageNo]').val("${salListSearchDTO.selectPageNo}");
-		$('[name=sort]').val("${salListSearchDTO.sort}");
->>>>>>> refs/remotes/master/master
-
-<<<<<<< HEAD
-		//$('[name=rowCntPerPage]').val($('[name=empSalForm] [name=rowCntPerPage]').val());
-		//$('[name=selectPageNo]').val($('[name=empSalForm] [name=selectPageNo]').val());
-		
-		//inputData("[name=sort]", "${salListSearchDTO.sort}");
-=======
->>>>>>> refs/remotes/master/master
 	});
 	
 	
@@ -90,33 +67,10 @@
 	직책 : ${jikup}	&nbsp;&nbsp; 성명 :${emp_name}  <br>
 	
 	<form name="empSalForm" method="post" action="/group4erp/viewEmpSalInfo.do">
-<<<<<<< HEAD
-
-		
 		<table>
 			<tr height=10>
 				<td></td>
-=======
-
-		<input type="hidden" name="selectPageNo">
-		<input type="hidden" name="sort">
-
-	
-		<table class="tab" cellpadding="5" cellspacing="5">
-			<tr>			
-				<td align="right">
-	        	[전체] : ${myPayCheckCnt}건&nbsp;&nbsp;&nbsp;&nbsp;
-	           	 <select name="rowCntPerPage">
-	              		<option value="10">10</option>
-	               		<option value="15">15</option>
-	               		<option value="20">20</option>
-	               		<option value="25">25</option>
-	               		<option value="30">30</option>
-	            	</select> 행보기
-	    		</td>
->>>>>>> refs/remotes/master/master
 			</tr>
-<<<<<<< HEAD
 		</table>
 			
 		<input type="hidden" name="selectPageNo">
@@ -142,12 +96,6 @@
 		<tr>
 			<td>
 				<table class="empSalInfo tab" name="empSalInfo" cellpadding="5" cellspacing="5">
-=======
-			</form>
-			<tr>
-				<td>
-					<table class="empSalInfo tab" cellpadding="5" cellspacing="5">
->>>>>>> refs/remotes/master/master
 				
 					<tr align="center">
 						<th rowspan="2">번호</th>
@@ -308,13 +256,8 @@
 		</tr>
 	
 	</table>
-<<<<<<< HEAD
-	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
-=======
+		<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div><br>
 	
-	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div><br>
-	
->>>>>>> refs/remotes/master/master
 	</form>
 
 	<h5>귀하의 노고에 감사드립니다.</h5>
