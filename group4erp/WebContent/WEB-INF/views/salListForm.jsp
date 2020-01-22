@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "/WEB-INF/views/common.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,6 +12,7 @@
      <meta name="author" content="Dashboard">
      <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
      <meta http-equiv="Conpatible" content="no-cache"/>
+     
    <title>급여지급내역(직원별)</title>
    <link href="${ctRootImg}/favicon.png" rel="icon">
      <link href="${ctRootImg}/apple-touch-icon.png" rel="apple-touch-icon">
@@ -50,9 +53,18 @@
       }
      </style>
   
-<script>
 
+   <script type="text/javascript"></script>
+   
+   
+   <script type="text/javascript">
    $(document).ready(function(){
+
+      console.log("ready chart");
+      google.charts.load('current', {'packages' : ['corechart'] } );
+      google.charts.setOnLoadCallback(drawChart);
+      console.log("end chart");
+      
    
       headerSort("salListTable", 0);
 
@@ -84,7 +96,27 @@
       inputData('[name=rowCntPerPage]',"${salListSearchDTO.rowCntPerPage}");
       inputData('[name=selectPageNo]',"${salListSearchDTO.selectPageNo}");
    });
-
+   
+   function drawChart() {
+      //console.log("${sal_chart_data} ", ${sal_chart_data});
+      var data = google.visualization.arrayToDataTable(${sal_chart_data});
+      var options = {
+            title: '직급별 평균 연봉',
+            width :1400, 
+            height: 700,
+            lineWidth:20,
+            colors:['#4ECDC4','#4ECDC4'],
+            animation:{
+               "startup": true,
+                 duration: 1000,
+                 easing: 'out',
+               }
+      };
+      
+      var chart = new google.visualization.BarChart(document.getElementById('salaryChart'));
+      chart.draw(data, options);
+   }
+   
    function goSearch() {
       document.empSalSearchForm.submit();
    }
@@ -141,6 +173,13 @@
       });
 
    }
+
+
+
+
+
+   
+      
 
 </script>
 
@@ -269,7 +308,7 @@
               <li>
                 <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
               <li>
@@ -322,7 +361,12 @@
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper" style="text-align:left;">
-        <h3><i class="fa fa-angle-right"></i> ${timeDTO.now_year}년도&nbsp;${timeDTO.now_month}월분 급여대장</h3>
+       <table width=99%>
+           <tr>
+              <td> <h3><i class="fa fa-angle-right"></i> ${timeDTO.now_year}년도&nbsp;${timeDTO.now_month}월분 급여대장</h3> </td>
+                <td align=right> <button type="button" class="btn btn-theme04" onclick="goPayCheck();"><i class="fa fa-money"></i> 급여 지급</button> </td>
+             </tr>
+      </table>
         <div class="row">
           <div class="col-md-12">
             <div class="content-panel">
@@ -435,21 +479,24 @@
           <!-- /col-md-12 -->
         </div>
         <br>
-        <table width=99%>
-        	<tr>
-        	<td align=center>
-        		<button type="button" class="btn btn-theme02" onclick="goPayCheck();"><i class="fa fa-check"></i> 급여 지급</button>
-        </table>
+
+        
+        <div class="col-md-12 mt">
+            <div class="content-panel">
+              <h4><i class="fa fa-angle-right"></i> 직급별 평균연봉 차트</h4>
+            <div id="salaryChart" style="width:100%; height: 700px;"></div>
+            </div>
+          </div>
         <!-- /row -->
       </section>
     </section>
     
        <br>
        <center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      
+      <!-- 
           <input type="button" value="급여 지급" onClick="goPayCheck();">
       <input type="button" value="차트보기" onClick="goChart();">
-            
+             -->
       
       
       <form name="salListForm" method="post" action="/group4erp/viewEmpSalInfo.do">
@@ -459,6 +506,7 @@
     
     <!-- /MAIN CONTENT -->
     <!--main content end-->
+    
     
     
     
@@ -500,7 +548,9 @@
   <!--common script for all pages-->
   <script src="${ctRootlib}/common-scripts.js?ver=1"></script>
   <!--script for this page-->
-  
+   <script src = "https://www.google.com/jsapi"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
 </body>
 
 </html>

@@ -188,9 +188,10 @@ $(document).ready( function() {
          , data : $('[name=checkIDProc1]').serialize()
          , success : function(check){
             if(check.emp_no){
-               if(check.emp_no.length<6){
+               var empNo = check.emp_no+'';
+               if(empNo.length <= 5){
                   //$(".noAprroval").show( 1000 );
-                  alert('미승인');
+                  //alert('미승인');
                   //$(".newEmpDiv").show();
                   //$("[name=jumin_num]").remove();
                   $("[name=jumin_num]").replaceWith("<i id='unconfirmed'><font style='color:blue;'>미승인 사원입니다.</font></i>");
@@ -198,7 +199,7 @@ $(document).ready( function() {
                   //$(".noAprroval").css( {"top":y,"left":x} );
                }
                else{
-                  alert("사번:"+check.emp_no+" 비밀번호:"+check.emp_pwd);
+                  //alert("사번:"+check.emp_no+" 비밀번호:"+check.emp_pwd);
                   //$(".newEmpDiv").show();
                   //$("[name=jumin_num]").remove();
                   //console.log($(".newEmpDiv").is(":visible"));
@@ -331,6 +332,7 @@ $(document).ready( function() {
    }
    
 </script>
+
 <!-- style="display:none" -->
 </head>
 <body>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
