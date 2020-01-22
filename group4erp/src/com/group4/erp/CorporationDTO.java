@@ -24,6 +24,7 @@ public class CorporationDTO {
 	public void setCorp_business_name(String corp_business_name) {
 		this.corp_business_name = corp_business_name;
 	}
+
 	public String getRNUM() {
 		return RNUM;
 	}

@@ -33,7 +33,6 @@
 		</if>
 	</sql>
 
-	
 
 	<sql id="whereCondition">
 		<if test="searchKeyword !=null and searchKeyword.length()>0">
@@ -81,12 +80,13 @@
 		</if>
 	</sql>
 
+
 	<select id='getCorpListCnt' parameterType="com.group4.erp.CorpSearchDTO" resultType="int">
 		select count(*) from corporation_cus cc
-		where cc.is_on_business='y'
-		and 1=1
+		where 1=1
+		and cc.is_on_business='y'
 		<include refid="whereCondition" />
-		<!-- <include refid="corpListCntWhere" /> -->
+
 	</select>
 	
 	
@@ -112,6 +112,9 @@
 		where RNUM&gt;= ${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
 	</select>
 	
+
+	
+
 	
 	<select id='getCorpInfo' parameterType="String" resultType="com.group4.erp.CorporationDTO">
 		
@@ -238,7 +241,7 @@
 		</if>	
 	</sql>
 	
-	<select id='getTranSpecCnt' parameterType = "int"> <!--  resultType="int" -->
+	<select id='getTranSpecCnt' parameterType = "int" resultType="int">
 		select count(*) from corp_order_info where order_books_no = #{order_books_no}
 		
 	</select>
