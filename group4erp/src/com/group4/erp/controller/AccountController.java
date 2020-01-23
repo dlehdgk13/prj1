@@ -219,7 +219,7 @@ public class AccountController {
 		try {
 			
 			int tranSpec_cnt = this.accountService.getTranSpecCnt(order_no);
-			List<TranSpecDTO> tranSpecList = this.accountService.getTranSpecList(order_no);
+			TranSpecDTO tranSpecList = this.accountService.getTranSpecList(order_no);
 			
 			mav.addObject("tranSpec_cnt", tranSpec_cnt);
 			mav.addObject("tranSpecList", tranSpecList);
