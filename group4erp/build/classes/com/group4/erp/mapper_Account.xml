@@ -262,7 +262,8 @@
     		co.books_qty "books_qty",
     		(select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty "tot_cost",
     		((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty)*0.1||'' "tax",
-    		to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "order_dt"
+    		to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "order_dt",
+    		((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty) - (((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty)*0.1) "tradeTot"
     	from corp_order_info co
     	where co.order_books_no = #{order_books_no}
 	</select>

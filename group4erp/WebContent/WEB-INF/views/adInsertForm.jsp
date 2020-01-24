@@ -13,6 +13,7 @@
 <script>
 
 	$(document).ready(function() {
+		showTime();
 		$("[name=open_req_dt]").datepicker({
    		 	onSelect: function() { 
    	 		//var date = $('#datepicker').datepicker({ dateFormat: 'yyyy-mm-dd' }).val();

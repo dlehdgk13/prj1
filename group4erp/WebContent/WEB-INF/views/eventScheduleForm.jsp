@@ -1,15 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file = "/WEB-INF/views/common.jsp" %>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>이벤트 행사 현황</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <meta http-equiv="Conpatible" content="no-cache"/>
+  <title>Dashio - Bootstrap Admin Template</title>
+
+ <!-- Favicons -->
+  <link href="${ctRootImg}/favicon.png" rel="icon">
+  <link href="${ctRootImg}/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="${ctRootlib}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--external css-->
+  <link href="${ctRootlib}/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="${ctRootcss}/style.css" rel="stylesheet">
+  <link href="${ctRootcss}/style-responsive.css" rel="stylesheet">
+
+  <!-- =======================================================
+    Template Name: Dashio
+    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
+</head>
+
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger{cursor: pointer;}
@@ -32,6 +55,7 @@
    border-width: thin;
 }
 </style>
+
 <script>
 
 	$(document).ready(function() {
@@ -41,7 +65,7 @@
 		inputData("[name=evnt_no]", evnt_no);
 			
 		$("#evnt_start_dt").datepicker({
-			
+			dateFormat : 'yy-mm-dd',
 			onClose: function( selectedDate ) {   
         		$("#evnt_end_dt").datepicker( 'option', 'minDate', selectedDate );
 			}, 
@@ -53,7 +77,7 @@
 		});
 		
 		$("#evnt_end_dt").datepicker({
-			
+			dateFormat : 'yy-mm-dd',
 			onSelect: function() { 
     			//var date = $('#datepicker').datepicker({ dateFormat: 'yyyy-mm-dd' }).val();
 				 var dateObject = $(this).datepicker('getDate');
@@ -282,93 +306,326 @@
 		});
 	}		
 
-	</script>
-</head>
-<body><center>
-<h1>[이벤트 신청 페이지]</h1>
-	<form name="eventScheduleForm" method="post" enctype="multipart/form-data">
-		<table class="tab" cellpadding="5" cellspacing="5">
-			<tr>
-				<td colspan="2">이벤트 일련번호</td><td colspan="2"> 
-					<c:if test="${myEventReApproval.evnt_no != null}">
-						<span id="event_no">"${myEventReApproval.evnt_no}"</span> </td>
+	
+	function goReset(){
+		document.eventScheduleForm.reset();
+	}
+	
+	function goBack(){
+		history.go(-1);
+	}
+	
+</script>
+
+
+<body>
+  <section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+      <div class="sidebar-toggle-box">
+        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+      </div>
+      <!--logo start-->
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <!--logo end-->
+      <div class="nav notify-row" id="top_menu">
+        <!--  notification start -->
+        <ul class="nav top-menu">
+          <!-- settings start -->
+          <!-- notification dropdown end -->
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
+          </li>
+        </ul>
+        <!--  notification end -->
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
+    </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+          <p class="centered">
+            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+          </p>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
+          <li class="mt">
+            <a href="/group4erp/goMainTest.do">
+              <i class="fa fa-dashboard"></i>
+              <span>메인페이지</span>
+              </a>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-desktop"></i>
+              <span>업무 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/goMyCareBookList.do"><i class="fa fa-book"></i>담당 도서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
+              </li>
+              <li>
+                <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
+              </li>
+              <li>
+                <a href="/group4erp/goEmpDayOffjoin.do"><i class="fa fa-edit"></i>휴가 신청</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-shopping-cart"></i>
+              <span>재고 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/goBookList.do"><i class="fa fa-info-circle"></i>도서정보조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goReleaseList.do"><i class="fa fa-list"></i>출고현황조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goWarehousingList.do"><i class="fa fa-list"></i>입고현황조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/goReturnOrderList.do"><i class="fa fa-list"></i>반품현황조회</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a class="active" href="javascript:;">
+              <i class="fa fa-calendar"></i>
+              <span>마케팅 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewSalesInfoList.do"><i class="fa fa-money"></i>판매현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEventList.do"><i class="fa fa-gift"></i>이벤트행사 현황</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-users"></i>
+              <span>인사 관리</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-krw"></i>
+              <span>회계 관리</span>
+              </a>
+            <ul class="sub">
+              <li class="active">
+                <a href="/group4erp/viewTranSpecIssueList.do"><i class="fa fa-list"></i>거래명세서 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewTranSpecList.do"><i class="fa fa-file-text"></i>사업자 거래내역 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewCorpList.do"><i class="fa fa-link"></i>거래처 현황 조회</a>
+              </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="javascript:;">
+              <i class=" fa fa-bar-chart-o"></i>
+              <span>전략 분석</span>
+              </a>
+            <ul class="sub">
+              <li>
+                <a href="/group4erp/viewBestKeywdAnalysis.do"><i class="fa fa-search"></i>키워드 검색 자료 조회</a>
+              </li>
+              <li>
+                <a href="/group4erp/viewOurCompanyReport.do"><i class="fa fa-building-o"></i>회사현황</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+      <section class="wrapper">
+        <table border=0 cellpadding=0 cellspace=0 width="98%">
+      	<tr>
+      	<td widtj=50%>
+      	<h3 align=left><i class="fa fa-angle-right"></i>이벤트 등록</h3>
+      	<td widtj=50%>
+      	<h3 align=right><i class="fa fa-arrow-left" onclick="goBack();" style="cursor:pointer;"></i></h3>
+        </table>
+        <!-- BASIC FORM ELELEMNTS -->
+        <div class="row mt">
+        	<div class="col-md-3"></div>
+          <div class="col-lg-6 col-md-6 col-sm-6" align=center>
+            <h4 class="title">상세정보 입력</h4>
+            <div id="message"></div>
+            <form name="eventScheduleForm" method="post" enctype="multipart/form-data">
+
+              <div class="form-group">
+              <strong>일렬번호 : </strong>
+                	<c:if test="${myEventReApproval.evnt_no != null}">
+						<span id="event_no">"${myEventReApproval.evnt_no}"</span>
 					</c:if>
 					<c:if test="${empty myEventReApproval.evnt_no }">
-						<span id="event_no">EV00-00${eventNo}</span> </td>
-					</c:if>				
-			</tr>
-			<tr>
-				<td colspan="2">담당자 </td><td colspan="2">${emp_name} </td>
-			</tr>
-			<tr>
-				<td>행사종류</td><td><select name="evnt_cd"><option value="1">매대판매행사</option>
-										<option value="2">야외판매</option>
-										<option value="3">할인전</option>
-										<option value="4">기부행사</option>
-										<option value="5">온라인 설문조사</option>
-										<option value="6">저자강연회</option>
-										<option value="7">선착순증정</option>
-								</select></td><td>행사명</td><td><input type="text" name="evnt_title"></td>
-			</tr>
-			<tr>
-				<td colspan="2">이벤트 예정 일시 </td><td colspan="2">
-					<c:if test="${myEventReApproval.evnt_start_dt != null}">
-								<input type="text" id="evnt_start_dt" name="evnt_start_dt" value="${myEventReApproval.evnt_start_dt }"> ~
-					</c:if> 
-					<c:if test="${empty myEventReApproval.evnt_start_dt}">
-								<input type="text" id="evnt_start_dt" name="evnt_start_dt" > ~
+						<span id="event_no">EV00-00${eventNo}</span>
 					</c:if>
-					
-					<c:if test="${myEventReApproval.evnt_end_dt != null }">
-								<input type="text" id="evnt_end_dt" name="evnt_end_dt" value="${myEventReApproval.evnt_end_dt }"></td>
-					</c:if>
-					
-					<c:if test="${empty myEventReApproval.evnt_end_dt}">
-								<input type="text" id="evnt_end_dt" name="evnt_end_dt" ></td>	  
-					</c:if>
-
-			</tr>
-			<tr>
-				<c:if test="${myEventReApproval.tot_est_cost != null}">
-					<td colspan="2">예상 소요 경비 </td><td colspan="2"><input type="text" name="tot_est_cost" value="${myEventReApproval.tot_est_cost}">원</td>
-				</c:if>
-				
-				<c:if test="${empty myEventReApproval.tot_est_cost}">
-					<td colspan="2">예상 소요 경비 </td><td colspan="2"><input type="text" name="tot_est_cost">원</td>
-				</c:if>
-				</td>
-			</tr>
-			<!-- <tr>
-				<td colspan="2">첨부자료</td><td colspan="2"><input type="file" class="atchd_data" name="atchd_data">
-			</tr> -->
-			<tr>
-				<td colspan="2">비고</td><td colspan="2"><textarea name="evnt_comment" cols="40" rows="10"></textarea></td>
-			</tr>
-		
-		</table><br>
-		<script>
-	    	$("#evnt_start_dt").datepicker({ dateFormat: 'yy-mm-dd', minDate : "+1M", maxDate : "+3M"});
-	    	
-	    	
-			$("#evnt_start_dt").change(function() {
-				evnt_from_date = $("#evnt_start_dt").val();
-				//alert(event_from_date);
-				//$("evnt_end_dt").datepicker('option', 'minDate', evnt_from_date);
-			});
-			
-			evnt_from_date = $("#evnt_start_dt").val();
-			$("#evnt_end_dt").datepicker({ dateFormat: 'yy-mm-dd', minDate : '+1M', maxDate : "+3M" });
-		
-    	
-	    </script>
-	    
-		<input type="button" value="결재" onClick="checkForm();">
-		<input type="reset" value="초기화">
-		<input type="hidden" name="evnt_no" value="${evnt_no}">
-		<input type="hidden" name="emp_no" value="${emp_no}">
+              </div>
+              <div class="form-group">
+               <p class="form-control-static"> <strong>담당자 : </strong> ${emp_name}</p>
+              </div>
+              <div class="form-group">
+              <strong>종류 : </strong>
+                <select name="evnt_cd">
+                	<option value="">------------------------------------------------------</option>
+                	<option value="1">매대판매행사</option>
+					<option value="2">야외판매</option>
+					<option value="3">할인전</option>
+					<option value="4">기부행사</option>
+					<option value="5">온라인 설문조사</option>
+					<option value="6">저자강연회</option>
+					<option value="7">선착순증정</option>
+				</select>
+              </div>
+              <div class="form-group">
+                <input type="text" name="evnt_title" class="form-control" placeholder="이벤트 명을 입력하시오.">
+                <div class="validate"></div>
+              </div>
+              <div class="form-group">
+              	<div class="input-group input-large">
+             		 <input type="text" class="form-control dpd1" id="evnt_start_dt" name="evnt_start_dt" placeholder="시작일을 입력하시오">
+                      <span class="input-group-addon">~</span>
+                      <input type="text" class="form-control dpd2" id="evnt_end_dt" name="evnt_end_dt" placeholder="종료일을 입력하시오">
+                 </div>
+              </div>
+              
+              <div class="form-group">
+                <input type="text" name="tot_est_cost" class="form-control" placeholder="금액을 입력하시오.">
+                <div class="validate"></div>
+                <span align=left class="help-block"><h5>* 행사 진행시 필요한 금액을 입력하세요</h5></span>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="evnt_comment" placeholder="기타사항을 입력하시오." rows="5"></textarea>
+                <div class="validate"></div>
+                <span align=left class="help-block"><h5>* 추가사항이나 주의할 사항 등을 적어주세요</h5></span>
+              </div>
+              <input type="hidden" name="evnt_no" value="${evnt_no}">
+			  <input type="hidden" name="emp_no" value="${emp_no}">
 	</form>
+			  <br>
+              <div class="form-send">
+                <button type="button" class="btn btn-theme02" onclick="checkForm();"><i class="fa fa-check"></i> 등록</button>
+                <button type="button" class="btn btn-default" onclick="goReset();"><input type="image" src="/group4erp/resources/image/reset.png" width="15" height="15">초기화</button>
+              </div>
+
+            
+          </div>
+        </div>
+        <!-- /row -->
 
 
-</center>
+        <!-- /row -->
+      </section>
+      <!-- /wrapper -->
+    </section>
+    <!-- /MAIN CONTENT -->
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+      <div class="text-center">
+        <p>
+			KOSMO 자바&빅데이터 과정 팀프로젝트
+        </p>
+        <div class="credits">
+        <font style="font-size:12pt;">
+        ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
+         </font>
+          <!--
+            You are NOT allowed to delete the credit link to TemplateMag with free version.
+            You can delete the credit link only if you bought the pro version.
+            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
+            Licensing information: https://templatemag.com/license/
+          -->
+        </div>
+        <a href="basic_table.html#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="${ctRootlib}/jquery/jquery.min.js"></script>
+  <script src="${ctRootlib}/bootstrap/js/bootstrap.min.js"></script>
+  <script class="include" type="text/javascript" src="${ctRootlib}/jquery.dcjqaccordion.2.7.js"></script>
+  <script src="${ctRootlib}/jquery.scrollTo.min.js"></script>
+  <script src="${ctRootlib}/jquery.nicescroll.js" type="text/javascript"></script>
+  <!--common script for all pages-->
+  <script src="${ctRootlib}/common-scripts.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
 </body>
+
 </html>

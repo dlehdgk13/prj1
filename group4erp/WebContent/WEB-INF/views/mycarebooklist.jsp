@@ -97,6 +97,8 @@
 
       //goSearchMyWorkList();
       
+      startTime();
+      
       $('[name=rowCntPerPageDown]').change(function(){
 		   $('[name=rowCntPerPage]').val( $(this).val() );
 		   goSearchMyWorkList();
@@ -284,12 +286,12 @@
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
-     		 <table>
-        		 <tr>
-        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
-         		</tr>
-      		</table>
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -300,10 +302,21 @@
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -317,7 +330,7 @@
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -607,11 +620,11 @@
 			         <tr>   
 			         <td align=center>${myWorkListAllCnt-(myWorkSearchDTO.selectPageNo*myWorkSearchDTO.rowCntPerPage-myWorkSearchDTO.rowCntPerPage+1+loopTagStatus.index)+1}
 			            <td align=center>${MyCareBookList.ISBN13}
-			            <td align=left>${MyCareBookList.book_name}
-			            <td align=center>${MyCareBookList.cat_name}
-			            <td align=center>${MyCareBookList.book_price}
+			            <td align=left>${MyCareBookList.BOOK_NAME}
+			            <td align=center>${MyCareBookList.CAT_NAME}
+			            <td align=center>${MyCareBookList.BOOK_PRICE}
 			            <td align=center>${MyCareBookList.ISBN_cnt}
-			            <td align=center>${MyCareBookList.branch_name}
+			            <td align=center>${MyCareBookList.BRANCH_NAME}
 			            <td align=center>
 			               <c:if test="${MyCareBookList.ISBN_cnt < 100}">
 			                  <button type='button' class='btn btn-default' onClick="booKInvenFill(this,'${MyCareBookList.ISBN13}');"><input type='image' src='/group4erp/resources/image/order_book.png' width='12' height='12'>발주</button> 

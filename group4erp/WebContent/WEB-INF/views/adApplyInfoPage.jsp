@@ -13,6 +13,7 @@
 <script>
 
 	$(document).ready(function() {
+		showTime();
 		headerSort("adApplyTable", 0);
 
 		setTableTrBgColor(

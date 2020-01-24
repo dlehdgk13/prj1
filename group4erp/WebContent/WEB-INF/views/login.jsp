@@ -58,7 +58,8 @@
    align:center;
 }
 body{
-  background: #797979;
+  /* background: #2f323a; */
+  background: #444c57;
   color:white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <html>
+
+ 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,10 +66,11 @@
    
 
       $(document).ready(function(){
-         getTime();
-         headerSort("dayOffList", 0);
+         
+    	  startTime();
 
-         $('[name=rowCntPerPage]').change(function(){
+         $('[name=rowCntPerPageDown]').change(function(){
+  		   $('[name=rowCntPerPage]').val( $(this).val() );
             goDayoffSearch();
          });
          
@@ -86,16 +89,9 @@
          );
 
          $("[name=dayOffList]").addClass('dayOffList');
-         
-         setTableTrBgColor(
-               "dayOffList",         //테이블 class 값
-               "${headerColor}",      //헤더 tr 배경색
-               "${oddTrColor}",      //홀수행 배경색
-               "${evenTrColor}",      //짝수행 배경색
-               "${mouseOverColor}"      //마우스 온 시 배경색
-         );
 
-         inputData('[name=rowCntPerPage]',"${hrListSearchDTO.rowCntPerPage}");
+
+         inputData('[name=rowCntPerPageDown]',"${hrListSearchDTO.rowCntPerPage}");
          inputData('[name=selectPageNo]',"${hrListSearchDTO.selectPageNo}");
          inputData("[name=dy_keyword]", "${hrListSearchDTO.dy_keyword}");
          inputData("[name=sort]", "${hrListSearchDTO.sort}");
@@ -699,12 +695,12 @@
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
+          <li><!-- 
             <table>
                <tr>
-                  <td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
                </tr>
-            </table>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -715,10 +711,21 @@
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -732,7 +739,7 @@
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -875,19 +882,19 @@
          <!-- <div class="divcss"> -->
          <table class="searchTable" style="border: 0px;">
             <tr>
-               <th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b></th>
-               <td colspan="3" width="32%"> <input type="text" name="dy_keyword" size=40></td>
+            	<th width="8%" style="text-align:right;"><b>* 구분&nbsp;</b></th>
+               <td width="32%" style="text-align:left">   
+                  &nbsp;&nbsp;<input type="checkbox" name="dayoff_state" value="휴가전">휴가전
+                  &nbsp;&nbsp;<input type="checkbox" name="dayoff_state" value="휴가중">휴가중
+                  &nbsp;&nbsp;<input type="checkbox" name="dayoff_state" value="휴가후">휴가후
                <!-- <th></th>
                <td width="20%"></td>
                <th></th>
                <td width="30%" ></td> -->
             </tr>
             <tr>
-               <th width="8%" style="text-align:right;"><b>* 구분&nbsp;</b></th>
-               <td width="32%" style="text-align:left">   
-                  <input type="checkbox" name="dayoff_state" value="휴가전">휴가전
-                  <input type="checkbox" name="dayoff_state" value="휴가중">휴가중
-                  <input type="checkbox" name="dayoff_state" value="휴가후">휴가후
+               <th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b></th>
+               <td colspan="3" width="32%"> <input type="text" name="dy_keyword" size=78></td>
             </td>
             <td ></td>
                <td width="20%">
@@ -926,7 +933,7 @@
                <tr>
                   <td><h4><i class="fa fa-angle-right"></i>검색 결과</h4>
                   <td align=right>
-                  [총 개수] : ${getDayOffListCnt}&nbsp;&nbsp;&nbsp;&nbsp;
+                  [신청 수] : ${getDayOffListCnt} 건 &nbsp;&nbsp;&nbsp;&nbsp;
                   <select name="rowCntPerPageDown">
                         <option value="10">10</option>
                         <option value="15">15</option>
@@ -941,7 +948,7 @@
              <thead>
             <tr>
                <th width="6%">No
-<c:choose>
+				<c:choose>
                   <c:when test="${param.sort=='dayoff_apply_no desc'}">
                      <th style="cursor:pointer" onClick="$('[name=sort]').val(''); goDayoffSearch();">▼ 신청번호</th>
                   </c:when>
@@ -1042,7 +1049,7 @@
                      <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goDayoffSearch();">▼ 사용가능 휴가일</th>
                   </c:when>
                   <c:when test="${param.sort=='(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no) asc'}">
-                     <th bgcolor="black" style="cursor:pointer" onclick="$('[name=sort]').val('(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no) desc'); goDayoffSearch();">▲ 사용가능 휴가일</th>
+                     <th style="cursor:pointer" onclick="$('[name=sort]').val('(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no) desc'); goDayoffSearch();">▲ 사용가능 휴가일</th>
                   </c:when>
                   <c:otherwise>
                      <th style="cursor:pointer" onclick="$('[name=sort]').val('(select remain_dayoff from emp_dayoff_info where emp_no = da.emp_no) asc'); goDayoffSearch();">사용가능 휴가일</th>
@@ -1063,7 +1070,7 @@
                
                <c:choose>
                   <c:when test="${param.sort=='dayoff_apply_dt desc'}">
-                     <th bgcolor="black" style="cursor:pointer" onclick="$('[name=sort]').val(''); goDayoffSearch();">▼ 신청일</th>
+                     <th style="cursor:pointer" onclick="$('[name=sort]').val(''); goDayoffSearch();">▼ 신청일</th>
                   </c:when>
                   <c:when test="${param.sort=='dayoff_apply_dt asc'}">
                      <th style="cursor:pointer" onclick="$('[name=sort]').val('dayoff_apply_dt desc'); goDayoffSearch();">▲ 신청일</th>
@@ -1096,7 +1103,8 @@
                   </c:otherwise>
                </c:choose>
             </tr>
-
+			</thead>
+			<tbody>
             <c:forEach items="${requestScope.getDayOffList}" var="dayoff" varStatus="loopTagStatus">
                <tr style="cursor:pointer; font-size:11pt;" onclick="addUpdelTr(this,'${dayoff.emp_no}')">
                   <td align=center>
@@ -1120,8 +1128,8 @@
                </tbody>
          </table>
          <input type="hidden" name="selectPageNo">
+         <br>
       <div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
-      <br><br><br>
       <%-- <c:if test="${empty getDayOffList}">
          금일은 휴가자가 없습니다.
       </c:if> --%>

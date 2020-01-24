@@ -95,6 +95,8 @@
 
 $(document).ready(function(){
 
+	startTime();
+	
 	$('[name=rowCntPerPageDown]').change(function(){
 		$('[name=rowCntPerPage]').val( $(this).val() );
 		goSearch();
@@ -162,12 +164,12 @@ $(document).ready(function(){
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
-     		 <table>
-        		 <tr>
-        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
-         		</tr>
-      		</table>
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -178,10 +180,21 @@ $(document).ready(function(){
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -195,7 +208,7 @@ $(document).ready(function(){
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>

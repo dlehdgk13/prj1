@@ -85,9 +85,9 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public List<TranSpecDTO> getTranSpecList(int order_no) {
+	public TranSpecDTO getTranSpecList(int order_no) {
 		// TODO Auto-generated method stub
-		List<TranSpecDTO> tranSpecList = this.accountDAO.getTranSpecList(order_no);
+		TranSpecDTO tranSpecList = this.accountDAO.getTranSpecList(order_no);
 		
 		return tranSpecList;
 	}

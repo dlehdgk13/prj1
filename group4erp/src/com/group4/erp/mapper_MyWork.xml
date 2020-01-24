@@ -65,77 +65,9 @@
 		</if>
 		
 		<if test="sort==null or sort==''">
-			order by 13, b.reg_dt desc
+			order by 13, reg_dt desc
 		</if>
 	</sql>
-	
-	<!--=============================================================================================================================================-->
-	<!-- 담당 상품 조회 -->
-	<!--=============================================================================================================================================-->
-	<select id='getMyCareBookList' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="java.util.HashMap">
-		select * from(select zzz.*, rownum RNUM from(
-			 select                 
-                 ISBN13 "ISBN13",
-                 book_name "book_name",
-                 cat_name "cat_name",
-                 book_price "book_price",
-                 book_pages "book_pages",
-                 writer "writer",
-                 publisher "publisher",
-                 size_cd "size_cd",
-                 is_print "is_print",
-                 emp_no "emp_no",
-                 published_dt "published_dt",
-                 editor "editor",
-                 ISBN_CNT "ISBN_cnt",
-                 branch_name "branch_name",
-                 reg_dt "reg_dt"
-			from
-                (select 
-                b.ISBN13  as "ISBN13"
-                ,b.book_name  as "BOOK_NAME"                 
-                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "CAT_NAME"
-                ,b.book_price  as "BOOK_PRICE"
-                ,b.book_pages||'' as "BOOK_PAGES"
-                ,b.writer as "WRITER"
-                ,b.publisher  as "PUBLISHER"                 
-                ,b.size_cd||'' as "SIZE_CD"
-                ,b.is_print  as "IS_PRINT"
-                ,b.emp_no||'' as "EMP_NO"
-                ,to_char(b.published_dt,'YYYY-MM-DD') as "PUBLISHED_DT"
-                ,b.editor as "EDITOR"
-                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_CNT" 
-                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "BRANCH_NAME"
-                ,b.reg_dt "REG_DT"             
-            from book b)
-            where emp_no = '${emp_no}'
-			<include refid="MyCareBookSearch" />
-			order by reg_dt desc
-		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>		 	
-
-		<!-- select * from(select zzz.*, rownum RNUM from(
-			select
-                b.ISBN13                     as "ISBN13"
-                ,b.book_name                 as "book_name"
-                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "cat_name"
-                ,b.book_price              as "book_price"
-                ,b.book_pages||''         as "book_pages"
-                ,b.writer                 as "writer"
-                ,b.publisher                 as "publisher"
-                ,b.size_cd||''             as "size_cd"
-                ,b.is_print             as "is_print"
-                ,b.emp_no||''                as "emp_no"
-                ,to_char(b.published_dt,'YYYY-MM-DD') as "published_dt" 
-                ,b.editor                    as "editor"
-                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_cnt"
-                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "branch_name"
-            from book b 
-            where b.emp_no = '${emp_no}'
-			<include refid="headerSort"/>
-		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>  -->
-
-	</select>
-	
 	
 	<sql id="MyCareBookSearch">
 		<if test="searchCategory=='전체'">
@@ -182,6 +114,77 @@
 		 	and is_print = #{is_print}
 		 </if>
 	</sql>
+	
+	
+	<!--=============================================================================================================================================-->
+	<!-- 담당 상품 조회 -->
+	<!--=============================================================================================================================================-->
+	<select id='getMyCareBookList' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="java.util.HashMap">
+		select * from(select zzz.*, rownum RNUM from(
+			 select                 
+                 ISBN13 "ISBN13",
+                 book_name "BOOK_NAME",
+                 cat_name "CAT_NAME",
+                 book_price "BOOK_PRICE",
+                 book_pages "BOOK_PAGES",
+                 writer "WRITER",
+                 publisher "PUBLISHER",
+                 size_cd "SIZE_CD",
+                 is_print "IS_PRINT",
+                 emp_no "EMP_NO",
+                 published_dt "PUBLISHED_DT",
+                 editor "EDITOR",
+                 ISBN_CNT "ISBN_cnt",
+                 branch_name "BRANCH_NAME",
+                 reg_dt "REG_DT"
+			from
+                (select 
+                b.ISBN13  as "ISBN13"
+                ,b.book_name  as "BOOK_NAME"                 
+                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "CAT_NAME"
+                ,b.book_price  as "BOOK_PRICE"
+                ,b.book_pages||'' as "BOOK_PAGES"
+                ,b.writer as "WRITER"
+                ,b.publisher  as "PUBLISHER"                 
+                ,b.size_cd||'' as "SIZE_CD"
+                ,b.is_print  as "IS_PRINT"
+                ,b.emp_no||'' as "EMP_NO"
+                ,to_char(b.published_dt,'YYYY-MM-DD') as "PUBLISHED_DT"
+                ,b.editor as "EDITOR"
+                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_CNT" 
+                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "BRANCH_NAME"
+                ,b.reg_dt "REG_DT"             
+            from book b)
+            where emp_no = '${emp_no}'
+			<include refid="headerSort" />
+		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>	
+		<include refid="MyCareBookSearch" />	 	
+
+		<!-- select * from(select zzz.*, rownum RNUM from(
+			select
+                b.ISBN13                     as "ISBN13"
+                ,b.book_name                 as "book_name"
+                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "cat_name"
+                ,b.book_price              as "book_price"
+                ,b.book_pages||''         as "book_pages"
+                ,b.writer                 as "writer"
+                ,b.publisher                 as "publisher"
+                ,b.size_cd||''             as "size_cd"
+                ,b.is_print             as "is_print"
+                ,b.emp_no||''                as "emp_no"
+                ,to_char(b.published_dt,'YYYY-MM-DD') as "published_dt" 
+                ,b.editor                    as "editor"
+                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_cnt"
+                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "branch_name"
+            from book b 
+            where b.emp_no = '${emp_no}'
+			<include refid="headerSort"/>
+		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>  -->
+
+	</select>
+	
+	
+	
 	
 	<select id='getCategoryList' resultType="java.util.HashMap">
 		select

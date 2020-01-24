@@ -3341,6 +3341,7 @@ ul.chat-available-user li a:hover {
     background: #4ECDC4;
     color: #fff;
     padding: 15px 0;
+    /* position: fixed; */
 }
 
 .site-footer p {
