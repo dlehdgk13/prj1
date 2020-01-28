@@ -39,6 +39,7 @@
   ======================================================= -->
 </head>
 
+<<<<<<< HEAD
 <% String emp_no = (String)session.getAttribute("emp_id"); 
    //System.out.println("emp_nm==="+emp_nm);
    
@@ -46,6 +47,8 @@
 
 %>
 
+=======
+>>>>>>> refs/remotes/b_ldh/b_ldh
 <style>
 
 .searchTable{
@@ -581,7 +584,7 @@
 						<c:if test="${businessList.emp_no != emp_no }">
 							<tr class="tab" style="cursor:pointer">
 						</c:if>
-						
+
 								<td align=center>${businessTripListAllCnt - businessList.RNUM + 1}</td>	
 								<td align=center>
 									${businessList.emp_name}

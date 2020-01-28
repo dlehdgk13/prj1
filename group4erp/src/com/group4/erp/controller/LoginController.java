@@ -99,6 +99,7 @@ public class LoginController {
 	public ModelAndView joinMembership() {
 =======
 	*/
+	
 	@RequestMapping(value="/goMainTest.do")
 	   public ModelAndView goMainTest(HttpSession session) {
 	      

@@ -3,6 +3,7 @@
 
 <%@ include file="/WEB-INF/views/common.jsp" %>
     
+<<<<<<< HEAD
 <% String emp_nm = (String)session.getAttribute("emp_name"); 
 	String jikup = (String)session.getAttribute("jikup");
 	String dep_name = (String)session.getAttribute("dep_name");
@@ -111,7 +112,8 @@
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">${emp_name} ${jikup}님 반갑습니다. <br> 소속부서 : ${dep_name}</h5>
+          <h5 class="centered">Sam Soffes</h5>
+
           <li class="mt">
             <a class="active" href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
