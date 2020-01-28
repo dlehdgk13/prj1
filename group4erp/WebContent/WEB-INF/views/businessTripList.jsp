@@ -39,6 +39,13 @@
   ======================================================= -->
 </head>
 
+<% String emp_no = (String)session.getAttribute("emp_id"); 
+   //System.out.println("emp_nm==="+emp_nm);
+   
+   request.setAttribute("emp_no", emp_no);
+
+%>
+
 <style>
 
 .searchTable{
@@ -562,12 +569,19 @@
 					</thead>
 					<tbody>
 					<c:forEach items="${businessTripList}" var="businessList" varStatus="loopTagStatus">
-						<tr class="tab" style="cursor:pointer" onClick="goBusinessTripContentsForm(${businessList.work_outside_seq}
+						<!-- 자기 이외에는 못보게 막음(추후 진행방향 결정) -->
+						<c:if test="${businessList.emp_no eq emp_no}">
+							<tr class="tab" style="cursor:pointer" onClick="goBusinessTripContentsForm(${businessList.work_outside_seq}
 																									,${businessList.emp_no}
 																									,'${businessList.travel_payment}'
 																									,${businessList.dep_no}
 																									,${businessList.mgr_no}
 																									,'${businessList.jikup}');">
+						</c:if>
+						<c:if test="${businessList.emp_no != emp_no }">
+							<tr class="tab" style="cursor:pointer">
+						</c:if>
+						
 								<td align=center>${businessTripListAllCnt - businessList.RNUM + 1}</td>	
 								<td align=center>
 									${businessList.emp_name}

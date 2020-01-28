@@ -150,21 +150,25 @@
 			    	)
 			</if>
 		</if>
+		
 		<if test="searchCategory=='책번호'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
 				and upper(isbn13) like upper('%${search_keyword}%')
 			</if>
 		</if>
+		
 		<if test="searchCategory=='책이름'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
 				and upper(book_name) like upper('%${search_keyword}%')
 			</if>
 		</if>
+		
 		<if test="searchCategory=='카테고리'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
 				and upper(cat_name) like upper('%${search_keyword}%')
 			</if>
 		</if>
+		
 		<if test="searchCategory=='보유지점'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
 				and upper(branch_name) like upper('%${search_keyword}%')

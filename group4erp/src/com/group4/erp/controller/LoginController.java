@@ -70,6 +70,7 @@ public class LoginController {
 				   session.setAttribute("mgr", empInfo.getMgr());
 				   session.setAttribute("mgr_emp_no", empInfo.getMgr_emp_no());
 				   session.setAttribute("dep_no", dep_no);
+				   session.setAttribute("dep_name", empInfo.getDep_name());
 				   session.setAttribute("ceo_no", empInfo.getCeo_no());
 			   }
 			 
