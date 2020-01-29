@@ -64,14 +64,12 @@
 }
 
 .searchTable td{
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-left: 7;
 }
 
 .searchTable th {
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-right: 7;
     
 }
@@ -91,7 +89,8 @@
 <script>
 
 $(document).ready(function(){  
-	
+
+	startTime();
 	
 	$("#datepicker1").datepicker({
 		dateFormat: 'yy-mm-dd'
@@ -355,14 +354,14 @@ $(document).ready(function(){
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
-         
+
           <!-- notification dropdown end -->
-          <li>
-     		 <table>
-        		 <tr>
-        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
-         		</tr>
-      		</table>
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -373,10 +372,21 @@ $(document).ready(function(){
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -390,7 +400,7 @@ $(document).ready(function(){
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -409,9 +419,12 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -466,9 +479,11 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -660,7 +675,9 @@ $(document).ready(function(){
 			            	</c:if>
 		         	</c:forEach>
 					</tbody>
+
 			</table>
+
 			<br>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>
@@ -674,12 +691,13 @@ $(document).ready(function(){
     </section>
     <div id="allContent" style="display:none;">
 		<div id="contecnt1" style="dispaly:none;">
-			<table border=0 width=99%>
-	 			<tr>
-	 				<td align=right>
-						<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
+			<table width=99%> <tr> <td width=30%> <td width=40% align=center>
+	 			⏷<br>[상세 정보]<br>
+	 				<td width=30% align=right>
+						<h3 align=right><i class='fa fa-times' onclick='goClose();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3>
 			</table>
-			<table class="table table-advance table-bordered tableth" id="contecntTable1"  align=center>
+			<table class="searchTable searchTable-bordered tableth" width="50%" id="contecntTable1"  align=center>
+
 				<tr>
 					<th>책번호
 					<td colspan=2>
@@ -709,12 +727,16 @@ $(document).ready(function(){
 		</div>
 		
 		<div id="contecnt2" style="dispaly:none;">
-			<table border=0 width=99%>
-	 			<tr>
-	 				<td align=right>
-						<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
+
+			<table width=99%> <tr> <td width=30%> <td width=40% align=center>
+	 			⏷<br>[상세 정보]<br>
+	 				<td width=30% align=right>
+						<h3 align=right><i class='fa fa-times' onclick='goClose();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3>
+
 			</table>
-			<table class="table table-advance table-bordered tableth" id="contecntTable2" align=center>
+
+			<table class="searchTable searchTable-bordered tableth" width="50%" id="contecntTable2" align=center>
+
 				<tr>
 					<th>책번호
 					<td colspan=2>
@@ -751,12 +773,13 @@ $(document).ready(function(){
 		</div>
 		
 		<div id="contecnt3" style="dispaly:none;">
-			<table border=0 width=99%>
-	 			<tr>
-	 				<td align=right>
-						<h3><i class="fa fa-times" onclick="goClose();" style="cursor:pointer;"></i></h3>
+			<table width=99%> <tr> <td width=30%> <td width=40% align=center>
+	 			⏷<br>[상세 정보]<br>
+	 				<td width=30% align=right>
+						<h3 align=right><i class='fa fa-times' onclick='goClose();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3>
 			</table>
-			<table class="table table-advance table-bordered tableth" id="contecntTable3" align=center>
+
+			<table class="searchTable searchTable-bordered tableth" width="50%" id="contecntTable3" align=center>
 				<tr>
 					<th>책번호
 					<td colspan=2>

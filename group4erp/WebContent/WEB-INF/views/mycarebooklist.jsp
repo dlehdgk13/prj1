@@ -68,14 +68,12 @@
 }
 
 .searchTable td{
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-left: 7;
 }
 
 .searchTable th {
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-right: 7;
     
 }
@@ -85,8 +83,9 @@
     border: 1px solid #ddd !important;
 }
 
-.table-hover>tbody>tr>.test:hover {
-	background-color: white;
+.tableth th{
+	text-align: right;
+	font-weight: bold;
 }
 
 </style>
@@ -96,6 +95,8 @@
    $(document).ready(function(){   
 
       //goSearchMyWorkList();
+
+      startTime();
       
       $('[name=rowCntPerPageDown]').change(function(){
 		   $('[name=rowCntPerPage]').val( $(this).val() );
@@ -188,12 +189,15 @@
       
       var wares = "<tr class='test' name='test' align=center bgcolor=white> <td colspan=8>"
       wares += "<div class='www'>"
+      wares += "<table width=99%> <tr> <td width=30%> <td width=40% align=center>"
+      wares += "⏷<br>[발주 신청]<br>"
+      wares += "<td width=30% align=right>"
+      wares += "<h3 align=right><i class='fa fa-times' onclick='closeTr();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3> </table>"
       wares += "<form name='wareHousingForm'>"
-      wares += "<h3 align=right><i class='fa fa-times' onclick='closeTr();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3>"
-      wares += "<table class='searchTable' align=center>"
-      wares += "<tr> <th style='text-align:right;'>발주수량 <td><input type='text' name='isbn_cnt'>권"
-      wares += "<tr> <th style='text-align:right;'>입고요청일 <td><input type='text' id='datepicker' name='datepicker'>"
-      wares += "<tr> <th style='text-align:right;'>공급률 <td><input tyep='text' name='supply_rate' value='60'>%&nbsp;&nbsp;&nbsp;<font color=#EF5F83><strong>*(기본 60%)</strong></font>"
+      wares += "<table class='searchTable tableth' width=30% align=center>"
+      wares += "<tr> <th style='text-align:right;'>발주수량 <td><input type='text' class='form-control round-form' name='isbn_cnt'>"
+      wares += "<tr> <th style='text-align:right;'>입고요청일 <td><input type='text' class='form-control round-form' id='datepicker' name='datepicker'>"
+      wares += "<tr> <th style='text-align:right;'>공급률 <td><input tyep='text' class='form-control round-form' name='supply_rate' value='60'>&nbsp;&nbsp;&nbsp;<font color=#EF5F83><strong>*(기본 60%)</strong></font>"
       wares += "</table> </from>"
       wares += "<div style='heigth:100;'></div><br>"
       wares += "<button type='button' class='btn btn-default' onclick='goOrderBook("+isbn+");'><input type='image' src='/group4erp/resources/image/order_book.png' width='13' height='13'>발주 신청</button> &nbsp;&nbsp;"
@@ -202,6 +206,9 @@
       
       thisTr.after(wares);
 
+      $('[name=mycarebookTable] [name=test]').hide();
+      $('[name=mycarebookTable] [name=test]').show(1000);
+      
       $("#datepicker").datepicker({ 
               dateFormat: 'yy-mm-dd'
              ,minDate : 'today'
@@ -256,7 +263,12 @@
    }
    
    function closeTr(){
-      $('[name=test]').remove();
+
+	   var delTr = $('[name=mycarebookTable] [name=test]');
+	   delTr.hide(1000, function(){
+		  delTr.remove(); 
+	   });
+
    }
    
    function goAllReset(){
@@ -284,12 +296,12 @@
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
-     		 <table>
-        		 <tr>
-        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
-         		</tr>
-      		</table>
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -300,10 +312,21 @@
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -317,7 +340,7 @@
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -336,9 +359,12 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -393,9 +419,11 @@
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -607,11 +635,11 @@
 			         <tr>   
 			         <td align=center>${myWorkListAllCnt-(myWorkSearchDTO.selectPageNo*myWorkSearchDTO.rowCntPerPage-myWorkSearchDTO.rowCntPerPage+1+loopTagStatus.index)+1}
 			            <td align=center>${MyCareBookList.ISBN13}
-			            <td align=left>${MyCareBookList.book_name}
-			            <td align=center>${MyCareBookList.cat_name}
-			            <td align=center>${MyCareBookList.book_price}
+			            <td align=left>${MyCareBookList.BOOK_NAME}
+			            <td align=center>${MyCareBookList.CAT_NAME}
+			            <td align=center>${MyCareBookList.BOOK_PRICE}
 			            <td align=center>${MyCareBookList.ISBN_cnt}
-			            <td align=center>${MyCareBookList.branch_name}
+			            <td align=center>${MyCareBookList.BRANCH_NAME}
 			            <td align=center>
 			               <c:if test="${MyCareBookList.ISBN_cnt < 100}">
 			                  <button type='button' class='btn btn-default' onClick="booKInvenFill(this,'${MyCareBookList.ISBN13}');"><input type='image' src='/group4erp/resources/image/order_book.png' width='12' height='12'>발주</button> 

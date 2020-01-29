@@ -3,6 +3,9 @@
 <%@ include file = "/WEB-INF/views/common.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -60,6 +63,8 @@
    <script type="text/javascript">
    $(document).ready(function(){
 
+	   startTime();
+	   
       console.log("ready chart");
       google.charts.load('current', {'packages' : ['corechart'] } );
       google.charts.setOnLoadCallback(drawChart);
@@ -202,12 +207,12 @@
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
+          <li><!-- 
             <table>
                <tr>
-                  <td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
                </tr>
-            </table>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -218,10 +223,21 @@
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -235,7 +251,7 @@
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -254,9 +270,12 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -311,9 +330,11 @@
               <li class="active">
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -446,16 +467,18 @@
             
                <td><input type="hidden" name="jikup" value="${empSal.jikup}">${empSal.jikup}</td>
                <td><input type="hidden" name="emp_name" value="${empSal.emp_name}">${empSal.emp_name}</td>
-               <td><input type="hidden" name="month_sal" value="${empSal.month_sal}">${empSal.month_sal}</td>
-               <td><input type="hidden" name="mess_allowance" value="${empSal.mess_allowance}">${empSal.mess_allowance}</td> 
-               <td><input type="hidden" name="bus_trip_bonus" value="${empSal.bus_trip_bonus}">${empSal.bus_trip_bonus}</td> 
-               <td><input type="hidden" name="sum_payable" value="${empSal.sum_payable}">${empSal.sum_payable}</td>
+
+               <td><input type="hidden" name="month_sal" value="${empSal.month_sal}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.month_sal}" />원</td>
+               <td><input type="hidden" name="mess_allowance" value="${empSal.mess_allowance}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.mess_allowance}" />원</td> 
+               <td><input type="hidden" name="bus_trip_bonus" value="${empSal.bus_trip_bonus}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.bus_trip_bonus}" />원</td> 
+               <td><input type="hidden" name="sum_payable" value="${empSal.sum_payable}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.sum_payable}" />원</td>
                
-               <td><input type="hidden" name="emp_insurance" value="${empSal.emp_insurance}">${empSal.emp_insurance}</td>
-               <td><input type="hidden" name="health" value="${empSal.health}">${empSal.health}</td>
-               <td><input type="hidden" name="pension" value="${empSal.pension}">${empSal.pension}</td> 
-               <td><input type="hidden" name="deduct" value="${empSal.deduct}">${empSal.deduct} </td> 
-               <td><input type="hidden" name="real_sal" value="${empSal.real_sal}">${empSal.real_sal}</td>
+               <td><input type="hidden" name="emp_insurance" value="${empSal.emp_insurance}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.emp_insurance}" />원</td>
+               <td><input type="hidden" name="health" value="${empSal.health}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.health}" />원</td>
+               <td><input type="hidden" name="pension" value="${empSal.pension}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.pension}" />원</td> 
+               <td><input type="hidden" name="deduct" value="${empSal.deduct}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.deduct}" />원</td> 
+               <td><input type="hidden" name="real_sal" value="${empSal.real_sal}"><fmt:formatNumber type="number" maxFractionDigits="3" value="${empSal.real_sal}" />원</td>
+
             </tr>
          </c:forEach>
          </tbody>

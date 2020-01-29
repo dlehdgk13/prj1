@@ -458,4 +458,49 @@ public class ApprovalController {
 		return approvalDelCnt;
 	}
 
+	/*public int deleteBTripApprovalProc(@RequestParam(value="document_no") String document_no, ApprovalDTO approvalDTO) {
+	
+		int approvalUpCnt = 0;
+		int bTripDelCnt = 0;
+		
+		System.out.println("deleteDayOffApprovalProc() 메소드 시작==="+document_no);
+		
+		try {
+			
+			approvalDTO.setDocument_no(document_no);
+			approvalDTO.setE_works_state_cd("0");
+			document_no = document_no.substring(3);
+			System.out.println("document_no==="+document_no);
+			
+			//int bTrip_apply_no = Integer.parseInt(document_no); 
+			
+			//emp_dayoff_apply 테이블에 있는 내역을 삭제한다.
+			//bTripDelCnt = this.approvalService.deleteDayOffApproval(bTrip_apply_no);
+			
+			
+			//dayOffApplyDTO.setConfirm("C");
+			//eventDTO.setEvnt_state_cd("0");
+			
+			//approvalUpCnt = this.approvalService.updateApprovalProc(approvalDTO);
+			//dayOffUpCnt = this.hrService.;
+			
+			//System.out.println("document_no==="+document_no);
+			
+			/*if(upDel.equals("up")) {
+				upDelCnt = this.boardService.updateBoard(boardDTO);
+			}
+			
+			//만약 삭제 모드이면 삭제 실행하고 삭제 적용행의 개수를 저장
+			else {
+				upDelCnt = this.boardService.deleteBoard(boardDTO);
+			} 
+			
+		} catch(Exception e) {
+			System.out.println("deleteEvntApprovalProc() 메소드에서 예외 발생 >>> "+e);
+		}
+				
+		return approvalUpCnt;
+
+	}*/
+
 }
