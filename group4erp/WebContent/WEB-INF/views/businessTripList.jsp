@@ -39,16 +39,12 @@
   ======================================================= -->
 </head>
 
-<<<<<<< HEAD
 <% String emp_no = (String)session.getAttribute("emp_id"); 
    //System.out.println("emp_nm==="+emp_nm);
    
    request.setAttribute("emp_no", emp_no);
 
 %>
-
-=======
->>>>>>> refs/remotes/b_ldh/b_ldh
 <style>
 
 .searchTable{

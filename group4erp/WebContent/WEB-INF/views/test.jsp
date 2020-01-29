@@ -3,7 +3,6 @@
 
 <%@ include file="/WEB-INF/views/common.jsp" %>
     
-<<<<<<< HEAD
 <% String emp_nm = (String)session.getAttribute("emp_name"); 
 	String jikup = (String)session.getAttribute("jikup");
 	String dep_name = (String)session.getAttribute("dep_name");
