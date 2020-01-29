@@ -3,6 +3,7 @@ package com.group4.erp;
 public class TranSpecDTO {
 
 
+
 	private int order_books_no;
 	private String order_no;
 	private String corp_no;
@@ -20,14 +21,22 @@ public class TranSpecDTO {
 	private String tax;
 	private String issue_no;
 	private String issue_dt;
+	private String tradeTot;
 	
-	
-
 	private String searchKeyword;
 	private int selectPageNo=1;
 	private int rowCntPerPage=10;
 	
 
+
+	public String getTradeTot() {
+		return tradeTot;
+	}
+
+	public void setTradeTot(String tradeTot) {
+		this.tradeTot = tradeTot;
+	}
+	
 	public String getRNUM() {
 		return RNUM;
 	}

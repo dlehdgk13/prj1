@@ -23,6 +23,18 @@ public class EmployeeDTO {
 	private int worktime_cd;
 	private int dep_no;
 	private String emp_pic;
+	private String dep_name;
+	
+	
+
+	public String getDep_name() {
+		return dep_name;
+	}
+
+	public void setDep_name(String dep_name) {
+		this.dep_name = dep_name;
+	}
+
 	
 	
 	public int getDep_no() {

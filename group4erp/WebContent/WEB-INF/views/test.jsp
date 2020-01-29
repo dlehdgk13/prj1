@@ -3,6 +3,20 @@
 
 <%@ include file="/WEB-INF/views/common.jsp" %>
     
+<<<<<<< HEAD
+<% String emp_nm = (String)session.getAttribute("emp_name"); 
+	String jikup = (String)session.getAttribute("jikup");
+	String dep_name = (String)session.getAttribute("dep_name");
+	
+   System.out.println("emp_nm==="+emp_nm);
+   System.out.println("jikup==="+jikup);
+   
+   request.setAttribute("emp_nm", emp_nm);
+   request.setAttribute("jikup", jikup);
+   request.setAttribute("dep_name", dep_name);
+
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -99,6 +113,7 @@
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
           <h5 class="centered">Sam Soffes</h5>
+
           <li class="mt">
             <a class="active" href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
