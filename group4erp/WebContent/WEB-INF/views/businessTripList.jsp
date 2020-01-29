@@ -199,7 +199,7 @@
 	}
 
 	function goBusinessTripForm() {
-		location.href = "/group4erp/businessTripForm.do";
+		location.href = "/group4erp/businessTripForm.do	";
 	}
 	
 </script>

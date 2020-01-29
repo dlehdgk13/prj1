@@ -445,6 +445,7 @@
             	<td width=40%>
             	<td align=left width=30%>
             		<button type="button" class="btn btn-default" onClick="checkBusinessTripRegForm()"><i class="fa fa-pencil-square-o"></i>결재 신청</button>&nbsp;&nbsp;
+            		<button type="button" class="btn btn-default" onClick="goBack()" ><i class="fa fa-pencil-square-o"></i>뒤로가기</button>&nbsp;&nbsp;
 					<button type="button" class="btn btn-default" onclick="reset();"><input type="image" src="/group4erp/resources/image/reset.png" width="14" height="14">초기화</button>
 				</td>
             	<td width=30%>
