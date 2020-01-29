@@ -273,9 +273,20 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
               </li>
-              <li>
-                <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
-              </li>
+              	<c:if test="${emp_id eq '600001'}">
+                	<li>
+              			<a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여지급대장 조회</a>
+              		</li>	
+              		<li>
+              			<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              		</li>	
+				</c:if>
+                   
+                <c:if test="${emp_id != '600001'}">
+                	<li>
+              			<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              		</li>	
+                </c:if>
               <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
