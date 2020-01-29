@@ -647,7 +647,8 @@
 					</thead>
 					<tbody>
 					<c:forEach items="${eventList}" var="eventList" varStatus="loopTagStatus">
-			            <tr style="cursor:pointer" onClick="viewEventInfoForm(${empList.emp_no});">      
+						<!-- 2020-01-28 -->
+			            <tr>      
 			               <td class="delCheckBox" align=center>
 			                  <c:if test="${eventList.evnt_stat eq '대기중'|| eventList.evnt_stat eq '반려' }">
 			                     <c:if test="${eventList.emp_name eq emp_nm}">

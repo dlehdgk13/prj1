@@ -463,7 +463,11 @@
       <!-- &nbsp;&nbsp;<h6>단위 [원]</h6> -->
       <br>
       <!-- <input type="button" value="신규사원등록" onClick="insertNewEmp();"> -->
-      <br><br>
+      <br>
+      <!-- 2020-01-26 -->
+      <c:if test="${emp_tot_cnt==0}">
+      	<center>조회내역이 없습니다.</center>
+      </c:if>
       <div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
    </form>
          

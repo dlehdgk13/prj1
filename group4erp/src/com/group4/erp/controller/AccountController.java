@@ -221,8 +221,14 @@ public class AccountController {
 			int tranSpec_cnt = this.accountService.getTranSpecCnt(order_no);
 			List<TranSpecDTO> tranSpecList = this.accountService.getTranSpecList(order_no);
 			
+			
+			TranSpecDTO test = new TranSpecDTO();
+			for(TranSpecDTO tranSpec : tranSpecList) {
+				test = tranSpec;
+			}
+			
 			mav.addObject("tranSpec_cnt", tranSpec_cnt);
-			mav.addObject("tranSpecList", tranSpecList);
+			mav.addObject("tranSpecList", test);
 			mav.addObject("order_no", order_no);
 			
 		} catch(Exception e) {

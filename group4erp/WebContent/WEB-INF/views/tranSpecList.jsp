@@ -453,6 +453,11 @@ $(document).ready(function(){
 						</c:forEach>
 					</tbody>
 			</table>
+			<!-- 2020-01-26 -->
+			<br>
+			<c:if test="${tranSpecIssueCnt==0}">
+				<center>조회내역이 없습니다.</center>
+			</c:if>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>
             </div>

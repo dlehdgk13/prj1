@@ -90,6 +90,8 @@
         	(select c.jikup from code_jikup c where c.jikup_cd = e.jikup_cd) "jikup", 
         	nvl(count(*), 0) "cnt"
         from employee e 
+        <!-- 2020-01-26 수정 -->
+        where e.jikup_cd is not null
     group by e.jikup_cd
     order by e.jikup_cd
 	</select>

@@ -77,7 +77,6 @@
 	직책 : ${jikup}	&nbsp;&nbsp; 성명 :${emp_name}  <br>
 	
 	<form name="empSalForm" method="post" action="/group4erp/viewEmpSalInfo.do">
-<<<<<<< HEAD
 
 		<input type="hidden" name="selectPageNo">
 		<input type="hidden" name="sort">
@@ -295,13 +294,14 @@
 		</tr>
 	
 	</table>
-
-	<div>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
+	<!-- 2020-01-28 -->
+	<div align=center>&nbsp; <span class="pagingNumber"></span>&nbsp;</div>
 
 	</form>
-
-	<h5>귀하의 노고에 감사드립니다.</h5>
-	<input type="button" value="뒤로 가기" onClick="javascript:history.go(-1);">
+	<!-- 2020-01-28 -->
+	<center><h5>귀하의 노고에 감사드립니다.</h5></center>
+	<!-- 2020-01-28 -->
+	<center><input type="button" value="뒤로 가기" onClick="javascript:history.go(-1);"></center>
 </center>
 
 </body>

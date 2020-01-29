@@ -168,7 +168,23 @@
 	
 	
 	<select id='getCorpOrderCnt' parameterType = "com.group4.erp.CorpSearchDTO" resultType="int">
-		select count(*) from corp_order_info where corp_no is not null
+		<!-- 2020-01-26 -->
+		select count(*) from (
+			select 
+				co.order_books_no||'' "ORDER_BOOKS_NO",
+    			co.corp_no "CORP_NO",
+    			(select cc.corp_name from corporation_cus cc where cc.corp_no = co.corp_no) "CORP_NAME",   
+    			(select cc.ceo_name from corporation_cus cc where cc.corp_no = co.corp_no) "CEO_NAME",
+    			co.books_qty "BOOKS_QTY",
+    			(select b.book_price from book b where b.isbn13= co.isbn13) "BOOK_PRICE",
+    			( (select b.book_price from book b where b.isbn13= co.isbn13) * co.books_qty) "TOT_COST",
+    			to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "ORDER_DT",
+    			(select count(*) from tran_issue_info ti where ti.order_no = co.order_books_no) "ISSUE"
+    		from corp_order_info co
+		) where corp_no is not null
+		<!-- 2020-01-26 -->
+    	<include refid="CorpCondition" />
+ 		    	<include refid="issueYnWhere" />
 		
 	</select>
 	

@@ -92,11 +92,8 @@ public class LoginController {
 		
 		return mav;
 	}
-<<<<<<< HEAD
-	
 	/*@RequestMapping(value="/joininsert.do")
 	public ModelAndView joinMembership() {
-=======
 	*/
 	@RequestMapping(value="/goMainPage.do")
 	public ModelAndView goMainPage(HttpSession session) {
