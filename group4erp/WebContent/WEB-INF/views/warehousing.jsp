@@ -65,13 +65,11 @@
 
 .searchTable td{
 	height: 32px;
-    background-color: #fff !important;
     padding-left: 7;
 }
 
 .searchTable th {
 	height: 32px;
-    background-color: #fff !important;
     padding-right: 7;
     
 }
@@ -411,9 +409,12 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -468,9 +469,11 @@
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -691,12 +694,12 @@
       </section>
     </section>
    <div id="contecnt" style="display:none;">
-  		<table border=0 width=99%>
-	 			<tr>
-	 				<td align=right>
-	 					<h3><i class="fa fa-times" onclick="closeDiv(this);" style="cursor:pointer;"></i></h3>
+		<table width=99%> <tr> <td width=30%> <td width=40% align=center>
+			⏷<br>[상세 정보]<br>
+			<td width=30% align=right>
+			<h3 align=right><i class='fa fa-times' onclick='closeDiv(this);' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3>
 		</table>
-		<table class="table tableth table-advance table-bordered" id="contentTable" align=center>
+		<table class="searchTable searchTable-bordered tableth" width="50%" id="contentTable" align=center>
 			<tr>
 				<th class="thcolor">주문자</th>  
 				<th class="thcolor">발주신청일 </th> 

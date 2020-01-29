@@ -427,8 +427,12 @@ input::placeholder {
                               class="fa fa-book"></i>담당 도서 조회</a></li>
                         <li><a href="/group4erp/businessTripList.do"><i
                               class="fa fa-briefcase"></i>출장 신청</a></li>
-                        <li><a href="/group4erp/goMyWorkTime.do"><i
-                              class="fa fa-list"></i>근태 조회</a></li>
+                        <!-- 
+              <li>
+                <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
+              </li>
+              <li>
+               -->
                         <li><a href="/group4erp/viewApprovalList.do"><i
                               class="fa fa-pencil"></i>문서 결재</a></li>
                         <li><a href="/group4erp/goEmpDayOffjoin.do"><i
@@ -464,8 +468,11 @@ input::placeholder {
                               class="fa fa-info-circle"></i>직원정보</a></li>
                         <li><a href="/group4erp/viewSalList.do"><i
                               class="fa fa-file"></i>급여명세서 조회</a></li>
-                        <li><a href="/group4erp/viewEmpWorkStateList.do"><i
-                              class="fa fa-list"></i>직원별 근무현황</a></li>
+                        <!-- 
+              <li>
+                <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
+              </li>
+               -->
                         <li><a href="/group4erp/viewEmpDayOffList.do"><i
                               class="fa fa-list"></i>직원별 휴가 현황</a></li>
                      </ul></li>

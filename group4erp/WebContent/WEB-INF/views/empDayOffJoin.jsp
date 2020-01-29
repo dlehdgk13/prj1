@@ -452,9 +452,12 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -509,9 +512,11 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -615,7 +620,7 @@ $(document).ready(function(){
 						<td colspan=3 align=center>
 						
 						<!-- <td width=15% align=right> -->
-						<button type="button" class="btn btn-default" onclick="empDayOffJoin();"><i class="fa fa-pencil-square-o"></i>신청</button>
+						<button type="button" class="btn btn-theme02" onclick="empDayOffJoin();"><i class="fa fa-pencil-square-o"></i>신청</button>
 						&nbsp;&nbsp;
 						<!-- <td width=55% align=left> -->
 						<button type="button" class="btn btn-default" onclick="goAllReset();"><input type="image" src="/group4erp/resources/image/reset.png" width="13" height="13">초기화</button>

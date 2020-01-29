@@ -47,13 +47,11 @@
 
 .searchTable td{
 	height: 32px;
-    background-color: #fff !important;
     padding-left: 7;
 }
 
 .searchTable th {
 	height: 32px;
-    background-color: #fff !important;
     padding-right: 7;
     
 }
@@ -61,6 +59,11 @@
 .searchTable-bordered td,
 .searchTable-bordered th {
     border: 1px solid #ddd !important;
+}
+
+.tableth th{
+	text-align: right;
+	font-weight: bold;
 }
 
 </style>
@@ -133,12 +136,16 @@
 
 		var htmlCode = "<tr name='test' align=center> <td colspan=7>"
 			//htmlCode += "<form name='updateEventForm'>"
-			htmlCode += "<table class='innertable tab' name='innertable' align='center'>"
+			htmlCode += "<table width=99%> <tr> <td width=30%> <td width=40% align=center>"
+   			htmlCode += "⏷<br>[처리된 문서]<br>"
+    		htmlCode += "<td width=30% align=right>"
+    		htmlCode += "<h3 align=right><i class='fa fa-times' onClick='closeThisTr(this);' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3> </table>"
+			htmlCode += "<table class='innertable searchTable tableth' name='innertable' align='center'>"
 
 			if(approval_state=='대기중') {
-				 htmlCode += "<tr> <th colspan='2' align='center'>아직 회신이 없습니다. </tr>"
+				 htmlCode += "<tr> <td colspan='2' align='center'>아직 회신이 없습니다. </tr>"
 			} else {
-				htmlCode += "<tr> <th colspan='2' align='center'>결재받은 내용입니다. </tr>"
+				htmlCode += "<tr> <td colspan='2' align='center'>결재받은 내용입니다. </tr>"
 			}
 			
 			htmlCode += "<tr> <th>문서 번호</th> <td><label>'"+document_no+"'</label></td></tr>"
@@ -152,28 +159,33 @@
 		   	
 		    htmlCode += "</table>"
 		    htmlCode += "<input type='hidden' name='e_work_no' value="+e_works_no+">"
-		    htmlCode += "<input type='hidden' name='document_no' value="+document_no+">"
+		    htmlCode += "<input type='hidden' name='document_no' value="+document_no+"><br>"
 
 		    if(approval_state == '반려' || approval_state == '대기중') {
 
-				htmlCode += "<button id ='reApproval' name='reApproval' value='"+document_no+"'>다시 결재요청하기</button>&nbsp;"
-				htmlCode += "<button id = 'removeApproval' name='removeApproval' value='"+document_no+"'>삭제</button>&nbsp;"
+				htmlCode += "<button id ='reApproval' name='reApproval' class='btn btn-theme03' value='"+document_no+"'><i class='fa fa-reply'></i>재결재</button>&nbsp;"
+				htmlCode += "<button id = 'removeApproval' name='removeApproval' class='btn btn-theme04' value='"+document_no+"'><i class='fa fa-eraser'></i>삭제</button>&nbsp;"
 
 			} 
 			//htmlCode += "<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
-			htmlCode += "<button id='closeTr' name='closeTr' onClick='closeThisTr(this);'>닫기"
 		    //htmlCode += "</form>"
 			htmlCode += "</tr>"
   
 		   
 	    thisTr.after(htmlCode);
 	    
+			
+			
+			$('[name=approvalReqList] [name=test]').hide();
+			$('[name=approvalReqList] [name=test]').show(1000);
 	}
 
 	function closeThisTr(idx) {
 		
-		$(idx).parent().parent().remove();
-
+		var delTr = $('[name=approvalReqList] [name=test]');
+		delTr.hide(1000, function(){
+			delTr.remove();
+		});
 	}
 
 	function reApprovalProc(document_no) {
@@ -392,9 +404,11 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -449,9 +463,11 @@
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>

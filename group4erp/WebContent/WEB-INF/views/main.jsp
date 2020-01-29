@@ -11,7 +11,7 @@
  %>
 <head>
 <meta charset="UTF-8">
-<title>IZ Books ERP 메인 페이지</title>
+<title>BOOKST.ERP 메인 페이지</title>
 <style>
 
 

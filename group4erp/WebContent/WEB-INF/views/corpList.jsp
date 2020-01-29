@@ -46,14 +46,12 @@
 }
 
 .searchTable td{
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-left: 7;
 }
 
 .searchTable th {
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-right: 7;
     
 }
@@ -61,6 +59,11 @@
 .searchTable-bordered td,
 .searchTable-bordered th {
     border: 1px solid #ddd !important;
+}
+
+.tableth th{
+	text-align: right;
+	font-weight: bold;
 }
 
 </style>
@@ -137,18 +140,19 @@
 	
 	function updateCorpInfo(idx, flag, corp_no, corp_name, ceo_name, business_area, corp_addr, corp_tel, corp_fax) {
 		
+		/*
 		if(closeFlag!=flag) {
 			$(idx).val("닫기");
 			closeFlag = flag;
 
 		} 
-
+*/
 		var thisTr = $(idx).parent().parent();
-		var delTr = $(".corpListMain .corpListTable [name=updateCorpInfo]");
+		var delTr = $(".corpListTable [name=updateCorpInfo]");
 		
 		if(delTr.size() > 0) {
 			delTr.remove();
-		}		
+		}
 		
 		//$('.corpListTable tr:eq('+idx+')').append(" <tr> <td>");
 		      //$('.mycarebookTable tbody tr:eq('+idx+')').after(" <tr align=center> <td colspan=7> </td> </tr>");
@@ -156,39 +160,46 @@
 		      //var str = $('.qqq').html();
 		      
 		var htmlCode = "<tr name='updateCorpInfo' align='center'>" 
-		htmlCode +=	"<td colspan=7>"
+		htmlCode +=	"<td colspan=10>"
+		htmlCode += "<table width=99%> <tr> <td width=30%> <td width=40% align=center>"
+   		htmlCode += "⏷<br>[거래처 수정]<br>"
+    	htmlCode += "<td width=30% align=right>"
+    	htmlCode += "<h3 align=right><i class='fa fa-times' onClick='closeThisTr();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3> </table>"
 		htmlCode += 	"<form name='updateCorpForm' method='post' action='/group4erp/updateCorpInfoProc.do'>"
-		htmlCode += 		"<table class='innertable tab' align='center'>"
-		htmlCode += 			"<tr> <td>사업자번호</td> <td><input type='text' name='new_corp_no' value="+corp_no+"> </td> </tr>"
-		htmlCode += 			"<tr> <td>상호명 </td> <td><input type='text' name='corp_name' value='"+corp_name+"'> </td> </tr>"
-		htmlCode += 			"<tr> <td>사업자명</td> <td><input type='text' name='ceo_name' value='"+ceo_name+"'></td> </tr>"
-		htmlCode += 			"<tr> <td>사업분야</td> <td> <input type='checkbox' name='corp_business_area' value='1'>IT" 
+		htmlCode += 		"<table class='searchTable tableth' align='center'>"
+		htmlCode += 			"<tr> <th>사업자번호</th> <td><input type='text' class='form-control round-form' size='30' name='new_corp_no' value="+corp_no+"> </td> </tr>"
+		htmlCode += 			"<tr> <th>상호명 </th> <td><input type='text' class='form-control round-form' size='30' name='corp_name' value='"+corp_name+"'> </td> </tr>"
+		htmlCode += 			"<tr> <th>사업자명</th> <td><input type='text' class='form-control round-form' size='30' name='ceo_name' value='"+ceo_name+"'></td> </tr>"
+		htmlCode += 			"<tr> <th>사업분야</th> <td> <input type='checkbox' name='corp_business_area' value='1'>IT" 
 		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='2'>통신"
 		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value'3'>금융"
 		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='4'>출판&미디어"
-		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='5'>교육&학원<br>"
+		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='5'>교육&학원"
 		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='6'>운송&물류"
 		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='7'>학교"
 		htmlCode +=				"							<input type='checkbox' name='corp_business_area' value='8'>기타</td> </tr>"
-		htmlCode += 			"<tr> <td>소재지</td> <td><input type='text' name='corp_addr' value='"+corp_addr+"'></td> </tr>"
-		htmlCode += 			"<tr> <td>연락처</td> <td><input type='text' name='corp_tel' value='"+corp_tel+"'></td> </tr>"
-		htmlCode += 			"<tr> <td>FAX</td> <td><input type='text' name='corp_fax' value='"+corp_fax+"'></td> </tr>"
+		htmlCode += 			"<tr> <th>소재지</th> <td><input type='text' class='form-control round-form' size='30' name='corp_addr' value='"+corp_addr+"'></td> </tr>"
+		htmlCode += 			"<tr> <th>연락처</th> <td><input type='text' class='form-control round-form' size='30' name='corp_tel' value='"+corp_tel+"'></td> </tr>"
+		htmlCode += 			"<tr> <th>FAX</th> <td><input type='text' class='form-control round-form' size='30' name='corp_fax' value='"+corp_fax+"'></td> </tr>"
 		htmlCode += 		"</table><br>"
-		htmlCode +=			"<button id= 'button' name='updateCorp' onClick='updateCorpInfoProc("+corp_no+");'>저장</button> &nbsp;"
-		htmlCode += 		"<button id='closeTr' name='closeTr' onClick='closeThisTr(this);'>닫기</button>"
+		htmlCode +=			"<button type='button' class='btn btn-theme02' onClick='updateCorpInfoProc("+corp_no+");'><i class='fa fa-check'></i> 수정</button> &nbsp;"
 		htmlCode +=         "<input type='hidden' name='corp_no' value="+corp_no+">"
 		htmlCode +=  	"</form>"
 		htmlCode += "</td>"
 		htmlCode += "</tr>"
-		      
+		
 		thisTr.after(htmlCode);
-
+		
+		$(".corpListTable [name=updateCorpInfo]").hide();
+		$(".corpListTable [name=updateCorpInfo]").show(1000);
 	}
 
 	function closeThisTr(idx) {
 				
-		$(idx).parent().parent().remove();
-		$("[name=updateCorpBtn]").val("수정");
+		var delTr = $(".corpListTable [name=updateCorpInfo]");
+		delTr.hide(1000, function(){
+			delTr.remove();
+		});
 		
 	}
 
@@ -355,9 +366,12 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -412,9 +426,11 @@
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -533,7 +549,7 @@
 						</select> 행보기
 			</table>
 			<table><tr><td height="10"></td></tr></table>
-             <table class="table table-striped table-advance table-hover table-bordered" width="90%" border=0 cellspacing=0 cellpadding=5>
+             <table class="corpListTable table table-striped table-advance table-hover table-bordered" width="90%" border=0 cellspacing=0 cellpadding=5>
              <thead>
 				<tr>
 					<th></th>
@@ -646,6 +662,7 @@
 					</c:forEach>
 					</tbody>
 			</table>
+			&nbsp;<button type='button' align=left class='btn btn-theme04' onClick='deleteCorp();'><i class='fa fa-eraser'></i> 선택 삭제</button>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>
             </div>

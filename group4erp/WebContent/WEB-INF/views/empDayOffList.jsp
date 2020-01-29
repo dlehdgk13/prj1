@@ -38,27 +38,30 @@
  
    <style type="text/css" media="screen">
        .ko_day { text-indent : -9999px; background: #eee url(/imgs/korea.png) no-repeat center;}
-      .searchTable{
-         border-collapse: 1px collapse !important;
-      }
-      
-      .searchTable td{
-         height: 32px;
-          background-color: #fff !important;
-          padding-left: 7;
-      }
-      
-      .searchTable th {
-         height: 32px;
-          background-color: #fff !important;
-          padding-right: 7;
-          
-      }
-      
-      .searchTable-bordered td,
-      .searchTable-bordered th {
-          border: 1px solid #ddd !important;
-      }
+.searchTable{
+	border-collapse: 1px collapse !important;
+}
+
+.searchTable td{
+	height: 40px;
+    padding-left: 7;
+}
+
+.searchTable th {
+	height: 40px;
+    padding-right: 7;
+    
+}
+
+.searchTable-bordered td,
+.searchTable-bordered th {
+    border: 1px solid #ddd !important;
+}
+
+.tableth th{
+	text-align: right;
+	font-weight: bold;
+}
    </style>
 
 
@@ -156,9 +159,13 @@
          dayoff_apply_dt = dayoff_apply_dt_origin.replace(dayoff_apply_dt_origin.substr(10,2),"").trim();
          var remainD_origin = $(ele).children().eq(8).text();
          
-         var addhtmlTr = "<tr name='addTr'><td colspan='14' align=center><center><div align='center' style='position:absoulte text-align:center'>⏷<br>[휴가 수정]<br>";
-         addhtmlTr += "<div style='height:10'></div><form name='upData' action=''><table name='upDayoff' class='tab2' id='contentTable' border=1 bordercolor='#000000' cellpadding=5 align=center>";
-         addhtmlTr += "<tr><th>휴가종류</th><td><select name=dayoff_name>";
+         var addhtmlTr = "<tr name='addTr'><td colspan='14' align=center><center><div align='center' style='position:absoulte text-align:center'>";
+         addhtmlTr += "<table width=99%> <tr> <td width=30%> <td width=40% align=center>"
+         addhtmlTr += "⏷<br>[휴가 수정]<br>"
+         addhtmlTr += "<td width=30% align=right>"
+         addhtmlTr += "<h3 align=right><i class='fa fa-times' onClick='dayoffClose(this);' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3> </table>"
+         addhtmlTr += "<div style='height:10'></div><form name='upData' action=''><table name='upDayoff' class='searchTable tableth' width=35% id='contentTable' align=center>";
+         addhtmlTr += "<tr><th>휴가종류</th><td><select class='form-control' name=dayoff_name>";
          
          addhtmlTr += "<option value='연차'>연차</option><option value='월차'>월차</option>"
          addhtmlTr += "<option value='생리'>생리</option><option value='출산'>출산</option>"
@@ -167,20 +174,20 @@
          var dtfrom = $(ele).children().eq(6).text();
          dtfromval = dtfrom.replace(dtfrom.substr(11,2),"").trim();
          
-         addhtmlTr += "<tr><th>휴가 시작일</th><td><input type='text' name='start_dayoff' id='dateFrom' size='15' value='"+dtfromval+"'></td></tr>";
+         addhtmlTr += "<tr><th>휴가 시작일</th><td><input type='text' class='form-control round-form' name='start_dayoff' id='dateFrom' size='15' value='"+dtfromval+"'></td></tr>";
          var dttill = $(ele).children().eq(7).text();
          dttillval = dttill.replace(dttill.substr(11,2),"").trim();
 
-         addhtmlTr += "<tr><th>복귀 예정일</th><td><input type='text' name='end_dayoff' id='dateTill' size='15' value='"+dttillval+"'><input type='hidden' name='emp_no' value='"+emp_no+"'></td></tr>";
+         addhtmlTr += "<tr><th>복귀 예정일</th><td><input type='text' class='form-control round-form' name='end_dayoff' id='dateTill' size='15' value='"+dttillval+"'><input type='hidden' name='emp_no' value='"+emp_no+"'></td></tr>";
          addhtmlTr += "<tr><th>휴가 신청일수</th><td>";
-         addhtmlTr += "<input type='text' style='background-color:#EBEBE4; box-shadow:none; border: 1px solid lightgray; text-align:center;' name='using_dayoff' size='1' value='"+$(ele).children().eq(8).text()+"'readonly/>";
+         addhtmlTr += "<input type='text' class='form-control round-form' style='background-color:#EBEBE4; box-shadow:none; border: 1px solid lightgray; text-align:center;' name='using_dayoff' size='1' value='"+$(ele).children().eq(8).text()+"'readonly/>";
          addhtmlTr += "&nbsp;<font size='1px'>*수정 불가(자동계산)</font></td></tr>";
          addhtmlTr += "<input type='hidden' name='remain_dayoff' size='1' value='"+$(ele).children().eq(9).text()+"'/></table></form>";
-         addhtmlTr += "<div style='height:10'></div><input type='button' value='수정' onClick='dayoffUpdate(this);'>&nbsp;&nbsp;<input type='button' value='삭제' onClick='dayoffDelete("+emp_no+","+remainD_origin+");'>";
-         addhtmlTr += "&nbsp;&nbsp;<input type='reset' value='초기화' onClick='goReset();'>"
-         addhtmlTr += "&nbsp;&nbsp;<input type='button' value='닫기' onClick='dayoffClose(this);'></div><div style='height:20'></div></td><tr>";
+         addhtmlTr += "<div style='height:10'></div><button type='button' class='btn btn-theme02' onClick='dayoffUpdate(this);'><i class='fa fa-check'></i> 수정</button>&nbsp;&nbsp;<button type='button' class='btn btn-theme04' onClick='dayoffDelete("+emp_no+","+remainD_origin+");'><i class='fa fa-eraser'></i> 삭제</button>";
+         addhtmlTr += "&nbsp;&nbsp;<button type='button' class='btn btn-default' onclick='goReset();'><input type='image' src='/group4erp/resources/image/reset.png' width='13' height='13'>초기화</button>"
+         addhtmlTr += "&nbsp;&nbsp;</div><div style='height:20'></div></td><tr>";
          
-
+         
          /* var addhtmlTr = "<tr name='addTr'><td align=center></td>";
          addhtmlTr += "<td align=center>"+$(ele).children().eq(1).text()+"</td>";
          addhtmlTr += "<td align=center>"+$(ele).children().eq(2).text()+"</td>";
@@ -211,17 +218,13 @@
          $(ele).after(addhtmlTr);
          inputData("[name=dayoff_name]", $(ele).children().eq(5).text());
          
-
-/*          $("[name='addTr']").siblings();
-         //$("[name=dayOffList]").addClass(dayOffList);
+         $('[name=addTr]').hide();
+         $('[name=addTr]').show(1000);
          
-         setTableTrBgColor(
-               "dayOffList",         //테이블 class 값
-               "${headerColor}",      //헤더 tr 배경색
-               "${oddTrColor}",      //홀수행 배경색
-               "${evenTrColor}",      //짝수행 배경색
-               "${mouseOverColor}"      //마우스 온 시 배경색
-         ); */
+         /* 
+         $("[name='addTr']").siblings();
+         //$("[name=dayOffList]").addClass(dayOffList);
+          */
 
 
 
@@ -538,7 +541,9 @@
       function dayoffClose(close){
          //$(close).parent().parent().prev().remove();   
          //$(close).parent().remove();
-         $("[name=addTr]").remove();
+         $("[name=addTr]").hide(1000, function(){
+        	 $("[name=addTr]").remove();
+         });
       }
 
       var holidays = [
@@ -758,9 +763,12 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -815,9 +823,11 @@
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li  class="active">
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
