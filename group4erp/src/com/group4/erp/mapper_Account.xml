@@ -340,7 +340,7 @@
 	
 	
 	<insert id="saveTempTranSpec" parameterType="com.group4.erp.TranSpecDTO">
-		insert into  (
+		insert into tran_issue_info (
 			issue_no,
 			order_no,
 			corp_no,
