@@ -220,6 +220,12 @@ public class AccountController {
 			
 			int tranSpec_cnt = this.accountService.getTranSpecCnt(order_no);
 			TranSpecDTO tranSpecList = this.accountService.getTranSpecList(order_no);
+
+			/*
+			int bookPrice = Integer.parseInt(tranSpecList.getBook_price());
+			int taxCost = Integer.parseInt(tranSpecList.getTax());
+			*/
+
 			
 			
 			/*

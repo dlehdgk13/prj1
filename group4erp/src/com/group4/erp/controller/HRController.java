@@ -332,7 +332,6 @@ public class HRController {
 		mav.addObject("navigator", "[인사관리] → [직원정보] → [직원등록]");
 		return mav;
 	}
-
 	@RequestMapping(value = "/empWorkStateUpdateProc.do" // 접속하는 클의 URL 주소 설정
 
 	// POST를 없애면 GET방식과 POST 방식 모두 수용하기 때문에 보안상 문제가 발생할수 있다.

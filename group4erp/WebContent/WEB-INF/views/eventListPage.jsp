@@ -46,14 +46,12 @@
 }
 
 .searchTable td{
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-left: 7;
 }
 
 .searchTable th {
-	height: 32px;
-    background-color: #fff !important;
+	height: 40px;
     padding-right: 7;
     
 }
@@ -61,6 +59,11 @@
 .searchTable-bordered td,
 .searchTable-bordered th {
     border: 1px solid #ddd !important;
+}
+
+.tableth th{
+	text-align: right;
+	font-weight: bold;
 }
 
 </style>
@@ -77,6 +80,9 @@
 
    $(document).ready(function(){
 
+
+	   startTime();
+	   
       $("#evnt_start_dt").datepicker({
              onSelect: function() { 
                 //var date = $('#datepicker').datepicker({ dateFormat: 'yyyy-mm-dd' }).val();
@@ -93,8 +99,6 @@
             }
       });
       
-   
-      headerSort("eventListTable", 0);
       $(".updateArea").hide();
 
 
@@ -130,7 +134,7 @@
 
    function reserveEvent() {
       //alert("이벤트 신청 페이지");
-      location.replace("/group4erp/eventScheduling.do");
+      location.href="/group4erp/eventScheduling.do";
    }
 
    function goSearch() {
@@ -174,26 +178,29 @@
          //var thisTr = $(idx).parent().parent();
          
          
-         var htmlCode = "<tr name='test' align=center> <td colspan=7>"
+         
+         var htmlCode = "<tr name='test' align=center> <td colspan=10>"
+    	 htmlCode += "<table width=99%> <tr> <td width=30%> <td width=40% align=center>"
+   		htmlCode += "⏷<br>[이벤트 수정]<br>"
+    	htmlCode += "<td width=30% align=right>"
+    	htmlCode += "<h3 align=right><i class='fa fa-times' onClick='closeThisTr();' style='cursor:pointer;'></i>&nbsp;&nbsp;</h3> </table>"
          htmlCode += "<form name='updateEventForm'>"
-         htmlCode += "<table class='innertable tab' align=center>"
-         htmlCode += "<tr> <th>이벤트 종류 <td><select name='evnt_cd'>"
+         htmlCode += "<table class='searchTable tableth' width=35% align=center>"
+         htmlCode += "<tr> <th>이벤트 종류 <td><select class='form-control' name='evnt_cd'>"
         htmlCode +=                            "<option value='1'>매대판매행사</option>"
         htmlCode +=                            "<option value='2'>야외판매</option>"
         htmlCode +=                            "<option value='3'>할인전</option>"
         htmlCode +=                            "<option value='4'>기부행사</option>"
         htmlCode +=                            "<option value='5'>온라인 설문조사</option>"
         htmlCode +=                   "</select> </td></tr>"
-         htmlCode += "<tr> <th>이벤트 타이틀</th> <td><input type='text' name='evnt_title' value='"+evnt_title+"'></td></tr>"
-         htmlCode += "<tr> <th>시작일</th> <td><input type='text' name='evnt_start_dt' value='"+evnt_start_dt+"'></td></tr>"
-           htmlCode += "<tr> <th>종료일</th> <td><input type='text' name='evnt_end_dt' value='"+evnt_end_dt+"'></td></tr>"
-           htmlCode += "<tr> <th>메시지</th> <td><textarea name='evnt_comment' value='"+evnt_comment+"'>"+evnt_comment+"</textarea></td></tr>"
+         htmlCode += "<tr> <th>이벤트 타이틀</th> <td><input type='text' class='form-control round-form' name='evnt_title' value='"+evnt_title+"'></td></tr>"
+         htmlCode += "<tr> <th>시작일</th> <td><input type='text' class='form-control round-form' name='evnt_start_dt' value='"+evnt_start_dt+"'></td></tr>"
+           htmlCode += "<tr> <th>종료일</th> <td><input type='text' class='form-control round-form' name='evnt_end_dt' value='"+evnt_end_dt+"'></td></tr>"
+           htmlCode += "<tr> <th>메시지</th> <td><textarea class='form-control' name='evnt_comment' rows='5' value='"+evnt_comment+"'>"+evnt_comment+"</textarea></td></tr>"
          htmlCode += "</table>"
-         htmlCode += "<input type='hidden' name='evnt_no' value="+evnt_no+">"
-         htmlCode += "<input type='button' value='저장' name='updateEvent' onClick='updateEventProc();'>&nbsp;"
-        htmlCode += "<input type='button' value='닫기' name='closeTr' onClick='closeThisTr(this);'>&nbsp;"
+         htmlCode += "<input type='hidden' name='evnt_no' value="+evnt_no+"><br>"
+         htmlCode += "<button type='button' class='btn btn-theme02' onClick='updateEventProc();'><i class='fa fa-check'></i> 수정</button>&nbsp;"
          htmlCode += "</form>"
-        htmlCode += "</tr>"
         htmlCode += "<script>"
         htmlCode += "$('[name=evnt_start_dt]').datepicker({ dateFormat: 'yy-mm-dd' });"
         htmlCode += "$('[name=evnt_end_dt]').datepicker({ dateFormat: 'yy-mm-dd' });"
@@ -201,12 +208,17 @@
         htmlCode += ">"
         
          thisTr.after(htmlCode);
-       
+         
+         $('.eventListTable [name=test]').hide();
+         $('.eventListTable [name=test]').show(1000);
    }
 
-   function closeThisTr(idx) {
+   function closeThisTr() {
       
-      $(idx).parent().parent().remove();
+	   var delTr = $('.eventListTable [name=test]');
+	   delTr.hide(1000, function(){
+		   delTr.remove();
+	   });
 
    }
 
@@ -312,12 +324,12 @@
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
-     		 <table>
-        		 <tr>
-        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
-         		</tr>
-      		</table>
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -328,10 +340,21 @@
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -345,7 +368,7 @@
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -364,9 +387,12 @@
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -421,9 +447,12 @@
               <li>
                 <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
+
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -555,7 +584,8 @@
 			</table>
 			<table><tr><td height="10"></td></tr></table>
 			<form name="eventScheduleForm" method="post" action="/group4erp/reserveEvent.do">
-             <table class="table table-striped table-advance table-hover table-bordered" width="90%" border=0 cellspacing=0 cellpadding=5>
+
+             <table class="eventListTable table table-striped table-advance table-hover table-bordered" width="90%" border=0 cellspacing=0 cellpadding=5>
              <thead>
 				<tr>
 		            <th></th>
@@ -689,20 +719,21 @@
 			               <td align=center>${eventList.evnt_stat}</td>
 			            </tr> --%>       
 			               </c:forEach>
-			            </table><br>
+			               </tbody>
+			            </table>
 			               <c:if test="${empty eventList}">
+			              		<br>
 			                  <h5><center>해당 결과가 없습니다.</center></h5>
 			               </c:if>
 			   
 			         </form>
-			      </td>
-			      </tr>
-					</tbody>
-			</table>
-			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
+			         &nbsp;<button type='button' align=left class='btn btn-theme04' onClick='deleteNotYetEvent();'><i class='fa fa-eraser'></i> 선택 삭제</button>
+			         <div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
+			
 			<br>
 			
             </div>
+            
           </div>
           <!-- /col-md-12 -->
         </div>

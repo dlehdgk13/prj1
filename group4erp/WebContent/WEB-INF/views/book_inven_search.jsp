@@ -153,66 +153,12 @@ $(document).ready(function(){
 		   document.book_inventory_search_form.reset();
 	   }
 
-	   function showTime() {
-		    //현재 날짜를 관리하는 Date 객체 생성
-		    var today = new Date();
-		    //----------------------------------------
-		    //Date 객체에서 날짜 관련 각 데이터를 꺼내어 저장하는 변수 선언
-		    var amPm = "오후";
-		    var year = today.getFullYear();
-		    var month = today.getMonth()+1;
-		    var week = today.getDay();
-		    var date = today.getDate();
-		    var hour = today.getHours();
-		    var minute = today.getMinutes();
-		    var second = today.getSeconds();
 
-		    var week = ["일", "월", "화", "수", "목", "금", "토"][today.getDay()];
-		    //날짜 관련 각 데이터가 10 미만이면 앞에 0 붙이기
-		    //오전, 오후 여부 판단해서 저장하기
-		    
-		    if(month<10) {
-		       month = "0"+month;
-		    }
-
-		    if(date<10) {
-		       date = "0"+date;
-		    }
-
-		    if(hour<12) {
-		       amPm = "오전";
-		    }
-
-		    if(hour>12) {
-		       hour=hour-12;
-		    }
-
-		    if(hour<10) {
-		       hour="0"+hour;
-		    }
-
-		    if(minute<10) {
-		       minute = "0"+minute;
-		    }
-
-		    if(second<10) {
-		       second = "0" + second;
-		    }
-		    //id="nowTime"가 있는 태그영역 내부에 시간 문자열 삽입
-
-		    document.getElementById("nowTime").innerHTML = year+"년 "+month+"월 "+date+"일("+week+") "+amPm+" "+hour+"시 "+minute+"분 "+second+"초 ";
-		    
-		 }
-
-		function startTime() {
-		showTime();      //1초 딜레이 되어 시간이 표시되는 현상을 제거하기 위해 showTime() 함수를 한 번 호출한다.
-		//-----------------------------------
-		//1초마다 showTime() 함수를 호출하기
-		//-----------------------------------
-		window.setInterval("showTime()", 1000);      //window.setInterval(function() { showTime(); }, 1000);
-		}
+	   
 	   
 </script>
+
+
 <body>
   <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -231,12 +177,12 @@ $(document).ready(function(){
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-          <li>
-     		 <table>
-        		 <tr>
-        		 	<td align="left"> <font style="color:#D8E8E4;"><h5><span id="nowTime" align="right"></span> </h5></font></td>
-         		</tr>
-      		</table>
+          <li><!-- 
+            <table>
+               <tr>
+                  <td align="left"> <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font></td>
+               </tr>
+            </table> -->
           </li>
         </ul>
         <!--  notification end -->
@@ -247,10 +193,21 @@ $(document).ready(function(){
             <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
           </li> -->
           <li>
-            <a class="logout" href="/group4erp/logout.do">Logout</a>
+             <a class="logout" href="/group4erp/logout.do">Logout</a>
           </li>
         </ul>
       </div>
+      <div class="top-menu">
+        <ul class="nav pull-right top-menu">
+          <!-- <li>
+            <a class="goBackss" href="javascript:goBack();">뒤로 가기</a>
+          </li> -->
+          <li style="margin-top: 10px; margin-right: 20px;">
+             <font style="color:#D8E8E4;"><h4><span id="nowTime" align="right"></span> </h4></font>
+          </li>
+        </ul>
+      </div>
+      
     </header>
     <!--header end-->
     <!-- **********************************************************************************************************************************************************
@@ -264,7 +221,7 @@ $(document).ready(function(){
           <p class="centered">
             <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
           </p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
             <a href="/group4erp/goMainTest.do">
               <i class="fa fa-dashboard"></i>
@@ -283,9 +240,12 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/businessTripList.do"><i class="fa fa-briefcase"></i>출장 신청</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/goMyWorkTime.do"><i class="fa fa-list"></i>근태 조회</a>
               </li>
+              <li>
+               -->
               <li>
                 <a href="/group4erp/viewApprovalList.do"><i class="fa fa-pencil"></i>문서 결재</a>
               </li>
@@ -337,12 +297,14 @@ $(document).ready(function(){
               <li>
                 <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
               </li>
-              <li>
-                <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              <li class="active">
+              	<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
               </li>
+              <!-- 
               <li>
                 <a href="/group4erp/viewEmpWorkStateList.do"><i class="fa fa-list"></i>직원별 근무현황</a>
               </li>
+               -->
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
               </li>
@@ -390,9 +352,8 @@ $(document).ready(function(){
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper" style="text-align:left;">
-      <table width=99%>
-      <tr>
-      <td>
+      <table width=99%> <tr> <td>
+
         <h3><i class="fa fa-angle-right"></i> 재고 관리</h3>
        <td align=right>
        <button type="button" class="btn btn-theme04" onclick="goNewBookInfo();"><i class="fa fa-book"></i> 서적 등록</button>
@@ -408,7 +369,7 @@ $(document).ready(function(){
 			<table class="searchTable" style="border: 0px;">
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 분야&nbsp;</b></th>
-					
+
 					<td colspan=2 width="50%" align=left>
 					<c:forEach items="${requestScope.category}" var="cat" varStatus="loopTagStatus">
 							&nbsp;<input type="checkbox" name="category_name" value="${cat.cat_name}">${cat.cat_name}

@@ -278,8 +278,9 @@
     		to_char(co.books_qty,'999,999,999') "books_qty",
     		to_char(((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty),'999,999,999,999') "tot_cost",
     		((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty)*0.1||'' "tax",
-    		((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty) - (((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty)*0.1) "tradeTot",
-    		to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "order_dt"
+    		to_char(co.order_dt, 'yyyy.mm.dd')|| '('||to_char(co.order_dt, 'dy', 'nls_date_language=Korean' )||')' "order_dt",
+    		((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty) - (((select b.book_price from book b where b.isbn13=co.isbn13) * co.books_qty)*0.1) "tradeTot"
+
     	from corp_order_info co
     	where co.order_books_no = #{order_books_no}
 	</select>
@@ -356,7 +357,7 @@
 	
 	
 	<insert id="saveTempTranSpec" parameterType="com.group4.erp.TranSpecDTO">
-		insert into  (
+		insert into tran_issue_info (
 			issue_no,
 			order_no,
 			corp_no,

@@ -65,10 +65,11 @@
 		</if>
 		
 		<if test="sort==null or sort==''">
-			order by 13, b.reg_dt desc
+			order by 13, reg_dt desc
 		</if>
 	</sql>
 	
+
 	<!--=============================================================================================================================================-->
 	<!-- 담당 상품 조회 -->
 	<!--=============================================================================================================================================-->
@@ -136,7 +137,7 @@
 
 	</select>
 	
-	
+
 	<sql id="MyCareBookSearch">
 		<if test="searchCategory=='전체'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
@@ -186,6 +187,7 @@
 		 	and is_print = #{is_print}
 		 </if>
 	</sql>
+	
 	
 	<select id='getCategoryList' resultType="java.util.HashMap">
 		select

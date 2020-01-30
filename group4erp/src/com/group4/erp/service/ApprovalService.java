@@ -37,9 +37,10 @@ public interface ApprovalService {
 	int deleteDayOffApproval(int dayoff_apply_no);
 	
 	int updateBTripApprovalProc(ApprovalDTO approvalDTO);
-	
+
 	int deleteBTripApproval(ApprovalDTO approvalDTO);
 	
 	int deleteBTripApplyInfo(BusinessTripDTO businessTripDTO);
+
 
 }

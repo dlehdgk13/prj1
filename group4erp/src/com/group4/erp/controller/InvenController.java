@@ -218,7 +218,7 @@ public class InvenController {
 		mav.setViewName("main.jsp");
 		mav.addObject("subMenu", "viewSignUpBook");
 		mav.addObject("navigator", "[재고현황] → [도서정보조회] → [도서등록]");
-
+		
 		List<Map<String, String>> size = this.invenService.getSize();
 		mav.addObject("size", size);
 		
