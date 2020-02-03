@@ -137,10 +137,18 @@
 		location.href="/group4erp/goInsertCorpPage.do"
 	}
 
-	
-	
 	var closeFlag = "close";
+	
+	
 	function updateCorpInfo(idx, flag, corp_no, corp_name, ceo_name, business_area, corp_addr, corp_tel, corp_fax) {
+		
+		/*
+		if(closeFlag!=flag) {
+			$(idx).val("닫기");
+			closeFlag = flag;
+
+		} 
+*/
 		var thisTr = $(idx).parent().parent();
 		var delTr = $(".corpListTable [name=updateCorpInfo]");
 		
@@ -660,11 +668,6 @@
 					</c:forEach>
 					</tbody>
 			</table>
-			<!-- 2020-01-26 -->
-			<br>
-			<c:if test="${corpListCnt==0}">
-				<center>조회내역이 없습니다.</center>
-			</c:if>
 			&nbsp;<button type='button' align=left class='btn btn-theme04' onClick='deleteCorp();'><i class='fa fa-eraser'></i> 선택 삭제</button>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>

@@ -117,6 +117,7 @@
       inputData("[name=search_keyword]", "${myWorkSearchDTO.search_keyword}");
       inputData("[name=searchCategory]", "${myWorkSearchDTO.searchCategory}");
       inputData("[name=is_print]", "${myWorkSearchDTO.is_print}");
+      inputData("[name=sort]", "${myWorkSearchDTO.sort}");
 
       /* 
       <c:forEach items="${myWorkSearchDTO.category}" var="category">
@@ -545,31 +546,31 @@
 				<tr>
 		            <th width="4%">No
 		            <c:choose>
-		               <c:when test="${param.sort=='b.ISBN13 desc'}">
+		               <c:when test="${param.sort=='1 desc'}">
 		                  <th width="9%" style="cursor: pointer"
 		                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼책번호
 		               </c:when>
-		               <c:when test="${param.sort=='b.ISBN13 asc'}">
+		               <c:when test="${param.sort=='1 asc'}">
 		                  <th width="9%" style="cursor: pointer"
-		                     onclick="$('[name=sort]').val('b.ISBN13 desc'); goSearchMyWorkList();">▲책번호
+		                     onclick="$('[name=sort]').val('1 desc'); goSearchMyWorkList();">▲책번호
 		               </c:when>
 		               <c:otherwise>
 		                  <th width="9%" style="cursor: pointer"
-		                     onclick="$('[name=sort]').val('b.ISBN13 asc'); goSearchMyWorkList();">책번호
+		                     onclick="$('[name=sort]').val('1 asc'); goSearchMyWorkList();">책번호
 		               </c:otherwise>
 		         </c:choose> 
 		            <c:choose>
-		               <c:when test="${param.sort=='b.book_name desc'}">
+		               <c:when test="${param.sort=='2 desc'}">
 		                  <th width="25%" style="cursor: pointer"
 		                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼책 이름
 		               </c:when>
-		               <c:when test="${param.sort=='b.book_name asc'}">
+		               <c:when test="${param.sort=='2 asc'}">
 		                  <th width="25%" style="cursor: pointer"
-		                     onclick="$('[name=sort]').val('b.book_name desc'); goSearchMyWorkList();">▲책 이름
+		                     onclick="$('[name=sort]').val('2 desc'); goSearchMyWorkList();">▲책 이름
 		               </c:when>
 		               <c:otherwise>
 		                  <th width="25%" style="cursor: pointer"
-		                     onclick="$('[name=sort]').val('b.book_name asc'); goSearchMyWorkList();">책 이름
+		                     onclick="$('[name=sort]').val('2 asc'); goSearchMyWorkList();">책 이름
 		               </c:otherwise>
 		         </c:choose>
 		            <c:choose>
@@ -587,17 +588,17 @@
 		               </c:otherwise>
 		         </c:choose>
 		            <c:choose>
-		               <c:when test="${param.sort=='to_number(b.book_price) desc'}">
+		               <c:when test="${param.sort=='4 desc'}">
 		                  <th width="8%" style="cursor: pointer"
 		                     onclick="$('[name=sort]').val(''); goSearchMyWorkList();">▼가격
 		               </c:when>
-		               <c:when test="${param.sort=='to_number(b.book_price) asc'}">
+		               <c:when test="${param.sort=='4 asc'}">
 		                  <th width="8%" style="cursor: pointer"
-		                     onclick="$('[name=sort]').val('to_number(b.book_price) desc'); goSearchMyWorkList();">▲가격
+		                     onclick="$('[name=sort]').val('4 desc'); goSearchMyWorkList();">▲가격
 		               </c:when>
 		               <c:otherwise>
 		                  <th width="8%" style="cursor: pointer"
-		                     onclick="$('[name=sort]').val('to_number(b.book_price) asc'); goSearchMyWorkList();">가격
+		                     onclick="$('[name=sort]').val('4 asc'); goSearchMyWorkList();">가격
 		               </c:otherwise>
 		         </c:choose>
 		            <c:choose>
@@ -650,10 +651,6 @@
 			         </c:forEach>
 					</tbody>
 			</table>
-			<!-- 2020-01-26 -->
-			<c:if test="${myWorkListAllCnt==0}">
-            <center><h5>조회내역이 없습니다.</h5></center>
-        	 </c:if>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>
             </div>

@@ -67,8 +67,11 @@
    </style>
 
 
- <script>
-    $(document).ready(function(){
+   <script>
+   
+
+      $(document).ready(function(){
+
 	//headerSort("dayOffList", 0);
     	  startTime();
 
@@ -109,6 +112,9 @@
       function goDayoffSearch(){
          document.empDayoffSearch.submit();
 
+      }
+
+/*
          if(month < 10 ) {month = "0"+month;}
          if (date<10){date = "0" + date;}
 
@@ -118,7 +124,7 @@
          var result = year + "년 " +month + "월 " + date + "일 ("+ week +") ";
          $("#nowtime").text('2019-09-09');         
          //return year + "년 " +month + "월 " + date + "일 ("+ week +") " + hour + "시 " + minute + "분 " +second + "초 ";
-      } 
+      }*/
 
 
       var cd = $("[name=addTr]").find("[name=dayoff_name]").val();
@@ -910,11 +916,9 @@
             </td>
             <td ></td>
                <td width="20%">
-               			<!-- 2020-01-26 -->
-                     <button  type="button" class="btn btn-default" onclick="goDayoffSearch();"><input type="image" src="/group4erp/resources/image/magnifying-glass.png" style="width:13; height:13;" ><font style="font-size:9pt;" >검색</font></button>
+                     <button  type="button" class="btn btn-default" onclick="goSearch();"><input type="image" src="/group4erp/resources/image/magnifying-glass.png" style="width:13; height:13;" ><font style="font-size:9pt;" >검색</font></button>
                      &nbsp;
-               			<!-- 2020-01-26 -->
-                     <button type="button" class="btn btn-default" onclick="goDayoffSearchAll();"><input type="image" src="/group4erp/resources/image/searchA.png" style="width:13; height:13;"><font style="font-size:9pt;">모두검색</font></button>
+                     <button type="button" class="btn btn-default" onclick="goSearchAll();"><input type="image" src="/group4erp/resources/image/searchA.png" style="width:13; height:13;"><font style="font-size:9pt;">모두검색</font></button>
                      &nbsp;
                      <button type="button" class="btn btn-default" onclick="goAllReset();"><input type="image" src="/group4erp/resources/image/reset.png" style="width:13; height:13;"><font style="font-size:9pt;">초기화</font></button>
                   
@@ -1142,14 +1146,12 @@
                </tbody>
          </table>
          <input type="hidden" name="selectPageNo">
-       <br>
-       	<!-- 2020-01-26 -->
-       	<c:if test="${getDayOffListCnt==0}">
-       		<center>조회 내역이 없습니다.</center>
-       	</c:if>
+         <br>
       <div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 
-      
+      <%-- <c:if test="${empty getDayOffList}">
+         금일은 휴가자가 없습니다.
+      </c:if> --%>
          <br>
             </div>
           </div>

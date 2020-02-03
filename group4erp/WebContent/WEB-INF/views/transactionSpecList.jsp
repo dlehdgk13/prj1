@@ -525,10 +525,6 @@
 					</c:forEach>
 					</tbody>
 			</table>
-			<br>
-			<c:if test="${corp_tran_cnt==0}">
-				<center>조회내역이 없습니다.</center>
-			</c:if>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<form name="tranSpecTable" method="post" action="/group4erp/viewTranSpecInfo.do">
 			<input type="hidden" name="order_no">

@@ -45,6 +45,11 @@
    request.setAttribute("emp_no", emp_no);
 
 %>
+
+<!-- =======
+>>>>>>> refs/remotes/b_ldh/b_ldh
+=======
+>>>>>>> refs/remotes/b_kth/b_kth -->
 <style>
 
 .searchTable{
@@ -201,7 +206,7 @@
 	}
 
 	function goBusinessTripForm() {
-		location.href = "/group4erp/businessTripForm.do	";
+		location.href = "/group4erp/businessTripForm.do";
 	}
 	
 </script>
@@ -644,9 +649,6 @@
 						</c:forEach>
 					</tbody>
 			</table>
-			<c:if test="${businessTripListAllCnt==0}">
-            <center><h5>조회내역이 없습니다.</h5></center>
-        	 </c:if>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>
             </div>

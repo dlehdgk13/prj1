@@ -576,10 +576,6 @@
 					</tbody>
 			</table>
 			<br>
-			<!-- 2020-01-26 -->
-			<c:if test="${returnOrderCnt==0 }">
-				<center>조회내역이 없습니다.</center>
-			</c:if>
 			<div align=center>&nbsp;<span class="pagingNumber"></span>&nbsp;</div>
 			<br>
             </div>

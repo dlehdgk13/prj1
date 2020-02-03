@@ -227,13 +227,8 @@ public class AccountController {
 			*/
 
 			
-			
-			/*
-			 * TranSpecDTO test = new TranSpecDTO(); for(TranSpecDTO tranSpec :
-			 * tranSpecList) { test = tranSpec; }
-			 */
-			
 			mav.addObject("tranSpec_cnt", tranSpec_cnt);
+			mav.addObject("tranSpecList", tranSpecList);
 			mav.addObject("order_no", order_no);
 			
 		} catch(Exception e) {

@@ -73,7 +73,7 @@
 			order by ${sort}
 		</if>
 		
-		<if test="sort==null">
+		<if test="sort==null or sort==''">
 			order by 1 desc
 		</if>
 	</sql>
@@ -104,7 +104,12 @@
 			where 1=1	
 			and ei.evnt_state_cd != '0'
 			<include refid="eventWhere" />
-			<include refid="headerSort" />
+			<if test="sort!=null and sort.length() > 0" >
+			order by ${sort}
+			</if>
+			<if test="sort==null or sort==''">
+			order by 1 desc
+			</if>
 		) zzz) 
 		where RNUM&gt;=${selectPageNo * rowCntPerPage - rowCntPerPage +1} and RNUM&lt;=${selectPageNo * rowCntPerPage}
 	</select>

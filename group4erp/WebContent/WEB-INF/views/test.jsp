@@ -2,18 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/views/common.jsp" %>
-<% String emp_nm = (String)session.getAttribute("emp_name"); 
-	String jikup = (String)session.getAttribute("jikup");
-	String dep_name = (String)session.getAttribute("dep_name");
-	
-   System.out.println("emp_nm==="+emp_nm);
-   System.out.println("jikup==="+jikup);
    
-   request.setAttribute("emp_nm", emp_nm);
-   request.setAttribute("jikup", jikup);
-   request.setAttribute("dep_name", dep_name);
-
-%>
 
 <!DOCTYPE html>
 <html lang="ko">

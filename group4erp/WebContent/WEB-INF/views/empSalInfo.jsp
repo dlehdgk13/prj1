@@ -129,6 +129,7 @@
 </script>
 
 </head>
+
 <body>
 <section id="container">
     <!-- **********************************************************************************************************************************************************
@@ -540,6 +541,7 @@
 							<td><fmt:formatNumber type="number" maxFractionDigits="3" value="${myPayCheckList.real_sal}" />원</td>
 
 						</tr>
+		
 					 </c:forEach>
          </tbody>
       </table>

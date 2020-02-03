@@ -371,7 +371,7 @@ $(document).ready(function(){
                       <td class="text-right no-border">
                         <div class="well well-small green"><strong>총액</strong></div>
                       </td>
-                      <td class="text-right"><strong><%-- ${tranSpecList.tradeTot} --%>퉤</strong></td>
+                      <td class="text-right"><strong>${tranSpecList.tradeTot}</strong></td>
                     </tr>
                   </tbody>
                 </table>

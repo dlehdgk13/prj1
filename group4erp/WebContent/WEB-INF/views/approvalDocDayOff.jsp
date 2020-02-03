@@ -52,12 +52,6 @@
 
 			return;		
 		}
-		/* 2020-01-28 */
-		else if(approvalYn==null){
-			alert("승인 및 반려를 선택해 주세요.");
-
-			return;
-		}
 	
 		$.ajax({
 			url : "/group4erp/updateDayOffApprovalProc.do",				//호출할 서버쪽 URL 주소 설정
@@ -68,7 +62,7 @@
 					alert("결재 성공!");
 				
 					location.replace("/group4erp/viewApprovalList.do");
-				} else if(upCnt==0) {	
+				} else if(delCnt==0) {	
 					alert("결재 로직 실패!");
 				
 				location.replace("/group4erp/viewApprovalList.do");

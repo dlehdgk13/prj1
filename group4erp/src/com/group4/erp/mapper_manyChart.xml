@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+<!-- mapper 태그 선언 -->
+<!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+	<!-- namespace 속성값으로 [DAO 인터페이스명]이 오며 -->
+	<!-- [DAO 인터페이스] 메소드명과 동일한 id 값을 소유한 태그를 내포하고 있다. -->
+<!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
+
+<mapper namespace="com.group4.erp.dao.manyChartDAO">
+	
+	<select id="getPerBookCat" resultType="com.group4.erp.ManyChartDTO">
+		select cat_name "cat_name",
+			round(( select count(*) from book b where b.cat_cd=c.cat_cd )/(select count(*) from book)*100, 2) "perNum"
+		from code_category c order by c.cat_cd
+	</select>
+	
+	<select id="getPerCorpArea" resultType="com.group4.erp.ManyChartDTO">
+		select BUSINESS_AREA_NAME "business_area_name",
+			round(( select nvl(count(*), 0) from corporation_cus cc where cc.CORP_BUSINESS_AREA=c.business_area_code )/(select count(*) from corporation_cus)*100, 2) "perCorp"
+		from code_business_area c order by c.business_area_code
+	</select>
+	
+	<select id="getPerLine" resultType="com.group4.erp.ManyChartDTO">
+		select round( ( (select count(*) from buy_offline_info)/( (select count(*) from buy_offline_info)+(select count(*) from order_info) )*100 ), 2) "off_line",
+			round(( (select count(*) from order_info)/( (select count(*) from buy_offline_info)+(select count(*) from order_info) )*100 ), 2) "on_line" from dual 
+	</select>
+	
+	<select id="getPerMember" resultType="com.group4.erp.ManyChartDTO">
+		select round(((select count(*) from order_info where is_member='y')/(select count(*) from order_info)*100), 2) "memberY",
+			round(((select count(*) from order_info where is_member='n')/(select count(*) from order_info)*100), 2) "memberN" from dual
+	</select>
+	
+	<select id="getPerLeave" resultType="com.group4.erp.ManyChartDTO">
+		select round((select count(*) from employee where is_on_leave='F')/(select count(*) from employee)*100, 2) "leaveF",
+			round((select count(*) from employee where is_on_leave='T')/(select count(*) from employee)*100, 2) "leaveT" from dual
+	</select>
+	
+	<select id="getPerOnlineOrder" resultType="com.group4.erp.ManyChartDTO">
+		select c.cat_name "cat_name_online",
+			round( ( select count(*) from order_info where isbn13 in(select isbn13 from book b where b.cat_cd=c.cat_cd) )/(select count(*) from order_info)*100, 2) "peronlineorder"
+		from code_category c
+	</select>
+	
+</mapper>
+
+
+

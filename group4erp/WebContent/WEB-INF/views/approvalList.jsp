@@ -611,9 +611,8 @@
 			<br>
 
 			</form>
-			<!-- 2020-01-26 -->
 			<c:if test="${approvalResList.size()==0}">
-		         <centor><h5>결재할 사항이 없습니다.</h5></centor>
+		         <h5>결재할 사항이 없습니다.</h5>
 		      </c:if>
             </div>
           </div>
