@@ -102,24 +102,31 @@
          <foreach collection="inventory_loc" item="loc" open="(" separator="or" close=")">
              <if test="loc==1">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                 <!-- (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '5' -->
              </if>
              <if test="loc==2">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                 <!-- (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '4' -->
              </if>
              <if test="loc==3">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                <!--  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '3' -->
              </if>
              <if test="loc==4">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                 <!-- (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '1' -->
              </if>
              <if test="loc==5">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                 <!-- (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '2' -->
              </if>
              <if test="loc==6">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                 <!-- (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '6' -->
              </if>
              <if test="loc==7">
                  (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = ${loc}
+                 <!-- (select s.branch_cd from stock_info s where s.isbn13=b.isbn13) = '7' -->
              </if>
          </foreach>
       </if>
@@ -328,7 +335,7 @@
 	</select>
 	
 	<select id="getInven_loc" parameterType="com.group4.erp.InvenSearchDTO" resultType="java.util.HashMap">
-		select branch_name as "branch_name" from code_branch order by 1
+		select branch_name as "branch_name" from code_branch
 	</select>
 	
 	<!-- 출고현황 -->

@@ -77,7 +77,7 @@ public class InvenController {
 			System.out.println("<게시글 불러오기 실패>");
 			System.out.println("예외발생 =>"+e);
 		}
-		return mav;
+		return mav; 
 	}
 	
 

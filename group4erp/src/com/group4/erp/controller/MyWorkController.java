@@ -90,6 +90,7 @@ public class MyWorkController {
 			mav.addObject("myWorkListAllCnt", myWorkListAllCnt);
 			mav.addObject("MyCareBookList", MyCareBookList);
 			System.out.println(myWorkSearchDTO.getSort());
+			System.out.println(myWorkListAllCnt);
 
 		} catch(Exception e) {
 			System.out.println("<게시글 불러오기 실패>");

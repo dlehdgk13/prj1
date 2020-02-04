@@ -122,7 +122,7 @@
    
       var options1 = {
             title: '일반 고객 주문 건수(분야별)',
-            width :750, 
+            width :900, 
             height: 300,
             animation: { //차트가 뿌려질때 실행될 애니메이션 효과
                 
