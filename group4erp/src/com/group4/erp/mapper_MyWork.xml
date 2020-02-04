@@ -85,7 +85,7 @@
                  emp_no "EMP_NO",
                  published_dt "PUBLISHED_DT",
                  editor "EDITOR",
-                 ISBN_CNT "ISBN_cnt",
+                 ISBN_cnt "ISBN_CNT",
                  branch_name "BRANCH_NAME",
                  reg_dt "REG_DT"
 			from
@@ -224,17 +224,9 @@
 	
 	<select id='getMyWorkListAllCnt' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="int">
 		select count(*)from(
-			select 
-				b.*
-				, cc.cat_name
-				, si.ISBN_Cnt
-				, cb.branch_name 
-			from book b, code_category cc, stock_info si, code_branch cb
-	        where cc.cat_cd = b.cat_cd and b.ISBN13 = si.ISBN13(+) and si.branch_cd = cb.branch_cd(+)
+			select b.*, cc.cat_name, si.ISBN_Cnt, cb.branch_name from book b, code_category cc, stock_info si, code_branch cb
+	        	where cc.cat_cd = b.cat_cd and b.ISBN13 = si.ISBN13(+) and si.branch_cd = cb.branch_cd(+)
 	        	and b.emp_no = '${emp_no}'
-	        	<if test="is_print!=null and is_print.length()>0">
-			 		and is_print = #{is_print}
-			 	</if>
 				<include refid="MyCareBookSearchWere" />
 		)
 	</select>
