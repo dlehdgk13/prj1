@@ -109,12 +109,11 @@ input::placeholder {
    $(document).ready(
          function() {
 
-        	 startTime();
-        	 
+           startTime();
+            
             inputData("[name=dep_name]", "${employeeInfoUpDTO.dep_name}");
             inputData("[name=jikup]", "${employeeInfoUpDTO.jikup}");
-            inputData("[name=worktime_name]",
-                  "${employeeInfoUpDTO.worktime_name}");
+            //inputData("[name=worktime_name]", "");
             //      inputData("[name=mgr_emp_dep_name]", "${employeeInfoUpDTO.mgr_emp_dep_name}");
             //      inputData("[name=mgr_emp_jikup]", "${employeeInfoUpDTO.mgr_emp_jikup}");
 
@@ -236,7 +235,8 @@ input::placeholder {
          $("[name=jikup]").focus();
          return;
       }
-      if (is_empty('[name=salary]')) {
+      var salary = $("[name=salary]").val();
+      if (is_empty('[name=salary]') || salary == 0) {
          alert("연봉을 입력해주세요.");
          $("[name=salary]").focus();
          return;
@@ -305,12 +305,13 @@ input::placeholder {
          data : formData,
          type : 'POST',
          success : function(result) {
-            alert("수정이 완료되었습니다.");
             $("img").remove();
             if(emp_no.length < 6){
-               location.href = "/group4erp/viewEmpList.do"
+               alert("승인이 완료되었습니다.");
+                  location.href = "/group4erp/viewEmpList.do"
             }else{
-               location.href = "/group4erp/viewEmpContentForm.do?emp_no="+ emp_no;
+               alert("수정이 완료되었습니다.");
+                  location.href = "/group4erp/viewEmpContentForm.do?emp_no="+ emp_no;
             }
                
          }
@@ -365,7 +366,7 @@ input::placeholder {
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOK<span>STREET</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -414,7 +415,7 @@ input::placeholder {
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+            <a href="/group4erp/goMainTest.do"><img src="/group4erp/resources/image/logo_sidebar.png"  width="80"></a>
           </p>
           <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
                   <li class="mt"><a href="index.html"> <i
@@ -681,7 +682,7 @@ input::placeholder {
                                        <option value="기타">기타</option>
                                  </select></td>
                                  <td>∗ 연봉</td>
-                                 <td colspan="2"><input type="text" name="salary" size="27" value="${employeeInfoUpDTO.salary}"></td>
+                                 <td colspan="2"><input type="text" name="salary" size="27" value="${employeeInfoUpDTO.salary}"><font style="font-size:9pt; color:orange;"> *단위:만원</font></td>
                               </tr>
                               <tr>
                                  <td>∗ 입사일</td>

@@ -154,7 +154,8 @@ function openBestKwdData() {
 
 
 </script>
-<<<<<<< HEAD
+
+
 </head>
 <body><%-- <center>
 =======
@@ -214,7 +215,7 @@ function openBestKwdData() {
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOK<span>STREET</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -263,7 +264,7 @@ function openBestKwdData() {
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+            <a href="/group4erp/goMainTest.do"><img src="/group4erp/resources/image/logo_sidebar.png"  width="80"></a>
           </p>
           <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
@@ -382,6 +383,9 @@ function openBestKwdData() {
               </li>
               <li>
                 <a href="/group4erp/viewOurCompanyReport.do"><i class="fa fa-building-o"></i>회사현황</a>
+              </li>
+              <li>
+                <a href="/group4erp/goMyChart.do"><i class="fa fa-bar-chart-o"></i>차트현황</a>
               </li>
             </ul>
           </li>

@@ -157,13 +157,14 @@ $(document).ready(function(){
 			return;
 		}
 		
-		
+		/*
 		var checkPirce = $('[name=book_price]').val();
 		if(isNaN(checkPirce)==true){
 			alert("책 가격은 숫자만 기입해주세요");
 			//$('[name=book_price]').val();
 			return;
 		}
+		*/
 		var checkPages = $('[name=book_pages]').val();
 		if(isNaN(checkPages)==true){
 			alert("페이지 수는 숫자만 기입해주세요");
@@ -191,6 +192,19 @@ $(document).ready(function(){
 			return;
 		}
 		
+		/*
+		var arrayPirce = [];
+		
+		arrayPirce = checkPirce.split("");
+		
+		for(var i=0 ; i<arrayPrice.length ; i++){
+			alert("전"+arrayPrice[i]);
+			if(arrayPrice[i]==','){
+				arrayPrice[i].push('');
+			}
+			alert("후"+arrayPrice[i]);
+		}
+		*/
 		
 		if(confirm("정말 저장하시겠습니까?")==false){return;}
 		
@@ -230,13 +244,12 @@ $(document).ready(function(){
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOK<span>STREET</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
-
           <!-- notification dropdown end -->
           <li><!-- 
             <table>
@@ -280,7 +293,7 @@ $(document).ready(function(){
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+            <a href="/group4erp/goMainTest.do"><img src="/group4erp/resources/image/logo_sidebar.png"  width="80"></a>
           </p>
           <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
@@ -413,7 +426,7 @@ $(document).ready(function(){
       	<table border=0 cellpadding=0 cellspace=0 width="98%">
       	<tr>
       	<td widtj=50%>
-      	<h3 align=left><i class="fa fa-angle-right"></i>서적 상세정보(datepicker 수정해야함.)</h3>
+      	<h3 align=left><i class="fa fa-angle-right"></i>서적 상세정보</h3>
       	<td widtj=50%>
       	<h3 align=right><i class="fa fa-arrow-left" onclick="goBack();" style="cursor:pointer;"></i></h3>
         </table>

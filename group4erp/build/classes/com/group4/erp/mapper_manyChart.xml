@@ -43,6 +43,82 @@
 		from code_category c
 	</select>
 	
+	<select id="getPerOffOrder" resultType="com.group4.erp.ManyChartDTO">
+		select c.cat_name "cat_name_off",
+			round( ( select count(*) from buy_offline_info where isbn13 in(select isbn13 from book b where b.cat_cd=c.cat_cd) )/(select count(*) from buy_offline_info)*100, 2) "perofforder"
+		from code_category c
+	</select>
+	
+	<select id="getDeptEmpCnt" resultType="com.group4.erp.ManyChartDTO">
+		select d.dep_name "dep_name",
+			(select count(*) from employee e where e.dep_no=d.dep_no) "depCnt" from dept d
+	</select>
+	
+	<select id="getMonthTotMoney" resultType="com.group4.erp.ManyChartDTO">
+		select
+	          sum( (select b.book_price from book b where b.isbn13 in(o.isbn13))*o.book_qty ) as "totmoneyM"
+	          ,to_char(o.order_dt, 'yy') || '년 ' || to_char(o.order_dt, 'mm')||'월' as "monthsort"
+	       from order_info o
+	      where o.order_no not in (select order_no from return_sale_info)
+	      group by to_char(o.order_dt, 'yy') || '년 ' || to_char(o.order_dt, 'mm')||'월'
+	      order by 2 desc
+	</select>
+	
+	<select id="getOffMonthTotMoney" resultType="com.group4.erp.ManyChartDTO">
+		select
+	          sum(o.tot_cost ) as "offtotmoney"
+	          ,to_char(o.buy_dt, 'yy') || '년 ' || to_char(o.buy_dt, 'mm')||'월' as "offmonthsort"
+	       from buy_offline_info o
+	      group by to_char(o.buy_dt, 'yy') || '년 ' || to_char(o.buy_dt, 'mm')||'월'
+	      order by 2 desc
+	</select>
+	
+	<select id="getPerOnlineOrderAjax" parameterType="String" resultType="com.group4.erp.ManyChartDTO">
+		select c.cat_name "cat_name_online",
+			round( ( select count(*) from order_info where isbn13 in(select isbn13 from book b where b.cat_cd=c.cat_cd) and to_char(order_dt,'yyyymm')='2019'||#{month_choice} )/(select count(*) from order_info where to_char(order_dt,'yyyymm')='2019'||#{month_choice})*100, 2) "peronlineorder"
+		from code_category c
+	</select>
+	<select id="getPerOfflineOrderAjax" parameterType="String" resultType="com.group4.erp.ManyChartDTO">
+		select c.cat_name "cat_name_offline",
+round( ( select count(*) from buy_offline_info where isbn13 in(select isbn13 from book b where b.cat_cd=c.cat_cd) and to_char(buy_dt,'yyyymm')='2019'||#{month_choice} )/(select count(*) from buy_offline_info where to_char(buy_dt,'yyyymm')='2019'||#{month_choice})*100, 2) "perofflineorder"
+from code_category c
+	</select>
+	
+	<select id="getBestSellers" resultType="HashMap">
+		select * from (
+		    select rownum "RNUM", zxcv.* from(
+		        select o.isbn13 "isbn13",
+		        (select b.book_name from book b where b.isbn13=o.isbn13) "book_name",
+		        (select c.cat_name from code_category c where c.cat_cd in(select b.cat_cd from book b where b.isbn13=o.isbn13)) "cat_name",
+		        count(*) "soldcnt" from order_info o where to_char(o.order_dt,'yymm')= to_char(add_months(sysdate, -1),'yymm') group by o.isbn13 order by "soldcnt" desc)
+		    zxcv where rownum &lt;= 5)
+	</select>
+	
+	<select id="getPerReturnCnt" resultType="com.group4.erp.ManyChartDTO">
+		select cr.return_name "return_name",
+			round((select count(*) from return_sale_info rs where rs.return_sales_cd in(cr.return_cd) )/(select count(*) from return_sale_info)*100, 2) "perreturncnt"
+		from code_return cr
+	</select>
+	
+	<select id="getCreditTot" resultType="com.group4.erp.ManyChartDTO">
+		select
+	          sum(credit_info ) as "credittot"
+	          ,to_char(occur_dt, 'yy') || '년 ' || to_char(occur_dt, 'mm')||'월' as "creditmonth"
+	       from ledger_info  
+	       where debit_info is null
+	      group by to_char(occur_dt, 'yy') || '년 ' || to_char(occur_dt, 'mm')||'월'
+	      order by 2 desc
+	</select>
+	
+	<select id="getDebitTot" resultType="com.group4.erp.ManyChartDTO">
+		select
+	          sum(debit_info ) as "debittot"
+	          ,to_char(occur_dt, 'yy') || '년 ' || to_char(occur_dt, 'mm')||'월' as "debitmonth"
+	       from ledger_info  
+	       where credit_info is null
+	      group by to_char(occur_dt, 'yy') || '년 ' || to_char(occur_dt, 'mm')||'월'
+	      order by 2 desc
+	</select>
 </mapper>
 
 

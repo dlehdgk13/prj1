@@ -290,7 +290,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOK<span>STREET</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -339,7 +339,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+            <a href="/group4erp/goMainTest.do"><img src="/group4erp/resources/image/logo_sidebar.png"  width="80"></a>
           </p>
           <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
@@ -485,8 +485,8 @@
 				<tr>
 	               <th width="8%"style="text-align:right;"><b>* 판매 상황&nbsp;</b></th>
 	               <td width="13%" align=left>
-	                  <input type="checkbox" name="is_print" value="y">절판
-	                  <input type="checkbox" name="is_print" value="n">판매중
+	                  <input type="checkbox" name="is_print" value="n">절판
+	                  <input type="checkbox" name="is_print" value="y">판매중
 					<th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b>
 					<td>
 						<select name="searchCategory">
@@ -639,13 +639,13 @@
 			            <td align=left>${MyCareBookList.BOOK_NAME}
 			            <td align=center>${MyCareBookList.CAT_NAME}
 			            <td align=center>${MyCareBookList.BOOK_PRICE}
-			            <td align=center>${MyCareBookList.ISBN_cnt}
+			            <td align=center>${MyCareBookList.ISBN_CNT}
 			            <td align=center>${MyCareBookList.BRANCH_NAME}
 			            <td align=center>
-			               <c:if test="${MyCareBookList.ISBN_cnt < 100}">
+			               <c:if test="${MyCareBookList.ISBN_CNT < 100}">
 			                  <button type='button' class='btn btn-default' onClick="booKInvenFill(this,'${MyCareBookList.ISBN13}');"><input type='image' src='/group4erp/resources/image/order_book.png' width='12' height='12'>발주</button> 
 			               </c:if>
-			               <c:if test="${MyCareBookList.ISBN_cnt >= 100}">
+			               <c:if test="${MyCareBookList.ISBN_CNT >= 100}">
 			                  --
 			               </c:if>  
 			         </c:forEach>

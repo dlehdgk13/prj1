@@ -83,6 +83,7 @@
               or upper(to_char(w.wh_dt,'YYYY-MM-DD (DY)', 'NLS_DATE_LANGUAGE=KOREAN')) like upper('%${wh_keyword}%')
               or upper(w.wh_no) like upper('%${wh_keyword}%')
               or upper(w.order_inven_no) like upper('%${wh_keyword}%')
+              or upper((select isbn13 from books_inven_order_info where order_inven_no = w.order_inven_no)) like upper('%${wh_keyword}%')
          )
 
 

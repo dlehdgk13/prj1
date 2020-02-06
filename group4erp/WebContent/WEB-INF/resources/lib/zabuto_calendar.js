@@ -99,7 +99,7 @@ $.fn.zabuto_calendar = function (options) {
                                             }
                                             itemBadge = '<span class="badge ' + badgeClassName + '">' + item.badge + '</span> ';
                                         }
-                                        $legendObj.append('<span class="legend-' + item.type + '">' + itemBadge + itemLabel + '</span>');
+                                        //$legendObj.append('<span class="legend-' + item.type + '">' + itemBadge + itemLabel + '</span>');
                                     }
                                     break;
                                 case 'block':
@@ -111,19 +111,19 @@ $.fn.zabuto_calendar = function (options) {
                                     } else {
                                         var listClassName = 'event-styled ' + item.classname;
                                     }
-                                    $legendObj.append('<span class="legend-' + item.type + '"><ul class="legend"><li class="' + listClassName + '"></li></u>' + itemLabel + '</span>');
+                                    //$legendObj.append('<span class="legend-' + item.type + '"><ul class="legend"><li class="' + listClassName + '"></li></u>' + itemLabel + '</span>');
                                     break;
                                 case 'list':
                                     if ('list' in item && typeof(item.list) == 'object' && item.list.length > 0) {
                                         var $legendUl = $('<ul class="legend"></u>');
                                         $(item.list).each(function (listIndex, listClassName) {
-                                            $legendUl.append('<li class="' + listClassName + '"></li>');
+                                            //$legendUl.append('<li class="' + listClassName + '"></li>');
                                         });
-                                        $legendObj.append($legendUl);
+                                        //$legendObj.append($legendUl);
                                     }
                                     break;
                                 case 'spacer':
-                                    $legendObj.append('<span class="legend-' + item.type + '"> </span>');
+                                    //$legendObj.append('<span class="legend-' + item.type + '"> </span>');
                                     break;
 
                             }

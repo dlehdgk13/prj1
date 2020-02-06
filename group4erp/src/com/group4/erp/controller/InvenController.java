@@ -269,6 +269,11 @@ public class InvenController {
 		try {
 			
 			BookInfoDTO bookInfo = this.invenService.getBookInfo(isbn13_search);
+			
+			String bookprice = bookInfo.getBook_price().trim();
+			bookprice = bookprice.replace(",", "");
+			bookInfo.setBook_price(bookprice);
+			
 			mav.addObject("bookInfo", bookInfo);
 			
 			List<Map<String, String>> inventory_loc = this.invenService.getInvenLoc(invenSearchDTO);

@@ -127,9 +127,12 @@ $(document).ready(function(){
 	            	)
 	         );
 
+	 
+	 
+	 	inputData('[name=searchPublisher]',"${invenSearchDTO.searchPublisher}");
+	 
 	 inputData('[name=rowCntPerPageDown]',"${invenSearchDTO.rowCntPerPage}");
 	 inputData('[name=selectPageNo]',"${invenSearchDTO.selectPageNo}");
-	 inputData('[name=searchPublisher]',"${invenSearchDTO.searchPublisher}");
 	 inputData('[name=keyword1]',"${invenSearchDTO.keyword1}");
 	 inputData('[name=dateFrom]',"${invenSearchDTO.dateFrom}");
 	 inputData('[name=dateTill]',"${invenSearchDTO.dateTill}");
@@ -348,13 +351,12 @@ $(document).ready(function(){
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOK<span>STREET</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
-
           <!-- notification dropdown end -->
           <li><!-- 
             <table>
@@ -398,7 +400,7 @@ $(document).ready(function(){
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+            <a href="/group4erp/goMainTest.do"><img src="/group4erp/resources/image/logo_sidebar.png"  width="80"></a>
           </p>
           <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
@@ -551,10 +553,11 @@ $(document).ready(function(){
             		<th width="8%" style="text-align:right;"><b>* 출판사&nbsp;</b>
 					<td align=left>
 						<select name="searchPublisher">
-							<option value="">--------</option>
+								<option value="" >--------</option>
 							<c:forEach items="${requestScope.publisher}" var="publisher" varStatus="loopTagStatus">
 								<option value="${publisher.publisher}">${publisher.publisher}</option>
 							</c:forEach>
+						</select>
 				<tr>
 					<th width="8%" style="text-align:right;"><b>* 일자&nbsp;</b>
 					<td colspan=2 width="42%" align=left>

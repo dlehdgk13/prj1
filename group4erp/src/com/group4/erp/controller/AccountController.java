@@ -278,7 +278,7 @@ public class AccountController {
 		System.out.println("order_no=="+tranSpecDTO.getOrder_no());
 		//System.out.println("order_dt=="+tranSpecDTO.getOrder_dt());
 		//System.out.println("corp_no=="+tranSpecDTO.getCorp_no());
-		
+		System.out.println("issue_no =>"+tranSpecDTO.getIssue_no());
 		try {
 					
 			issueCnt = this.accountService.saveTempTranSpec(tranSpecDTO);

@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.group4.erp.CorpSearchDTO;
+import com.group4.erp.ManyChartDTO;
 import com.group4.erp.OrderDTO;
 import com.group4.erp.SalesInfoDTO;
 import com.group4.erp.WarehousingSearchDTO;
+import com.group4.erp.dao.ManyChartDAO;
 import com.group4.erp.BestKwdDTO;
 import com.group4.erp.BestKwdSearchDTO;
 import com.group4.erp.ChartDTO;
@@ -31,6 +33,9 @@ public class AnalysisController {
 	
 	@Autowired
 	AnalysisService analysisService;
+	
+	@Autowired
+	private ManyChartDAO manyDAO;
 	
 	@RequestMapping(value="/viewBestKeywdAnalysis.do")
 	public ModelAndView viewBestKeywdAnalysis(HttpSession session, BestKwdSearchDTO bestKwdSearchDTO, String rank) {
@@ -53,7 +58,7 @@ public class AnalysisController {
 			
 			String bestKwd_chart_data = "[";
 			bestKwd_chart_data += "['날짜', '횟수']";
-				
+			
 			List<BestKwdDTO> bestKeywdInfo = this.analysisService.getKeywdSrchCntChart();
 			
 			for(int i=0; i<bestKeywdInfo.size(); i++) {
@@ -64,6 +69,8 @@ public class AnalysisController {
 				bestKwd_chart_data += "] ";
 			}
 			bestKwd_chart_data += "]";
+			
+			
 			
 			//보류
 			//List<BestKwdDTO> bestKeywdChart = this.analysisService.getBestKwdListChart(bestKwdSearchDTO);
@@ -138,7 +145,12 @@ public class AnalysisController {
 		
 		String employee_chart_data = "[";
 		employee_chart_data += "['직급', '인원수']";
+		
 		for(int i=0; i<employeeChart.size(); i++) {
+			
+			if(employeeChart.get(i).getJikup()==null) {
+				employeeChart.get(i).setJikup("미승인");
+			}
 			employee_chart_data += ", ['";
 			employee_chart_data += employeeChart.get(i).getJikup();
 			employee_chart_data += "', ";
@@ -203,6 +215,20 @@ public class AnalysisController {
 		}
 		
 		catInventory_chart_data += "] ";
+		
+		
+		List<ManyChartDTO> deptEmpCnt = this.manyDAO.getDeptEmpCnt();
+		mav.addObject("deptEmpCnt", deptEmpCnt);
+		
+		ManyChartDTO perLeave = this.manyDAO.getPerLeave();
+		mav.addObject("perLeave", perLeave);
+
+		List<ManyChartDTO> perBookCat = this.manyDAO.getPerBookCat();
+		mav.addObject("perBookCat", perBookCat);
+		
+		List<ManyChartDTO> perCorpArea = this.manyDAO.getPerCorpArea();
+		mav.addObject("perCorpArea", perCorpArea);
+		
 		
 		mav.addObject("bookCategoryList", bookCategoryList);
 		mav.addObject("employee_chart_data", employee_chart_data);

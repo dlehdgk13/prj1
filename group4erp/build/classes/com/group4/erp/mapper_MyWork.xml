@@ -9,47 +9,50 @@
 <!--mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm-->
 <mapper namespace="com.group4.erp.dao.myWorkDAO">
 	<sql id="MyCareBookSearchWere">
-		<if test="searchCategory=='전체'">
-			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and(
-					upper(b.ISBN13) like upper('%${search_keyword}%')
-				    or upper(b.book_name) like upper('%${search_keyword}%')
-				    or upper(cc.cat_name) like upper('%${search_keyword}%')
-				    or upper(book_price) like upper('%${search_keyword}%')
-				    or upper(si.ISBN_cnt) like upper('%${search_keyword}%')
-				    or upper(cb.branch_name) like upper('%${search_keyword}%')
-			    	)
-			</if>
-		</if>
-		<if test="searchCategory=='책번호'">
-			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(b.ISBN13) like upper('%${search_keyword}%')
-			</if>
-		</if>
-		<if test="searchCategory=='책이름'">
-			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(b.book_name) like upper('%${search_keyword}%')
-			</if>
-		</if>
-		<if test="searchCategory=='카테고리'">
-			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(cc.cat_name) like upper('%${search_keyword}%')
-			</if>
-		</if>
-		<if test="searchCategory=='보유지점'">
-			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(cb.branch_name) like upper('%${search_keyword}%')
-			</if>
-		</if>
-		 <!-- 
-		<if test="(category!=null and category.length>0)">
-			and
-			<foreach collection="category" item="category" open="(" separator="or" close=")">
-				b.cat_cd = to_number(${category})
-			</foreach>
-		</if>
-		 -->
-	</sql>
+      <if test="searchCategory=='전체'">
+         <if test="(search_keyword!=null and search_keyword.length()>0)">
+            and(
+               upper(b.ISBN13) like upper('%${search_keyword}%')
+                or upper(b.book_name) like upper('%${search_keyword}%')
+                or upper(c1.cat_name) like upper('%${search_keyword}%')
+                or upper(b.book_price) like upper('%${search_keyword}%')
+                or upper(s1.ISBN_cnt) like upper('%${search_keyword}%')
+                or upper(c2.branch_name) like upper('%${search_keyword}%')
+                )
+         </if>
+      </if>
+      <if test="searchCategory=='책번호'">
+         <if test="(search_keyword!=null and search_keyword.length()>0)">
+            and upper(b.ISBN13) like upper('%${search_keyword}%')
+         </if>
+      </if>
+      <if test="searchCategory=='책이름'">
+         <if test="(search_keyword!=null and search_keyword.length()>0)">
+            and upper(b.book_name) like upper('%${search_keyword}%')
+         </if>
+      </if>
+      <if test="searchCategory=='카테고리'">
+         <if test="(search_keyword!=null and search_keyword.length()>0)">
+            and upper(c1.cat_name) like upper('%${search_keyword}%')
+         </if>
+      </if>
+      <if test="searchCategory=='보유지점'">
+         <if test="(search_keyword!=null and search_keyword.length()>0)">
+            and upper(c2.branch_name) like upper('%${search_keyword}%')
+         </if>
+      </if>
+      <if test="is_print!=null and is_print.length()>0">
+             and b.is_print = #{is_print}
+          </if>
+       <!-- 
+      <if test="(category!=null and category.length>0)">
+         and
+         <foreach collection="category" item="category" open="(" separator="or" close=")">
+            b.cat_cd = to_number(${category})
+         </foreach>
+      </if>
+       -->
+   </sql>
 	<sql id="WorkDaysListSearchWere">
 		<if test="searchEmpNo!=0">
 			and w.emp_no = ${searchEmpNo}
@@ -66,118 +69,80 @@
 		</if>
 	</sql>
 	
-
+<!--  이름 날짜 시작 -->
 	<!--=============================================================================================================================================-->
 	<!-- 담당 상품 조회 -->
 	<!--=============================================================================================================================================-->
 	<select id='getMyCareBookList' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="java.util.HashMap">
-		select * from(select zzz.*, rownum RNUM from(
-			 select                 
-                 ISBN13 "ISBN13",
-                 book_name "BOOK_NAME",
-                 cat_name "CAT_NAME",
-                 to_char(book_price,'999,999,999,999')||'원' "BOOK_PRICE",
-                 book_pages "BOOK_PAGES",
-                 writer "WRITER",
-                 publisher "PUBLISHER",
-                 size_cd "SIZE_CD",
-                 is_print "IS_PRINT",
-                 emp_no "EMP_NO",
-                 published_dt "PUBLISHED_DT",
-                 editor "EDITOR",
-                 ISBN_cnt "ISBN_CNT",
-                 branch_name "BRANCH_NAME",
-                 reg_dt "REG_DT"
-			from
-                (select 
-                b.ISBN13  as "ISBN13"
-                ,b.book_name  as "BOOK_NAME"                 
-                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "CAT_NAME"
-                ,b.book_price  as "BOOK_PRICE"
-                ,b.book_pages||'' as "BOOK_PAGES"
-                ,b.writer as "WRITER"
-                ,b.publisher  as "PUBLISHER"                 
-                ,b.size_cd||'' as "SIZE_CD"
-                ,b.is_print  as "IS_PRINT"
-                ,b.emp_no||'' as "EMP_NO"
-                ,to_char(b.published_dt,'YYYY-MM-DD') as "PUBLISHED_DT"
-                ,b.editor as "EDITOR"
-                ,(select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13) as  "ISBN_CNT" 
-                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "BRANCH_NAME"
-                ,b.reg_dt "REG_DT"             
-            from book b)
-            where emp_no = '${emp_no}'
-			 <if test="is_print!=null and is_print.length()>0">
-			 	and is_print = #{is_print}
-			 </if>
-			<if test="sort!=null and sort.length() > 0" >
-			order by ${sort}
-			</if>
-			<if test="sort==null or sort==''">
-			order by reg_dt desc
-			</if>
-		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>	
-			<include refid="MyCareBookSearch" />	 	
-
-		<!-- select * from(select zzz.*, rownum RNUM from(
-			select
-                b.ISBN13                     as "ISBN13"
-                ,b.book_name                 as "book_name"
-                ,(select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd) as "cat_name"
-                ,to_char(b.book_price,'999,999,999,999')              as "book_price"
-                ,b.book_pages||''         as "book_pages"
-                ,b.writer                 as "writer"
-                ,b.publisher                 as "publisher"
-                ,b.size_cd||''             as "size_cd"
-                ,b.is_print             as "is_print"
-                ,b.emp_no||''                as "emp_no"
-                ,to_char(b.published_dt,'YYYY-MM-DD') as "published_dt" 
-                ,b.editor                    as "editor"
-                ,to_char((select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13),'999,999,999') as  "ISBN_cnt"
-                ,(select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13))) as  "branch_name"
-            from book b 
-            where b.emp_no = '${emp_no}'
-			<include refid="headerSort"/>
-		) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>  -->
-
-	</select>
+      select * from(select zzz.*, rownum RNUM from(         
+         select
+             b.isbn13 as "ISBN13"
+                  ,b.book_name as "BOOK_NAME"
+             ,c1.cat_name as "CAT_NAME"
+             ,b.book_price  as "BOOK_PRICE"
+             ,b.book_pages||'' as "BOOK_PAGES"
+             ,b.writer as "WRITER"
+             ,b.publisher  as "PUBLISHER"                 
+             ,b.size_cd||'' as "SIZE_CD"
+             ,b.is_print  as "IS_PRINT"
+             ,b.emp_no||'' as "EMP_NO"
+             ,to_char(b.published_dt,'YYYY-MM-DD') as "PUBLISHED_DT"
+             ,b.editor as "EDITOR"
+             ,s1.isbn_cnt as "ISBN_CNT"
+             ,c2.branch_name as "BRANCH_NAME"
+             ,b.reg_dt as "REG_DT" 
+         from book b inner join code_category c1 on b.cat_cd = c1.cat_cd
+              inner join stock_info s1 on b.isbn13 = s1.isbn13
+              inner join code_branch c2 on s1.branch_cd = c2.branch_cd  
+            where 1=1 
+               <include refid="MyCareBookSearchWere" />
+               and b.emp_no = '${emp_no}'
+         <if test="sort!=null and sort.length() > 0" >
+         order by ${sort}
+         </if>
+         <if test="sort==null or sort==''">
+         order by b.reg_dt desc
+         </if>
+      ) zzz ) where <![CDATA[ RNUM>=${selectPageNo*rowCntPerPage-rowCntPerPage+1} and RNUM<=${selectPageNo*rowCntPerPage} ]]>   
+                
+   </select>
 	
 
 	<sql id="MyCareBookSearch">
 		<if test="searchCategory=='전체'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
 				and(
-					upper(isbn13) like upper('%${search_keyword}%')
-				    or upper(book_name) like upper('%${search_keyword}%')
-				    or upper(cat_name) like upper('%${search_keyword}%')
-				    or upper(book_price) like upper('%${search_keyword}%')
-				    or upper(isbn_cnt) like upper('%${search_keyword}%')
-				    or upper(branch_name) like upper('%${search_keyword}%')
+					upper(b.isbn13) like upper('%${search_keyword}%')
+				    or upper(b.book_name) like upper('%${search_keyword}%')
+				    or upper((select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd)) like upper('%${search_keyword}%')
+				    or upper(b.book_price) like upper('%${search_keyword}%')
+				    or upper((select si.ISBN_cnt from stock_info si where b.ISBN13 = si.ISBN13)) like upper('%${search_keyword}%')
+				    or upper((select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13)))) like upper('%${search_keyword}%')
 			    	)
 			</if>
 		</if>
 		
 		<if test="searchCategory=='책번호'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(isbn13) like upper('%${search_keyword}%')
+				and upper(b.isbn13) like upper('%${search_keyword}%')
 			</if>
 		</if>
 		
 		<if test="searchCategory=='책이름'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(book_name) like upper('%${search_keyword}%')
+				and upper(b.book_name) like upper('%${search_keyword}%')
 			</if>
 		</if>
 		
 		<if test="searchCategory=='카테고리'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(cat_name) like upper('%${search_keyword}%')
+				and upper((select cc.cat_name from code_category cc where cc.cat_cd=b.cat_cd)) like upper('%${search_keyword}%')
 			</if>
 		</if>
 		
 		<if test="searchCategory=='보유지점'">
 			<if test="(search_keyword!=null and search_keyword.length()>0)">
-				and upper(branch_name) like upper('%${search_keyword}%')
+				and upper((select c.branch_name from code_branch c where c.branch_cd in(select bc.branch_cd from stock_info bc where bc.ISBN13 in(b.ISBN13)))) like upper('%${search_keyword}%')
 			</if>
 		</if>
 		 <!-- 
@@ -189,7 +154,7 @@
 		</if>
 		 -->
 		 <if test="is_print!=null and is_print.length()>0">
-		 	and is_print = #{is_print}
+		 	and b.is_print = #{is_print}
 		 </if>
 	</sql>
 	
@@ -223,13 +188,32 @@
 	</select>
 	
 	<select id='getMyWorkListAllCnt' parameterType="com.group4.erp.MyWorkSearchDTO" resultType="int">
-		select count(*)from(
-			select b.*, cc.cat_name, si.ISBN_Cnt, cb.branch_name from book b, code_category cc, stock_info si, code_branch cb
-	        	where cc.cat_cd = b.cat_cd and b.ISBN13 = si.ISBN13(+) and si.branch_cd = cb.branch_cd(+)
-	        	and b.emp_no = '${emp_no}'
-				<include refid="MyCareBookSearchWere" />
-		)
-	</select>
+      select count(*) from(
+         select
+             b.isbn13 as "ISBN13"
+                  ,b.book_name as "BOOK_NAME"
+             ,c1.cat_name as "CAT_NAME"
+             ,b.book_price  as "BOOK_PRICE"
+             ,b.book_pages||'' as "BOOK_PAGES"
+             ,b.writer as "WRITER"
+             ,b.publisher  as "PUBLISHER"                 
+             ,b.size_cd||'' as "SIZE_CD"
+             ,b.is_print  as "IS_PRINT"
+             ,b.emp_no||'' as "EMP_NO"
+             ,to_char(b.published_dt,'YYYY-MM-DD') as "PUBLISHED_DT"
+             ,b.editor as "EDITOR"
+             ,s1.isbn_cnt as "ISBN_CNT"
+             ,c2.branch_name as "BRANCH_NAME"
+             ,b.reg_dt as "REG_DT" 
+         from book b inner join code_category c1 on b.cat_cd = c1.cat_cd
+              inner join stock_info s1 on b.isbn13 = s1.isbn13
+              inner join code_branch c2 on s1.branch_cd = c2.branch_cd  
+         
+            where 1=1 
+               <include refid="MyCareBookSearchWere" />
+               and b.emp_no = '${emp_no}'
+      )
+   </select>
 					
 	<!--=============================================================================================================================================-->
 	<!-- 근태조회 -->

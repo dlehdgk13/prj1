@@ -90,17 +90,24 @@
 			        </interceptor>        
 			    </interceptors>  
 		    -->
-	 
-	 <!-- <interceptors>
+		    
+		    
+	  <interceptors>
         <interceptor>
 			<mapping path="/**/*" />                    
             <exclude-mapping path="/loginForm.do"/>
             <exclude-mapping path="/loginProc.do"/>
-            <exclude-mapping path="/logout.do"/>
+            <exclude-mapping path="/logout.do"/>   
+            <exclude-mapping path="/checkApprovalProc.do"/>
+            <exclude-mapping path="/viewNewEmpJoin.do"/>
+            <exclude-mapping path="/goMainTest.do"/>
+            <exclude-mapping path="/getMainCharts.do"/>
+            <exclude-mapping path="/goClientLogin.do"/>
+            <exclude-mapping path="/goOrderBookList.do"/>
             <exclude-mapping path="/resources/**"/>
-            <beans:bean class="com.group4.erp.SessionInterceptor"></beans:bean>            
+            <beans:bean class="com.group4.erp.controller.SessionInterceptor2"></beans:bean>            
         </interceptor>        
-    </interceptors>  -->
+    </interceptors> 
     
 	 
 	<!-- <mvc:interceptors>

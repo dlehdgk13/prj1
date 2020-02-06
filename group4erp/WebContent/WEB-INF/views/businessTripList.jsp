@@ -100,14 +100,6 @@
 
 		startTime();
 		
-		setTableTrBgColor(
-				"businessTripListTable",	//테이블 class 값
-				"${headerColor}",			//헤더 tr 배경색
-				"${oddTrColor}",		//홀수행 배경색
-				"${evenTrColor}",	//짝수행 배경색
-				"${mouseOverColor}"			//마우스 온 시 배경색
-		);
-		
 		$("#datepicker3").datepicker({
 			dateFormat: 'yy-mm-dd'
 		});
@@ -223,14 +215,13 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOKST<span>.ERP</span></b></a>
+      <a href="/group4erp/goMainTest.do" class="logo"><b>BOOK<span>STREET</span></b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
         <ul class="nav top-menu">
           <!-- settings start -->
           <!-- notification dropdown end -->
-
           <li><!-- 
             <table>
                <tr>
@@ -273,7 +264,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            <a href="profile.html"><img src="${ctRootImg}/ui-sam.jpg" class="img-circle" width="80"></a>
+            <a href="/group4erp/goMainTest.do"><img src="/group4erp/resources/image/logo_sidebar.png"  width="80"></a>
           </p>
           <h4 class="centered"><b><font style="color:lightgray">${emp_name} ${jikup}님</font></b></h4>
           <li class="mt">
@@ -437,10 +428,10 @@
 			<br>
 			<table class="searchTable" style="border: 0px;">
 				<tr>
-					<th width="8%" style="text-align:right;"><b>* 출장 날짜&nbsp;</b>
+					<th width="8%" style="text-align:right;"><b>* 키워드&nbsp;</b>
 					<td width="50%">
 						<select id = "selectSearch">
-							<option>------</option>
+							<option value="">------</option>
 							<option value="emp_name">성명</option>
 							<option value="dep_name">부서</option>
 							<option value="mgr_name">담당자</option>
@@ -500,92 +491,92 @@
 					
 			
 					<c:choose>
-						<c:when test="${param.sort=='3 desc'}">
+						<c:when test="${param.sort=='4 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼성명</th>
 						</c:when>
-						<c:when test="${param.sort=='3 asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('3 desc'); goSearch();">▲성명</th>
+						<c:when test="${param.sort=='4 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('4 desc'); goSearch();">▲성명</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('3 asc'); goSearch();">성명</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('4 asc'); goSearch();">성명</th>
 						</c:otherwise>
 					</c:choose>
 					
 					<c:choose>
-						<c:when test="${param.sort=='c.jikup_cd desc'}">
+						<c:when test="${param.sort=='3 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼직급</th>
 						</c:when>
-						<c:when test="${param.sort=='c.jikup_cd asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('c.jikup_cd desc'); goSearch();">▲직급</th>
+						<c:when test="${param.sort=='3 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('3 desc'); goSearch();">▲직급</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('c.jikup_cd asc'); goSearch();">직급</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('3 asc'); goSearch();">직급</th>
 						</c:otherwise>
 					</c:choose>
 					
 					
 
 					<c:choose>
-						<c:when test="${param.sort=='4 desc'}">
+						<c:when test="${param.sort=='6 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼부서명</th>
 						</c:when>
-						<c:when test="${param.sort=='4 asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('4 desc'); goSearch();">▲부서명</th>
+						<c:when test="${param.sort=='6 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('6 desc'); goSearch();">▲부서명</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('4 asc'); goSearch();">부서명</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('6 asc'); goSearch();">부서명</th>
 						</c:otherwise>
 					</c:choose>
 
 					
 	
 					<c:choose>
-						<c:when test="${param.sort=='7 desc'}">
+						<c:when test="${param.sort=='10 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼출발 날짜</th>
 						</c:when>
-						<c:when test="${param.sort=='7 asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('7 desc'); goSearch();">▲출발 날짜</th>
+						<c:when test="${param.sort=='10 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('10 desc'); goSearch();">▲출발 날짜</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('7 asc'); goSearch();">출발 날짜</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('10 asc'); goSearch();">출발 날짜</th>
 						</c:otherwise>
 					</c:choose>
 					
 					<c:choose>
-						<c:when test="${param.sort=='8 desc'}">
+						<c:when test="${param.sort=='11 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼복귀 예정 날짜</th>
 						</c:when>
-						<c:when test="${param.sort=='8 asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('8 desc'); goSearch()">▲복귀 예정 날짜</th>
+						<c:when test="${param.sort=='11 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('11 desc'); goSearch()">▲복귀 예정 날짜</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('8 asc'); goSearch();">복귀 예정 날짜</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('11 asc'); goSearch();">복귀 예정 날짜</th>
 						</c:otherwise>
 					</c:choose>
 
 					
 					<c:choose>
-						<c:when test="${param.sort=='9 desc'}">
+						<c:when test="${param.sort=='12 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼담당자</th>
 						</c:when>
-						<c:when test="${param.sort=='9 asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('9 desc'); goSearch()">▲담당자</th>
+						<c:when test="${param.sort=='12 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('12 desc'); goSearch()">▲담당자</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('9 asc'); goSearch();">담당자</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('12 asc'); goSearch();">담당자</th>
 						</c:otherwise>
 					</c:choose>
 					
 					
 					<c:choose>
-						<c:when test="${param.sort=='10 desc'}">
+						<c:when test="${param.sort=='15 desc'}">
 							<th style="cursor:pointer" onclick="$('[name=sort]').val('outside_start_time desc'); goSearch();">▼결재</th>
 						</c:when>
-						<c:when test="${param.sort=='10 asc'}">
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('10 desc'); goSearch()">▲결재</th>
+						<c:when test="${param.sort=='15 asc'}">
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('15 desc'); goSearch()">▲결재</th>
 						</c:when>
 						<c:otherwise>
-							<th style="cursor:pointer" onclick="$('[name=sort]').val('10 asc'); goSearch();">결재</th>
+							<th style="cursor:pointer" onclick="$('[name=sort]').val('15 asc'); goSearch();">결재</th>
 						</c:otherwise>
 					</c:choose>
 				</tr>
