@@ -8,7 +8,7 @@ public class WarehousingSearchDTO {
 	private String dateTill;
 	private String searchToday;
 	private String wh_keyword;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private int selectPageNo=1;
 	private String sort;
 	

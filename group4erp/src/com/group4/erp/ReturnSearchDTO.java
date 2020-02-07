@@ -4,7 +4,7 @@ public class ReturnSearchDTO {
 
 	private String searchKeyword;
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;	
+	private int rowCntPerPage=20;	
 	private String sort;
 	private String return_cd[];
 	private String return_dt;

@@ -331,7 +331,7 @@
 	
 	<update id="dayoffUpdateProcI" parameterType="com.group4.erp.HrDayoffDTO">
 		update EMP_DAYOFF_INFO
-		set remain_dayoff = remain_dayoff - (   (to_number(#{using_dayoff})) - ( select using_dayoff from EMP_DAYOFF_APPLY where emp_no = to_number(#{emp_no}) )   )
+		set remain_dayoff = remain_dayoff - (   (#{using_dayoff}) - ( select using_dayoff from EMP_DAYOFF_APPLY where emp_no = to_number(#{emp_no}) and dayoff_apply_no=to_number(#{dayoff_apply_no}) )   )
 		where emp_no = to_number(#{emp_no})
 	</update>
 	
@@ -343,7 +343,7 @@
 			<if test="end_dayoff!=null">,end_dayoff = to_date(#{end_dayoff},'YYYY-MM-DD')</if>
 			<if test="using_dayoff!=null">,using_dayoff = ${using_dayoff}</if>
 		</set>
-		where emp_no = to_number(#{emp_no}) 
+		where emp_no = #{emp_no} 
 	</update>
 	
 

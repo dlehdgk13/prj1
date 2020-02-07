@@ -3,7 +3,7 @@ package com.group4.erp;
 public class MyWorkSearchDTO {
 
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private String search_keyword;
 	private String[] category;
 	private String searchCategory = "전체";

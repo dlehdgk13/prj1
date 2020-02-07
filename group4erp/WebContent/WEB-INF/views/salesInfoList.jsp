@@ -122,12 +122,12 @@
    
       var options1 = {
             title: '일반 고객 주문 건수(분야별)',
-            width :900, 
-            height: 300,
+            /* width :1500, */ 
+            height: 500,
+            legend: {'position': 'right', textStyle: {fontSize:13, color: '#797979', fontName:'Noto Sans KR'}},
+            chartArea: {'width': '80%', 'height': '80%'}, /* , 'right':10 */
             animation: { //차트가 뿌려질때 실행될 애니메이션 효과
-                
                     duration: 1000,
-                   
                }
       };
 
@@ -392,7 +392,7 @@
               <span>마케팅 관리</span>
               </a>
             <ul class="sub">
-              <li>
+              <li class="active">
                 <a href="/group4erp/viewSalesInfoList.do"><i class="fa fa-money"></i>판매현황</a>
               </li>
               <li>
@@ -466,16 +466,25 @@
       <section class="wrapper site-min-height">
         <h3 align=left><i class="fa fa-angle-right"></i> [주문 & 판매현황]</h3>
         <!-- page start-->
-        <table border="0" cellpadding="5" cellspacing="5" align="center">
+        <table cellpadding="10" cellspacing="5" align="center" style="font-size:14pt; width:40%;" border=0>
                <tr>
-                  <td colspan="4" align="center"><h3>일반 고객 판매 현황</h3></td>
+                  <td colspan="2" height=90 align="center"><h3><u>일반 고객 판매 현황</u></h3></td>
                </tr>
                <tr>
-                  <td height=20>[오프라인 판매량]</td><td> ${dailyOfflineSalesTotCnt.tot_cnt}건</td> <td>총 예상 수입액 </td><td> ${dailyOfflineSalesTotCnt.tot_revenue}원 </td>
+                  <td bgcolor="#eaeaea" height=70 align="center" style="color:#157296"><i class="fa fa-bar-chart-o">&nbsp;오프라인 판매량&nbsp;</i></td>
+                  <td bgcolor="#eaeaea" height=70 align="center" style="color:#157296"><i class="fa fa-bar-chart-o">&nbsp;온라인 주문량&nbsp;</td>
                </tr>
                <tr>
-                  <td height=20>[온라인 주문량]</td><td> ${onlineOrderCnt}건</td> <td>총 예상 수입액 </td><td> ${tot_revenue}원 </td>
+                  <td bgcolor="#eaeaea" height=50 style="padding-left:10;" align="center">총 예상 수입액  : 
+                  	<font style="font-size:15pt; font-weight:bold; color:#3acc88;">${dailyOfflineSalesTotCnt.tot_revenue}</font>원</td>
+                  <td bgcolor="#eaeaea" height=50 style="padding-left:10;" align="center">총 예상 수입액 : 
+                  	<font style="font-size:15pt; font-weight:bold; color:#3acc88;">${tot_revenue}</font>원 </td>
                </tr>
+               <tr>
+               	<td bgcolor="#eaeaea" height=50 align="center"><font style="font-size:15pt; font-weight:bold; color:#de6c6c;">${dailyOfflineSalesTotCnt.tot_cnt}</font>건</td>
+               	<td bgcolor="#eaeaea" height=50 align="center"><font style="font-size:15pt; font-weight:bold; color:#de6c6c;">${onlineOrderCnt}</font>건</td>
+               </tr>
+               <tr><td colspan="6" height="40"></td></tr>
       
             </table>
         <div class="content-panel">
@@ -484,27 +493,34 @@
             <div id="dailyOfflineChart" style="width: 900px; height: 400px;"> </div>
           </div>
         </div>
+        <div style="height:80;"></div>
        <div class="content-panel">
-          <h4><i class="fa fa-angle-right"></i> 분야별 누적 주문 건수</h4>
-          <div class="panel-body">
-             <div id="orderInfoChart" style="width: 1100px; height: 300px;"> </div>
-          </div>
+       	<table width="100%" style="text-align:center;">
+       		<tr>
+       			<td><h4><i class="fa fa-angle-right"></i> 분야별 누적 주문 건수</h4></td>
+       		</tr>
+       		<tr>
+       			<td><div width="90%" id="orderInfoChart" style="background-color:#eaeaea"> </div></td>
+       		</tr>
+       	</table>
+          <!-- <div class="panel-body"> -->
+           <!-- style="width: 1100px; height: 300px;" -->
+          <!-- </div> -->
         </div>
+        <div style="height:80;"></div>
         <div class="content-panel">
           <h4><i class="fa fa-angle-right"></i>  일반고객 주문 건수(일자별)</h4>
           <div class="panel-body">
             <div id="dailyOrderChart" style="width: 700px; height: 300px;"> </div>
           </div>
         </div>
-        
         <!-- page end-->
-       
       </section>
     </section>
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
+<!--     <footer class="site-footer">
       <div class="text-center">
         <p>
 			KOSMO 자바&빅데이터 과정 팀프로젝트
@@ -513,18 +529,12 @@
         <font style="font-size:12pt;">
         ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
          </font>
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
         </div>
         <a href="basic_table.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
-    </footer>
+    </footer> -->
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->

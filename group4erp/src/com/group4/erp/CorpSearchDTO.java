@@ -4,7 +4,7 @@ public class CorpSearchDTO {
 	
 	private String searchKeyword;
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private String keyword;
 	
 	private String corp_no;

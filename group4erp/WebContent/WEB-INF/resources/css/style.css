@@ -16,7 +16,7 @@ Website: http://Alvarez.is/
 
 /* BASIC THEME CONFIGURATION */
 body {
-    color: #797979;
+    color: #524d4d;
 	background: #eaeaea;
     font-family: 'Ruda', sans-serif;
     padding: 0px !important;
@@ -215,7 +215,7 @@ hr {
 }
 
 .bg-theme {
-	background-color: #4ECDC4;
+	background-color: #606161;
 }
 
 ul.top-menu > li > .logout {
@@ -223,10 +223,10 @@ ul.top-menu > li > .logout {
 	font-size: 12px;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
-	border: 1px solid #64c3c2 !important;
+	border: 1px solid #000000 !important;
 	padding: 5px 15px;
 	margin-right: 15px;
-	background: #4ECDC4;
+	background: #4ecdc4;
 	margin-top: 15px;
 }
 
@@ -250,6 +250,7 @@ ul.top-menu > li > .goBackss {
     height: 100%;
     position: fixed;
     background: #2f323a;
+    font-size:15pt;
 }
 
 #sidebar h5 {
@@ -327,7 +328,7 @@ ul.sidebar-menu li ul.sub li:last-child{
 }
 
 ul.sidebar-menu li ul.sub li a {
-    font-size: 12px;
+    font-size: 13px;
     padding: 6px 0;
     line-height: 35px;
     height: 35px;
@@ -374,7 +375,8 @@ ul.sidebar-menu li a{
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight:bold;
     outline: none;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -384,7 +386,8 @@ ul.sidebar-menu li a{
 }
 
 ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #4ECDC4;
+    /* background: #4ECDC4; */
+    background: #5cc1ba;
     color: #fff;
     display: block;
 
@@ -785,7 +788,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 /* Dash Side */
 
 .ds {
-	background: #d6d9dc;
+	background: #ccbeaa;
 	padding-top: 20px;
 }
 
@@ -833,7 +836,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .ds a {
-	color: #4ECDC4;
+	color: #ffffff;
 }
 
 /* MAIN CHART CONFIGURATION */
@@ -956,10 +959,10 @@ PANELS CONFIGURATIONS
 
 .grey-panel {
 	text-align: center;
-	background: #dfdfe1;
+	background: #ecece6;
 }
 .grey-panel .grey-header {
-	background: #ccd1d9;
+	background: #444c57;
 	padding: 3px;
 	margin-bottom: 15px;
 }
@@ -1013,10 +1016,10 @@ PANELS CONFIGURATIONS
 /*Green Panel*/
 .green-panel {
 	text-align: center;
-	background: #4ECDC4;
+	background: #e8e7de;
 }
 .green-panel .green-header {
-	background: #43b1a9;
+	background: #dcd7bf;
 	padding: 3px;
 	margin-bottom: 15px;
 }
@@ -1198,7 +1201,7 @@ PANELS CONFIGURATIONS
 
 /* Message Panel */
 .message-p {
-	background: #f5f5f5;
+	background: #ecece6;
 }
 .message-p .message-header {
 	background: #dcdfe3;
@@ -1397,7 +1400,7 @@ PANELS CONFIGURATIONS
 	padding: 0px !important;
 }
 .calendar-month-header {
-	background: #43b1a9;
+	background: #b5ae8e;
 }
 
 /* TODO PANEL */
@@ -3338,7 +3341,7 @@ ul.chat-available-user li a:hover {
 
 /*footer*/
 .site-footer {
-    background: #4ECDC4;
+    background: #c1a27a;
     color: #fff;
     padding: 15px 0;
 

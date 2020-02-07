@@ -4,7 +4,7 @@ public class HrListSearchDTO {
 	
 	private String searchKeyword;
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private String datepicker;
 	private String[] inout_name;
 	private String keyword1;

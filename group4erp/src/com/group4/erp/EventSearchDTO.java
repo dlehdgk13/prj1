@@ -5,7 +5,7 @@ public class EventSearchDTO {
 	private String searchKeyword;
 	private String emp_no;
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private String evnt_category[];
 	private String evnt_stat[];
 	private String sort;

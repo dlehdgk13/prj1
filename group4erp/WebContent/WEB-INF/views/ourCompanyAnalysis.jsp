@@ -53,18 +53,39 @@
    function drawHireOrResignChart() {
       var hireOrResign_chart_data = google.visualization.arrayToDataTable(${empHireOrResign_data});
       var hireOrResign_chart_options = {
-         title: '직원 변동 현황',
-         width :700, 
+         /* title: '직원 변동 현황', */
+         width :1500, 
          height: 400,
          lineWidth: 4,
+         legend: {'position': 'right', textStyle: {fontSize:16, color: '#222222', fontName:'Noto Sans KR'}},
          colors:['#f0ad4e', '#ed5564', '#4eccc4'],
          /* '#4eccc4','#4eccc4' */
 
          animation:{
             "startup": true,
-              duration: 1000,
+              duration: 2000,
               easing: 'out',
-            }
+            },
+			chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+
+	            hAxis: {
+	               textStyle:{fontSize:25, color: '#222222', fontName:'Noto Sans KR'},
+	               gridlines: {
+	                   color: "white"
+	               },
+	        	   baselineColor: 'white'/*, 
+	        	    ticks: []*/
+	        	 }, 
+	        	 vAxis: {
+	        		 textStyle:{fontSize:25, color: '#222222', fontName:'Noto Sans KR'},
+		             /* gridlines: {
+		                   color: "white"
+		             }, */
+		        	 baselineColor: 'lightgray',
+	                 titleTextStyle: {
+	                   color: '#797979'
+	                 }
+	        	 }   
       };
 
 
@@ -78,16 +99,41 @@
    function drawEmployeeCntChart() {
       var employee_chart_data = google.visualization.arrayToDataTable(${employee_chart_data});
       var employee_chart_options = {
-         title: '직원 현황(직급별)',
-         width :800, 
+         /* title: '직원 현황(직급별)', */
+         width :1500, 
          height: 400,
+         legend: {'position': 'right', textStyle: {fontSize:16,color: '#222222', fontName:'Noto Sans KR'}},
          colors:['#FF6464','#FF6464'],
          opacity: 0.5,
          animation:{
             "startup": true,
               duration: 1000,
               easing: 'out',
-            }
+            },
+            chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+
+            hAxis: {
+               textStyle:{fontSize:25, color: '#222222', fontName:'Noto Sans KR'},
+               gridlines: {
+                   color: "white"
+               },
+        	   baselineColor: 'white'/*, 
+        	    ticks: []*/
+        	 }, 
+        	 vAxis: {
+        		 textStyle:{fontSize:25, color: '#222222', fontName:'Noto Sans KR'},
+	             /* gridlines: {
+	                   color: "white"
+	             }, */
+	        	 baselineColor: 'lightgray',
+                 titleTextStyle: {
+                   color: '#222222'
+                 }
+        	 }   
+            /* backgroundColor: {
+	             fill: '#eaeaea',
+	             fillOpacity: 0
+	           } */
       };
 
 
@@ -105,17 +151,36 @@
 	      ]);
 	      //#ac92ec
 	      var employee_chart_options = {
-    	         title: '직원 현황(부서별)',
+    	         /* title: '직원 현황(부서별)', */
     	         width :800, 
     	         height: 400,
-    	         colors:['#22242a','#00c5de'],
+    	         legend: {'position': 'right', textStyle: {fontSize:15,color: '#222222', fontName:'Noto Sans KR'}},
+    	         colors:['#14C6C3','#14C6C3'],
     	         opacity: 0.5,
     	         animation:{
     	            "startup": true,
     	              duration: 1000,
     	              easing: 'out',
     	            },
-    	         vAxis: {minValue:0,maxValue:20}
+
+    	            hAxis: {
+    	               textStyle:{fontSize:20, color: '#222222', fontName:'Noto Sans KR'},
+    	               gridlines: {
+    	                   color: "white"
+    	               },
+    	        	   baselineColor: 'white'/*, 
+    	        	    ticks: []*/
+    	        	 }, 
+    	        	 vAxis: {
+    	        		 textStyle:{fontSize:20, color: '#222222', fontName:'Noto Sans KR'},
+    		             /* gridlines: {
+    		                   color: "white"
+    		             }, */
+    		        	 baselineColor: 'lightgray',
+    	                 titleTextStyle: {
+    	                   color: '#222222'
+    	                 }
+    	        	 }   
     	      };
 	      
 	      var employee_chart = new google.visualization.ColumnChart(document.getElementById('employeeChartDept'));
@@ -131,8 +196,10 @@
 	    ]);
 	   
 	   var options5 = {
-	      title: '휴직자 비율',
 	      width :700,
+	      chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+	      legend: {'position': 'right', textStyle: {fontSize:25,color: '#222222', fontName:'Noto Sans KR'}},
+	      colors:['#034f83','#f9e03d'],
 	      height: 400,
 	      is3D: true
 	    };
@@ -159,15 +226,21 @@
 	    ]);
 	    
 	    var options = {
-   	      title: '분야 별 도서 비율',
+   	      /* title: '분야 별 도서 비율', */
 	   	   width :700,
 	      height: 400,
+	      legend: {'position': 'right', textStyle: {fontSize:25,color: '#222222', fontName:'Noto Sans KR'}},
+	      colors:['#f7c9c9','#f7776a','#91a8d1','#034f83','#f9e03d','#97dddd','#9896a4','#dd4132','#b18f6a','#78c752','#ff1199'],
+	      chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */}, 
 	      is3D: true
    	    };
    	    var options2 = {
-   	      title: '거래처 분야 비율',
+   	      /* title: '거래처 분야 비율', */
 	   	   width :700,
 	      height: 400,
+	      legend: {'position': 'right', textStyle: {fontSize:25,color: '#222222', fontName:'Noto Sans KR'}},
+	      colors:['#f7c9c9','#f7776a','#91a8d1','#034f83','#f9e03d','#97dddd','#9896a4','#dd4132','#b18f6a','#78c752','#ff1199'],
+	      chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
 	      is3D: true
    	    };
    	    
@@ -501,32 +574,37 @@ function drawLineChart() {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper site-min-height">
-        <h3><i class="fa fa-angle-right"></i> 회사현황</h3>
+        <h1><i class="fa fa-angle-right"></i> 회사현황</h1>
         <!-- page start-->
         <form name="categoryBookChart" method="post" action="/group4erp/viewCategoryChart.do">
-        <div id="morris">
+         <div id="morris">
+         
           <div class="row mt">
             <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 직급별 직원현황</h4>
-                <div class="panel-body">
-                  <div id="employeeChart"> </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 기간별 총원 변동 현황</h4>
+              <div class="content-panel" style="width: 1650; height: 550px;">
+                <h2><i class="fa fa-angle-right"></i> 기간별 총원 변동 현황</h2>
                 <div class="panel-body">
                    <div id="empHireOrResignChart"> </div>
                 </div>
               </div>
             </div>
           </div>
+         
+         <div class="row mt">
+         	<div class="col-lg-6">
+              <div class="content-panel" style="width: 1650; height: 550px;">
+                <h2><i class="fa fa-angle-right" ></i> 직급별 직원현황</h2>
+                <div class="panel-body">
+                  <div id="employeeChart"> </div>
+                </div>
+              </div>
+         	</div>
+         </div>
+         
           <div class="row mt">
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 부서별 직원현황</h4>
+                <h2><i class="fa fa-angle-right"></i> 부서별 직원현황</h2>
                 <div class="panel-body">
                    <div id="employeeChartDept"></div>
                 </div>
@@ -534,17 +612,18 @@ function drawLineChart() {
             </div>
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 휴직자 비율</h4>
+                <h2><i class="fa fa-angle-right" ></i> 휴직자 비율</h2>
                 <div class="panel-body">
-               <div id="drawDayoffChart"></div>
+               <div id="drawDayoffChart" ></div>
                 </div>
               </div>
             </div>
           </div>
+          
           <div class="row mt">
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 분야 별 도서 현황</h4>
+                <h2><i class="fa fa-angle-right"></i> 분야 별 도서 현황</h2>
                 <div class="panel-body">
                    <div id="piechart"></div>
                 </div>
@@ -552,13 +631,14 @@ function drawLineChart() {
             </div>
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 분야 별 거래처 현황</h4>
+                <h2><i class="fa fa-angle-right"></i> 분야 별 거래처 현황</h2>
                 <div class="panel-body">
                <div id="piechart2"></div>
                 </div>
               </div>
             </div>
           </div>
+          
         </div>
         <input type="hidden" name="cat_cd">
    </form>
@@ -568,7 +648,7 @@ function drawLineChart() {
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
+<!--     <footer class="site-footer">
       <div class="text-center">
         <p>
 			KOSMO 자바&빅데이터 과정 팀프로젝트
@@ -577,18 +657,12 @@ function drawLineChart() {
         <font style="font-size:12pt;">
         ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
          </font>
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
         </div>
         <a href="basic_table.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
-    </footer>
+    </footer> -->
     <!--footer end-->
   </section>
 <!-- js placed at the end of the document so the pages load faster -->

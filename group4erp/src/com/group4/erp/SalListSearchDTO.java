@@ -4,7 +4,7 @@ public class SalListSearchDTO {
 
 	private String searchKeyword;
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private String emp_no;
 	private String sort;
 	private int my_emp_no;

@@ -11,7 +11,7 @@ public class InvenSearchDTO {
 	private String wh_keyword;
 	private String orAnd;
 	private String[] date;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=25;
 
 	private int selectPageNo=1;
 	

@@ -10,6 +10,7 @@ public class HrDayoffDTO {
 	private String remain_dayoff;
 	private String confirm;
 	private String dayoff_apply_dt;
+	private String dayoff_apply_no;
 	
 	
 	public String getEmp_no() {
@@ -67,6 +68,13 @@ public class HrDayoffDTO {
 	public void setDayoff_apply_dt(String dayoff_apply_dt) {
 		this.dayoff_apply_dt = dayoff_apply_dt;
 	}
+	public String getDayoff_apply_no() {
+		return dayoff_apply_no;
+	}
+	public void setDayoff_apply_no(String dayoff_apply_no) {
+		this.dayoff_apply_no = dayoff_apply_no;
+	}
+	
 	
 	
 	

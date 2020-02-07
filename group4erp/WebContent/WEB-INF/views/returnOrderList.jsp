@@ -357,7 +357,7 @@
               <li>
                 <a href="/group4erp/goWarehousingList.do"><i class="fa fa-list"></i>입고현황조회</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="/group4erp/goReturnOrderList.do"><i class="fa fa-list"></i>반품현황조회</a>
               </li>
             </ul>
@@ -615,7 +615,7 @@
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
+<!--     <footer class="site-footer">
       <div class="text-center">
         <p>
 			KOSMO 자바&빅데이터 과정 팀프로젝트
@@ -624,18 +624,12 @@
         <font style="font-size:12pt;">
         ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
          </font>
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
         </div>
         <a href="basic_table.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
-    </footer>
+    </footer> -->
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->

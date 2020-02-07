@@ -41,20 +41,20 @@ google.charts.setOnLoadCallback(drawChart);
 google.charts.setOnLoadCallback(drawMoneyChart);
 
 $(document).ready( function() {
-	 
-	
-	startTime();
-	
-	
-	  $('[name=month_choice]').change(function(){
-		  //alert($(this).val());
-		 drwaOnlineChartAjax($(this).val()); 
-		 
-		 drwaOfflineChartAjax($(this).val()); 
-		 
-		 $('[name=month_choice]').val($(this).val());
-	  });
-	  
+    
+   
+   startTime();
+   
+   
+     $('[name=month_choice]').change(function(){
+        //alert($(this).val());
+       drwaOnlineChartAjax($(this).val()); 
+       
+       drwaOfflineChartAjax($(this).val()); 
+       
+       $('[name=month_choice]').val($(this).val());
+     });
+     
 });
 function showTime() {
     //현재 날짜를 관리하는 Date 객체 생성
@@ -107,251 +107,269 @@ function showTime() {
     
  }
 
-	function startTime() {
-	showTime();      //1초 딜레이 되어 시간이 표시되는 현상을 제거하기 위해 showTime() 함수를 한 번 호출한다.
-	//-----------------------------------
-	//1초마다 showTime() 함수를 호출하기
-	//-----------------------------------
-	window.setInterval("showTime()", 1000);      //window.setInterval(function() { showTime(); }, 1000);
-	}
+   function startTime() {
+   showTime();      //1초 딜레이 되어 시간이 표시되는 현상을 제거하기 위해 showTime() 함수를 한 번 호출한다.
+   //-----------------------------------
+   //1초마다 showTime() 함수를 호출하기
+   //-----------------------------------
+   window.setInterval("showTime()", 1000);      //window.setInterval(function() { showTime(); }, 1000);
+   }
 
 function drwaOnlineChartAjax(thisVal){
-	  
-	  var checkVal = "month_choice="+thisVal;
-	  
-	  if(thisVal==""){
-		  $("#onlineOrder").children().remove();
-		  $("#onlineOrder").append("<div id='piechart8' style='width: 700px; height: 500px;'></div>");
-		  allOnlineOrder();
-		  return;
-	  }
-	  
-	  $.ajax({
-	         url : "/group4erp/goOnlineOrderProc.do"
-	         , type : "post"
-	         , data : checkVal
-	         , success : function(manyDTO){
-	           
-	        	 //chartDataOnline.push([ "['카테고리', '비율']" ]);
+     
+     var checkVal = "month_choice="+thisVal;
+     
+     if(thisVal==""){
+        $("#onlineOrder").children().remove();
+        $("#onlineOrder").append("<div id='piechart8' style='width: 700px; height: 500px;'></div>");
+        allOnlineOrder();
+        return;
+     }
+     
+     $.ajax({
+            url : "/group4erp/goOnlineOrderProc.do"
+            , type : "post"
+            , data : checkVal
+            , success : function(manyDTO){
+              
+               //chartDataOnline.push([ "['카테고리', '비율']" ]);
 
-	            if(thisVal!=null){
-	            	
-	            	var cat_online_ajax = [];
-	            	 var per_online_ajax = [];
-	            	for(var i=0; i<=10 ; i++){
-	            		 //alert(manyDTO[i].cat_name_online);
-	            		 //chartDataOnline.push("['" + manyDTO[i].cat_name_online + "'," + manyDTO[i].peronlineorder + "]");
-	            		 //alert(chartDataOnline[i]);
-	            		cat_online_ajax.push(manyDTO[i].cat_name_online);
-	            		per_online_ajax.push(manyDTO[i].peronlineorder)
-              	}
+               if(thisVal!=null){
+                  
+                  var cat_online_ajax = [];
+                   var per_online_ajax = [];
+                  for(var i=0; i<=10 ; i++){
+                      //alert(manyDTO[i].cat_name_online);
+                      //chartDataOnline.push("['" + manyDTO[i].cat_name_online + "'," + manyDTO[i].peronlineorder + "]");
+                      //alert(chartDataOnline[i]);
+                     cat_online_ajax.push(manyDTO[i].cat_name_online);
+                     per_online_ajax.push(manyDTO[i].peronlineorder)
+                 }
 
-	            	$("#onlineOrder").children().remove();
-	            	$("#onlineOrder").append("<div id='onlineChart' style='width: 700px; height: 500px;'></div>");
-	                
-	            	//google.charts.setOnLoadCallback(drawOnlineChart);
-	            	drawOnlineChart(cat_online_ajax, per_online_ajax);
-	            }
-	         }
-	         , error : function(){
-	            alert("서버 접속 실패");
-	         }
-	      });
-	  
+                  $("#onlineOrder").children().remove();
+                  $("#onlineOrder").append("<div id='onlineChart' style='width: 700px; height: 500px;'></div>");
+                   
+                  //google.charts.setOnLoadCallback(drawOnlineChart);
+                  drawOnlineChart(cat_online_ajax, per_online_ajax);
+               }
+            }
+            , error : function(){
+               alert("서버 접속 실패");
+            }
+         });
+     
 }
 
 function drwaOfflineChartAjax(thisVal){
-	  
-	  var checkVal = "month_choice="+thisVal;
-	  
-	  if(thisVal==""){
-		  $("#offlineOrder").children().remove();
-		  $("#offlineOrder").append("<div id='piechart10' style='width: 700px; height: 500px;'></div>");
-		  allOfflineOrder();
-		  return;
-	  }
-	  
-	  $.ajax({
-	         url : "/group4erp/goOfflineOrderProc.do"
-	         , type : "post"
-	         , data : checkVal
-	         , success : function(manyDTO){
-	           
-	        	 //alert(manyDTO[0].cat_name_online);
-	        	 
-	        	 //chartDataOnline.push([ "['카테고리', '비율']" ]);
+     
+     var checkVal = "month_choice="+thisVal;
+     
+     if(thisVal==""){
+        $("#offlineOrder").children().remove();
+        $("#offlineOrder").append("<div id='piechart10' style='width: 700px; height: 500px;'></div>");
+        allOfflineOrder();
+        return;
+     }
+     
+     $.ajax({
+            url : "/group4erp/goOfflineOrderProc.do"
+            , type : "post"
+            , data : checkVal
+            , success : function(manyDTO){
+              
+               //alert(manyDTO[0].cat_name_online);
+               
+               //chartDataOnline.push([ "['카테고리', '비율']" ]);
 
-	            if(thisVal!=null){
-	            	
-	            	var cat_offline_ajax = [];
-	            	 var per_offline_ajax = [];
-	            	for(var i=0; i<=10 ; i++){
-	            		 //alert(manyDTO[i].cat_name_online);
-	            		 //chartDataOnline.push("['" + manyDTO[i].cat_name_online + "'," + manyDTO[i].peronlineorder + "]");
-	            		 //alert(chartDataOnline[i]);
-	            		cat_offline_ajax.push(manyDTO[i].cat_name_offline);
-	            		per_offline_ajax.push(manyDTO[i].perofflineorder)
-              	}
+               if(thisVal!=null){
+                  
+                  var cat_offline_ajax = [];
+                   var per_offline_ajax = [];
+                  for(var i=0; i<=10 ; i++){
+                      //alert(manyDTO[i].cat_name_online);
+                      //chartDataOnline.push("['" + manyDTO[i].cat_name_online + "'," + manyDTO[i].peronlineorder + "]");
+                      //alert(chartDataOnline[i]);
+                     cat_offline_ajax.push(manyDTO[i].cat_name_offline);
+                     per_offline_ajax.push(manyDTO[i].perofflineorder)
+                 }
 
-	            	$("#offlineOrder").children().remove();
-	            	$("#offlineOrder").append("<div id='offChart' style='width: 700px; height: 500px;'></div>");
-	                
-	            	//google.charts.setOnLoadCallback(drawOnlineChart);
-	            	drawOfflineChart(cat_offline_ajax, per_offline_ajax);
-	            }
-	         }
-	         , error : function(){
-	            alert("서버 접속 실패");
-	         }
-	      });
-	  
+                  $("#offlineOrder").children().remove();
+                  $("#offlineOrder").append("<div id='offChart' style='width: 700px; height: 500px;'></div>");
+                   
+                  //google.charts.setOnLoadCallback(drawOnlineChart);
+                  drawOfflineChart(cat_offline_ajax, per_offline_ajax);
+               }
+            }
+            , error : function(){
+               alert("서버 접속 실패");
+            }
+         });
+     
 }
 
 function drawOnlineChart(cat_offline_ajax, per_offline_ajax){
-	  
-	  //alert(cat_online_ajax[0]+'');
-	  //alert(per_online_ajax);
-	  /*
-	  chartDataOnline += "['카테고리', '비율']";
-	  
-	  for(var i=0 ; i<=10 ; i++){
-		  chartDataOnline += ",['";
-		  chartDataOnline += cat_online_ajax[i];
-		  chartDataOnline += "',";
-		  chartDataOnline += Number(per_online_ajax[i]);
-		  chartDataOnline += "]"
-	  }*/
-	  
-	  var online_data = google.visualization.arrayToDataTable([
-		  //chartDataOnline
-		  
-		  ['카테고리', '비율'],
-		  [cat_offline_ajax[0]+'', Number(per_offline_ajax[0])],
-		  [cat_offline_ajax[1]+'', Number(per_offline_ajax[1])],
-		  [cat_offline_ajax[2]+'', Number(per_offline_ajax[2])],
-		  [cat_offline_ajax[3]+'', Number(per_offline_ajax[3])],
-		  [cat_offline_ajax[4]+'', Number(per_offline_ajax[4])],
-		  [cat_offline_ajax[5]+'', Number(per_offline_ajax[5])],
-		  [cat_offline_ajax[6]+'', Number(per_offline_ajax[6])],
-		  [cat_offline_ajax[7]+'', Number(per_offline_ajax[7])],
-		  [cat_offline_ajax[8]+'', Number(per_offline_ajax[8])],
-		  [cat_offline_ajax[9]+'', Number(per_offline_ajax[9])],
-		  [cat_offline_ajax[10]+'', Number(per_offline_ajax[10])]
-		  
+     
+     //alert(cat_online_ajax[0]+'');
+     //alert(per_online_ajax);
+     /*
+     chartDataOnline += "['카테고리', '비율']";
+     
+     for(var i=0 ; i<=10 ; i++){
+        chartDataOnline += ",['";
+        chartDataOnline += cat_online_ajax[i];
+        chartDataOnline += "',";
+        chartDataOnline += Number(per_online_ajax[i]);
+        chartDataOnline += "]"
+     }*/
+     
+     var online_data = google.visualization.arrayToDataTable([
+        //chartDataOnline
+        
+        ['카테고리', '비율'],
+        [cat_offline_ajax[0]+'', Number(per_offline_ajax[0])],
+        [cat_offline_ajax[1]+'', Number(per_offline_ajax[1])],
+        [cat_offline_ajax[2]+'', Number(per_offline_ajax[2])],
+        [cat_offline_ajax[3]+'', Number(per_offline_ajax[3])],
+        [cat_offline_ajax[4]+'', Number(per_offline_ajax[4])],
+        [cat_offline_ajax[5]+'', Number(per_offline_ajax[5])],
+        [cat_offline_ajax[6]+'', Number(per_offline_ajax[6])],
+        [cat_offline_ajax[7]+'', Number(per_offline_ajax[7])],
+        [cat_offline_ajax[8]+'', Number(per_offline_ajax[8])],
+        [cat_offline_ajax[9]+'', Number(per_offline_ajax[9])],
+        [cat_offline_ajax[10]+'', Number(per_offline_ajax[10])]
+        
     ]);
-	  
-	  //alert(online_data);
-	  
-	  var online_options8 = {
-	      title: '온라인 주문 분야 비율 (월)',
-	      width :700,
-	      height: 450,
-	      is3D: true
-	    };
-	  
-	  var onlineChart = new google.visualization.PieChart(document.getElementById('onlineChart'));
+     
+     //alert(online_data);
+     
+     var online_options8 = {
+         /* title: '온라인 주문 분야 비율 (월)', */
+         width :700,
+         height: 450,
+         is3D: true,
+         chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+         legend: {'position': 'right', textStyle: {fontSize:20, color: '#000000', fontName:'Noto Sans KR'}},
+         colors:['#f7c9c9','#f7776a','#91a8d1','#034f83','#f9e03d','#97dddd','#9896a4','#dd4132','#b18f6a','#78c752','#ff1199']
+       };
+     
+     var onlineChart = new google.visualization.PieChart(document.getElementById('onlineChart'));
 
-	  onlineChart.draw(online_data, online_options8);
-	  
+     onlineChart.draw(online_data, online_options8);
+     
 }
 
-	function drawOfflineChart(cat_online_ajax, per_online_ajax){
+   function drawOfflineChart(cat_online_ajax, per_online_ajax){
 
-	  var offline_data = google.visualization.arrayToDataTable([
-		  //chartDataOnline
-		  
-		  ['카테고리', '비율'],
-		  [cat_online_ajax[0]+'', Number(per_online_ajax[0])],
-		  [cat_online_ajax[1]+'', Number(per_online_ajax[1])],
-		  [cat_online_ajax[2]+'', Number(per_online_ajax[2])],
-		  [cat_online_ajax[3]+'', Number(per_online_ajax[3])],
-		  [cat_online_ajax[4]+'', Number(per_online_ajax[4])],
-		  [cat_online_ajax[5]+'', Number(per_online_ajax[5])],
-		  [cat_online_ajax[6]+'', Number(per_online_ajax[6])],
-		  [cat_online_ajax[7]+'', Number(per_online_ajax[7])],
-		  [cat_online_ajax[8]+'', Number(per_online_ajax[8])],
-		  [cat_online_ajax[9]+'', Number(per_online_ajax[9])],
-		  [cat_online_ajax[10]+'', Number(per_online_ajax[10])]
-		  
+     var offline_data = google.visualization.arrayToDataTable([
+        //chartDataOnline
+        
+        ['카테고리', '비율'],
+        [cat_online_ajax[0]+'', Number(per_online_ajax[0])],
+        [cat_online_ajax[1]+'', Number(per_online_ajax[1])],
+        [cat_online_ajax[2]+'', Number(per_online_ajax[2])],
+        [cat_online_ajax[3]+'', Number(per_online_ajax[3])],
+        [cat_online_ajax[4]+'', Number(per_online_ajax[4])],
+        [cat_online_ajax[5]+'', Number(per_online_ajax[5])],
+        [cat_online_ajax[6]+'', Number(per_online_ajax[6])],
+        [cat_online_ajax[7]+'', Number(per_online_ajax[7])],
+        [cat_online_ajax[8]+'', Number(per_online_ajax[8])],
+        [cat_online_ajax[9]+'', Number(per_online_ajax[9])],
+        [cat_online_ajax[10]+'', Number(per_online_ajax[10])]
+        
     ]);
-	  
-	  
-	  var offline_options8 = {
-	      title: '오프라인 주문 분야 비율 (월)',
-	      width :700,
-	      height: 450,
-	      is3D: true
-	    };
-	  
-	  var offlineChart = new google.visualization.PieChart(document.getElementById('offChart'));
+     
+     
+     var offline_options8 = {
+         /* title: '오프라인 주문 분야 비율 (월)', */
+         width :700,
+         height: 450,
+         is3D: true,
+         chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+         legend: {'position': 'right', textStyle: {fontSize:20, color: '#000000', fontName:'Noto Sans KR'}},
+         colors:['#f7c9c9','#f7776a','#91a8d1','#034f83','#f9e03d','#97dddd','#9896a4','#dd4132','#b18f6a','#78c752','#ff1199']
+       };
+     
+     var offlineChart = new google.visualization.PieChart(document.getElementById('offChart'));
 
-	  offlineChart.draw(offline_data, offline_options8);
-	  
+     offlineChart.draw(offline_data, offline_options8);
+     
 }
 
 function allOnlineOrder(){
-	  var data8 = google.visualization.arrayToDataTable([
-	    	['카테고리', '비율']
-	    	<c:forEach items="${requestScope.perOnlineOrder}" var="onlineorder" varStatus="loopTagStatus">
-	  			,['${onlineorder.cat_name_online}', ${onlineorder.peronlineorder}]
-		    </c:forEach>
-	    ]);
-	  var options8 = {
-		      title: '온라인 주문 분야 비율',
-		      width :700,
-		      height: 450,
-		      is3D: true
-		    };
+     var data8 = google.visualization.arrayToDataTable([
+          ['카테고리', '비율']
+          <c:forEach items="${requestScope.perOnlineOrder}" var="onlineorder" varStatus="loopTagStatus">
+              ,['${onlineorder.cat_name_online}', ${onlineorder.peronlineorder}]
+          </c:forEach>
+       ]);
+     var options8 = {
+            /* title: '온라인 주문 분야 비율', */
+            width :700,
+            height: 450,
+            is3D: true,
+            chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+            legend: {'position': 'right', textStyle: {fontSize:20, color: '#000000', fontName:'Noto Sans KR'}},
+            colors:['#f7c9c9','#f7776a','#91a8d1','#034f83','#f9e03d','#97dddd','#9896a4','#dd4132','#b18f6a','#78c752','#ff1199']
+          };
 
-	    var chart8 = new google.visualization.PieChart(document.getElementById('piechart8'));
+       var chart8 = new google.visualization.PieChart(document.getElementById('piechart8'));
 
-	    chart8.draw(data8, options8);
+       chart8.draw(data8, options8);
 }
 
 function allOfflineOrder(){
-	  var data10 = google.visualization.arrayToDataTable([
-	    	['카테고리', '비율']
-	    	<c:forEach items="${requestScope.perOffOrder}" var="offorder" varStatus="loopTagStatus">
-	  			,['${offorder.cat_name_off}', ${offorder.perofforder}]
-		    </c:forEach>
-	    ]);
-	  
-	  var options10 = {
-		      title: '오프라인 주문 분야 비율',
-		      width :700,
-		      height: 450,
-		      is3D: true
-		    };
+     var data10 = google.visualization.arrayToDataTable([
+          ['카테고리', '비율']
+          <c:forEach items="${requestScope.perOffOrder}" var="offorder" varStatus="loopTagStatus">
+              ,['${offorder.cat_name_off}', ${offorder.perofforder}]
+          </c:forEach>
+       ]);
+     
+     var options10 = {
+            /* title: '오프라인 주문 분야 비율', */
+            width :700,
+            height: 450,
+            is3D: true,
+            chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+            legend: {'position': 'right', textStyle: {fontSize:20, color: '#000000', fontName:'Noto Sans KR'}},
+            colors:['#f7c9c9','#f7776a','#91a8d1','#034f83','#f9e03d','#97dddd','#9896a4','#dd4132','#b18f6a','#78c752','#ff1199']
+          };
 
-	    var chart10 = new google.visualization.PieChart(document.getElementById('piechart10'));
+       var chart10 = new google.visualization.PieChart(document.getElementById('piechart10'));
 
-	    chart10.draw(data10, options10);
+       chart10.draw(data10, options10);
 }
 
 
 function drawChart() {
-	
-	var data3 = google.visualization.arrayToDataTable([
-    	['카테고리', '비율']
-    	,['온라인', ${perLine.on_line}]
-    	,['오프라인', ${perLine.off_line}]
+   
+   var data3 = google.visualization.arrayToDataTable([
+       ['카테고리', '비율']
+       ,['온라인', ${perLine.on_line}]
+       ,['오프라인', ${perLine.off_line}]
     ]);
     var data4 = google.visualization.arrayToDataTable([
-    	['카테고리', '비율']
-    	,['회원', ${perMember.memberY}]
-    	,['비회원', ${perMember.memberN}]
+       ['카테고리', '비율']
+       ,['회원', ${perMember.memberY}]
+       ,['비회원', ${perMember.memberN}]
     ]);
     var options3 = {
-      title: '온/오프라인 주문 비율',
+      /* title: '온/오프라인 주문 비율', */
       width :700,
       height: 450,
-      is3D: true
+      is3D: true,
+      chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+      legend: {'position': 'right', textStyle: {fontSize:20, color: '#000000', fontName:'Noto Sans KR'}},
+      colors:['#f9e03d','#034f83']
     };
     var options4 = {
-      title: '회원/비회원 주문 비율',
+      /* title: '회원/비회원 주문 비율', */
       width :700,
       height: 450,
-      is3D: true
+      is3D: true,
+      chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+      legend: {'position': 'right', textStyle: {fontSize:20, color: '#000000', fontName:'Noto Sans KR'}},
+      colors:['#034f83','#f9e03d']
     };
     
     var chart3 = new google.visualization.PieChart(document.getElementById('piechart3'));
@@ -363,68 +381,157 @@ function drawChart() {
 
 function drawMoneyChart() {
     var online_chart_data = google.visualization.arrayToDataTable([
-  	  ['날짜', '금액']
-  	  <c:forEach items="${requestScope.monthTotMoney}" var="monthTotMoney" varStatus="loopTagStatus">
-				,['${monthTotMoney.monthsort}', ${monthTotMoney.totmoneyM}]
-	  	  </c:forEach>
+       ['날짜', '금액']
+       <c:forEach items="${requestScope.monthTotMoney}" var="monthTotMoney" varStatus="loopTagStatus">
+            ,['${monthTotMoney.monthsort}', ${monthTotMoney.totmoneyM}]
+          </c:forEach>
     ]);
     var offline_chart_data = google.visualization.arrayToDataTable([
-  	  ['날짜', '금액']
-  	  <c:forEach items="${requestScope.offMonthTotMoney}" var="offMonthTotMoney" varStatus="loopTagStatus">
-				,['${offMonthTotMoney.offmonthsort}', ${offMonthTotMoney.offtotmoney}]
-	  	  </c:forEach>
+       ['날짜', '금액']
+       <c:forEach items="${requestScope.offMonthTotMoney}" var="offMonthTotMoney" varStatus="loopTagStatus">
+            ,['${offMonthTotMoney.offmonthsort}', ${offMonthTotMoney.offtotmoney}]
+          </c:forEach>
     ]);
     var credit_data = google.visualization.arrayToDataTable([
-  	  ['날짜', '금액']
-  	  <c:forEach items="${requestScope.creditTot}" var="creditTot" varStatus="loopTagStatus">
-				,['${creditTot.creditmonth}', ${creditTot.credittot}]
-	  	  </c:forEach>
+       ['날짜', '금액']
+       <c:forEach items="${requestScope.creditTot}" var="creditTot" varStatus="loopTagStatus">
+            ,['${creditTot.creditmonth}', ${creditTot.credittot}]
+          </c:forEach>
     ]);
     var debit_data = google.visualization.arrayToDataTable([
-  	  ['날짜', '금액']
-  	  <c:forEach items="${requestScope.debitTot}" var="debitTot" varStatus="loopTagStatus">
-				,['${debitTot.debitmonth}', ${debitTot.debittot}]
-	  	  </c:forEach>
+       ['날짜', '금액']
+       <c:forEach items="${requestScope.debitTot}" var="debitTot" varStatus="loopTagStatus">
+            ,['${debitTot.debitmonth}', ${debitTot.debittot}]
+          </c:forEach>
     ]);
     var onlinemonthTotMoney_chart_options = {
-  		  title: "온라인 월별 총 매출 액",
-  		  width :700,
-  		  height: 300,
-  		animation:{
+          /* title: "온라인 월별 총 매출 액", */
+          width :1600,
+          height: 500,
+          colors:['#4AB34A','#4AB34A', 'opacity: 0.2'],
+        animation:{
             "startup": true,
               duration: 1000,
               easing: 'out',
-            }
+              color: '#b97df0'
+            },
+         chartArea: {'width': '70%', 'height': '77%'/* , 'right':10 */},
+         legend: {'position': 'right', textStyle: {fontSize:25, color: '#000000', fontName:'Noto Sans KR'}},
+
+          hAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+             gridlines: {
+                 color: "white"
+             },
+            baselineColor: 'white'/*, 
+             ticks: []*/
+          }, 
+          vAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+                /* gridlines: {
+                      color: "white"
+                }, */
+               baselineColor: 'lightgray',
+               titleTextStyle: {
+                 color: '#000000'
+               }
+          }
     };
     var offlinemonthTotMoney_chart_options = {
-  		  title: "오프라인 월별 총 매출 액",
-  		  width :700,
-  		  height: 300,
-  		animation:{
+          /* title: "오프라인 월별 총 매출 액", */
+          width :1600,
+          height: 500,
+          colors:['#28B4B4','#28B4B4', 'opacity: 0.2'],   /* 막대 그래프 색. 하나는 주석 색, 하나는 막대 색 */
+        animation:{
             "startup": true,
               duration: 1000,
               easing: 'out',
-            }
+            },
+         chartArea: {'width': '70%', 'height': '77%'/* , 'right':10 */},
+         legend: {'position': 'right', textStyle: {fontSize:25, color: '#000000', fontName:'Noto Sans KR'}},
+
+          hAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+             gridlines: {
+                 color: "white"
+             },
+            baselineColor: 'white'/*, 
+             ticks: []*/
+          }, 
+          vAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+                /* gridlines: {
+                      color: "white"
+                }, */
+               baselineColor: 'lightgray',
+               titleTextStyle: {
+                 color: '#000000'
+               }
+          }
     };
     var creditMonth_options = {
-  		  title: "월별 총 매출 액",
-  		  width :700,
-  		  height: 300,
-  		animation:{
+          /* title: "월별 총 매출 액", */
+          width :1600,
+          height: 500,
+          colors:['#FFB900','#FFB900', 'opacity: 0.2'],
+        animation:{
             "startup": true,
               duration: 1000,
               easing: 'out',
-            }
+            },
+         chartArea: {'width': '70%', 'height': '77%'/* , 'right':10 */},
+         legend: {'position': 'right', textStyle: {fontSize:25, color: '#000000', fontName:'Noto Sans KR'}},
+
+          hAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+             gridlines: {
+                 color: "white"
+             },
+            baselineColor: 'white'/*, 
+             ticks: []*/
+          }, 
+          vAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+                /* gridlines: {
+                      color: "white"
+                }, */
+               baselineColor: 'lightgray',
+               titleTextStyle: {
+                 color: '#000000'
+               }
+          }
     };
     var debitMonth_options = {
-  		  title: "월별 총 지출 액",
-  		  width :700,
-  		  height: 300,
-  		animation:{
+          /* title: "월별 총 지출 액", */
+          width :1600,
+          height: 500,
+          colors:['#DC9146','#DC9146', 'opacity: 0.2'],
+        animation:{
             "startup": true,
               duration: 1000,
               easing: 'out',
-            }
+            },
+         chartArea: {'width': '70%', 'height': '77%'/* , 'right':10 */},
+         legend: {'position': 'right', textStyle: {fontSize:25, color: '#000000', fontName:'Noto Sans KR'}},
+
+          hAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+             gridlines: {
+                 color: "white"
+             },
+            baselineColor: 'white'/*, 
+             ticks: []*/
+          }, 
+          vAxis: {
+             textStyle:{color: '#000000', fontSize:25},
+                /* gridlines: {
+                      color: "white"
+                }, */
+               baselineColor: 'lightgray',
+               titleTextStyle: {
+                 color: '#000000'
+               }
+          }
     };
 
     var onlinemonthTotMoney_chart = new google.visualization.ColumnChart(document.getElementById('onlinemonthTotMoneyChart'));
@@ -579,19 +686,19 @@ function drawMoneyChart() {
               <li>
                 <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
               </li>
-             	<c:if test="${emp_id eq '600001'}">
-                   		<li>
-              				<a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여지급대장 조회</a>
-              			</li>	
-              			<li>
-              				<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
-              			</li>	
+                <c:if test="${emp_id eq '600001'}">
+                         <li>
+                          <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여지급대장 조회</a>
+                       </li>   
+                       <li>
+                          <a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+                       </li>   
                    </c:if>
                    
                    <c:if test="${emp_id != '600001'}">
-                   		<li>
-              				<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
-              			</li>	
+                         <li>
+                          <a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+                       </li>   
                    </c:if>
               <!-- 
               <li>
@@ -632,7 +739,7 @@ function drawMoneyChart() {
               <li>
                 <a href="/group4erp/viewOurCompanyReport.do"><i class="fa fa-building-o"></i>회사현황</a>
               </li>
-              <li>
+              <li class="active">
                 <a href="/group4erp/goMyChart.do"><i class="fa fa-bar-chart-o"></i>차트현황</a>
               </li>
             </ul>
@@ -654,61 +761,89 @@ function drawMoneyChart() {
           <div class="row mt">
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 온라인 주문 분야 별 비율</h4>
+                <h2><i class="fa fa-angle-right"></i> 온라인 주문 분야 별 비율</h2>
                 <div class="panel-body">
                 <select name=month_choice>
-					<option value="">전체</option>
-					<option value="01">1월</option>
-					<option value="02">2월</option>
-					<option value="03">3월</option>
-					<option value="04">4월</option>
-					<option value="05">5월</option>
-					<option value="06">6월</option>
-					<option value="07">7월</option>
-					<option value="08">8월</option>
-					<option value="09">9월</option>
-					<option value="10">10월</option>
-					<option value="11">11월</option>
-					<option value="12">12월</option>
-				</select>
+               <option value="">전체</option>
+               <option value="01">1월</option>
+               <option value="02">2월</option>
+               <option value="03">3월</option>
+               <option value="04">4월</option>
+               <option value="05">5월</option>
+               <option value="06">6월</option>
+               <option value="07">7월</option>
+               <option value="08">8월</option>
+               <option value="09">9월</option>
+               <option value="10">10월</option>
+               <option value="11">11월</option>
+               <option value="12">12월</option>
+            </select>
                   <div id="onlineOrder">
-					<div id="piechart8" align=center>
-					</div>
-					</div>
+               <div id="piechart8" align=center>
+               </div>
+               </div>
                 </div>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 오프라인 판매 분야 별 비율</h4>
+                <h2><i class="fa fa-angle-right"></i> 오프라인 판매 분야 별 비율</h2>
                 <div class="panel-body">
                 <select name=month_choice>
-					<option value="">전체</option>
-					<option value="01">1월</option>
-					<option value="02">2월</option>
-					<option value="03">3월</option>
-					<option value="04">4월</option>
-					<option value="05">5월</option>
-					<option value="06">6월</option>
-					<option value="07">7월</option>
-					<option value="08">8월</option>
-					<option value="09">9월</option>
-					<option value="10">10월</option>
-					<option value="11">11월</option>
-					<option value="12">12월</option>
-				</select>
+               <option value="">전체</option>
+               <option value="01">1월</option>
+               <option value="02">2월</option>
+               <option value="03">3월</option>
+               <option value="04">4월</option>
+               <option value="05">5월</option>
+               <option value="06">6월</option>
+               <option value="07">7월</option>
+               <option value="08">8월</option>
+               <option value="09">9월</option>
+               <option value="10">10월</option>
+               <option value="11">11월</option>
+               <option value="12">12월</option>
+            </select>
                   <div id="offlineOrder">
-					<div id="piechart10" align=center>
-					</div>
-					</div>
+               <div id="piechart10" align=center>
+               </div>
+               </div>
                 </div>
               </div>
             </div>
           </div>
+          
+          <div style="height:30"></div>
+          
+          <div class="content-panel">
+          <!-- <div class="row mt">
+            <div class="col-lg-6">
+              <div class="content-panel"> -->
+                <h2><i class="fa fa-angle-right"></i> 온라인 월별 총 매출</h2>
+               <!--  <div class="panel-body"> -->
+                  <div id="onlinemonthTotMoneyChart" align=center></div>
+<!--                 </div>
+              </div>
+            </div> -->
+          </div>
+          
+          <div style="height:30"></div>
+          <div class="content-panel">
+          <!-- <div class="row mt">
+            <div class="col-lg-6">
+              <div class="content-panel"> -->
+                <h2><i class="fa fa-angle-right"></i> 오프라인 월별 총 매출</h2>
+                <!-- <div class="panel-body"> -->
+                  <div id="offlinemonthTotMoneyChart" align=center></div>
+                <!-- </div>
+              </div>
+            </div> -->
+          </div>
+          
           <div class="row mt">
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 온/오프라인 주문 비율</h4>
+                <h2><i class="fa fa-angle-right"></i> 온/오프라인 주문 비율</h2>
                 <div class="panel-body">
                   <div id="piechart3" align=center></div>
                 </div>
@@ -716,49 +851,41 @@ function drawMoneyChart() {
             </div>
             <div class="col-lg-6">
               <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 회원/비회원 주문 비율</h4>
+                <h2><i class="fa fa-angle-right"></i> 회원/비회원 주문 비율</h2>
                 <div class="panel-body">
                   <div id="piechart4" align=center></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row mt">
+          
+          <div style="height:30"></div>
+          <div class="content-panel">
+          <!-- <div class="row mt">
             <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 오프라인 월별 총 매출</h4>
-                <div class="panel-body">
-                  <div id="offlinemonthTotMoneyChart" align=center></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 온라인 월별 총 매출</h4>
-                <div class="panel-body">
-                  <div id="onlinemonthTotMoneyChart" align=center></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt">
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 월별 총 매출</h4>
-                <div class="panel-body">
+              <div class="content-panel"> -->
+                <h2><i class="fa fa-angle-right"></i> 월별 총 매출</h2>
+                <!-- <div class="panel-body"> -->
                   <div id="creditTotChart" align=center></div>
-                </div>
+                <!-- </div>
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="content-panel">
-                <h4><i class="fa fa-angle-right"></i> 월별 총 지출</h4>
-                <div class="panel-body">
-                  <div id="debitTotChart" align=center></div>
-                </div>
-              </div>
-            </div>
+            </div> -->
           </div>
+          
+          
+          <div style="height:30"></div>
+          <div class="content-panel">
+          <!-- <div class="row mt">
+             <div class="col-lg-6">
+              <div class="content-panel"> -->
+                <h2><i class="fa fa-angle-right"></i> 월별 총 지출</h2>
+                <!-- <div class="panel-body"> -->
+                  <div id="debitTotChart" align=center></div>
+                <!-- </div>
+              </div>
+            </div> -->
+          </div>
+        
         </div>
         <!-- page end-->
       </section>
@@ -766,27 +893,21 @@ function drawMoneyChart() {
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
+<!--     <footer class="site-footer">
       <div class="text-center">
         <p>
-			KOSMO 자바&빅데이터 과정 팀프로젝트
+         KOSMO 자바&빅데이터 과정 팀프로젝트
         </p>
         <div class="credits">
         <font style="font-size:12pt;">
         ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
          </font>
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
         </div>
         <a href="basic_table.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
-    </footer>
+    </footer> -->
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->

@@ -4,7 +4,7 @@ public class SalarySearchDTO {
 	
 	private String searchKeyword;
 	private int selectPageNo=1;
-	private int rowCntPerPage=10;
+	private int rowCntPerPage=20;
 	private int emp_no;
 	
 	

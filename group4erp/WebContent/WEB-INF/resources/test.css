@@ -15,7 +15,7 @@ body {
    border-bottom:1px solid white;
    border-left:0px;
    border-right:0px;
-   font-size:12pt;
+   font-size:13pt;
    font-family: 'Noto Sans KR', sans-serif;
    /* background-color: white; */
 /*    font-weight:350; */
@@ -26,7 +26,7 @@ body {
    border-collapse: collapse;
    border:1px solid #ddd;
    padding:5px;
-   font-size:12pt;
+   font-size:13pt;
    font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -34,7 +34,7 @@ body {
    border-collapse: collapse;
    border:0px solid white;
    padding:5px;
-   font-size:12pt;
+   font-size:13pt;
    font-family: 'Noto Sans KR', sans-serif;
 }
 .logintab{
@@ -61,7 +61,7 @@ td{
 th{
    
    font-weight: 450; 
-   font-size:11pt ;
+   font-size:13pt ;
 }
 .fontLight{
    
@@ -73,7 +73,7 @@ th{
 .fontNormal{
    font-family: 'Noto Sans KR', sans-serif;
    font-weight: 410; 
-   font-size: 14pt ;
+   font-size: 13pt ;
    color : #666666;
    
 }
@@ -86,7 +86,7 @@ th{
 h1{
    font-family: 'Noto Sans KR', sans-serif;
    font-weight: 600;
-   font-size: 17pt ;
+   font-size: 16pt ;
 }
 
 

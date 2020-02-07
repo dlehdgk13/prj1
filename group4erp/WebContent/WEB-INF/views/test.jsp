@@ -62,78 +62,78 @@
    google.charts.setOnLoadCallback(drawChartSellingStat);
 
    function drawChartSellingStat(){
-      var sellingStat_data = google.visualization.arrayToDataTable([
-            ['Month', '판매부수']
-                ,["${mainChartsDTO.sellingStat[0].title}", ${mainChartsDTO.sellingStat[0].cnt}]
-                ,["${mainChartsDTO.sellingStat[1].title}", Number(${mainChartsDTO.sellingStat[1].cnt})]
-                ,["${mainChartsDTO.sellingStat[2].title}", Number(${mainChartsDTO.sellingStat[2].cnt})]
-                ,["${mainChartsDTO.sellingStat[3].title}", Number(${mainChartsDTO.sellingStat[3].cnt})]
-                ,["${mainChartsDTO.sellingStat[4].title}", Number(${mainChartsDTO.sellingStat[4].cnt})]
-                ,["${mainChartsDTO.sellingStat[5].title}", Number(${mainChartsDTO.sellingStat[5].cnt})]
-                ,["${mainChartsDTO.sellingStat[6].title}", Number(${mainChartsDTO.sellingStat[6].cnt})]
-                ,["${mainChartsDTO.sellingStat[7].title}", Number(${mainChartsDTO.sellingStat[7].cnt})]
-                ,["${mainChartsDTO.sellingStat[8].title}", Number(${mainChartsDTO.sellingStat[8].cnt})]
-                ,["${mainChartsDTO.sellingStat[9].title}", Number(${mainChartsDTO.sellingStat[9].cnt})]
-                ,["${mainChartsDTO.sellingStat[10].title}", Number(${mainChartsDTO.sellingStat[10].cnt})]
-                ,["${mainChartsDTO.sellingStat[11].title}", Number(${mainChartsDTO.sellingStat[11].cnt})]
-         ]);
-   
-         var sellingStat_option = {
-               //title: '월별 도서 판매 부수',
-                  //width :700, 
-                  height: 400,
-                  colors:['#2f323a','#2f323a', 'opacity: 0.2'],
-                  /* colors:['#99CCFF','#99CCFF', 'opacity: 0.2'], */
-                  /* colors:['#e68f8f','#e68f8f'], */
-                  animation:{
-                       startup: true,
-                       duration: 1000,
-                       easing: 'out',
-                 },
-                 /* annotations: {
-                    boxStyle: {
-                          // Color of the box outline.
-                          stroke: '#888',
-                          // Thickness of the box outline.
-                          strokeWidth: 1,
-                          // x-radius of the corner curvature.
-                          rx: 50,
-                          // y-radius of the corner curvature.
-                          ry: 50
-                    }
-               }
-                */backgroundColor: {
-                      fill: '#eaeaea',
-                      fillOpacity: 0
-                    },
-               chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
-                     legend: {'position': 'right', textStyle: {fontSize:13, color: '#797979', fontName:'Noto Sans KR'}},
+	   var sellingStat_data = google.visualization.arrayToDataTable([
+				['Month', '판매부수']
+		  	  	,["${mainChartsDTO.sellingStat[0].title}", ${mainChartsDTO.sellingStat[0].cnt}]
+		  	  	,["${mainChartsDTO.sellingStat[1].title}", Number(${mainChartsDTO.sellingStat[1].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[2].title}", Number(${mainChartsDTO.sellingStat[2].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[3].title}", Number(${mainChartsDTO.sellingStat[3].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[4].title}", Number(${mainChartsDTO.sellingStat[4].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[5].title}", Number(${mainChartsDTO.sellingStat[5].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[6].title}", Number(${mainChartsDTO.sellingStat[6].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[7].title}", Number(${mainChartsDTO.sellingStat[7].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[8].title}", Number(${mainChartsDTO.sellingStat[8].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[9].title}", Number(${mainChartsDTO.sellingStat[9].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[10].title}", Number(${mainChartsDTO.sellingStat[10].cnt})]
+		  	  	,["${mainChartsDTO.sellingStat[11].title}", Number(${mainChartsDTO.sellingStat[11].cnt})]
+			]);
+	
+			var sellingStat_option = {
+					//title: '월별 도서 판매 부수',
+			         //width :700, 
+			         height: 400,
+			         colors:['#fba14c','#fba14c', 'opacity: 0.2'],
+			         /* colors:['#99CCFF','#99CCFF', 'opacity: 0.2'], */
+			         /* colors:['#e68f8f','#e68f8f'], */
+			         animation:{
+			              startup: true,
+			              duration: 1000,
+			              easing: 'out',
+			        },
+			        /* annotations: {
+			        	boxStyle: {
+			        	      // Color of the box outline.
+			        	      stroke: '#888',
+			        	      // Thickness of the box outline.
+			        	      strokeWidth: 1,
+			        	      // x-radius of the corner curvature.
+			        	      rx: 50,
+			        	      // y-radius of the corner curvature.
+			        	      ry: 50
+			        	}
+					}
+					 */backgroundColor: {
+			             fill: '#eaeaea',
+			             fillOpacity: 0
+			           },
+					chartArea: {'width': '80%', 'height': '80%'/* , 'right':10 */},
+		               legend: {'position': 'right', textStyle: {fontSize:13, color: '#797979', fontName:'Noto Sans KR'}},
 
-                     hAxis: {
-                        textStyle:{color: '#797979'},
-                        gridlines: {
-                            color: "white"
-                        },
-                       baselineColor: 'white'/*, 
-                        ticks: []*/
-                     }, 
-                     vAxis: {
-                        textStyle:{color: '#797979'},
-                         /* gridlines: {
-                               color: "white"
-                         }, */
-                        baselineColor: 'lightgray',
-                          titleTextStyle: {
-                            color: '#797979'
-                          }
-                     }
-                    
-         };
+			            hAxis: {
+			               textStyle:{color: '#797979'},
+			               gridlines: {
+			                   color: "white"
+			               },
+			        	   baselineColor: 'white'/*, 
+			        	    ticks: []*/
+			        	 }, 
+			        	 vAxis: {
+			        		 textStyle:{color: '#797979'},
+				             /* gridlines: {
+				                   color: "white"
+				             }, */
+				        	 baselineColor: 'lightgray',
+			                 titleTextStyle: {
+			                   color: '#797979'
+			                 }
+			        	 }
+			        	
+			};
 
-         var sellingStat_chart = new google.visualization.ColumnChart(document.getElementById('sellingStat'));
-           sellingStat_chart.draw(sellingStat_data, sellingStat_option);
-   
-   }
+			var sellingStat_chart = new google.visualization.ColumnChart(document.getElementById('sellingStat'));
+  			sellingStat_chart.draw(sellingStat_data, sellingStat_option);
+	
+	}
 
 
    /* function drawChart() {
@@ -152,25 +152,25 @@
              fillOpacity: 0
            },
             hAxis: {
-               textStyle:{color: '#fdfdfd'},
-              baselineColor: 'none',
-              ticks: []
-            }, 
-            vAxis: {
-              baselineColor: 'none',
-              ticks: [],
-              textStyle: {
+            	textStyle:{color: '#fdfdfd'},
+        	   baselineColor: 'none',
+        	   ticks: []
+        	 }, 
+        	 vAxis: {
+        	   baselineColor: 'none',
+        	   ticks: [],
+        	   textStyle: {
                    color: 'red'
                },
                titleTextStyle: {
                    color: 'red'
                }
-            },
-            legend: {
-                   textStyle: {
-                       color: 'white'
-                   }
-               },
+        	 },
+        	 legend: {
+        	        textStyle: {
+        	            color: 'white'
+        	        }
+        	    },
          animation:{
             "startup": true,
               duration: 1000,
@@ -185,10 +185,6 @@
    } */
 
 
-
-   
-
-
 </script>
 <style>
 :root {
@@ -199,7 +195,7 @@
   --border-radius : 20px;
   --green : #BCCF11;
   --red : #E20D18;
-  --yellow : #FEC107;
+  --yellow : #eab71b;
   --silver : #C1C1C1;
   --bronze : #AC7D18;
 }
@@ -390,27 +386,27 @@ html, body {
 }
 
 .leaderboards-container{
-   height:30%
+	height:30%
 }
 
 .nullDiv{
-   margin-top:0;
-   margin-bottom:0;
-   padding-top:0;
-   padding-bottom:0;
-   
+	margin-top:0;
+	margin-bottom:0;
+	padding-top:0;
+	padding-bottom:0;
+	
 }
 
 .year-group{
-   color : black;
+	color : black;
 }
 
 .title{
-   font-weight:bold;
+	font-weight:bold;
 }
 
 .steps{
-   text-align:right;
+	text-align:right;
 }
 
 
@@ -567,18 +563,18 @@ html, body {
                 <a href="/group4erp/viewEmpList.do"><i class="fa fa-info-circle"></i>직원정보</a>
               </li>
               <c:if test="${emp_id eq '600001'}">
-                         <li>
-                          <a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여지급대장 조회</a>
-                       </li>   
-                       <li>
-                          <a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
-                       </li>   
+                   		<li>
+              				<a href="/group4erp/viewSalList.do"><i class="fa fa-file"></i>급여지급대장 조회</a>
+              			</li>	
+              			<li>
+              				<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              			</li>	
                    </c:if>
                    
                    <c:if test="${emp_id != '600001'}">
-                         <li>
-                          <a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
-                       </li>   
+                   		<li>
+              				<a href="/group4erp/viewEmpSalInfo.do"><i class="fa fa-file"></i>급여명세서 조회</a>
+              			</li>	
                    </c:if>
               <li>
                 <a href="/group4erp/viewEmpDayOffList.do"><i class="fa fa-list"></i>직원별 휴가 현황</a>
@@ -638,7 +634,7 @@ html, body {
             </div>
             <!-- <div id="sellingStat" style="background-color:white"> -->
             <div id="sellingStat" style="background-color:#eaeaea">
-               
+            	
             </div>
             <!-- <div class="custom-bar-chart" id="sellingStatDiv">
               <ul class="y-axis">
@@ -691,117 +687,117 @@ html, body {
                   <div class="row">
                    
                     <div class="col-md-12">
-                  <%-- <%@ include file="/WEB-INF/views/manyCharts2.jsp" %> --%>
-                  <div id="app" style='height:20%; padding-top:0; margin-top:0;'></div>
+						<%-- <%@ include file="/WEB-INF/views/manyCharts2.jsp" %> --%>
+						<div id="app" style='height:20%; padding-top:0; margin-top:0;'></div>
 
-                  <script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.min.js'></script>
-                  <script id="rendered-js">
-                  let title = 'Blackbirds';
-                  let yearGroup = 'Year 3';
-                  let steps = '1,345';
-                  
-                  let app =
-                  React.createElement("div", { className: "leaderboards-container" },
-                  /*
-                  React.createElement("div", { className: "slider-container" },
-                  React.createElement("div", { className: "option" }, "Daily"),
-                  
-                  React.createElement("div", { className: "option highlighted" }, "Momth")),
-                  
-                  React.createElement("div", { className: "option" }, "Termly")),
-                  */
-                  
-                  React.createElement("div", { className: "podium-places-container" },
-                  React.createElement("div", null,
-                  React.createElement("div", { className: "podium silver" },
-                  React.createElement("div", { className: "position" },
-                  React.createElement("div", null, "2")),
-                  
-                  
-                  
-                  React.createElement("div", { className: "class-information" },
-                  React.createElement("div", { className: "title" },
-                  '${bestSellers[1].book_name}'),
-                  
-                  React.createElement("div", { className: "year-group" },
-                  '${bestSellers[1].cat_name}'),
-                  
-                  React.createElement("div", { className: "steps" },
-                  '${bestSellers[1].soldcnt}'+'권')))),
-                  
-                  React.createElement("div", null,
-                  React.createElement("div", { className: "podium gold" },
-                  React.createElement("div", { className: "position" },
-                  React.createElement("div", null, "1")),
-                  
-                  
-                  
-                  React.createElement("div", { className: "class-information" },
-                  React.createElement("div", { className: "title" },
-                  '${bestSellers[0].book_name}'),
-                  
-                  React.createElement("div", { className: "year-group" },
-                        '${bestSellers[0].cat_name}'),
-                  
-                  React.createElement("div", { className: "steps" },
-                        '${bestSellers[0].soldcnt}'+'권')))),
-                  
-                  
-                  React.createElement("div", null,
-                  React.createElement("div", { className: "podium bronze" },
-                  React.createElement("div", { className: "position" },
-                  React.createElement("div", null, "3")),
-                  
-                  
-                  
-                  React.createElement("div", { className: "class-information" },
-                  React.createElement("div", { className: "title" },
-                        '${bestSellers[2].book_name}'),
-                  
-                  React.createElement("div", { className: "year-group" },
-                        '${bestSellers[2].cat_name}'),
-                  
-                  React.createElement("div", { className: "steps" },
-                        '${bestSellers[2].soldcnt}'+'권'))))));
-                  
-                  
-                  
-                  /* React.createElement("div", { className: "places-list-container" },
-                  React.createElement("div", { className: "list-item" },
-                  React.createElement("div", { className: "position" }, "4"),
-                  
-                  
-                  React.createElement("div", { className: "class-information" },
-                  React.createElement("div", { className: "title" },
-                        '${bestSellers[3].book_name}'),
-                  
-                  React.createElement("div", { className: "year" },
-                        '${bestSellers[3].cat_name}')),
-                  
-                  
-                  React.createElement("div", { className: "steps" },
-                        '${bestSellers[3].soldcnt}'+'권')),
-                  
-                  
-                  
-                  React.createElement("div", { className: "list-item" },
-                  React.createElement("div", { className: "position" }, "5"),
-                  
-                  
-                  React.createElement("div", { className: "class-information" },
-                  React.createElement("div", { className: "title" },
-                        '${bestSellers[4].book_name}'),
-                  
-                  React.createElement("div", { className: "year" },
-                        '${bestSellers[4].cat_name}')),
-                  
-                  
-                  React.createElement("div", { className: "steps" },
-                        '${bestSellers[4].soldcnt}'+'권')))); */
-                  
-                  React.render(app, document.getElementById('app'));
-                  //# sourceURL=pen.js
-                      </script>
+						<script src='https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.min.js'></script>
+						<script id="rendered-js">
+						let title = 'Blackbirds';
+						let yearGroup = 'Year 3';
+						let steps = '1,345';
+						
+						let app =
+						React.createElement("div", { className: "leaderboards-container" },
+						/*
+						React.createElement("div", { className: "slider-container" },
+						React.createElement("div", { className: "option" }, "Daily"),
+						
+						React.createElement("div", { className: "option highlighted" }, "Momth")),
+						
+						React.createElement("div", { className: "option" }, "Termly")),
+						*/
+						
+						React.createElement("div", { className: "podium-places-container" },
+						React.createElement("div", null,
+						React.createElement("div", { className: "podium silver" },
+						React.createElement("div", { className: "position" },
+						React.createElement("div", null, "2")),
+						
+						
+						
+						React.createElement("div", { className: "class-information" },
+						React.createElement("div", { className: "title" },
+						'${bestSellers[1].book_name}'),
+						
+						React.createElement("div", { className: "year-group" },
+						'${bestSellers[1].cat_name}'),
+						
+						React.createElement("div", { className: "steps" },
+						'${bestSellers[1].soldcnt}'+'권')))),
+						
+						React.createElement("div", null,
+						React.createElement("div", { className: "podium gold" },
+						React.createElement("div", { className: "position" },
+						React.createElement("div", null, "1")),
+						
+						
+						
+						React.createElement("div", { className: "class-information" },
+						React.createElement("div", { className: "title" },
+						'${bestSellers[0].book_name}'),
+						
+						React.createElement("div", { className: "year-group" },
+						      '${bestSellers[0].cat_name}'),
+						
+						React.createElement("div", { className: "steps" },
+						      '${bestSellers[0].soldcnt}'+'권')))),
+						
+						
+						React.createElement("div", null,
+						React.createElement("div", { className: "podium bronze" },
+						React.createElement("div", { className: "position" },
+						React.createElement("div", null, "3")),
+						
+						
+						
+						React.createElement("div", { className: "class-information" },
+						React.createElement("div", { className: "title" },
+						      '${bestSellers[2].book_name}'),
+						
+						React.createElement("div", { className: "year-group" },
+						      '${bestSellers[2].cat_name}'),
+						
+						React.createElement("div", { className: "steps" },
+						      '${bestSellers[2].soldcnt}'+'권'))))));
+						
+						
+						
+						/* React.createElement("div", { className: "places-list-container" },
+						React.createElement("div", { className: "list-item" },
+						React.createElement("div", { className: "position" }, "4"),
+						
+						
+						React.createElement("div", { className: "class-information" },
+						React.createElement("div", { className: "title" },
+								'${bestSellers[3].book_name}'),
+						
+						React.createElement("div", { className: "year" },
+								'${bestSellers[3].cat_name}')),
+						
+						
+						React.createElement("div", { className: "steps" },
+								'${bestSellers[3].soldcnt}'+'권')),
+						
+						
+						
+						React.createElement("div", { className: "list-item" },
+						React.createElement("div", { className: "position" }, "5"),
+						
+						
+						React.createElement("div", { className: "class-information" },
+						React.createElement("div", { className: "title" },
+								'${bestSellers[4].book_name}'),
+						
+						React.createElement("div", { className: "year" },
+								'${bestSellers[4].cat_name}')),
+						
+						
+						React.createElement("div", { className: "steps" },
+								'${bestSellers[4].soldcnt}'+'권')))); */
+						
+						React.render(app, document.getElementById('app'));
+						//# sourceURL=pen.js
+						    </script>
                       <!-- <p>
                         <name>Dan Rogers</name>
                         sent you a message.
@@ -819,215 +815,215 @@ html, body {
               
               <!-- SERVER STATUS PANELS -->
               <div class="col-md-4 col-sm-4 mb">
-                <div class="grey-panel pn donut-chart">
+                <div class="grey-panel pn donut-chart" style="color:#fff;">
                   <div class="grey-header">
                     <h5><b>${orderStat.title} 계획대비 실적 현황</b></h5>
                   </div>
                   <table width="95%">
-                     <tr><td>&nbsp;</td></tr>
-                     <tr>
-                        <td width="10%"></td>
-                        <td>
-                           
-                        <!-- <div class="task-info">
-                          <div class="desc">Dashio Admin Panel</div>
-                          <div class="percent">40%</div>
-                        </div> -->
+                  	<tr><td>&nbsp;</td></tr>
+                  	<tr>
+                  		<td width="10%"></td>
+                  		<td>
+                  			
+	                  	<!-- <div class="task-info">
+		                    <div class="desc">Dashio Admin Panel</div>
+		                    <div class="percent">40%</div>
+		                  </div> -->
 
-                        
-                        
-                        <c:if test="${empty orderStat}">
-                           판매율
-                           <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                    <font style="font-size:8pt; color:#ef6242;">&nbsp;※판매 건수가 없습니다.</font>
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                                          <span class="sr-only">0%</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td width="20%"><div class="percent">0%</div></td>
-                              </tr>
-                           </table>
-                        </c:if> 
-                        
-                        <c:if test="${!empty orderStat and orderStat.cnt<=50}">
-                            판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                            <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${orderStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${orderStat.cnt}%">
-                                           <span class="sr-only">${orderStat.cnt}</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                        
-                        <c:if test="${!empty orderStat and orderStat.cnt>50 and orderStat.cnt<=70}">
-                           판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                            <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="${orderStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${orderStat.cnt}%">
-                                           <span class="sr-only">${orderStat.cnt}</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                        
-                        <c:if test="${!empty orderStat and orderStat.cnt>70 and orderStat.cnt<=100}">
-                            판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                           <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${orderStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${orderStat.cnt}%">
-                                           <span class="sr-only">${orderStat.cnt}</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                        
-                        <c:if test="${!empty orderStat and orderStat.cnt>=100}">
-                            판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                           <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                           <span class="sr-only">100</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                                          
-                     <!-- <div width="100%" id="monthlyBookRegChart"></div> -->
-                     </td></tr>
+		                  
+		                  
+		                  <c:if test="${empty orderStat}">
+		                  	판매율
+		                  	<table>
+		                  		<tr>
+		                  			<td width="100%">
+		                  				<div class="progress progress-striped">
+				                  		<font style="font-size:8pt; color:#ef6242;">&nbsp;※판매 건수가 없습니다.</font>
+				                   			<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+				                     			<span class="sr-only">0%</span>
+				                    		</div>
+				                  		</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td width="20%"><div class="percent">0%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if> 
+		                  
+		                  <c:if test="${!empty orderStat and orderStat.cnt<=50}">
+		                   	판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                   	<table>
+		                  		<tr>
+		                  			<td width="100%">
+		                  				<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${orderStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${orderStat.cnt}%">
+					                      		<span class="sr-only">${orderStat.cnt}</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                  
+		                  <c:if test="${!empty orderStat and orderStat.cnt>50 and orderStat.cnt<=70}">
+		                  	판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                   	<table>
+		                  		<tr>
+		                  			<td width="100%">
+		                  				<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="${orderStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${orderStat.cnt}%">
+					                      		<span class="sr-only">${orderStat.cnt}</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                  
+		                  <c:if test="${!empty orderStat and orderStat.cnt>70 and orderStat.cnt<=100}">
+		                   	판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                  	<table>
+		                  		<tr>
+		                  			<td width="100%">
+					                  	<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${orderStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${orderStat.cnt}%">
+					                      		<span class="sr-only">${orderStat.cnt}</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                  
+		                  <c:if test="${!empty orderStat and orderStat.cnt>=100}">
+		                   	판매율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                  	<table>
+		                  		<tr>
+		                  			<td width="100%">
+					                  	<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+					                      		<span class="sr-only">100</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${orderStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                                    
+                  	<!-- <div width="100%" id="monthlyBookRegChart"></div> -->
+                  	</td></tr>
 
-                     <tr height="50%"><td>&nbsp;</td></tr>
-                     <tr>
-                        <td width="10%"></td>
-                        <td>
-                           
-                        <!-- <div class="task-info">
-                          <div class="desc">Dashio Admin Panel</div>
-                          <div class="percent">40%</div>
-                        </div> -->
-                        <c:if test="${empty returnStat}">
-                           반품율
-                           <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                    <font style="font-size:8pt; color:#ef6242;">&nbsp;※반품 건수가 없습니다.</font>
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                                          <span class="sr-only">0%</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">0%</div></td>
-                              </tr>
-                           </table>
-                        </c:if> 
-                        
-                        
-                        <c:if test="${!empty returnStat and returnStat.cnt<=30}">
-                            반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                            <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${returnStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${returnStat.cnt}%">
-                                           <span class="sr-only">${returnStat.cnt}</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                        
-                        <c:if test="${!empty returnStat and returnStat.cnt>30 and returnStat.cnt<=60}">
-                           반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                            <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="${returnStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${returnStat.cnt}%">
-                                           <span class="sr-only">${returnStat.cnt}</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                        
-                        <c:if test="${!empty returnStat and returnStat.cnt>60 and returnStat.cnt<=100}">
-                            반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                           <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${returnStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${returnStat.cnt}%">
-                                           <span class="sr-only">${returnStat.cnt}</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                        
-                        <c:if test="${!empty returnStat and returnStat.cnt>100}">
-                            반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
-                           <table>
-                              <tr>
-                                 <td width="100%">
-                                    <div class="progress progress-striped">
-                                      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-                                           <span class="sr-only">100</span>
-                                      </div>
-                                    </div>
-                                 </td>
-                                 <td>&nbsp;&nbsp;</td>
-                                 <td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
-                              </tr>
-                           </table>
-                        </c:if>
-                     <!-- <div width="100%" id="monthlyBookRegChart"></div> -->
-                     </td></tr>
+                  	<tr height="50%"><td>&nbsp;</td></tr>
+                  	<tr>
+                  		<td width="10%"></td>
+                  		<td>
+                  			
+	                  	<!-- <div class="task-info">
+		                    <div class="desc">Dashio Admin Panel</div>
+		                    <div class="percent">40%</div>
+		                  </div> -->
+		                  <c:if test="${empty returnStat}">
+		                  	반품율
+		                  	<table>
+		                  		<tr>
+		                  			<td width="100%">
+		                  				<div class="progress progress-striped">
+				                  		<font style="font-size:8pt; color:#ef6242;">&nbsp;※반품 건수가 없습니다.</font>
+				                   			<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+				                     			<span class="sr-only">0%</span>
+				                    		</div>
+				                  		</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">0%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if> 
+		                  
+		                  
+		                  <c:if test="${!empty returnStat and returnStat.cnt<=30}">
+		                   	반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                   	<table>
+		                  		<tr>
+		                  			<td width="100%">
+		                  				<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="${returnStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${returnStat.cnt}%">
+					                      		<span class="sr-only">${returnStat.cnt}</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                  
+		                  <c:if test="${!empty returnStat and returnStat.cnt>30 and returnStat.cnt<=60}">
+		                  	반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                   	<table>
+		                  		<tr>
+		                  			<td width="100%">
+		                  				<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="${returnStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${returnStat.cnt}%">
+					                      		<span class="sr-only">${returnStat.cnt}</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                  
+		                  <c:if test="${!empty returnStat and returnStat.cnt>60 and returnStat.cnt<=100}">
+		                   	반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                  	<table>
+		                  		<tr>
+		                  			<td width="100%">
+					                  	<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="${returnStat.cnt}" aria-valuemin="0" aria-valuemax="100" style="width:${returnStat.cnt}%">
+					                      		<span class="sr-only">${returnStat.cnt}</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+		                  
+		                  <c:if test="${!empty returnStat and returnStat.cnt>100}">
+		                   	반품율<!-- <font style="font-size:8pt;">(단위:100%=30,000건)</font> --> 
+		                  	<table>
+		                  		<tr>
+		                  			<td width="100%">
+					                  	<div class="progress progress-striped">
+					                    	<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+					                      		<span class="sr-only">100</span>
+					                    	</div>
+					                  	</div>
+		                  			</td>
+		                  			<td>&nbsp;&nbsp;</td>
+		                  			<td valign="top" width="20%"><div class="percent">${returnStat.cnt}%</div></td>
+		                  		</tr>
+		                  	</table>
+		                  </c:if>
+                  	<!-- <div width="100%" id="monthlyBookRegChart"></div> -->
+                  	</td></tr>
                   </table>
                   <!-- <div class="chart mt">
                     <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
@@ -1052,7 +1048,7 @@ html, body {
             
             
             <!-- <div style="width:30%; height:15%; background-color:#FEC107; border-radius : 25px;">
-               test
+            	test
             </div> -->
             
             
@@ -1062,50 +1058,50 @@ html, body {
             <div class="row">
               <!-- SERVER STATUS PANELS -->
               <div class="col-md-4 col-sm-4 mb">
-                <div class="grey-panel pn donut-chart">
+                <div class="grey-panel pn donut-chart" style="color:#fff;">
                   <div class="grey-header">
                     <h5><b><!-- <i class="fa fa-bell-o"></i> -->Yesterday summary</b></h5>
                   </div>
                   <table id="yesterdaySum">
-                             <tr>
-                                <td rowspan="4" width="30%"></td>
-                                <td>
-                                   <h4><i class="fa fa-pencil-square"></i>&nbsp;</h4> 
-                                </td>
-                                <td>
-                                   어제 도서계약 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:black'>${mainChartsDTO.reg_cnt}</font>건
-                                </td>
-                             </tr>
-                             <tr>
-                                <td>
-                                   <h4><i class="fa fa-shopping-cart"></i>&nbsp;</h4> 
-                                </td>
-                                <td>
-                                   어제 주문 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:black'>${mainChartsDTO.order_cnt}</font>건
-                                </td>
-                             </tr>
-                             <!-- <tr height="20"></tr> -->
-                             <tr>
-                                <td>
-                                   <h4><i class="fa fa-building-o"></i>&nbsp;</h4> 
-                                </td>
-                                <td>
-                                   어제 기업 주문 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:black'>${mainChartsDTO.corp_order_cnt}</font>건
-                                </td>
-                                <!-- <td width="30%"></td> -->
-                             </tr>
-                             <tr>
-                                <td>
-                                   <h4><i class="fa fa-reply"></i>&nbsp;</h4> 
-                                </td>
-                                <td>
-                                   어제 반품 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:black'>${mainChartsDTO.return_cnt}</font>건
-                                </td>
-                             </tr>
-                          </table>
-                          </td>
-                          </tr>
-                       </table>
+	                    		<tr>
+	                    			<td rowspan="4" width="30%"></td>
+	                    			<td>
+	                    				<h4><i class="fa fa-pencil-square"></i>&nbsp;</h4> 
+	                    			</td>
+	                    			<td>
+	                    				어제 도서계약 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:#424141;'>${mainChartsDTO.reg_cnt}</font>건
+	                    			</td>
+	                    		</tr>
+	                    		<tr>
+	                    			<td>
+	                    				<h4><i class="fa fa-shopping-cart"></i>&nbsp;</h4> 
+	                    			</td>
+	                    			<td>
+	                    				어제 주문 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:#424141;'>${mainChartsDTO.order_cnt}</font>건
+	                    			</td>
+	                    		</tr>
+	                    		<!-- <tr height="20"></tr> -->
+	                    		<tr>
+	                    			<td>
+	                    				<h4><i class="fa fa-building-o"></i>&nbsp;</h4> 
+	                    			</td>
+	                    			<td>
+	                    				어제 기업 주문 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:#424141;'>${mainChartsDTO.corp_order_cnt}</font>건
+	                    			</td>
+	                    			<!-- <td width="30%"></td> -->
+	                    		</tr>
+	                    		<tr>
+	                    			<td>
+	                    				<h4><i class="fa fa-reply"></i>&nbsp;</h4> 
+	                    			</td>
+	                    			<td>
+	                    				어제 반품 건수 :&nbsp;<font style='font-weight:bold; font-size:15pt;color:#424141;'>${mainChartsDTO.return_cnt}</font>건
+	                    			</td>
+	                    		</tr>
+	                    	</table>
+	                    	</td>
+	                    	</tr>
+	                    </table>
 
 
                 </div>
@@ -1126,27 +1122,27 @@ html, body {
                       <p>여자 / 남자 : </p>
                     </div>
                     <div class="col-sm-6 col-xs-6" id="genderText">
-                       <script>
-                          var genderData = [{
-                               value: ${mainChartsDTO.genderStat[0].cnt},
-                               color: "#FF6B6B"
-                             },
-                             {
-                               value: ${mainChartsDTO.genderStat[1].cnt},
-                               color: "#1c9ca7"
-                             }
-                           ];
-   
-                           var genderText = "<h2><font style='font-size:20pt'>"+${mainChartsDTO.genderStat[0].cnt}+"%</font>";
-                           genderText += "<font style='font-size:20pt; color:darkgray;'>/</font>";
-                           genderText += "<font style='font-size:20pt; color:#1c9ca7;'>"+${mainChartsDTO.genderStat[1].cnt}+"%</font></h2>"; 
-                           $("#genderText").append(genderText);
-                           
-                           var myDoughnut = new Chart(document.getElementById("genderStatCanvas").getContext("2d")).Doughnut(genderData);
-                       </script>
+                    	<script>
+	                    	var genderData = [{
+	                  		    value: ${mainChartsDTO.genderStat[0].cnt},
+	                  		    color: "#FF6B6B"
+	                  		  },
+	                  		  {
+	                  		    value: ${mainChartsDTO.genderStat[1].cnt},
+	                  		    color: "#1c9ca7"
+	                  		  }
+	                  		];
+	
+	                  		var genderText = "<h2><font style='font-size:20pt'>"+${mainChartsDTO.genderStat[0].cnt}+"%</font>";
+	                  		genderText += "<font style='font-size:20pt; color:darkgray;'>/</font>";
+	                  		genderText += "<font style='font-size:20pt; color:#1c9ca7;'>"+${mainChartsDTO.genderStat[1].cnt}+"%</font></h2>"; 
+	                  		$("#genderText").append(genderText);
+	                  		
+	                  		var myDoughnut = new Chart(document.getElementById("genderStatCanvas").getContext("2d")).Doughnut(genderData);
+                    	</script>
                       <!-- <h2><font style="font-size:20pt">21%</font>
-                           <font style="font-size:20pt; color:darkgray;">/</font> 
-                           <font style="font-size:20pt; color:#1c9ca7;">21%</font>
+                      	  <font style="font-size:20pt; color:darkgray;">/</font> 
+                      	  <font style="font-size:20pt; color:#1c9ca7;">21%</font>
                       </h2> -->
                     </div>
                   </div>
@@ -1159,22 +1155,15 @@ html, body {
                   </div>
                   <canvas id="genderStatCanvas" height="120" width="120"></canvas>
                   <p>April 17, 2014</p>
-                  <footer>
-                    <div class="pull-left">
-                      <h5><i class="fa fa-hdd-o"></i> 17 GB</h5>
-                    </div>
-                    <div class="pull-right">
-                      <h5>60% Used</h5>
-                    </div>
-                  </footer>
+                  
                 </div> -->
                 <!--  /darkblue panel -->
               </div>
               <!-- /col-md-4 -->
               <div class="col-md-4 col-sm-4 mb">
                 <!-- REVENUE PANEL -->
-                <div class="green-panel pn">
-                  <div class="green-header">
+                <div class="green-panel pn" style="background-color:#4a493f;">
+                  <div class="green-header" style="background-color:#675b5e;">
                     <h5><b>2019 이벤트 분포 현황</b></h5>
                   </div>
                   <canvas id="ageStatCanvas" height="120" width="120"></canvas>
@@ -1183,49 +1172,49 @@ html, body {
                     <div class="col-sm-12 col-xs-12 goleft" id="text1">
                     </div>
                     <div class="col-sm-12 col-xs-12" id="text">
-                       <br>
-                       <script>
-                        var evntData = [{
-                               value: ${mainChartsDTO.eventStat[0].cnt},
-                               color: '#b97df0'
-                           }
-                           ,{
-                               value: ${mainChartsDTO.eventStat[1].cnt},
-                               color: '#5cb0fa'
-                           }
-                           ,{
-                               value: ${mainChartsDTO.eventStat[2].cnt},
-                               color: '#fdfdfd'
-                           }
-                           ,{
-                               value: ${mainChartsDTO.eventStat[3].cnt},
-                               color: '#baf07d'
-                           }
-                           ,{
-                               value: ${mainChartsDTO.eventStat[4].cnt},
-                               color: '#f07d7d'
-                           }
-                        ];
+                    	<br>
+                    	<script>
+                  		var evntData = [{
+	                  		    value: ${mainChartsDTO.eventStat[0].cnt},
+	                  		    color: '#b97df0'
+	                  		}
+	                  		,{
+	                  		    value: ${mainChartsDTO.eventStat[1].cnt},
+	                  		    color: '#5cb0fa'
+	                  		}
+	                  		,{
+	                  		    value: ${mainChartsDTO.eventStat[2].cnt},
+	                  		    color: '#fdfdfd'
+	                  		}
+	                  		,{
+	                  		    value: ${mainChartsDTO.eventStat[3].cnt},
+	                  		    color: '#baf07d'
+	                  		}
+	                  		,{
+	                  		    value: ${mainChartsDTO.eventStat[4].cnt},
+	                  		    color: '#f07d7d'
+	                  		}
+                  		];
 
-                        var lastyearEvnt = "${mainChartsDTO.eventStat[0].title}"+"&nbsp;:&nbsp;";
-                        lastyearEvnt += "<font style='color:#d2bff5;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[0].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;" 
-                        lastyearEvnt +=  "${mainChartsDTO.eventStat[1].title}"+"&nbsp;:&nbsp;"
-                        lastyearEvnt += "<font style='color:#bfdcf5;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[1].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;"
-                        lastyearEvnt +=  "${mainChartsDTO.eventStat[2].title}"+"&nbsp;:&nbsp;"
-                        lastyearEvnt += "<font style='color:#fdfdfd;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[2].cnt}+"%</font><br>"
-                        lastyearEvnt +=  "${mainChartsDTO.eventStat[3].title}"+"&nbsp;:&nbsp;"
-                        lastyearEvnt += "<font style='color:#baf07d;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[3].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;"
-                        lastyearEvnt += "${mainChartsDTO.eventStat[4].title}"+"&nbsp;:&nbsp;"
-                        lastyearEvnt += "<font style='color:#f07d7d;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[4].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;"
-                        $("#text").append(lastyearEvnt);
-                               
-                        var myDoughnut = new Chart(document.getElementById("ageStatCanvas").getContext("2d")).Doughnut(evntData);
+                  		var lastyearEvnt = "<font style='color:#d0c2c2;'>${mainChartsDTO.eventStat[0].title}</font>"+"&nbsp;:&nbsp;";
+                  		lastyearEvnt += "<font style='color:#d2bff5;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[0].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;" 
+                  		lastyearEvnt +=  "<font style='color:#d0c2c2;'>${mainChartsDTO.eventStat[1].title}</font>"+"&nbsp;:&nbsp;"
+                  		lastyearEvnt += "<font style='color:#bfdcf5;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[1].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;"
+                  		lastyearEvnt +=  "<font style='color:#d0c2c2;'>${mainChartsDTO.eventStat[2].title}</font>"+"&nbsp;:&nbsp;"
+                  		lastyearEvnt += "<font style='color:#fdfdfd;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[2].cnt}+"%</font><br>"
+                  		lastyearEvnt +=  "<font style='color:#d0c2c2;'>${mainChartsDTO.eventStat[3].title}</font>"+"&nbsp;:&nbsp;"
+                  		lastyearEvnt += "<font style='color:#baf07d;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[3].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;"
+                  		lastyearEvnt += "<font style='color:#d0c2c2;'>${mainChartsDTO.eventStat[4].title}</font>"+"&nbsp;:&nbsp;"
+                  		lastyearEvnt += "<font style='color:#f07d7d;font-weight:bold;font-size:14pt'>"+${mainChartsDTO.eventStat[4].cnt}+"%</font>&nbsp;&nbsp;&nbsp;&nbsp;"
+                  		$("#text").append(lastyearEvnt);
+                          	  
+                  		var myDoughnut = new Chart(document.getElementById("ageStatCanvas").getContext("2d")).Doughnut(evntData);
 
-                                     
-                       </script>
+                							
+                    	</script>
                       <!-- <h2><font style="font-size:20pt">21%</font>
-                           <font style="font-size:20pt; color:darkgray;">/</font> 
-                           <font style="font-size:20pt; color:#1c9ca7;">21%</font>
+                      	  <font style="font-size:20pt; color:darkgray;">/</font> 
+                      	  <font style="font-size:20pt; color:#1c9ca7;">21%</font>
                       </h2> -->
                     </div>
                   </div>
@@ -1374,25 +1363,25 @@ html, body {
             <!--new earning end-->
             <!-- RECENT ACTIVITIES SECTION -->
             <h4 class="centered mt"><font style="font-size:12pt;">이번달 이벤트</font></h4>
-               <c:if test="${!empty requestScope.monthEvnt}">
-                  <c:forEach items='${requestScope.monthEvnt}' var="monthEvnt" varStatus="loopTagStatus">
-                   <div class="desc">
-                    <div class="thumb">
-                      <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                    </div>
-                   <div class="details" style="width:80%;">
-                      <p>
-                        <muted><font style="font-size:11pt;">${monthEvnt.evnt_start_dt} - ${monthEvnt.evnt_end_dt}</font></muted>
-                        <br/>
-                        <a href="#"><font style="font-size:11pt;">${monthEvnt.event_type}&nbsp;&nbsp;</font></a><font style="font-size:11pt;">${monthEvnt.evnt_title}</font><br/>
-                      </p>
-                    </div>
-                   </div>
-                </c:forEach> 
-               </c:if>
-               <c:if test="${empty requestScope.monthEvnt}">
-                  <div align="center" style="height:30%; color:orange; vertical-align:center;">진행중인 이벤트가 없습니다.</div>
-               </c:if>
+            	<c:if test="${!empty requestScope.monthEvnt}">
+            		<c:forEach items='${requestScope.monthEvnt}' var="monthEvnt" varStatus="loopTagStatus">
+		             <div class="desc">
+		              <div class="thumb">
+		                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+		              </div>
+		             <div class="details" style="width:80%;">
+		                <p>
+		                  <muted><font style="font-size:11pt;">${monthEvnt.evnt_start_dt} - ${monthEvnt.evnt_end_dt}</font></muted>
+		                  <br/>
+		                  <a href="#"><font style="font-size:11pt;">${monthEvnt.event_type}&nbsp;&nbsp;</font></a><font style="font-size:11pt;">${monthEvnt.evnt_title}</font><br/>
+		                </p>
+		              </div>
+		             </div>
+	             </c:forEach> 
+            	</c:if>
+            	<c:if test="${empty requestScope.monthEvnt}">
+            		<div align="center" style="height:30%; color:orange; vertical-align:center;">진행중인 이벤트가 없습니다.</div>
+	            </c:if>
             
            
             
@@ -1416,28 +1405,7 @@ html, body {
         <!-- /row -->
       </section>
     </section>
-    <!--main content end-->
-    <!--footer start-->
-    <footer class="site-footer">
-      <div class="text-center">
-        <p>
-          &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
-        </p>
-        <div class="credits">
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
-          Created with Dashio template by <a href="https://templatemag.com/">TemplateMag</a>
-        </div>
-        <a href="index.html#" class="go-top">
-          <i class="fa fa-angle-up"></i>
-          </a>
-      </div>
-    </footer>
-    <!--footer end-->
+  
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="${ctRootlib}/jquery/jquery.min.js"></script>

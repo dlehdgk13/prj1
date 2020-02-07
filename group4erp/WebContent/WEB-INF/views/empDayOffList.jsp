@@ -71,17 +71,16 @@
    
 
       $(document).ready(function(){
+	  	//headerSort("dayOffList", 0);
+    	startTime();
 
-	//headerSort("dayOffList", 0);
-    	  startTime();
-
-         $('[name=rowCntPerPageDown]').change(function(){
+        $('[name=rowCntPerPageDown]').change(function(){
   		   $('[name=rowCntPerPage]').val( $(this).val() );
-
             goDayoffSearch();
-         });
-         
-         //var dat2 =
+        });
+
+
+        //var dat2 =
          //var diff = dat2 - dat1;
          //var currDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
 
@@ -96,8 +95,6 @@
          );
 
          $("[name=dayOffList]").addClass('dayOffList');
-
-
          inputData('[name=rowCntPerPageDown]',"${hrListSearchDTO.rowCntPerPage}");
          inputData('[name=selectPageNo]',"${hrListSearchDTO.selectPageNo}");
          inputData("[name=dy_keyword]", "${hrListSearchDTO.dy_keyword}");
@@ -105,19 +102,15 @@
          <c:forEach items="${hrListSearchDTO.dayoff_state}" var="dy_state">
             inputData( "[name=dayoff_state]", "${dy_state}" );
          </c:forEach>
-         
       });
 
-   
       function goDayoffSearch(){
          document.empDayoffSearch.submit();
-
       }
 
 /*
          if(month < 10 ) {month = "0"+month;}
          if (date<10){date = "0" + date;}
-
 
          //alert( document.write(year) );
          //return 'abc';
@@ -125,7 +118,6 @@
          $("#nowtime").text('2019-09-09');         
          //return year + "년 " +month + "월 " + date + "일 ("+ week +") " + hour + "시 " + minute + "분 " +second + "초 ";
       }*/
-
 
       var cd = $("[name=addTr]").find("[name=dayoff_name]").val();
       var dateS = null;
@@ -138,13 +130,16 @@
       var dayoff_apply_dt = null;
       var dtfromval = null;
       var dttillval = null;
+      var dayoff_apply_no = null; 
 
 
 
-      function addUpdelTr(ele, emp_no){
+      function addUpdelTr(ele, emp_no, apply_no){
          //console.log(ele);
          //console.log($(ele));
          //alert($(ele).children().eq(1).text());
+         dayoff_apply_no = apply_no;
+         
          var delTr = $('[name=addTr]');
          if(delTr.size()>0){
                delTr.remove();
@@ -318,7 +313,7 @@
 
   
               $("#dateFrom").datepicker({ 
-                        dateFormat: 'yy-mm-dd'
+                       dateFormat: 'yy-mm-dd'
                        ,defaultDate : dtfromval
                        ,minDate : 'today'
                        ,onClose: function( selectedDate ) {   
@@ -359,7 +354,8 @@
                
                         $("[name=addTr]").find("[name=using_dayoff]").val(realDy);
                         var usingD = $("[name=addTr]").find("[name=using_dayoff]").val();
-                        updatedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateE+"&emp_no="+empNo+"&using_dayoff="+usingD;
+                        //var dayoff_apply_no = $("").val()
+                        updatedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateE+"&emp_no="+empNo+"&using_dayoff="+usingD+"&dayoff_apply_no="+dayoff_apply_no;
                       }
                       ,beforeShowDay:$.datepicker.noWeekends 
             });
@@ -410,7 +406,7 @@
                
                         $("[name=addTr]").find("[name=using_dayoff]").val(realDy);
                         var usingD = $("[name=addTr]").find("[name=using_dayoff]").val();
-                        updatedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateE+"&emp_no="+empNo+"&using_dayoff="+usingD+"dayoff_apply_dt="+dayoff_apply_dt;
+                        updatedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateE+"&emp_no="+empNo+"&using_dayoff="+usingD+"&dayoff_apply_no="+dayoff_apply_no;
                         //alert("updatedata => " + updatedata);
                           //alert($(this).val()); 
                       } 
@@ -479,14 +475,16 @@
          if(cd=='반차'){
             inputData("[name=end_dayoff]", dateS);
             var usingD = $("[name=addTr]").find("[name=using_dayoff]").val();
-            updatedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateS+"&emp_no="+empNo+"&using_dayoff="+usingD+"dayoff_apply_dt="+dayoff_apply_dt;
+
+            
+            updatedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateE+"&emp_no="+empNo+"&using_dayoff="+usingD+"&dayoff_apply_no="+dayoff_apply_no;
            }
 
          if(cd==null || dateS==null || dateE==null || dateS=='' || dateE=='' || empNo==null || realDy=='' || updatedata==null){
             alert('모두 선택해주시기 바랍니다.');
          }
-         alert(updatedata);
-         return;
+         //alert(updatedata);
+         //return;
          $.ajax({
                 url : "/group4erp/dayoffUpdateProc.do"
                 , type: "post"
@@ -510,8 +508,7 @@
 
       
       function dayoffDelete(emp_no,remainD_origin){
-         
-         var Deletedata = "emp_no="+emp_no+"&dayoff_apply_dt="+dayoff_apply_dt+"&remain_dayoff="+remainD_origin;
+         var Deletedata = "dayoff_name="+cd+"&start_dayoff="+dateS+"&end_dayoff="+dateE+"&emp_no="+empNo+"&using_dayoff="+usingD+"&dayoff_apply_no="+dayoff_apply_no;
          //alert(Deletedata);
          $.ajax({
                 url : "/group4erp/dayoffDeleteProc.do"
@@ -1123,7 +1120,7 @@
 			</thead>
 			<tbody>
             <c:forEach items="${requestScope.getDayOffList}" var="dayoff" varStatus="loopTagStatus">
-               <tr style="cursor:pointer; font-size:11pt;" onclick="addUpdelTr(this,'${dayoff.emp_no}')">
+               <tr style="cursor:pointer; font-size:11pt;" onclick="addUpdelTr(this,'${dayoff.emp_no}', '${dayoff.dayoff_apply_no}')">
                   <td align=center>
                   ${getDayOffListCnt-(hrListSearchDTO.selectPageNo*hrListSearchDTO.rowCntPerPage-hrListSearchDTO.rowCntPerPage+1+loopTagStatus.index)+1}
                   </td>
@@ -1164,7 +1161,7 @@
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
-    <footer class="site-footer">
+<!--     <footer class="site-footer">
       <div class="text-center">
         <p>
          KOSMO 자바&빅데이터 과정 팀프로젝트
@@ -1173,18 +1170,12 @@
         <font style="font-size:12pt;">
         ⓒ Copyrights <strong>조충래, 김태현, 박현우, 이동하, 임남희, 최민지</strong>
          </font>
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
         </div>
         <a href="basic_table.html#" class="go-top">
           <i class="fa fa-angle-up"></i>
           </a>
       </div>
-    </footer>
+    </footer> -->
     <!--footer end-->
   </section>
   <!-- js placed at the end of the document so the pages load faster -->
